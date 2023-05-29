@@ -17,17 +17,3 @@ export function hoverChangeExperience(
     varDateExperience.innerHTML = dateExperience;
   });
 }
-
-const header = document.getElementById("experience-company");
-const btns = header.getElementsByClassName("company");
-
-for (let i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function () {
-    const current = document.getElementsByClassName("activeExperience");
-    current[0].className = current[0].className.replace(
-      " activeExperience",
-      ""
-    );
-    this.className += " activeExperience";
-  });
-}
