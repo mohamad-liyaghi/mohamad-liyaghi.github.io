@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="author" content="Mohamad Liyaghi" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#986DFF" />
+    <meta name="description" content="Mohamad Liyaghi — Senior Backend Engineer at Zebracat AI. Distributed and AI-driven backend systems with Python, Go, TypeScript, Kubernetes, and AWS." />
+    <meta property="og:title" content="Mohamad Liyaghi — Senior Backend Engineer" />
+    <meta property="og:description" content="Senior Backend Engineer at Zebracat AI. Distributed systems, AI backends, Python, Go, TypeScript, Kubernetes, AWS." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mohamad-liyaghi.ir" />
+    <meta property="og:image" content="https://mohamad-liyaghi.ir/assets/image/me.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,7 +22,7 @@
 
 
     <script src="assets/js/svg-inject.min.js"></script>
-    <title>Mohamad's Portfolio</title>
+    <title>Mohamad Liyaghi — Senior Backend Engineer</title>
   </head>
 
   <body>
@@ -41,6 +48,9 @@
               <a href="#s-projects">Projects</a>
             </li>
             <li>
+              <a href="#s-experience">Experience</a>
+            </li>
+            <li>
               <a href="#s-skills">Skills</a>
             </li>
             <li>
@@ -58,11 +68,10 @@
             <div id="home-container-text">
               <h1 class="delayMediumReveal">
                 Hi there! I'm Mohamad,<br>
-                A <span>Backend Dev</span> at <span>Zebracat AI</span>.
+                A <span>Senior Backend Engineer</span> at <span>Zebracat AI</span>.
               </h1>
               <p class="delayLargeReveal">
-                I specialize in Python and Go, focusing on Django, DRF, and FastAPI for API development. I also have expertise in DevOps tools like Kubernetes, Docker, and Ansible, with extensive knowledge of databases such as PostgreSQL and MongoDB. Additionally, I am focusing on learning monitoring tools like Prometheus and Grafana. I strive to create testable, maintainable, and efficient code tailored to client needs. Currently, I am working as a full-time Backend Developer at Zebracat AI.
-
+                I design and ship scalable, AI-driven backend systems with a focus on distributed architectures, real-time pipelines, and high-throughput services. My toolkit spans Python (Django, FastAPI) and Node.js (TypeScript), with deep experience across PostgreSQL, MongoDB, Redis, Qdrant, Celery, RabbitMQ, Kubernetes, and AWS. I currently lead backend work for AI video generation at Zebracat AI.
               </p>
 
               <a
@@ -72,7 +81,7 @@
                 class="delayExtraBigReveal"
                 download='mohamad-liyaghi.pdf'
               >
-                Download CV
+                Download Resume
               </a>
             </div>
 
@@ -91,11 +100,11 @@
               <h2 class="delaySmallReveal">About Me</h2>
 
               <p class="delayLargeReveal">
-                I am a dedicated self-taught backend developer with over three years of experience, specializing in Django, Django REST Framework, FastAPI and Fiber for API development. I have also delved into the world of DevOps, with a particular focus on Kubernetes. Currently, I am learning monitoring tools like Prometheus and Grafana. Additionally, I have experience creating Telegram bots with over 50k users using them.
+                I'm a senior backend engineer with 4+ years of experience designing and shipping production systems for AI-driven products. My focus is building distributed, event-driven architectures: microservices that communicate over gRPC and message queues, real-time WebSocket APIs, vector-search pipelines for ML retrieval, and observability-first deployments on Kubernetes.
                 <br><br>
-                As a team leader, I have had the opportunity to work with diverse groups and contribute to some open-source projects on GitHub. My commitment to staying current with the latest development technologies allows me to continuously sharpen my skills and deliver high-quality solutions tailored to my clients’ needs.
+                At Zebracat AI I lead backend services for AI video generation — the systems behind asset processing, generation orchestration, and collaborative editing. I work across Python and TypeScript, ship on AWS with PostgreSQL, MongoDB, Redis, and Qdrant, and instrument everything with Sentry, Elastic APM, Prometheus, and Grafana.
                 <br><br>
-                I am currently working as a full-time Backend Developer at Zebracat Ai, where I am responsible for developing and maintaining APIs for various projects. I am also working on personal projects to further enhance my skills and knowledge.
+                Outside work I contribute to open-source on GitHub and maintain a few Telegram bots that have served 50k+ users. I care about clean code, testability, and shipping things that stay up.
               </p>
 
             </div>
@@ -161,6 +170,72 @@
       </section>
 
 
+      <section id="s-experience">
+        <style>
+          #s-experience { padding: 64px 0; }
+          #s-experience .grid-layout > h2 { color: #fff; font-weight: 500; margin-bottom: 32px; }
+          #s-experience .grid-layout > h2 span { color: #986dff; }
+          #experience-list { display: flex; flex-direction: column; gap: 20px; }
+          #experience-list article {
+            background-color: #151515;
+            border: 1px solid #1f1f1f;
+            border-left: 3px solid #986dff;
+            border-radius: 4px;
+            padding: 24px 28px;
+            transition: border-color 0.4s ease;
+          }
+          #experience-list article:hover { border-color: #986dff; }
+          #experience-list .xp-head {
+            display: flex; justify-content: space-between; align-items: baseline;
+            flex-wrap: wrap; gap: 8px; margin-bottom: 6px;
+          }
+          #experience-list h3 { color: #fff; font-size: 1.15rem; font-weight: 500; margin: 0; }
+          #experience-list .xp-dates { color: #9ca3af; font-size: 0.9rem; font-weight: 400; }
+          #experience-list .xp-company { color: #986dff; font-size: 0.95rem; margin-bottom: 10px; }
+          #experience-list p { color: #9ca3af; line-height: 1.7; margin: 0; }
+          @media (max-width: 768px) {
+            #experience-list article { padding: 20px; }
+            #experience-list .xp-head { flex-direction: column; align-items: flex-start; }
+          }
+        </style>
+        <div class="grid-layout">
+          <h2 class="delaySmallReveal">Experience <span></span></h2>
+          <div id="experience-list">
+            <article class="intervalCardReveal">
+              <div class="xp-head">
+                <h3>Senior Backend Engineer</h3>
+                <span class="xp-dates">Mar 2024 — Present</span>
+              </div>
+              <div class="xp-company">Zebracat AI</div>
+              <p>
+                Leading backend for an AI video generation platform. Designing microservices for distributed video pipelines, real-time WebSocket APIs for collaborative editing, and high-throughput task queues with Celery and RabbitMQ. Working across Python (Django, FastAPI) and Node.js (TypeScript) with PostgreSQL, MongoDB, Redis, and Qdrant for vector search. Production observability via Sentry, Elastic APM, Prometheus, and Grafana, deployed on AWS and Kubernetes.
+              </p>
+            </article>
+            <article class="intervalCardReveal">
+              <div class="xp-head">
+                <h3>Backend Developer</h3>
+                <span class="xp-dates">Feb 2023 — Mar 2024</span>
+              </div>
+              <div class="xp-company">Zebracat AI</div>
+              <p>
+                Built core API services, authentication, payment integration, and async task processing. Set up CI/CD with GitHub Actions self-hosted runners and migrated services to Kubernetes. Owned several Django and FastAPI services end-to-end.
+              </p>
+            </article>
+            <article class="intervalCardReveal">
+              <div class="xp-head">
+                <h3>Freelance Backend Developer &amp; Open-Source Contributor</h3>
+                <span class="xp-dates">2021 — 2023</span>
+              </div>
+              <div class="xp-company">Independent</div>
+              <p>
+                Delivered Django/DRF and FastAPI projects for international clients. Authored Telegram bots serving 50k+ active users. Maintained open-source Python projects on GitHub.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+
       <section id="s-skills">
         <div class="grid-layout">
           <div id="skills">
@@ -180,12 +255,28 @@
                   alt="python"
                 />
               </article>
-              <article class="js intervalCardReveal">
+              <article class="golang intervalCardReveal">
                 <img
                   src="assets/icons/golang.svg"
                   width="60px"
                   height="60px"
                   alt="golang"
+                />
+              </article>
+              <article class="typescript intervalCardReveal">
+                <img
+                  src="assets/icons/typescript.svg"
+                  width="60px"
+                  height="60px"
+                  alt="typescript"
+                />
+              </article>
+              <article class="nodejs intervalCardReveal">
+                <img
+                  src="assets/icons/nodejs.svg"
+                  width="60px"
+                  height="60px"
+                  alt="nodejs"
                 />
               </article>
               <article class="django intervalCardReveal">
@@ -204,12 +295,36 @@
                   alt="fastapi"
                 />
               </article>
+              <article class="react intervalCardReveal">
+                <img
+                  src="assets/icons/react.svg"
+                  width="60px"
+                  height="60px"
+                  alt="react"
+                />
+              </article>
+              <article class="grpc intervalCardReveal">
+                <img
+                  src="assets/icons/grpc.svg"
+                  width="60px"
+                  height="60px"
+                  alt="grpc"
+                />
+              </article>
               <article class="postgresql intervalCardReveal">
                 <img
                   src="assets/icons/postgresql.svg"
                   width="60px"
                   height="60px"
                   alt="postgresql"
+                />
+              </article>
+              <article class="mysql intervalCardReveal">
+                <img
+                  src="assets/icons/mysql.svg"
+                  width="60px"
+                  height="60px"
+                  alt="mysql"
                 />
               </article>
               <article class="mongo intervalCardReveal">
@@ -220,12 +335,28 @@
                   alt="mongo"
                 />
               </article>
+              <article class="qdrant intervalCardReveal">
+                <img
+                  src="assets/icons/qdrant.svg"
+                  width="60px"
+                  height="60px"
+                  alt="qdrant"
+                />
+              </article>
               <article class="redis intervalCardReveal">
                 <img
                   src="assets/icons/redis.svg"
                   width="60px"
                   height="60px"
                   alt="redis"
+                />
+              </article>
+              <article class="elastic intervalCardReveal">
+                <img
+                  src="assets/icons/elastic.svg"
+                  width="60px"
+                  height="60px"
+                  alt="elasticsearch"
                 />
               </article>
               <article class="docker intervalCardReveal">
@@ -242,6 +373,22 @@
                         width="60px"
                         height="60px"
                         alt="kubernetes"
+                />
+              </article>
+              <article class="aws intervalCardReveal">
+                <img
+                  src="assets/icons/aws.svg"
+                  width="60px"
+                  height="60px"
+                  alt="aws"
+                />
+              </article>
+              <article class="githubactions intervalCardReveal">
+                <img
+                  src="assets/icons/githubactions.svg"
+                  width="60px"
+                  height="60px"
+                  alt="github actions"
                 />
               </article>
               <article class="nginx intervalCardReveal">
@@ -271,6 +418,15 @@
                 />
               </article>
 
+              <article class="celery intervalCardReveal">
+                <img
+                  src="assets/icons/celery.svg"
+                  width="60px"
+                  height="60px"
+                  alt="celery"
+                />
+              </article>
+
 
             </div>
           </div>
@@ -278,17 +434,47 @@
       </section>
 
       <section id="s-contact">
-        <section id="s-skills">
-          <div class="grid-layout">
-            <div id="skills">
-              <article id="skills-text">
-                <h2 class="delaySmallReveal">Contact Options <span></span></h2>
-                <p class="delayMediumReveal changeDescription">
-                  If you have any business inquiries or questions, I would be delighted to connect with you. Please feel free to reach out to me through these links:
-                </p>
-              </article>
+        <style>
+          #s-contact { padding: 96px 48px; background-color: #111; }
+          @media screen and (max-width: 992px) { #s-contact { padding: 48px 24px; } }
+          #s-contact .grid-layout #contact-wrapper {
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; height: auto; padding: 8px;
+          }
+          #s-contact #contact-wrapper > div, #s-contact #contact-wrapper > article { width: 50%; }
+          @media screen and (max-width: 1200px) {
+            #s-contact #contact-wrapper > div, #s-contact #contact-wrapper > article { width: 100%; }
+          }
+          #s-contact #contact-text { min-height: 400px; }
+          @media screen and (max-width: 768px) { #s-contact #contact-text { min-height: auto; } }
+          #s-contact #contact-text h2 { margin-bottom: 32px; color: #fff; font-size: 3.2rem; font-weight: 500; }
+          #s-contact #contact-text h2 span { color: #986dff; }
+          #s-contact #contact-text .changeDescription { transition: 2s all ease; }
+          @media screen and (max-width: 768px) { #s-contact #contact-text .changeDescription { display: none; } }
+          #s-contact #contact-text p { max-width: 500px; line-height: 3.2rem; color: #9ca3af; font-size: 1.8rem; }
+          #s-contact #contact-cards { display: flex; flex-wrap: wrap; gap: 24px; }
+          @media screen and (max-width: 1200px) { #s-contact #contact-cards { margin-top: 48px; } }
+          #s-contact #contact-cards article {
+            display: flex; justify-content: center; align-items: center; flex-wrap: wrap;
+            width: 20%; flex-grow: 1; height: 130px;
+            background-color: #151515; position: relative;
+            border: 1px solid #1f1f1f; border-radius: 4px; transition: 1s all ease;
+          }
+          #s-contact #contact-cards article:hover { border: 1px solid #986dff; }
+          @media screen and (max-width: 768px) { #s-contact #contact-cards article { width: 40%; } }
+          #s-contact #contact-cards article a { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; }
+          #s-contact #contact-cards article img { width: 40px; height: 40px; }
+        </style>
+        <div class="grid-layout">
+          <div id="contact-wrapper">
+            <article id="contact-text">
+              <h2 class="delaySmallReveal">Contact Options <span></span></h2>
+              <p class="delayMediumReveal changeDescription">
+                If you have any business inquiries or questions, I would be delighted to connect with you. Please feel free to reach out to me through these links:
+              </p>
+            </article>
 
-              <div id="skills-cards">
+            <div id="contact-cards">
                 <article class="python intervalCardRevealContact">
                   <a
                   href="mailto:liaghimohamad69@gmail.com"
@@ -358,17 +544,16 @@
                 </article>
                 
                 
-              </div>
             </div>
           </div>
-        </section>
+        </div>
       </section>
 
 
       <footer>
         <div class="grid-layout">
           <p>
-            Copyright © 2024. No rights reserved.
+            Copyright © 2026. No rights reserved.
             Code was stolen by <a href="https://mohamad-liyaghi.ir">Mohamad Liyaghi</a>.
           </p>
         </div>
