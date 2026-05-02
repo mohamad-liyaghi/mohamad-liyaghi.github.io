@@ -10,7 +10,11 @@
     <meta property="og:description" content="Software Engineer at Zebracat AI. Distributed systems, AI backends, Python, Go, TypeScript, Kubernetes, AWS." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mohamad-liyaghi.ir" />
-    <meta property="og:image" content="https://mohamad-liyaghi.ir/assets/image/me.jpg" />
+    <meta property="og:image" content="https://mohamad-liyaghi.ir/assets/image/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Mohamad Liyaghi — Software Engineer" />
+    <meta name="twitter:image" content="https://mohamad-liyaghi.ir/assets/image/og-cover.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,6 +24,106 @@
     />
     <link rel="stylesheet" href="assets/css/style.css" />
 
+    <style id="light-theme-overrides">
+      /* Smooth transition between themes */
+      body, header, section, footer, article, h1, h2, h3, h4, p, a, span, div {
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      }
+
+      /* === LIGHT THEME === */
+      [data-theme="light"] body { background-color: #ffffff !important; color: #111 !important; }
+      [data-theme="light"] header {
+        background: rgba(255,255,255,0.92) !important;
+        border-bottom-color: #e5e7eb !important;
+      }
+      [data-theme="light"] header nav .nav-list li a { color: #4b5563 !important; }
+      [data-theme="light"] header nav .nav-list li a:hover { color: #111 !important; }
+      [data-theme="light"] header nav > a img { filter: invert(0.92); }
+      [data-theme="light"] .mobile-menu div { background-color: #111 !important; }
+      [data-theme="light"] .nav-list.active { background-color: #ffffff !important; }
+
+      [data-theme="light"] #s-home { background-color: #ffffff !important; }
+      [data-theme="light"] #s-home h1 { color: #111 !important; }
+      [data-theme="light"] #s-home p { color: #4b5563 !important; }
+
+      [data-theme="light"] #s-about { background-color: #f8f9fb !important; }
+      [data-theme="light"] #s-about .grid-layout > div {
+        background-color: #ffffff !important; border-color: #e5e7eb !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      }
+      [data-theme="light"] #s-about h2 { color: #111 !important; }
+      [data-theme="light"] #s-about p { color: #4b5563 !important; }
+
+      [data-theme="light"] #s-experience { background-color: #ffffff !important; }
+      [data-theme="light"] #s-experience h2 { color: #111 !important; }
+      [data-theme="light"] #experience-list article {
+        background-color: #f8f9fb !important; border-color: #e5e7eb !important;
+      }
+      [data-theme="light"] #experience-list h3 { color: #111 !important; }
+      [data-theme="light"] #experience-list .xp-dates {
+        color: #6e4ed4 !important; background: rgba(152, 109, 255, 0.1) !important;
+      }
+      [data-theme="light"] #experience-list .xp-company .xp-location { color: #6b7280 !important; }
+      [data-theme="light"] #experience-list p { color: #4b5563 !important; }
+
+      [data-theme="light"] #s-projects { background-color: #f8f9fb !important; }
+      [data-theme="light"] #s-projects h2 { color: #111 !important; }
+      [data-theme="light"] #s-projects #projects > article {
+        background-color: #ffffff !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      }
+      [data-theme="light"] #s-projects #projects > article h3 { color: #111 !important; }
+      [data-theme="light"] #s-projects #projects > article p { color: #4b5563 !important; }
+      [data-theme="light"] .proj-tag {
+        color: #6e4ed4 !important; background: rgba(152, 109, 255, 0.08) !important;
+        border-color: rgba(152, 109, 255, 0.25) !important;
+      }
+
+      [data-theme="light"] #s-skills { background-color: #ffffff !important; }
+      [data-theme="light"] #s-skills h2 { color: #111 !important; }
+      [data-theme="light"] #s-skills #skills-text p { color: #4b5563 !important; }
+      [data-theme="light"] #s-skills #skills-cards article:not(.skills-cat) {
+        background-color: #f8f9fb !important; border-color: #e5e7eb !important;
+      }
+      [data-theme="light"] #s-skills #skills-cards .skills-cat { color: #6b7280 !important; }
+      [data-theme="light"] #s-skills #skills-cards .cursor img { filter: invert(1); }
+
+      [data-theme="light"] #s-contact { background-color: #f8f9fb !important; }
+      [data-theme="light"] #s-contact h2 { color: #111 !important; }
+      [data-theme="light"] #s-contact p { color: #4b5563 !important; }
+      [data-theme="light"] #s-contact #contact-cards article {
+        background-color: #ffffff !important; border-color: #e5e7eb !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      }
+
+      [data-theme="light"] footer { background-color: #f8f9fb !important; }
+      [data-theme="light"] footer p { color: #4b5563 !important; }
+      [data-theme="light"] footer p a { color: #6e4ed4 !important; }
+
+      /* Theme toggle button */
+      .theme-toggle-item button {
+        background: transparent; border: 0; cursor: pointer; padding: 8px;
+        color: #9ca3af; display: inline-flex; align-items: center; justify-content: center;
+        transition: color 0.3s ease, transform 0.3s ease;
+        line-height: 0;
+      }
+      .theme-toggle-item button:hover { color: #fff; transform: rotate(15deg); }
+      .theme-toggle-item .sun-icon { display: none; }
+      [data-theme="light"] .theme-toggle-item button { color: #6b7280; }
+      [data-theme="light"] .theme-toggle-item button:hover { color: #111; }
+      [data-theme="light"] .theme-toggle-item .moon-icon { display: none; }
+      [data-theme="light"] .theme-toggle-item .sun-icon { display: inline-block; }
+      .theme-toggle-item button svg { width: 22px; height: 22px; }
+    </style>
+
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        } catch (e) {}
+      })();
+    </script>
 
     <script src="assets/js/svg-inject.min.js"></script>
     <title>Mohamad Liyaghi — Software Engineer</title>
@@ -55,6 +159,24 @@
             </li>
             <li>
               <a href="#s-contact">Contact Me</a>
+            </li>
+            <li class="theme-toggle-item">
+              <button id="theme-toggle" type="button" aria-label="Toggle light/dark theme">
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                </svg>
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="4" fill="currentColor"/>
+                  <line x1="12" y1="2" x2="12" y2="4"/>
+                  <line x1="12" y1="20" x2="12" y2="22"/>
+                  <line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/>
+                  <line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/>
+                  <line x1="2" y1="12" x2="4" y2="12"/>
+                  <line x1="20" y1="12" x2="22" y2="12"/>
+                  <line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/>
+                  <line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/>
+                </svg>
+              </button>
             </li>
           </ul>
         </nav>
@@ -535,6 +657,7 @@
             <article class="langchain intervalCardReveal"><img src="assets/icons/langchain.svg" width="60px" height="60px" alt="langchain" /></article>
             <article class="openai intervalCardReveal"><img src="assets/icons/openai.svg" width="60px" height="60px" alt="openai" /></article>
             <article class="copilot intervalCardReveal"><img src="assets/icons/githubcopilot.svg" width="60px" height="60px" alt="github copilot" /></article>
+            <article class="cursor intervalCardReveal"><img src="assets/icons/cursor.svg" width="60px" height="60px" alt="cursor" /></article>
           </div>
         </div>
       </section>
