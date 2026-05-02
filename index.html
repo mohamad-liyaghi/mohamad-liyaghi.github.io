@@ -664,119 +664,174 @@
 
       <section id="s-contact">
         <style>
-          #s-contact { padding: 96px 48px; background-color: #111; }
-          @media screen and (max-width: 992px) { #s-contact { padding: 48px 24px; } }
-          #s-contact .grid-layout #contact-wrapper {
-            display: flex; justify-content: space-between; align-items: center;
-            flex-wrap: wrap; height: auto; padding: 8px;
+          #s-contact { padding: 120px 48px; background-color: #111; }
+          @media (max-width: 992px) { #s-contact { padding: 80px 24px; } }
+          #s-contact .grid-layout > h2 {
+            text-align: center; color: #fff; font-size: 4rem; font-weight: 500;
+            margin: 0 0 20px;
           }
-          #s-contact #contact-wrapper > div, #s-contact #contact-wrapper > article { width: 50%; }
-          @media screen and (max-width: 1200px) {
-            #s-contact #contact-wrapper > div, #s-contact #contact-wrapper > article { width: 100%; }
+          @media (max-width: 768px) { #s-contact .grid-layout > h2 { font-size: 3rem; } }
+          #s-contact .grid-layout > h2 span { color: #986dff; }
+          #s-contact .contact-lede {
+            text-align: center; color: #b8bcc4; font-size: 1.7rem; line-height: 1.7;
+            max-width: 540px; margin: 0 auto 56px;
           }
-          #s-contact #contact-text { min-height: 400px; }
-          @media screen and (max-width: 768px) { #s-contact #contact-text { min-height: auto; } }
-          #s-contact #contact-text h2 { margin-bottom: 32px; color: #fff; font-size: 3.2rem; font-weight: 500; }
-          #s-contact #contact-text h2 span { color: #986dff; }
-          #s-contact #contact-text .changeDescription { transition: 2s all ease; }
-          @media screen and (max-width: 768px) { #s-contact #contact-text .changeDescription { display: none; } }
-          #s-contact #contact-text p { max-width: 500px; line-height: 3.2rem; color: #9ca3af; font-size: 1.8rem; }
-          #s-contact #contact-cards {
-            display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+          @media (max-width: 768px) { #s-contact .contact-lede { font-size: 1.5rem; margin-bottom: 40px; } }
+
+          .contact-primary {
+            display: flex; align-items: center; gap: 24px;
+            padding: 28px 32px;
+            background: linear-gradient(135deg, rgba(152,109,255,0.18), rgba(152,109,255,0.04));
+            border: 1px solid rgba(152,109,255,0.32);
+            border-radius: 14px;
+            max-width: 720px; margin: 0 auto 20px;
+            text-decoration: none; color: inherit;
+            transition: border-color 0.3s ease, transform 0.3s ease;
           }
-          @media screen and (max-width: 1200px) { #s-contact #contact-cards { margin-top: 48px; } }
-          @media screen and (max-width: 768px)  { #s-contact #contact-cards { grid-template-columns: repeat(3, 1fr); } }
-          @media screen and (max-width: 480px)  { #s-contact #contact-cards { grid-template-columns: repeat(2, 1fr); } }
-          #s-contact #contact-cards article {
-            display: flex; justify-content: center; align-items: center;
-            height: 110px;
-            background-color: #151515; position: relative;
-            border: 1px solid #1f1f1f; border-radius: 4px; transition: border-color 0.4s ease;
+          .contact-primary:hover { border-color: #986dff; transform: translateY(-3px); }
+          .contact-primary .ic {
+            width: 56px; height: 56px; flex-shrink: 0;
+            background: rgba(152,109,255,0.18); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: #c8b1ff;
           }
-          #s-contact #contact-cards article:hover { border-color: #986dff; }
-          #s-contact #contact-cards article a { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; }
-          #s-contact #contact-cards article img { width: 36px; height: 36px; }
+          .contact-primary .ic svg { width: 26px; height: 26px; }
+          .contact-primary .meta { flex: 1; min-width: 0; }
+          .contact-primary .label {
+            display: block; color: #c8b1ff; font-size: 1.15rem;
+            text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 4px;
+          }
+          .contact-primary .value {
+            display: block; color: #fff; font-size: 1.7rem; font-weight: 500;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+          }
+          .contact-primary .arrow {
+            color: #986dff; font-size: 1.6rem; transition: transform 0.3s ease;
+          }
+          .contact-primary:hover .arrow { transform: translate(3px, -3px); }
+          @media (max-width: 600px) {
+            .contact-primary { padding: 22px; gap: 16px; }
+            .contact-primary .ic { width: 44px; height: 44px; }
+            .contact-primary .value { font-size: 1.4rem; }
+          }
+
+          .contact-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+            max-width: 720px; margin: 0 auto;
+          }
+          @media (max-width: 600px) { .contact-grid { grid-template-columns: 1fr; } }
+
+          .contact-card {
+            display: flex; align-items: center; gap: 16px;
+            padding: 20px 22px;
+            background: #151515; border: 1px solid #1f1f1f;
+            border-radius: 12px;
+            text-decoration: none; color: inherit;
+            transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+          }
+          .contact-card:hover { border-color: #986dff; transform: translateY(-2px); background: #181620; }
+          .contact-card .ic {
+            width: 42px; height: 42px; flex-shrink: 0;
+            background: rgba(152,109,255,0.10); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: #986dff;
+          }
+          .contact-card .ic svg { width: 20px; height: 20px; }
+          .contact-card .meta { flex: 1; min-width: 0; }
+          .contact-card .label {
+            display: block; color: #9ca3af; font-size: 1.05rem;
+            text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 2px;
+          }
+          .contact-card .value {
+            display: block; color: #fff; font-size: 1.45rem;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+          }
+          .contact-card .arrow { color: #6b7280; font-size: 1.2rem; transition: color 0.3s ease, transform 0.3s ease; }
+          .contact-card:hover .arrow { color: #986dff; transform: translate(2px, -2px); }
+
+          /* Light theme overrides */
+          [data-theme="light"] .contact-primary {
+            background: linear-gradient(135deg, rgba(152,109,255,0.10), rgba(152,109,255,0.02)) !important;
+            border-color: rgba(152,109,255,0.28) !important;
+          }
+          [data-theme="light"] .contact-primary .label { color: #6e4ed4 !important; }
+          [data-theme="light"] .contact-primary .value { color: #111 !important; }
+          [data-theme="light"] .contact-primary .ic { background: rgba(152,109,255,0.10) !important; color: #6e4ed4 !important; }
+          [data-theme="light"] .contact-card { background: #ffffff !important; border-color: #e5e7eb !important; }
+          [data-theme="light"] .contact-card:hover { background: #faf8ff !important; }
+          [data-theme="light"] .contact-card .label { color: #6b7280 !important; }
+          [data-theme="light"] .contact-card .value { color: #111 !important; }
+          [data-theme="light"] .contact-card .ic { background: rgba(152,109,255,0.08) !important; color: #6e4ed4 !important; }
         </style>
         <div class="grid-layout">
-          <div id="contact-wrapper">
-            <article id="contact-text">
-              <h2 class="delaySmallReveal">Contact Options <span></span></h2>
-              <p class="delayMediumReveal changeDescription">
-                If you have any business inquiries or questions, I would be delighted to connect with you. Please feel free to reach out to me through these links:
-              </p>
-            </article>
+          <h2 class="delaySmallReveal">Get in touch <span></span></h2>
+          <p class="contact-lede delayMediumReveal">
+            Open to interesting work, collaborations, and conversations. The fastest way to reach me is email — or pick any channel below.
+          </p>
 
-            <div id="contact-cards">
-                <article class="python intervalCardRevealContact">
-                  <a
-                  href="mailto:liaghimohamad69@gmail.com"
-                  rel="noopener"
-                  target="_blank"
-                  ><li>
-                    <img
-                      src="./assets/icons/email.svg"
-                      rel="noopener"
-                      alt="email"
-                      onload="SVGInject(this)"
-                    /></li
-                ></a>
-                </article>
-                <article class="linkesin intervalCardRevealContact">
-                  <a
-                    href="https://www.linkedin.com/in/mohamad-liyaghi/"
-                    rel="noopener"
-                    target="_blank"
-                    ><li>
-                      <img
-                        src="./assets/icons/linkedin.svg"
-                        rel="noopener"
-                        alt="LinkedIn"
-                        onload="SVGInject(this)"
-                      /></li
-                  ></a>
-                </article>
-                <article class="github intervalCardRevealContact">
-                  <a
-                    href="https://github.com/mohamad-liyaghi"
-                    rel="noopener"
-                    target="_blank"
-                    ><li>
-                      <img
-                        src="./assets/icons/github.svg"
-                        alt="GitHub"
-                        onload="SVGInject(this)"
-                      /></li
-                  ></a>
-                </article>
-                <article class="discrod intervalCardRevealContact">
-                  <a
-                  href="https://discordapp.com/users/953609313488875550"
-                  rel="noopener"
-                  target="_blank"
-                  ><li>
-                    <img
-                      src="./assets/icons/discord.svg"
-                      alt="discord"
-                      onload="SVGInject(this)"
-                    /></li
-                ></a>
-                </article>
-                <article class="telegram intervalCardRevealContact">
-                  <a
-                  href="https://t.me/El_mohamad"
-                  rel="noopener"
-                  target="_blank"
-                  ><li>
-                    <img
-                      src="./assets/icons/telegram.svg"
-                      alt=" telegram"
-                      onload="SVGInject(this)"
-                    /></li
-                ></a>
-                </article>
-                
-                
-            </div>
+          <a class="contact-primary intervalCardReveal" href="mailto:liaghimohamad69@gmail.com" rel="noopener">
+            <span class="ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="2"/>
+                <path d="M3 7l9 6 9-6"/>
+              </svg>
+            </span>
+            <span class="meta">
+              <span class="label">Email</span>
+              <span class="value">liaghimohamad69@gmail.com</span>
+            </span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <div class="contact-grid">
+            <a class="contact-card intervalCardReveal" href="https://www.linkedin.com/in/mohamad-liyaghi/" rel="noopener" target="_blank">
+              <span class="ic">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
+                </svg>
+              </span>
+              <span class="meta">
+                <span class="label">LinkedIn</span>
+                <span class="value">/in/mohamad-liyaghi</span>
+              </span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="contact-card intervalCardReveal" href="https://github.com/mohamad-liyaghi" rel="noopener" target="_blank">
+              <span class="ic">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 007.86 10.92c.58.11.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.25 3.34.95.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.16 1.18a10.97 10.97 0 015.76 0c2.2-1.49 3.16-1.18 3.16-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.78 1.06.78 2.14v3.18c0 .31.21.68.8.56A11.5 11.5 0 0023.5 12c0-6.35-5.15-11.5-11.5-11.5z"/>
+                </svg>
+              </span>
+              <span class="meta">
+                <span class="label">GitHub</span>
+                <span class="value">@mohamad-liyaghi</span>
+              </span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="contact-card intervalCardReveal" href="https://t.me/El_mohamad" rel="noopener" target="_blank">
+              <span class="ic">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>
+                </svg>
+              </span>
+              <span class="meta">
+                <span class="label">Telegram</span>
+                <span class="value">@El_mohamad</span>
+              </span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="contact-card intervalCardReveal" href="https://discordapp.com/users/953609313488875550" rel="noopener" target="_blank">
+              <span class="ic">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M20.32 4.37A19.79 19.79 0 0016.55 3a13.39 13.39 0 00-.65 1.34 18.27 18.27 0 00-5.41 0A12.62 12.62 0 009.83 3a19.92 19.92 0 00-3.77 1.37A20.66 20.66 0 002.5 16.59a19.95 19.95 0 005.96 3 14.66 14.66 0 001.27-2.05 12.95 12.95 0 01-2-1c.17-.12.34-.25.5-.38a14.27 14.27 0 0012.55 0c.16.13.33.26.5.38a12.95 12.95 0 01-2 1c.36.72.79 1.4 1.27 2.05a19.93 19.93 0 005.96-3 20.65 20.65 0 00-3.55-12.22zM8.84 14.63c-1.18 0-2.16-1.08-2.16-2.41s.96-2.42 2.16-2.42 2.18 1.08 2.16 2.42c0 1.33-.97 2.41-2.16 2.41zm6.96 0c-1.19 0-2.16-1.08-2.16-2.41s.96-2.42 2.16-2.42 2.18 1.08 2.16 2.42c0 1.33-.96 2.41-2.16 2.41z"/>
+                </svg>
+              </span>
+              <span class="meta">
+                <span class="label">Discord</span>
+                <span class="value">El_mohamad</span>
+              </span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </a>
           </div>
         </div>
       </section>
