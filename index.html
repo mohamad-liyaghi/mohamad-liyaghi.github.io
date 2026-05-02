@@ -326,7 +326,7 @@
             <article id="skills-text">
               <h2 class="delaySmallReveal">Skills <span></span></h2>
               <p class="delayMediumReveal changeDescription">
-                I have recently been actively engaged in various projects, where I have gained significant experience working with cutting-edge technologies. These technologies include:
+                I work daily across modern backend, AI, and infrastructure stacks, and I stay sharp with AI-assisted development tools like Claude — using them as part of my workflow to ship faster and with more confidence. These are some of the technologies I reach for:
               </p>
             </article>
 
@@ -511,6 +511,15 @@
                 />
               </article>
 
+              <article class="claude intervalCardReveal">
+                <img
+                  src="assets/icons/claude.svg"
+                  width="60px"
+                  height="60px"
+                  alt="claude"
+                />
+              </article>
+
 
             </div>
           </div>
@@ -536,18 +545,21 @@
           #s-contact #contact-text .changeDescription { transition: 2s all ease; }
           @media screen and (max-width: 768px) { #s-contact #contact-text .changeDescription { display: none; } }
           #s-contact #contact-text p { max-width: 500px; line-height: 3.2rem; color: #9ca3af; font-size: 1.8rem; }
-          #s-contact #contact-cards { display: flex; flex-wrap: wrap; gap: 24px; }
-          @media screen and (max-width: 1200px) { #s-contact #contact-cards { margin-top: 48px; } }
-          #s-contact #contact-cards article {
-            display: flex; justify-content: center; align-items: center; flex-wrap: wrap;
-            width: 20%; flex-grow: 1; height: 130px;
-            background-color: #151515; position: relative;
-            border: 1px solid #1f1f1f; border-radius: 4px; transition: 1s all ease;
+          #s-contact #contact-cards {
+            display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
           }
-          #s-contact #contact-cards article:hover { border: 1px solid #986dff; }
-          @media screen and (max-width: 768px) { #s-contact #contact-cards article { width: 40%; } }
+          @media screen and (max-width: 1200px) { #s-contact #contact-cards { margin-top: 48px; } }
+          @media screen and (max-width: 768px)  { #s-contact #contact-cards { grid-template-columns: repeat(3, 1fr); } }
+          @media screen and (max-width: 480px)  { #s-contact #contact-cards { grid-template-columns: repeat(2, 1fr); } }
+          #s-contact #contact-cards article {
+            display: flex; justify-content: center; align-items: center;
+            height: 110px;
+            background-color: #151515; position: relative;
+            border: 1px solid #1f1f1f; border-radius: 4px; transition: border-color 0.4s ease;
+          }
+          #s-contact #contact-cards article:hover { border-color: #986dff; }
           #s-contact #contact-cards article a { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; }
-          #s-contact #contact-cards article img { width: 40px; height: 40px; }
+          #s-contact #contact-cards article img { width: 36px; height: 36px; }
         </style>
         <div class="grid-layout">
           <div id="contact-wrapper">
