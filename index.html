@@ -5,9 +5,9 @@
     <meta name="author" content="Mohamad Liyaghi" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#986DFF" />
-    <meta name="description" content="Mohamad Liyaghi — Senior Backend Engineer at Zebracat AI. Distributed and AI-driven backend systems with Python, Go, TypeScript, Kubernetes, and AWS." />
-    <meta property="og:title" content="Mohamad Liyaghi — Senior Backend Engineer" />
-    <meta property="og:description" content="Senior Backend Engineer at Zebracat AI. Distributed systems, AI backends, Python, Go, TypeScript, Kubernetes, AWS." />
+    <meta name="description" content="Mohamad Liyaghi — Software Engineer at Zebracat AI. Distributed and AI-driven backend systems with Python, Go, TypeScript, Kubernetes, and AWS." />
+    <meta property="og:title" content="Mohamad Liyaghi — Software Engineer" />
+    <meta property="og:description" content="Software Engineer at Zebracat AI. Distributed systems, AI backends, Python, Go, TypeScript, Kubernetes, AWS." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mohamad-liyaghi.ir" />
     <meta property="og:image" content="https://mohamad-liyaghi.ir/assets/image/me.jpg" />
@@ -22,7 +22,7 @@
 
 
     <script src="assets/js/svg-inject.min.js"></script>
-    <title>Mohamad Liyaghi — Senior Backend Engineer</title>
+    <title>Mohamad Liyaghi — Software Engineer</title>
   </head>
 
   <body>
@@ -45,10 +45,10 @@
             <li><a href="#s-home">Introduction</a></li>
             <li><a href="#s-about">About Me</a></li>
             <li>
-              <a href="#s-projects">Projects</a>
+              <a href="#s-experience">Experience</a>
             </li>
             <li>
-              <a href="#s-experience">Experience</a>
+              <a href="#s-projects">Projects</a>
             </li>
             <li>
               <a href="#s-skills">Skills</a>
@@ -64,6 +64,8 @@
     <main>
       <section id="s-home">
         <style>
+          #s-home .grid-layout #home { min-height: 80vh; padding: 140px 0; }
+          @media (max-width: 992px) { #s-home .grid-layout #home { padding: 120px 0 64px; min-height: auto; } }
           @media (min-width: 1200px) {
             #s-home .grid-layout #home { gap: 48px; align-items: center; }
             #s-home .grid-layout #home #home-container-text { width: auto; flex: 1 1 auto; }
@@ -87,7 +89,7 @@
             <div id="home-container-text">
               <h1 class="delayMediumReveal">
                 Hi there! I'm Mohamad,<br>
-                A <span>Senior Backend Engineer</span> at <span>Zebracat AI</span>.
+                A <span>Software Engineer</span> at <span>Zebracat AI</span>.
               </h1>
               <p class="delayLargeReveal">
                 I design and ship scalable, AI-driven backend systems with a focus on distributed architectures, real-time pipelines, and high-throughput services. My toolkit spans Python (Django, FastAPI) and Node.js (TypeScript), with deep experience across PostgreSQL, MongoDB, Redis, Qdrant, Celery, RabbitMQ, Kubernetes, and AWS. I currently lead backend work for AI video generation at Zebracat AI.
@@ -185,22 +187,54 @@
       </section>
 
       <section id="s-about">
+        <style>
+          #s-about { padding: 120px 48px; background-color: #111; }
+          @media (max-width: 992px) { #s-about { padding: 80px 24px; } }
+          #s-about .grid-layout > div {
+            background-color: #151515;
+            border: 1px solid #1f1f1f;
+            border-radius: 16px;
+            padding: 64px 64px;
+            display: block;
+            max-width: 920px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+          }
+          @media (max-width: 768px) { #s-about .grid-layout > div { padding: 40px 28px; } }
+          #s-about .grid-layout > div::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, transparent, #986dff, transparent);
+            opacity: 0.7;
+          }
+          #s-about .grid-layout > div > div { width: 100% !important; }
+          #s-about h2 {
+            font-size: 4rem !important; font-weight: 500; color: #fff;
+            margin: 0 0 36px 0 !important; padding: 0;
+          }
+          @media (max-width: 768px) { #s-about h2 { font-size: 3rem !important; margin-bottom: 24px !important; } }
+          #s-about h2::after {
+            content: ''; display: block; width: 56px; height: 3px;
+            background: #986dff; margin-top: 16px; border-radius: 2px;
+          }
+          #s-about p {
+            font-size: 1.85rem !important; color: #b8bcc4 !important;
+            line-height: 1.85 !important; margin: 0 !important;
+          }
+          @media (max-width: 768px) { #s-about p { font-size: 1.55rem !important; } }
+        </style>
         <div class="grid-layout">
           <div>
-            <div id="creator-photo" class="delayMediumReveal">
-              
-            </div>
             <div>
               <h2 class="delaySmallReveal">About Me</h2>
-
               <p class="delayLargeReveal">
-                I'm a senior backend engineer with 5+ years of experience designing and shipping production systems for AI-driven products. My focus is building distributed, event-driven architectures: microservices that communicate over gRPC and message queues, real-time WebSocket APIs, vector-search pipelines for ML retrieval, and observability-first deployments on Kubernetes.
+                I'm a software engineer with 5+ years of experience designing and shipping production systems for AI-driven products. My focus is building distributed, event-driven architectures: microservices that communicate over gRPC and message queues, real-time WebSocket APIs, vector-search pipelines for ML retrieval, and observability-first deployments on Kubernetes.
                 <br><br>
                 At Zebracat AI I lead backend services for AI video generation — the systems behind asset processing, generation orchestration, and collaborative editing. I work across Python and TypeScript, ship on AWS with PostgreSQL, MongoDB, Redis, and Qdrant, and instrument everything with Sentry, Elastic APM, Prometheus, and Grafana.
                 <br><br>
                 Outside work I contribute to open-source on GitHub and maintain a few Telegram bots that have served 50k+ users. I care about clean code, testability, and shipping things that stay up.
               </p>
-
             </div>
           </div>
         </div>
@@ -208,50 +242,183 @@
 
       
 
+      <section id="s-experience">
+        <style>
+          #s-experience { padding: 120px 48px; background-color: #0d0d0d; }
+          @media (max-width: 992px) { #s-experience { padding: 80px 24px; } }
+          #s-experience .grid-layout > h2 {
+            text-align: center; padding-bottom: 72px;
+            color: #fff; font-size: 4rem; font-weight: 500; margin: 0;
+          }
+          #s-experience .grid-layout > h2 span { color: #986dff; }
+          #experience-list {
+            position: relative;
+            padding-left: 56px;
+            max-width: 920px;
+            margin: 0 auto;
+          }
+          #experience-list::before {
+            content: ''; position: absolute;
+            left: 18px; top: 18px; bottom: 18px;
+            width: 2px;
+            background: linear-gradient(180deg, #986dff 0%, rgba(152,109,255,0.6) 60%, transparent 100%);
+          }
+          #experience-list article {
+            position: relative;
+            background-color: #151515;
+            border: 1px solid #1f1f1f;
+            border-radius: 12px;
+            padding: 40px 44px;
+            margin-bottom: 32px;
+            transition: border-color 0.4s ease, transform 0.4s ease;
+          }
+          #experience-list article:hover { border-color: #986dff; transform: translateX(6px); }
+          #experience-list article::before {
+            content: ''; position: absolute;
+            left: -47px; top: 44px;
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            background-color: #986dff;
+            box-shadow: 0 0 0 6px rgba(152, 109, 255, 0.15);
+          }
+          #experience-list .xp-head {
+            display: flex; justify-content: space-between; align-items: baseline;
+            flex-wrap: wrap; gap: 12px; margin-bottom: 12px;
+          }
+          #experience-list h3 {
+            color: #fff; font-size: 2.4rem; font-weight: 500; margin: 0; line-height: 1.3;
+          }
+          #experience-list .xp-dates {
+            color: #c8b1ff; font-size: 1.4rem; font-weight: 400;
+            background: rgba(152, 109, 255, 0.12);
+            padding: 6px 16px; border-radius: 100px;
+            white-space: nowrap; letter-spacing: 0.02em;
+          }
+          #experience-list .xp-company {
+            color: #986dff; font-size: 1.7rem; font-weight: 500;
+            margin-bottom: 22px;
+          }
+          #experience-list .xp-company .xp-location { color: #9ca3af; font-weight: 400; }
+          #experience-list p {
+            color: #b8bcc4; font-size: 1.7rem; line-height: 1.85; margin: 0;
+          }
+          @media (max-width: 768px) {
+            #experience-list { padding-left: 36px; }
+            #experience-list::before { left: 12px; }
+            #experience-list article { padding: 28px 26px; margin-bottom: 24px; }
+            #experience-list article::before { left: -30px; top: 32px; width: 14px; height: 14px; }
+            #experience-list h3 { font-size: 2rem; }
+            #experience-list p { font-size: 1.55rem; }
+            #experience-list .xp-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+            #experience-list .xp-dates { font-size: 1.3rem; }
+          }
+        </style>
+        <div class="grid-layout">
+          <h2 class="delaySmallReveal">Experience <span></span></h2>
+          <div id="experience-list">
+            <article class="intervalCardReveal">
+              <div class="xp-head">
+                <h3>Backend Engineer · Team Lead</h3>
+                <span class="xp-dates">Sep 2024 — Present</span>
+              </div>
+              <div class="xp-company">Zebracat AI <span class="xp-location">· Berlin, Germany</span></div>
+              <p>
+                Leading the backend team for an AI video generation platform. Driving day-to-day delivery and ensuring system stability and high performance across services while aligning engineering efforts with customer needs and business priorities. Maintaining and expanding the backend with new services and features built in Django, FastAPI, and RabbitMQ — focused on scalable, efficient, and reliable systems that power real-time operations and platform growth.
+              </p>
+            </article>
+            <article class="intervalCardReveal">
+              <div class="xp-head">
+                <h3>Fullstack Developer</h3>
+                <span class="xp-dates">Jun 2021 — Sep 2024</span>
+              </div>
+              <div class="xp-company">Freelance</div>
+              <p>
+                Delivered multiple end-to-end web projects with full ownership across frontend and backend. Shipped complete solutions including SaaS platforms and VPN-related services, from initial requirements gathering to production release. Designed scalable backend architectures, implemented responsive interfaces, integrated third-party services, and ensured performance, security, and reliability while meeting client deadlines.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+
       <section id="s-projects">
+        <style>
+          #s-projects .grid-layout h2 { padding-bottom: 64px; }
+          #s-projects .grid-layout #projects { gap: 24px; margin: 0; align-items: stretch; }
+          #s-projects .grid-layout #projects > article {
+            padding: 36px 32px;
+            border-radius: 12px;
+            margin: 0 !important;
+            flex-basis: calc(33.333% - 18px) !important;
+            display: flex; flex-direction: column;
+            transition: transform 0.4s ease, border-color 0.4s ease;
+          }
+          @media (max-width: 1200px) {
+            #s-projects .grid-layout #projects > article { flex-basis: calc(50% - 12px) !important; }
+          }
+          @media (max-width: 768px) {
+            #s-projects .grid-layout #projects > article { flex-basis: 100% !important; }
+          }
+          #s-projects .grid-layout #projects > article:hover { transform: translateY(-4px); }
+          #s-projects .grid-layout #projects > article h3 { font-size: 2.2rem; }
+          #s-projects .grid-layout #projects > article p { line-height: 1.75; margin: 16px 0 20px; font-size: 1.55rem; }
+          .proj-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 24px; }
+          .proj-tag {
+            font-size: 1.15rem; color: #c8b1ff;
+            background: rgba(152, 109, 255, 0.08);
+            border: 1px solid rgba(152, 109, 255, 0.18);
+            padding: 4px 11px; border-radius: 100px; letter-spacing: 0.02em;
+          }
+          #s-projects .grid-layout #projects > article a { margin-top: auto; font-size: 1.7rem; }
+        </style>
         <div class="grid-layout">
           <h2 class="delaySmallReveal">Projects <span></span></h2>
-          <div id="projects"> 
-            <article class="intervalCardReveal naped" style="min-height: 364px;">
+          <div id="projects">
+            <article class="intervalCardReveal naped">
               <h3>Fast Commerce</h3>
               <p>
-                An advanced e-commerce platform for vendors to create and sell products, ensuring efficient order processing and product shipping, with a strong focus on user feedback. The backend is powered by FastAPI, with PostgreSQL as the database and Redis for caching. Pytest ensures robust testing, while Kubernetes manages deployment for scalability and reliability.
+                An advanced e-commerce platform for vendors to create and sell products, with efficient order processing, shipping, and a strong focus on user feedback. Backend powered by FastAPI with PostgreSQL and Redis for caching. Tested with Pytest and deployed on Kubernetes for scale.
               </p>
-              <a
-                      href="https://github.com/mohamad-liyaghi/fast-commerce/"
-                      rel="noopener"
-                      target="_blank"
-                      id="naped"
-              >Visit
-              </a>
+              <div class="proj-tags">
+                <span class="proj-tag">FastAPI</span>
+                <span class="proj-tag">PostgreSQL</span>
+                <span class="proj-tag">Redis</span>
+                <span class="proj-tag">Pytest</span>
+                <span class="proj-tag">Kubernetes</span>
+              </div>
+              <a href="https://github.com/mohamad-liyaghi/fast-commerce/" rel="noopener" target="_blank" id="naped">Visit ↗</a>
             </article>
-            <article class="intervalCardReveal efront" style="min-height: 364px;">
+            <article class="intervalCardReveal efront">
               <h3>Food Anywhere</h3>
               <p>
-                A food delivery system that simplifies food ordering by connecting users with nearby restaurants. Built with Django, using PostGIS for geospatial data, Redis for caching and cart management, Celery for background tasks. The system is monitored with Prometheus, Grafana, and Loki. Pytest is used for testing, and Docker and Kubernetes for scalability and efficiency.
+                A food delivery system that connects users with nearby restaurants. Built with Django and PostGIS for geospatial queries, Redis for caching and cart state, Celery for background work. Monitored with Prometheus, Grafana, and Loki; deployed via Docker and Kubernetes.
               </p>
-              <a
-                href="https://github.com/mohamad-liyaghi/FoodAnywhere"
-                rel="noopener"
-                target="_blank"
-                id="efront"
-                >Visit
-              </a>
+              <div class="proj-tags">
+                <span class="proj-tag">Django</span>
+                <span class="proj-tag">PostGIS</span>
+                <span class="proj-tag">Redis</span>
+                <span class="proj-tag">Celery</span>
+                <span class="proj-tag">Prometheus</span>
+                <span class="proj-tag">Grafana</span>
+                <span class="proj-tag">Kubernetes</span>
+              </div>
+              <a href="https://github.com/mohamad-liyaghi/FoodAnywhere" rel="noopener" target="_blank" id="efront">Visit ↗</a>
             </article>
-            <article class="intervalCardReveal teslabank" style="min-height: 364px;">
+            <article class="intervalCardReveal teslabank">
               <h3>Job Hunt</h3>
               <p>
-                A microservice-based job search platform that allows users to search for jobs based on their preferences. The users service is powered by FastAPI, while the jobs service is powered by Golang Fiber. The system is using Redis for caching and RabbitMQ for communication between services and kubernetes for deployment and github actions for CI/CD.
+                A microservice-based job search platform. The users service is powered by FastAPI; the jobs service runs on Golang Fiber. Redis for caching, RabbitMQ for inter-service messaging, Kubernetes for deployment, and GitHub Actions for CI/CD.
               </p>
-              <a
-                href="https://github.com/mohamad-liyaghi/jobhunt/"
-                rel="noopener"
-                target="_blank"
-                id="teslabank"
-                >Visit
-              </a>
+              <div class="proj-tags">
+                <span class="proj-tag">FastAPI</span>
+                <span class="proj-tag">Go · Fiber</span>
+                <span class="proj-tag">Redis</span>
+                <span class="proj-tag">RabbitMQ</span>
+                <span class="proj-tag">Kubernetes</span>
+                <span class="proj-tag">GitHub Actions</span>
+              </div>
+              <a href="https://github.com/mohamad-liyaghi/jobhunt/" rel="noopener" target="_blank" id="teslabank">Visit ↗</a>
             </article>
-
           </div>
           <a
             href="https://github.com/mohamad-liyaghi?tab=repositories"
@@ -264,264 +431,110 @@
       </section>
 
 
-      <section id="s-experience">
+      <section id="s-skills">
         <style>
-          #s-experience { padding: 64px 0; }
-          #s-experience .grid-layout > h2 { color: #fff; font-weight: 500; margin-bottom: 32px; }
-          #s-experience .grid-layout > h2 span { color: #986dff; }
-          #experience-list { display: flex; flex-direction: column; gap: 20px; }
-          #experience-list article {
-            background-color: #151515;
-            border: 1px solid #1f1f1f;
-            border-left: 3px solid #986dff;
-            border-radius: 4px;
-            padding: 24px 28px;
-            transition: border-color 0.4s ease;
+          #s-skills { padding: 120px 48px; background-color: #111; }
+          @media (max-width: 992px) { #s-skills { padding: 80px 24px; } }
+          #s-skills .grid-layout #skills-text {
+            max-width: 760px; margin: 0 auto 56px; text-align: center;
+            min-height: auto !important; width: 100% !important;
           }
-          #experience-list article:hover { border-color: #986dff; }
-          #experience-list .xp-head {
-            display: flex; justify-content: space-between; align-items: baseline;
-            flex-wrap: wrap; gap: 8px; margin-bottom: 6px;
+          #s-skills .grid-layout #skills-text h2 {
+            color: #fff; font-size: 4rem; font-weight: 500; margin: 0 0 20px 0;
           }
-          #experience-list h3 { color: #fff; font-size: 1.15rem; font-weight: 500; margin: 0; }
-          #experience-list .xp-dates { color: #9ca3af; font-size: 0.9rem; font-weight: 400; }
-          #experience-list .xp-company { color: #986dff; font-size: 0.95rem; margin-bottom: 10px; }
-          #experience-list p { color: #9ca3af; line-height: 1.7; margin: 0; }
-          @media (max-width: 768px) {
-            #experience-list article { padding: 20px; }
-            #experience-list .xp-head { flex-direction: column; align-items: flex-start; }
+          @media (max-width: 768px) { #s-skills .grid-layout #skills-text h2 { font-size: 3rem; } }
+          #s-skills .grid-layout #skills-text h2 span { color: #986dff; }
+          #s-skills .grid-layout #skills-text p {
+            color: #b8bcc4; font-size: 1.7rem; line-height: 1.8;
+            max-width: none !important;
+          }
+          @media (max-width: 768px) { #s-skills .grid-layout #skills-text p { font-size: 1.5rem; display: block !important; } }
+          #s-skills #skills-cards {
+            display: grid !important;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 16px !important;
+            max-width: 1080px; margin: 0 auto !important;
+          }
+          @media (max-width: 992px) {
+            #s-skills #skills-cards { grid-template-columns: repeat(4, 1fr); }
+          }
+          @media (max-width: 600px) {
+            #s-skills #skills-cards { grid-template-columns: repeat(3, 1fr); }
+          }
+          #s-skills #skills-cards .skills-cat {
+            grid-column: 1 / -1;
+            font-size: 1.25rem; color: #9ca3af; font-weight: 500;
+            text-transform: uppercase; letter-spacing: 0.2em;
+            margin: 24px 0 4px; padding-left: 4px;
+            display: flex; align-items: center; gap: 12px;
+            height: auto !important; width: auto !important;
+            background: transparent !important; border: 0 !important;
+          }
+          #s-skills #skills-cards .skills-cat:first-child { margin-top: 0; }
+          #s-skills #skills-cards .skills-cat::before {
+            content: ''; display: inline-block; flex-shrink: 0;
+            width: 4px; height: 14px; background: #986dff; border-radius: 2px;
+          }
+          #s-skills #skills-cards article:not(.skills-cat) {
+            width: auto !important; height: 100px !important;
+            background-color: #151515; border: 1px solid #1f1f1f;
+            border-radius: 10px;
+            display: flex !important; align-items: center; justify-content: center;
+            transition: border-color 0.4s ease, transform 0.3s ease !important;
+          }
+          #s-skills #skills-cards article:not(.skills-cat):hover {
+            border-color: #986dff; transform: translateY(-3px);
+          }
+          #s-skills #skills-cards article:not(.skills-cat) img {
+            width: 48px !important; height: 48px !important;
           }
         </style>
         <div class="grid-layout">
-          <h2 class="delaySmallReveal">Experience <span></span></h2>
-          <div id="experience-list">
-            <article class="intervalCardReveal">
-              <div class="xp-head">
-                <h3>Backend Engineer · Team Lead</h3>
-                <span class="xp-dates">Sep 2024 — Present</span>
-              </div>
-              <div class="xp-company">Zebracat AI · Berlin, Germany</div>
-              <p>
-                Leading the backend team for an AI video generation platform. Driving day-to-day delivery and ensuring system stability and high performance across services while aligning development efforts with customer requirements and business priorities. Maintaining and expanding the backend with new services and features built in Django, FastAPI, and RabbitMQ — focused on scalable, efficient, and reliable systems that support real-time operations and platform growth.
-              </p>
-            </article>
-            <article class="intervalCardReveal">
-              <div class="xp-head">
-                <h3>Fullstack Developer</h3>
-                <span class="xp-dates">Jun 2021 — Sep 2024</span>
-              </div>
-              <div class="xp-company">Freelance</div>
-              <p>
-                Delivered multiple end-to-end web projects with full ownership across frontend and backend. Built and shipped complete solutions including SaaS platforms and VPN-related services, from initial requirements gathering to production release. Designed scalable backend architectures, implemented responsive interfaces, integrated third-party services, and ensured performance, security, and reliability while meeting client deadlines.
-              </p>
-            </article>
+          <div id="skills-text">
+            <h2 class="delaySmallReveal">Skills <span></span></h2>
+            <p class="delayMediumReveal">
+              I work daily across modern backend, AI, and infrastructure stacks, and I stay sharp with AI-assisted development tools like Claude — using them as part of my workflow to ship faster and with more confidence.
+            </p>
           </div>
-        </div>
-      </section>
 
+          <div id="skills-cards">
+            <h3 class="skills-cat">Languages</h3>
+            <article class="python intervalCardReveal"><img src="assets/icons/python.svg" width="60px" height="60px" alt="python" /></article>
+            <article class="golang intervalCardReveal"><img src="assets/icons/golang.svg" width="60px" height="60px" alt="golang" /></article>
+            <article class="typescript intervalCardReveal"><img src="assets/icons/typescript.svg" width="60px" height="60px" alt="typescript" /></article>
+            <article class="nodejs intervalCardReveal"><img src="assets/icons/nodejs.svg" width="60px" height="60px" alt="nodejs" /></article>
 
-      <section id="s-skills">
-        <div class="grid-layout">
-          <div id="skills">
-            <article id="skills-text">
-              <h2 class="delaySmallReveal">Skills <span></span></h2>
-              <p class="delayMediumReveal changeDescription">
-                I work daily across modern backend, AI, and infrastructure stacks, and I stay sharp with AI-assisted development tools like Claude — using them as part of my workflow to ship faster and with more confidence. These are some of the technologies I reach for:
-              </p>
-            </article>
+            <h3 class="skills-cat">Backend &amp; APIs</h3>
+            <article class="django intervalCardReveal"><img src="assets/icons/django.svg" width="60px" height="60px" alt="django" /></article>
+            <article class="fastapi intervalCardReveal"><img src="assets/icons/fastapi.svg" width="60px" height="60px" alt="fastapi" /></article>
+            <article class="react intervalCardReveal"><img src="assets/icons/react.svg" width="60px" height="60px" alt="react" /></article>
+            <article class="grpc intervalCardReveal"><img src="assets/icons/grpc.svg" width="60px" height="60px" alt="grpc" /></article>
 
-            <div id="skills-cards">
-              <article class="python intervalCardReveal">
-                <img
-                  src="assets/icons/python.svg"
-                  width="60px"
-                  height="60px"
-                  alt="python"
-                />
-              </article>
-              <article class="golang intervalCardReveal">
-                <img
-                  src="assets/icons/golang.svg"
-                  width="60px"
-                  height="60px"
-                  alt="golang"
-                />
-              </article>
-              <article class="typescript intervalCardReveal">
-                <img
-                  src="assets/icons/typescript.svg"
-                  width="60px"
-                  height="60px"
-                  alt="typescript"
-                />
-              </article>
-              <article class="nodejs intervalCardReveal">
-                <img
-                  src="assets/icons/nodejs.svg"
-                  width="60px"
-                  height="60px"
-                  alt="nodejs"
-                />
-              </article>
-              <article class="django intervalCardReveal">
-                <img
-                  src="assets/icons/django.svg"
-                  width="60px"
-                  height="60px"
-                  alt="django"
-                />
-              </article>
-              <article class="fastapi intervalCardReveal">
-                <img
-                  src="assets/icons/fastapi.svg"
-                  width="60px"
-                  height="60px"
-                  alt="fastapi"
-                />
-              </article>
-              <article class="react intervalCardReveal">
-                <img
-                  src="assets/icons/react.svg"
-                  width="60px"
-                  height="60px"
-                  alt="react"
-                />
-              </article>
-              <article class="grpc intervalCardReveal">
-                <img
-                  src="assets/icons/grpc.svg"
-                  width="60px"
-                  height="60px"
-                  alt="grpc"
-                />
-              </article>
-              <article class="postgresql intervalCardReveal">
-                <img
-                  src="assets/icons/postgresql.svg"
-                  width="60px"
-                  height="60px"
-                  alt="postgresql"
-                />
-              </article>
-              <article class="mysql intervalCardReveal">
-                <img
-                  src="assets/icons/mysql.svg"
-                  width="60px"
-                  height="60px"
-                  alt="mysql"
-                />
-              </article>
-              <article class="mongo intervalCardReveal">
-                <img
-                  src="assets/icons/mongodb.svg"
-                  width="60px"
-                  height="60px"
-                  alt="mongo"
-                />
-              </article>
-              <article class="qdrant intervalCardReveal">
-                <img
-                  src="assets/icons/qdrant.svg"
-                  width="60px"
-                  height="60px"
-                  alt="qdrant"
-                />
-              </article>
-              <article class="redis intervalCardReveal">
-                <img
-                  src="assets/icons/redis.svg"
-                  width="60px"
-                  height="60px"
-                  alt="redis"
-                />
-              </article>
-              <article class="elastic intervalCardReveal">
-                <img
-                  src="assets/icons/elastic.svg"
-                  width="60px"
-                  height="60px"
-                  alt="elasticsearch"
-                />
-              </article>
-              <article class="docker intervalCardReveal">
-                <img
-                  src="assets/icons/docker.svg"
-                  width="60px"
-                  height="60px"
-                  alt="docker"
-                />
-              </article>
-              <article class="kubernetes intervalCardReveal">
-                <img
-                        src="assets/icons/kubernetes.svg"
-                        width="60px"
-                        height="60px"
-                        alt="kubernetes"
-                />
-              </article>
-              <article class="aws intervalCardReveal">
-                <img
-                  src="assets/icons/aws.svg"
-                  width="60px"
-                  height="60px"
-                  alt="aws"
-                />
-              </article>
-              <article class="githubactions intervalCardReveal">
-                <img
-                  src="assets/icons/githubactions.svg"
-                  width="60px"
-                  height="60px"
-                  alt="github actions"
-                />
-              </article>
-              <article class="nginx intervalCardReveal">
-                <img
-                  src="assets/icons/nginx.svg"
-                  width="60px"
-                  height="60px"
-                  alt="nginx"
-                />
-              </article>
+            <h3 class="skills-cat">Databases &amp; Search</h3>
+            <article class="postgresql intervalCardReveal"><img src="assets/icons/postgresql.svg" width="60px" height="60px" alt="postgresql" /></article>
+            <article class="mysql intervalCardReveal"><img src="assets/icons/mysql.svg" width="60px" height="60px" alt="mysql" /></article>
+            <article class="mongo intervalCardReveal"><img src="assets/icons/mongodb.svg" width="60px" height="60px" alt="mongo" /></article>
+            <article class="qdrant intervalCardReveal"><img src="assets/icons/qdrant.svg" width="60px" height="60px" alt="qdrant" /></article>
+            <article class="redis intervalCardReveal"><img src="assets/icons/redis.svg" width="60px" height="60px" alt="redis" /></article>
+            <article class="elastic intervalCardReveal"><img src="assets/icons/elastic.svg" width="60px" height="60px" alt="elasticsearch" /></article>
 
-              <article class="git intervalCardReveal">
-                <img
-                  src="assets/icons/git.svg"
-                  width="60px"
-                  height="60px"
-                  alt="git"
-                />
-              </article>
+            <h3 class="skills-cat">Infrastructure &amp; DevOps</h3>
+            <article class="docker intervalCardReveal"><img src="assets/icons/docker.svg" width="60px" height="60px" alt="docker" /></article>
+            <article class="kubernetes intervalCardReveal"><img src="assets/icons/kubernetes.svg" width="60px" height="60px" alt="kubernetes" /></article>
+            <article class="aws intervalCardReveal"><img src="assets/icons/aws.svg" width="60px" height="60px" alt="aws" /></article>
+            <article class="githubactions intervalCardReveal"><img src="assets/icons/githubactions.svg" width="60px" height="60px" alt="github actions" /></article>
+            <article class="nginx intervalCardReveal"><img src="assets/icons/nginx.svg" width="60px" height="60px" alt="nginx" /></article>
+            <article class="git intervalCardReveal"><img src="assets/icons/git.svg" width="60px" height="60px" alt="git" /></article>
 
-              <article class="rabbitmq intervalCardReveal">
-                <img
-                  src="assets/icons/rabbitmq.svg"
-                  width="60px"
-                  height="60px"
-                  alt="rabbitmq"
-                />
-              </article>
+            <h3 class="skills-cat">Messaging &amp; Async</h3>
+            <article class="rabbitmq intervalCardReveal"><img src="assets/icons/rabbitmq.svg" width="60px" height="60px" alt="rabbitmq" /></article>
+            <article class="celery intervalCardReveal"><img src="assets/icons/celery.svg" width="60px" height="60px" alt="celery" /></article>
 
-              <article class="celery intervalCardReveal">
-                <img
-                  src="assets/icons/celery.svg"
-                  width="60px"
-                  height="60px"
-                  alt="celery"
-                />
-              </article>
-
-              <article class="claude intervalCardReveal">
-                <img
-                  src="assets/icons/claude.svg"
-                  width="60px"
-                  height="60px"
-                  alt="claude"
-                />
-              </article>
-
-
-            </div>
+            <h3 class="skills-cat">AI Tools</h3>
+            <article class="claude intervalCardReveal"><img src="assets/icons/claude.svg" width="60px" height="60px" alt="claude" /></article>
+            <article class="langchain intervalCardReveal"><img src="assets/icons/langchain.svg" width="60px" height="60px" alt="langchain" /></article>
+            <article class="openai intervalCardReveal"><img src="assets/icons/openai.svg" width="60px" height="60px" alt="openai" /></article>
+            <article class="copilot intervalCardReveal"><img src="assets/icons/githubcopilot.svg" width="60px" height="60px" alt="github copilot" /></article>
           </div>
         </div>
       </section>
@@ -649,8 +662,7 @@
       <footer>
         <div class="grid-layout">
           <p>
-            Copyright © 2026. No rights reserved.
-            Code was stolen by <a href="https://mohamad-liyaghi.ir">Mohamad Liyaghi</a>.
+            © 2026 — Built and maintained by <a href="https://mohamad-liyaghi.ir">Mohamad Liyaghi</a>.
           </p>
         </div>
       </footer>
