@@ -63,6 +63,25 @@
 
     <main>
       <section id="s-home">
+        <style>
+          @media (min-width: 1200px) {
+            #s-home .grid-layout #home { gap: 48px; align-items: center; }
+            #s-home .grid-layout #home #home-container-text { width: auto; flex: 1 1 auto; }
+            #hero-graphic-wrap { flex: 0 0 380px; width: 380px; height: 380px; display: flex; align-items: center; justify-content: center; }
+            #hero-graphic { width: 100%; height: 100%; }
+          }
+          @media (max-width: 1199px) { #hero-graphic-wrap { display: none; } }
+          #hero-graphic .hg-pulse { animation: hg-pulse 3s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+          #hero-graphic .hg-pulse-2 { animation-delay: 1s; }
+          #hero-graphic .hg-pulse-3 { animation-delay: 2s; }
+          @keyframes hg-pulse {
+            0%, 100% { opacity: 0.85; transform: scale(1); }
+            50%      { opacity: 1;    transform: scale(1.15); }
+          }
+          #hero-graphic .hg-ring-1 { animation: hg-spin 60s linear infinite; transform-origin: 200px 200px; }
+          #hero-graphic .hg-ring-2 { animation: hg-spin 90s linear infinite reverse; transform-origin: 200px 200px; }
+          @keyframes hg-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        </style>
         <div class="grid-layout">
           <div id="home">
             <div id="home-container-text">
@@ -85,7 +104,82 @@
               </a>
             </div>
 
-            
+            <div id="hero-graphic-wrap" class="delayLargeReveal" aria-hidden="true">
+              <svg id="hero-graphic" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="hg-node" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%"   stop-color="#c8b1ff"/>
+                    <stop offset="100%" stop-color="#986dff"/>
+                  </linearGradient>
+                  <linearGradient id="hg-line" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%"   stop-color="#986dff" stop-opacity="0.05"/>
+                    <stop offset="50%"  stop-color="#986dff" stop-opacity="0.55"/>
+                    <stop offset="100%" stop-color="#986dff" stop-opacity="0.05"/>
+                  </linearGradient>
+                  <radialGradient id="hg-glow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="#986dff" stop-opacity="0.28"/>
+                    <stop offset="60%"  stop-color="#986dff" stop-opacity="0.06"/>
+                    <stop offset="100%" stop-color="#986dff" stop-opacity="0"/>
+                  </radialGradient>
+                </defs>
+
+                <circle cx="200" cy="200" r="190" fill="url(#hg-glow)"/>
+                <g class="hg-ring-1">
+                  <circle cx="200" cy="200" r="170" fill="none" stroke="#986dff" stroke-opacity="0.14" stroke-width="1"/>
+                </g>
+                <g class="hg-ring-2">
+                  <circle cx="200" cy="200" r="130" fill="none" stroke="#986dff" stroke-opacity="0.10" stroke-width="1" stroke-dasharray="3 7"/>
+                </g>
+
+                <g stroke="url(#hg-line)" stroke-width="1.4" fill="none">
+                  <line x1="80" y1="120" x2="200" y2="100"/>
+                  <line x1="80" y1="120" x2="200" y2="200"/>
+                  <line x1="80" y1="120" x2="200" y2="300"/>
+                  <line x1="80" y1="200" x2="200" y2="100"/>
+                  <line x1="80" y1="200" x2="200" y2="200"/>
+                  <line x1="80" y1="200" x2="200" y2="300"/>
+                  <line x1="80" y1="280" x2="200" y2="100"/>
+                  <line x1="80" y1="280" x2="200" y2="200"/>
+                  <line x1="80" y1="280" x2="200" y2="300"/>
+                  <line x1="200" y1="100" x2="320" y2="160"/>
+                  <line x1="200" y1="100" x2="320" y2="240"/>
+                  <line x1="200" y1="200" x2="320" y2="160"/>
+                  <line x1="200" y1="200" x2="320" y2="240"/>
+                  <line x1="200" y1="300" x2="320" y2="160"/>
+                  <line x1="200" y1="300" x2="320" y2="240"/>
+                </g>
+
+                <g fill="url(#hg-node)">
+                  <circle class="hg-pulse"          cx="80"  cy="120" r="9"/>
+                  <circle class="hg-pulse hg-pulse-2" cx="80"  cy="200" r="9"/>
+                  <circle class="hg-pulse hg-pulse-3" cx="80"  cy="280" r="9"/>
+                  <circle class="hg-pulse hg-pulse-2" cx="200" cy="100" r="11"/>
+                  <circle class="hg-pulse"          cx="200" cy="200" r="11"/>
+                  <circle class="hg-pulse hg-pulse-3" cx="200" cy="300" r="11"/>
+                  <circle class="hg-pulse hg-pulse-3" cx="320" cy="160" r="9"/>
+                  <circle class="hg-pulse"          cx="320" cy="240" r="9"/>
+                </g>
+
+                <g fill="#fff">
+                  <circle r="2.5" opacity="0">
+                    <animateMotion dur="3s"   repeatCount="indefinite" path="M 80,120 L 200,200"/>
+                    <animate attributeName="opacity" values="0;1;1;0" dur="3s"   repeatCount="indefinite"/>
+                  </circle>
+                  <circle r="2.5" opacity="0">
+                    <animateMotion dur="3.5s" begin="1s"   repeatCount="indefinite" path="M 80,200 L 200,100"/>
+                    <animate attributeName="opacity" values="0;1;1;0" dur="3.5s" begin="1s"   repeatCount="indefinite"/>
+                  </circle>
+                  <circle r="2.5" opacity="0">
+                    <animateMotion dur="2.8s" begin="0.5s" repeatCount="indefinite" path="M 200,200 L 320,160"/>
+                    <animate attributeName="opacity" values="0;1;1;0" dur="2.8s" begin="0.5s" repeatCount="indefinite"/>
+                  </circle>
+                  <circle r="2.5" opacity="0">
+                    <animateMotion dur="3.2s" begin="1.5s" repeatCount="indefinite" path="M 200,300 L 320,240"/>
+                    <animate attributeName="opacity" values="0;1;1;0" dur="3.2s" begin="1.5s" repeatCount="indefinite"/>
+                  </circle>
+                </g>
+              </svg>
+            </div>
           </div>
         </div>
       </section>
@@ -100,7 +194,7 @@
               <h2 class="delaySmallReveal">About Me</h2>
 
               <p class="delayLargeReveal">
-                I'm a senior backend engineer with 4+ years of experience designing and shipping production systems for AI-driven products. My focus is building distributed, event-driven architectures: microservices that communicate over gRPC and message queues, real-time WebSocket APIs, vector-search pipelines for ML retrieval, and observability-first deployments on Kubernetes.
+                I'm a senior backend engineer with 5+ years of experience designing and shipping production systems for AI-driven products. My focus is building distributed, event-driven architectures: microservices that communicate over gRPC and message queues, real-time WebSocket APIs, vector-search pipelines for ML retrieval, and observability-first deployments on Kubernetes.
                 <br><br>
                 At Zebracat AI I lead backend services for AI video generation — the systems behind asset processing, generation orchestration, and collaborative editing. I work across Python and TypeScript, ship on AWS with PostgreSQL, MongoDB, Redis, and Qdrant, and instrument everything with Sentry, Elastic APM, Prometheus, and Grafana.
                 <br><br>
@@ -203,32 +297,22 @@
           <div id="experience-list">
             <article class="intervalCardReveal">
               <div class="xp-head">
-                <h3>Senior Backend Engineer</h3>
-                <span class="xp-dates">Mar 2024 — Present</span>
+                <h3>Backend Engineer · Team Lead</h3>
+                <span class="xp-dates">Sep 2024 — Present</span>
               </div>
-              <div class="xp-company">Zebracat AI</div>
+              <div class="xp-company">Zebracat AI · Berlin, Germany</div>
               <p>
-                Leading backend for an AI video generation platform. Designing microservices for distributed video pipelines, real-time WebSocket APIs for collaborative editing, and high-throughput task queues with Celery and RabbitMQ. Working across Python (Django, FastAPI) and Node.js (TypeScript) with PostgreSQL, MongoDB, Redis, and Qdrant for vector search. Production observability via Sentry, Elastic APM, Prometheus, and Grafana, deployed on AWS and Kubernetes.
+                Leading the backend team for an AI video generation platform. Driving day-to-day delivery and ensuring system stability and high performance across services while aligning development efforts with customer requirements and business priorities. Maintaining and expanding the backend with new services and features built in Django, FastAPI, and RabbitMQ — focused on scalable, efficient, and reliable systems that support real-time operations and platform growth.
               </p>
             </article>
             <article class="intervalCardReveal">
               <div class="xp-head">
-                <h3>Backend Developer</h3>
-                <span class="xp-dates">Feb 2023 — Mar 2024</span>
+                <h3>Fullstack Developer</h3>
+                <span class="xp-dates">Jun 2021 — Sep 2024</span>
               </div>
-              <div class="xp-company">Zebracat AI</div>
+              <div class="xp-company">Freelance</div>
               <p>
-                Built core API services, authentication, payment integration, and async task processing. Set up CI/CD with GitHub Actions self-hosted runners and migrated services to Kubernetes. Owned several Django and FastAPI services end-to-end.
-              </p>
-            </article>
-            <article class="intervalCardReveal">
-              <div class="xp-head">
-                <h3>Freelance Backend Developer &amp; Open-Source Contributor</h3>
-                <span class="xp-dates">2021 — 2023</span>
-              </div>
-              <div class="xp-company">Independent</div>
-              <p>
-                Delivered Django/DRF and FastAPI projects for international clients. Authored Telegram bots serving 50k+ active users. Maintained open-source Python projects on GitHub.
+                Delivered multiple end-to-end web projects with full ownership across frontend and backend. Built and shipped complete solutions including SaaS platforms and VPN-related services, from initial requirements gathering to production release. Designed scalable backend architectures, implemented responsive interfaces, integrated third-party services, and ensured performance, security, and reliability while meeting client deadlines.
               </p>
             </article>
           </div>
