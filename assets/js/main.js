@@ -4,6 +4,15 @@ import { menu } from "./menu.js";
 menu();
 initScrollReveal();
 
+const header = document.querySelector("header");
+if (header) {
+  const onScrollHeader = () => {
+    header.classList.toggle("is-scrolled", window.scrollY > 24);
+  };
+  onScrollHeader();
+  document.addEventListener("scroll", onScrollHeader, { passive: true });
+}
+
 const themeToggle = document.getElementById("theme-toggle");
 if (themeToggle) {
   themeToggle.addEventListener("click", () => {
