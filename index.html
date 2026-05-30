@@ -5,6 +5,8 @@
     <meta name="author" content="Mohamad Liyaghi" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#986DFF" />
+    <link rel="icon" type="image/svg+xml" href="assets/image/favicon.svg" />
+    <link rel="apple-touch-icon" href="assets/image/favicon.svg" />
     <meta name="description" content="Mohamad Liyaghi — Software Engineer at Zebracat AI. Distributed and AI-driven backend systems with Python, Go, TypeScript, Kubernetes, and AWS." />
     <meta property="og:title" content="Mohamad Liyaghi — Software Engineer" />
     <meta property="og:description" content="Software Engineer at Zebracat AI. Distributed systems, AI backends, Python, Go, TypeScript, Kubernetes, AWS." />
@@ -47,7 +49,12 @@
         background-image: radial-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px);
         opacity: 1;
       }
-      header, main { position: relative; z-index: 1; }
+      main { position: relative; z-index: 1; }
+      /* Sticky nav: keep it visible on scroll so scroll-spy + is-scrolled state actually show.
+         (Previously this rule forced position:relative, making the nav scroll away.) */
+      header { position: sticky; top: 0; z-index: 999; }
+      /* overflow-x:clip (not hidden) so it can't create a scroll container that breaks sticky */
+      html, body { overflow-x: clip; }
 
       /* Floating gradient orbs in the background */
       .bg-orbs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
@@ -154,13 +161,35 @@
         #experience-list article::before { animation: none; }
       }
 
-      /* Resume button: arrow micro-animation */
-      #s-home a[href*="resume" i], #s-home a[download] {
+      /* === Download Resume CTA — gradient, shine sweep, lift === */
+      #s-home a[download] {
         position: relative; overflow: hidden;
+        background: linear-gradient(135deg, #9a72ff 0%, #7b53e6 100%) !important;
+        border-radius: 10px !important;
+        padding: 18px 32px !important;
+        max-width: none !important; width: fit-content;
+        box-shadow: 0 10px 28px -12px rgba(152,109,255,0.65);
+        transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s ease !important;
+        will-change: transform; z-index: 0;
       }
+      #s-home a[download]:hover {
+        padding: 18px 32px !important;   /* cancel the base padding-grow jank */
+        max-width: none !important;
+        transform: translateY(-3px);
+        box-shadow: 0 18px 40px -12px rgba(152,109,255,0.8);
+      }
+      #s-home a[download]:active { transform: translateY(-1px); }
+      #s-home a[download]::before {
+        content: ''; position: absolute; top: 0; left: -130%;
+        width: 55%; height: 100%;
+        background: linear-gradient(100deg, transparent, rgba(255,255,255,0.5), transparent);
+        transform: skewX(-18deg); pointer-events: none; z-index: 1;
+        transition: left 0.75s cubic-bezier(0.16,1,0.3,1);
+      }
+      #s-home a[download]:hover::before { left: 140%; }
       #s-home a[download]::after {
         content: '↓';
-        display: inline-block; margin-left: 10px;
+        display: inline-block; margin-left: 10px; position: relative; z-index: 2;
         transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       }
       #s-home a[download]:hover::after { transform: translateY(3px); }
@@ -304,8 +333,11 @@
       [data-theme="light"] footer p { color: #4b5563 !important; }
       [data-theme="light"] footer p a { color: #6e4ed4 !important; }
 
+      /* Vertically center all nav items (links + toggle) on one shared axis */
+      header .grid-layout nav .nav-list { align-items: center; }
+
       /* Theme toggle button */
-      header .grid-layout nav .nav-list li.theme-toggle-item { margin-left: 32px; display: flex; align-items: center; }
+      header .grid-layout nav .nav-list li.theme-toggle-item { margin-left: 28px; display: flex; align-items: center; }
       .theme-toggle-item button {
         background: rgba(255,255,255,0.04);
         border: 1px solid rgba(255,255,255,0.08);
@@ -349,6 +381,56 @@
       .theme-toggle-item button:hover svg { transform: scale(1.08); }
       @media (max-width: 992px) {
         header .grid-layout nav .nav-list li.theme-toggle-item { margin: 8px 0 0; justify-content: center; opacity: 1 !important; }
+      }
+
+      /* === Animated section-title underline (draws in when section enters view) === */
+      .accent-underline { position: relative; }
+      .accent-underline::after {
+        content: ''; display: block;
+        width: 64px; height: 3px; border-radius: 2px;
+        margin: 18px auto 0;
+        background: linear-gradient(90deg, #986dff, #c8b1ff);
+        transform: scaleX(0); transform-origin: center;
+        transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .accent-underline.title-in::after { transform: scaleX(1); }
+
+      /* === On-brand terminal caret after the hero headline === */
+      .term-caret {
+        display: inline-block;
+        width: 3px; height: 1em;
+        margin-left: 6px;
+        vertical-align: -0.12em;
+        background: #986dff;
+        border-radius: 1px;
+        animation: term-blink 1.1s steps(1) infinite;
+      }
+      @keyframes term-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+
+      /* === Rotating gradient halo on the AI focus card (spotlights the AI story) === */
+      @property --ai-ang { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+      .ai-focus { isolation: isolate; }
+      .ai-focus .ai-ring {
+        content: ''; position: absolute; inset: 0; border-radius: 18px;
+        padding: 1px; pointer-events: none; z-index: 0;
+        background: conic-gradient(from var(--ai-ang),
+          rgba(152,109,255,0) 0deg,
+          rgba(152,109,255,0.85) 70deg,
+          rgba(200,177,255,0.95) 110deg,
+          rgba(152,109,255,0) 200deg,
+          rgba(152,109,255,0) 360deg);
+        -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor; mask-composite: exclude;
+        animation: ai-ring-spin 6s linear infinite;
+      }
+      @keyframes ai-ring-spin { to { --ai-ang: 360deg; } }
+
+      /* === Honor reduced-motion for all decorative motion added here === */
+      @media (prefers-reduced-motion: reduce) {
+        .accent-underline::after { transition: none; transform: scaleX(1); }
+        .term-caret { animation: none; opacity: 1; }
+        .ai-focus .ai-ring { animation: none; }
+        #s-home a[download]::before { display: none; }
       }
     </style>
 
@@ -428,8 +510,12 @@
     <main>
       <section id="s-home">
         <style>
-          #s-home .grid-layout #home { min-height: 80vh; padding: 140px 0; }
-          @media (max-width: 992px) { #s-home .grid-layout #home { padding: 120px 0 64px; min-height: auto; } }
+          #s-home .grid-layout #home { min-height: 0; padding: 64px 0 104px; }
+          @media (min-width: 1500px) { #s-home .grid-layout #home { padding: 104px 0 120px; } }
+          @media (max-width: 992px) {
+            #s-home { padding: 0 20px; }
+            #s-home .grid-layout #home { padding: 40px 0 56px; min-height: auto; }
+          }
           @media (min-width: 1200px) {
             #s-home .grid-layout #home { gap: 48px; align-items: center; }
             #s-home .grid-layout #home #home-container-text { width: auto; flex: 1 1 auto; }
@@ -454,7 +540,7 @@
               <span class="focus-chip delaySmallReveal">Software Engineer · AI Engineering</span>
               <h1 class="delayMediumReveal">
                 Hi there! I'm Mohamad,<br>
-                A <span class="grad-text">Software Engineer</span> at <span class="grad-text">Zebracat AI</span>.
+                A <span class="grad-text">Software Engineer</span> at <span class="grad-text">Zebracat AI</span>.<span class="term-caret" aria-hidden="true"></span>
               </h1>
               <p class="delayLargeReveal">
                 I build the backend behind AI products — distributed systems, real-time pipelines, and high-throughput services that quietly do the heavy lifting. At <strong style="color:#c8b1ff;font-weight:500">Zebracat AI</strong>, I lead the backend for AI video generation. Day to day I work in Python and TypeScript across Postgres, Redis, Qdrant, Celery, Kubernetes, and AWS — and I'm going deep on agents, MCP, and the architecture of production-grade AI.
@@ -580,9 +666,13 @@
           }
           @media (max-width: 768px) { #s-about h2 { font-size: 3rem !important; margin-bottom: 24px !important; } }
           #s-about h2::after {
-            content: ''; display: block; width: 56px; height: 3px;
-            background: #986dff; margin-top: 16px; border-radius: 2px;
+            content: ''; display: block; width: 60px; height: 3px;
+            background: linear-gradient(90deg, #986dff, #c8b1ff);
+            margin-top: 16px; border-radius: 2px;
+            transform: scaleX(0); transform-origin: left center;
+            transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
           }
+          #s-about h2.title-in::after { transform: scaleX(1); }
           #s-about p {
             font-size: 1.85rem !important; color: #b8bcc4 !important;
             line-height: 1.85 !important; margin: 0 !important;
@@ -592,7 +682,7 @@
         <div class="grid-layout">
           <div>
             <div>
-              <h2 class="delaySmallReveal">About Me</h2>
+              <h2 class="delaySmallReveal accent-underline">About Me</h2>
               <p class="delayLargeReveal">
                 I'm a software engineer with 5+ years of experience designing and shipping production systems for AI-driven products. My focus is building distributed, event-driven architectures: microservices that communicate over gRPC and message queues, real-time WebSocket APIs, vector-search pipelines for ML retrieval, and observability-first deployments on Kubernetes.
                 <br><br>
@@ -679,7 +769,7 @@
           }
         </style>
         <div class="grid-layout">
-          <h2 class="delaySmallReveal">Experience <span></span></h2>
+          <h2 class="delaySmallReveal accent-underline">Experience</h2>
           <div id="experience-list">
             <article class="intervalCardReveal">
               <div class="xp-head">
@@ -708,7 +798,7 @@
 
       <section id="s-projects">
         <style>
-          #s-projects .grid-layout h2 { padding-bottom: 64px; }
+          #s-projects .grid-layout h2 { padding-bottom: 64px; text-align: center; }
           #s-projects .grid-layout #projects { gap: 24px; margin: 0; align-items: stretch; }
           #s-projects .grid-layout #projects > article {
             padding: 36px 32px;
@@ -737,7 +827,7 @@
           #s-projects .grid-layout #projects > article a { margin-top: auto; font-size: 1.7rem; }
         </style>
         <div class="grid-layout">
-          <h2 class="delaySmallReveal">Projects <span></span></h2>
+          <h2 class="delaySmallReveal accent-underline">Projects</h2>
           <div id="projects">
             <article class="intervalCardReveal naped">
               <h3>Fast Commerce</h3>
@@ -977,13 +1067,14 @@
         </style>
         <div class="grid-layout">
           <div id="skills-text">
-            <h2 class="delaySmallReveal">Skills <span></span></h2>
+            <h2 class="delaySmallReveal accent-underline">Skills</h2>
             <p class="delayMediumReveal">
               I work daily across backend, AI, and infrastructure — and I'm constantly learning. Right now I'm <strong class="ai-highlight">deep into AI engineering</strong>: building agents, working with MCP, designing the architecture behind production-grade AI systems, and shipping with Claude as part of my everyday workflow.
             </p>
           </div>
 
           <div class="ai-focus delayLargeReveal">
+            <span class="ai-ring" aria-hidden="true"></span>
             <div class="ai-focus-head">
               <div class="ai-focus-spark" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1159,7 +1250,7 @@
           [data-theme="light"] .contact-card .ic { background: rgba(152,109,255,0.08) !important; color: #6e4ed4 !important; }
         </style>
         <div class="grid-layout">
-          <h2 class="delaySmallReveal">Get in touch <span></span></h2>
+          <h2 class="delaySmallReveal accent-underline">Get in touch</h2>
           <p class="contact-lede delayMediumReveal">
             Open to interesting work, collaborations, and conversations. The fastest way to reach me is email — or pick any channel below.
           </p>

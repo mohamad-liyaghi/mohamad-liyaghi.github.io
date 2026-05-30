@@ -58,3 +58,20 @@ if (sections.length && "IntersectionObserver" in window) {
   );
   sections.forEach((s) => io.observe(s));
 }
+
+// Draw-in the gradient underline beneath each section title as it enters view.
+const underlines = document.querySelectorAll(".accent-underline");
+if (underlines.length && "IntersectionObserver" in window) {
+  const titleIO = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("title-in");
+          obs.unobserve(e.target);
+        }
+      });
+    },
+    { rootMargin: "0px 0px -15% 0px", threshold: 0.2 }
+  );
+  underlines.forEach((el) => titleIO.observe(el));
+}
