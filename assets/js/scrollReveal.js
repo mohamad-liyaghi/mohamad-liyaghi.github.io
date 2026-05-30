@@ -24,7 +24,8 @@ export function initScrollReveal() {
   sr.reveal(".delayLargeReveal", { delay: 320, origin: "top", distance: "26px" });
   sr.reveal(".delayExtraBigReveal", { delay: 440, origin: "top", distance: "26px" });
 
-  // Cards & timeline — rise up with a gentle stagger as each section enters.
-  sr.reveal(".intervalCardReveal", { interval: 80 });
-  sr.reveal(".intervalCardRevealContact", { interval: 80 });
+  // Cards, timeline & grids — reveal together as one group per section
+  // (no per-item interval, so a section's items rise in at the same time).
+  sr.reveal(".intervalCardReveal");
+  sr.reveal(".intervalCardRevealContact");
 }
