@@ -2,6 +2,7 @@
 
 /* ------------------------------------------------------------------ *
  *  Design tokens — Tailwind v4 (inline so [data-theme] switches live)
+ *  Palette: Tokyo Night (dark) / Tokyo Night Day (light)
  * ------------------------------------------------------------------ */
 @theme inline {
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -18,60 +19,69 @@
   --color-accent: var(--accent);
   --color-accent2: var(--accent-2);
   --color-accent3: var(--accent-3);
+  --color-magenta: var(--magenta);
 
   --breakpoint-xs: 30rem;
 }
 
-/* Dark — deep aubergine / Ubuntu-coded */
+/* Dark — Tokyo Night */
 :root {
-  --bg: #160b13;
-  --bg-soft: #1d101a;
-  --bg-elev: #261622;
-  --line: #38233140;
-  --line: #382231;
-  --line-soft: #271a23;
-  --text: #f3ebe7;
-  --text-dim: #b6a6ad;
-  --text-faint: #7c6a74;
-  --accent: #e95420;          /* Ubuntu orange */
-  --accent-2: #33d17a;        /* terminal green */
-  --accent-3: #5fb3ff;        /* dir blue */
-  --grid: rgba(255, 255, 255, 0.02);
-  --glow: rgba(233, 84, 32, 0.13);
-  --selection: rgba(233, 84, 32, 0.3);
+  --bg: #16161e;
+  --bg-soft: #1a1b26;
+  --bg-elev: #1f2335;
+  --line: #2a2e44;
+  --line-soft: #20232f;
+  --text: #c0caf5;
+  --text-dim: #9aa5ce;
+  --text-faint: #565f89;
+  --accent: #7aa2f7;          /* blue */
+  --accent-2: #9ece6a;        /* green */
+  --accent-3: #7dcfff;        /* cyan */
+  --magenta: #bb9af7;         /* purple */
+  --grid: rgba(122, 162, 247, 0.045);
+  --glow: rgba(122, 162, 247, 0.14);
+  --glow-2: rgba(187, 154, 247, 0.10);
+  --selection: rgba(122, 162, 247, 0.28);
   color-scheme: dark;
 }
 
+/* Light — Tokyo Night Day */
 [data-theme="light"] {
-  --bg: #f4efe9;
-  --bg-soft: #fbf8f4;
+  --bg: #e1e2e7;
+  --bg-soft: #e9e9ed;
   --bg-elev: #ffffff;
-  --line: #e6dcd0;
-  --line-soft: #efe7dc;
-  --text: #1c1117;
-  --text-dim: #5e4d55;
-  --text-faint: #93808a;
-  --accent: #d2441a;
-  --accent-2: #1c8a52;
-  --accent-3: #1f72c4;
-  --grid: rgba(0, 0, 0, 0.028);
-  --glow: rgba(210, 68, 26, 0.1);
-  --selection: rgba(210, 68, 26, 0.16);
+  --line: #c4c8da;
+  --line-soft: #d6d8e3;
+  --text: #2e3043;
+  --text-dim: #555a77;
+  --text-faint: #848cb5;
+  --accent: #2e7de9;          /* blue */
+  --accent-2: #587539;        /* green */
+  --accent-3: #007197;        /* cyan */
+  --magenta: #9854f1;         /* purple */
+  --grid: rgba(46, 125, 233, 0.05);
+  --glow: rgba(46, 125, 233, 0.1);
+  --glow-2: rgba(152, 84, 241, 0.08);
+  --selection: rgba(46, 125, 233, 0.16);
   color-scheme: light;
 }
 
-/* The console is always a dark Ubuntu terminal, in either theme */
+/* The console is always a dark Tokyo-Night terminal, in either theme */
 :root {
-  --term-bg: #2a0a22;
-  --term-bg2: #36102c;
-  --term-text: #eeeeec;
-  --term-dim: #b8a9b2;
-  --term-faint: #8a7681;
-  --term-ok: #33d17a;
-  --term-orange: #e95420;
-  --term-blue: #6cb6ff;
-  --term-line: #4a2740;
-  --term-scan: rgba(255, 255, 255, 0.03);
+  --term-bg: #16161e;
+  --term-bg2: #1a1b26;
+  --term-text: #c0caf5;
+  --term-dim: #9aa5ce;
+  --term-faint: #565f89;
+  --term-ok: #9ece6a;       /* green   */
+  --term-blue: #7aa2f7;     /* blue    */
+  --term-cyan: #7dcfff;     /* cyan    */
+  --term-magenta: #bb9af7;  /* purple  */
+  --term-orange: #ff9e64;   /* orange  */
+  --term-red: #f7768e;      /* red     */
+  --term-yellow: #e0af68;   /* yellow  */
+  --term-line: #2a2e44;
+  --term-scan: rgba(255, 255, 255, 0.022);
 }
 
 /* Persian uses Vazirmatn for prose; the terminal chrome stays mono */
@@ -165,12 +175,14 @@ button {
   position: fixed;
   top: -22%;
   left: 50%;
-  width: 68vw;
-  height: 58vh;
+  width: 72vw;
+  height: 60vh;
   transform: translateX(-50%);
   z-index: -2;
-  background: radial-gradient(circle, var(--glow), transparent 66%);
-  filter: blur(46px);
+  background:
+    radial-gradient(circle at 38% 40%, var(--glow), transparent 60%),
+    radial-gradient(circle at 66% 55%, var(--glow-2), transparent 62%);
+  filter: blur(50px);
   pointer-events: none;
 }
 
@@ -180,12 +192,43 @@ button {
 .term {
   position: relative;
   background:
-    radial-gradient(120% 80% at 50% -10%, var(--term-bg2), var(--term-bg) 60%);
+    radial-gradient(130% 90% at 50% -12%, var(--term-bg2), var(--term-bg) 62%);
   color: var(--term-text);
   border: 1px solid var(--term-line);
+  border-radius: 14px;
   box-shadow:
-    0 40px 90px -40px rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+    0 50px 100px -45px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(255, 255, 255, 0.025) inset,
+    0 1px 0 0 rgba(255, 255, 255, 0.04) inset;
+}
+.term-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.6rem 0.95rem;
+  border-bottom: 1px solid var(--term-line);
+  background: linear-gradient(var(--term-bg2), transparent);
+  border-radius: 14px 14px 0 0;
+  font-size: 0.72rem;
+  color: var(--term-faint);
+}
+.term-body {
+  position: relative;
+  max-height: min(72vh, 620px);
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  padding: 1.1rem 1.15rem 1.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--term-line) transparent;
+}
+.term-body::-webkit-scrollbar { width: 9px; }
+.term-body::-webkit-scrollbar-track { background: transparent; }
+.term-body::-webkit-scrollbar-thumb {
+  background: var(--term-line);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: 999px;
 }
 .scanlines::after {
   content: "";
@@ -198,31 +241,69 @@ button {
     transparent 0 2px,
     var(--term-scan) 2px 3px
   );
-  opacity: 0.7;
+  opacity: 0.65;
+  z-index: 2;
 }
+
 .t-ok { color: var(--term-ok); }
-.t-orange { color: var(--term-orange); }
 .t-blue { color: var(--term-blue); }
+.t-cyan { color: var(--term-cyan); }
+.t-magenta { color: var(--term-magenta); }
+.t-orange { color: var(--term-orange); }
+.t-red { color: var(--term-red); }
+.t-yellow { color: var(--term-yellow); }
 .t-text { color: var(--term-text); }
 .t-dim { color: var(--term-dim); }
 .t-faint { color: var(--term-faint); }
+
+/* the hidden input that drives the live prompt */
+.term-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  padding: 0;
+  border: 0;
+  pointer-events: none;
+}
+
+.term-caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  background: var(--term-cyan);
+  translate: 0 0.18em;
+  box-shadow: 0 0 8px var(--term-cyan);
+  animation: blink 1.05s steps(1) infinite;
+}
+
+/* neofetch ------------------------------------------------------- */
+.nf-logo {
+  font-family: var(--font-mono);
+  font-size: clamp(0.5rem, 2.1vw, 0.72rem);
+  line-height: 1.04;
+  white-space: pre;
+  background: linear-gradient(135deg, var(--term-blue), var(--term-cyan) 42%, var(--term-magenta));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 14px rgba(122, 162, 247, 0.25));
+}
+.nf-label { color: var(--term-blue); font-weight: 600; }
+.nf-sep { color: var(--term-faint); }
+.nf-swatch {
+  display: inline-block;
+  width: 1.05rem;
+  height: 0.66rem;
+  border-radius: 2px;
+}
 
 .name-xl {
   font-family: var(--font-mono);
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1.02;
-  font-size: clamp(2rem, 7.5vw, 3.6rem);
-  color: var(--term-text);
-}
-
-.term-caret {
-  display: inline-block;
-  width: 0.58em;
-  height: 1.05em;
-  background: var(--term-orange);
-  translate: 0 0.18em;
-  animation: blink 1.05s steps(1) infinite;
+  font-size: clamp(2rem, 7.5vw, 3.4rem);
 }
 
 /* ------------------------------------------------------------------ *
@@ -325,7 +406,7 @@ html[dir="rtl"] .ulink::after { --ul-origin: right; }
 .btn-primary {
   background: var(--accent);
   border-color: var(--accent);
-  color: #fff;
+  color: #0b0e17;
   font-weight: 600;
 }
 .btn-primary:hover { box-shadow: 0 10px 28px -10px var(--accent); }
@@ -356,4 +437,5 @@ html[dir="rtl"] .ulink::after { --ul-origin: right; }
     transition-duration: 0.001ms !important;
   }
   .caret, .term-caret { animation: none; opacity: 1; }
+  .term-body { scroll-behavior: auto; }
 }

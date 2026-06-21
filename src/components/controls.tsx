@@ -39,9 +39,14 @@ export function LangToggle() {
   const navigate = useNavigate();
   const cur = i18n.language === "fa" ? "fa" : "en";
   const next = cur === "fa" ? "en" : "fa";
+  // keep the current sub-path (e.g. /en/blog → /fa/blog) and any hash
+  const goNext = () => {
+    const rest = window.location.pathname.replace(/^\/(en|fa)/, "");
+    navigate(`/${next}${rest}${window.location.hash}`);
+  };
   return (
     <button
-      onClick={() => navigate(`/${next}${window.location.hash}`)}
+      onClick={goNext}
       aria-label={t("a11y.lang")}
       title={t("a11y.lang")}
       className="inline-flex h-9 items-center gap-1 rounded-md border border-line px-2.5 text-xs keep-mono transition-colors hover:border-accent/50"

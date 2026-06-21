@@ -1,10 +1,12 @@
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { ARTICLES, PROFILE } from "../data/site";
 import { Icon } from "./Icons";
 import { ArrowLink, Reveal, SectionHeader } from "./ui";
 
 export function Writing() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lng = i18n.language === "fa" ? "fa" : "en";
 
   return (
     <section id="writing" className="py-20 sm:py-28">
@@ -52,7 +54,16 @@ export function Writing() {
           ))}
         </div>
 
-        <div className="mt-7">
+        <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <Link
+            to={`/${lng}/blog`}
+            className="group inline-flex items-center gap-1.5 keep-mono text-sm text-accent transition-colors hover:text-text"
+          >
+            {t("writing.open")}
+            <span className="transition-transform group-hover:translate-x-0.5 rtl:rotate-180">
+              →
+            </span>
+          </Link>
           <ArrowLink href={PROFILE.medium} label={t("writing.all")} />
         </div>
       </div>

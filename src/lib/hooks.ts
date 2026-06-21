@@ -2,31 +2,50 @@ import { useCallback, useEffect, useState } from "react";
 
 export type Theme = "dark" | "light";
 
+const THEME_COLOR: Record<Theme, string> = {
+  dark: "#16161e",
+  light: "#e1e2e7",
+};
+
+export function readTheme(): Theme {
+  if (typeof document === "undefined") return "dark";
+  return document.documentElement.getAttribute("data-theme") === "light"
+    ? "light"
+    : "dark";
+}
+
+/** Apply a theme to the DOM and notify every useTheme() listener. */
+export function setTheme(theme: Theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  try {
+    localStorage.setItem("theme", theme);
+  } catch {
+    /* ignore */
+  }
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute("content", THEME_COLOR[theme]);
+  window.dispatchEvent(new CustomEvent("themechange"));
+}
+
+export function toggleTheme(): Theme {
+  const next: Theme = readTheme() === "dark" ? "light" : "dark";
+  setTheme(next);
+  return next;
+}
+
 export function useTheme(): [Theme, () => void] {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof document !== "undefined") {
-      const t = document.documentElement.getAttribute("data-theme");
-      if (t === "light" || t === "dark") return t;
-    }
-    return "dark";
-  });
+  const [theme, set] = useState<Theme>(readTheme);
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    try {
-      localStorage.setItem("theme", theme);
-    } catch {
-      /* ignore */
-    }
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", theme === "dark" ? "#160b13" : "#f4efe9");
-  }, [theme]);
+    // index.html sets data-theme pre-paint; sync the meta colour + state here,
+    // and keep every instance in lock-step via the themechange event.
+    set(readTheme());
+    const sync = () => set(readTheme());
+    window.addEventListener("themechange", sync);
+    return () => window.removeEventListener("themechange", sync);
+  }, []);
 
-  const toggle = useCallback(
-    () => setTheme((t) => (t === "dark" ? "light" : "dark")),
-    [],
-  );
-  return [theme, toggle];
+  return [theme, useCallback(() => void toggleTheme(), [])];
 }
 
 export function useScrollSpy(ids: string[], offset = 110): string {

@@ -6,6 +6,9 @@ const en = {
     stack: "stack",
     writing: "writing",
     contact: "contact",
+    blog: "blog",
+    uses: "uses",
+    home: "home",
     menu: "menu",
     close: "close",
   },
@@ -20,6 +23,40 @@ const en = {
     telegram: "Telegram",
     email: "Email",
   },
+  term: {
+    bar: "mohamad@portfolio: ~",
+    shell: "zsh",
+    online: "online",
+    welcome:
+      "Welcome to Mohamad OS — five years of shipping. Type a command to look around.",
+    hint: "try:",
+    helpLead: "available commands",
+    helpFoot: "links open in a new tab · ↑ ↓ history · tab to complete",
+    notFound: "command not found: {{cmd}} — type 'help'",
+    opening: "opening {{what}} …",
+    themeMsg: "theme toggled.",
+    langMsg: "switching language …",
+    tap: "tap to type",
+    run: "run",
+    cmd: {
+      help: "list every command",
+      neofetch: "system info + résumé at a glance",
+      about: "who I am, in two lines",
+      whoami: "name and role",
+      skills: "languages, frameworks, infra",
+      projects: "selected work, with source links",
+      experience: "where I've shipped",
+      writing: "latest articles",
+      blog: "open the blog page",
+      resume: "open my résumé (PDF)",
+      contact: "email + how to reach me",
+      socials: "all of my links",
+      uses: "the tools I use",
+      theme: "toggle light / dark",
+      lang: "switch EN / FA",
+      clear: "clear the screen",
+    },
+  },
   hero: {
     boot: ["booting portfolio…", "modules: backend · ai · frontend · devops [ok]"],
     prompt: "guest@mohamad-liyaghi:~$",
@@ -30,7 +67,7 @@ const en = {
     tagline: "I build backend systems and AI features that hold up at scale.",
     blurb:
       "Full-stack engineer and AI enthusiast at Zebracat. Five years turning hard requirements into reliable, high-throughput systems — and writing about what actually works.",
-    focus: ["distributed backends", "LLM agents", "RAG pipelines", "video at scale"],
+    focus: ["image agents", "RAG pipelines", "cost engineering", "video at scale"],
     status: "available for interesting problems",
     exp: "5y shipping",
     resume: "resume.pdf",
@@ -44,7 +81,7 @@ const en = {
     title: "A full-stack engineer who likes hard problems",
     p: [
       "I'm Mohamad — a software engineer at Zebracat (zebracat.ai), where we turn text into video with generative AI. I work across the stack but live mostly in the backend: services that stay fast and predictable when traffic doesn't.",
-      "I'm an AI enthusiast in the practical sense — I build and ship LLM features (agents, RAG, guardrails, and the cost engineering that keeps them sane) and I sweat the parts that make them production-grade: queues, caching, observability, and back-pressure under load.",
+      "I'm an AI engineer in the practical sense — I design and ship production LLM systems: image agents, RAG pipelines, and the cost engineering that keeps them fast and affordable at scale. I sweat the parts that make them hold up — queues, caching, vector search, observability and back-pressure under load.",
       "On the frontend I'm at home in React and TypeScript, and I enjoy media-heavy work — programmatic video with tools like Remotion and headless rendering. I'm dedicated, I read a lot, I write about what I learn, and I'm happiest when I'm shipping.",
     ],
     factLabels: {
@@ -58,7 +95,7 @@ const en = {
       based: "Tehran, Iran",
       role: "Software Engineer · AI",
       company: "Zebracat — zebracat.ai",
-      focus: "AI systems · distributed backends",
+      focus: "image agents · RAG · scale",
       langs: "Persian (native) · English (C1)",
     },
   },
@@ -73,8 +110,8 @@ const en = {
       zebracat: {
         role: "Software Engineer · Team Lead",
         bullets: [
-          "Lead backend work on an AI text-to-video platform — services that fan out heavy generative jobs and stream progress back to users in real time.",
-          "Design async pipelines (queues, workers, back-pressure) that keep latency and cost under control as request volume grows.",
+          "Lead backend work on an AI text-to-video platform — orchestrating image agents, RAG and heavy generative jobs, and streaming progress back to users in real time.",
+          "Design async pipelines (queues, workers, back-pressure) and cost-aware LLM orchestration that keep latency and spend under control as request volume grows.",
           "Coordinate the team day to day — scope, review and ship — keeping systems stable while the product moves fast.",
         ],
       },
@@ -99,7 +136,7 @@ const en = {
     more: "see everything on GitHub",
     items: {
       zebracat:
-        "Generative text-to-video at scale: orchestrated microservices, async job pipelines, vector search and a programmatic video-rendering layer.",
+        "Generative text-to-video at scale: orchestrated microservices, image agents, async job pipelines, vector search and a programmatic video-rendering layer.",
       foodanywhere:
         "Open-source food-delivery backend connecting users with nearby restaurants — geospatial search, cart caching and heavy tasks offloaded to workers, with full metrics and logging.",
       fastquora:
@@ -136,6 +173,32 @@ const en = {
       "I write about the unglamorous reality of shipping AI systems — what breaks, what scales and what actually works in production.",
     read: "read on Medium",
     all: "all posts on Medium",
+    open: "open the blog",
+  },
+  blog: {
+    label: "blog",
+    title: "The blog",
+    intro:
+      "Field notes on shipping AI systems — image agents, RAG, cost engineering and the backend work that holds them up. Published on Medium.",
+    back: "back home",
+    min: "min read",
+    read: "read",
+    all: "follow on Medium",
+  },
+  uses: {
+    label: "uses",
+    title: "/uses",
+    intro:
+      "The tools I reach for every day — editor, stack and the bits that keep me fast. Inspired by uses.tech.",
+    back: "back home",
+    cats: {
+      editor: "editor & shell",
+      languages: "languages",
+      backend: "backend",
+      ai: "ai & data",
+      frontend: "frontend & media",
+      infra: "devops & cloud",
+    },
   },
   contact: {
     index: "06",
@@ -151,8 +214,7 @@ const en = {
     index: "index",
     elsewhere: "elsewhere",
     colophon: "colophon",
-    colophonText:
-      "Built with React, TypeScript & Framer Motion. Set in JetBrains Mono & Archivo. Deployed on GitHub Pages.",
+    colophonText: "Built by Mohamad — vibe coding, for sure.",
     rights: "All rights reserved.",
     source: "view source",
     build: "build",

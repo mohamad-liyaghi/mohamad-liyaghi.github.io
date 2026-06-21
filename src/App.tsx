@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import {
   Navigate,
+  Outlet,
   Route,
   Routes,
   useLocation,
@@ -11,12 +12,14 @@ import { About } from "./components/About";
 import { Contact } from "./components/Contact";
 import { Experience } from "./components/Experience";
 import { Footer } from "./components/Footer";
-import { Hero } from "./components/Hero";
 import { Nav } from "./components/Nav";
 import { Projects } from "./components/Projects";
 import { ScrollProgress } from "./components/controls";
 import { Skills } from "./components/Skills";
+import { Terminal } from "./components/Terminal";
 import { Writing } from "./components/Writing";
+import { Blog } from "./pages/Blog";
+import { Uses } from "./pages/Uses";
 
 function initialLang(): Lang {
   try {
@@ -28,36 +31,8 @@ function initialLang(): Lang {
   return (navigator.language || "en").slice(0, 2) === "fa" ? "fa" : "en";
 }
 
-function Home() {
-  const { hash } = useLocation();
-  useEffect(() => {
-    if (!hash) return;
-    const el = document.getElementById(hash.slice(1));
-    if (el) window.setTimeout(() => el.scrollIntoView(), 60);
-    // run once on mount only
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return (
-    <>
-      <div className="bg-grid" aria-hidden="true" />
-      <ScrollProgress />
-      <Nav />
-      <main>
-        <Hero />
-        <About />
-        <Experience />
-        <Projects />
-        <Skills />
-        <Writing />
-        <Contact />
-      </main>
-      <Footer />
-    </>
-  );
-}
-
-function LangHome() {
+/* Shared chrome + per-language side effects for every page under /:lang */
+function LangLayout() {
   const { lang } = useParams();
   const l: Lang = isLang(lang) ? lang : "en";
 
@@ -72,14 +47,58 @@ function LangHome() {
     }
   }, [l]);
 
-  return <Home />;
+  return (
+    <>
+      <div className="bg-grid" aria-hidden="true" />
+      <ScrollProgress />
+      <Nav />
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
+    </>
+  );
+}
+
+function Home() {
+  const { hash } = useLocation();
+  useEffect(() => {
+    if (!hash) return;
+    const el = document.getElementById(hash.slice(1));
+    if (el) window.setTimeout(() => el.scrollIntoView(), 80);
+    // run once on mount only
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <>
+      <Terminal />
+      <About />
+      <Experience />
+      <Projects />
+      <Skills />
+      <Writing />
+      <Contact />
+    </>
+  );
+}
+
+function LangIndexRedirect() {
+  const { lang } = useParams();
+  const l: Lang = isLang(lang) ? lang : "en";
+  return <Navigate to={`/${l}`} replace />;
 }
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to={`/${initialLang()}`} replace />} />
-      <Route path="/:lang" element={<LangHome />} />
+      <Route path="/:lang" element={<LangLayout />}>
+        <Route index element={<Home />} />
+        <Route path="blog" element={<Blog />} />
+        <Route path="uses" element={<Uses />} />
+        <Route path="*" element={<LangIndexRedirect />} />
+      </Route>
       <Route path="*" element={<Navigate to={`/${initialLang()}`} replace />} />
     </Routes>
   );

@@ -120,13 +120,23 @@ export const SKILLS: { key: string; items: string[] }[] = [
   { key: "backend", items: ["Django", "DRF", "FastAPI", "Celery", "Express", "Go Fiber"] },
   { key: "frontend", items: ["React", "Next.js", "Vite", "Tailwind", "Framer Motion", "Remotion"] },
   { key: "data", items: ["PostgreSQL", "PostGIS", "MongoDB", "Redis", "MySQL", "Qdrant", "Milvus"] },
-  { key: "ai", items: ["LLM integration", "RAG", "Agents", "LangChain", "Guardrails", "Cost engineering"] },
+  { key: "ai", items: ["Image agents", "RAG pipelines", "LLM agents", "Cost engineering", "Vector search", "LangChain"] },
   { key: "messaging", items: ["RabbitMQ", "Socket.IO", "WebSockets", "asyncio", "Microservices"] },
   { key: "infra", items: ["Docker", "Kubernetes", "GitHub Actions", "Nginx", "AWS", "Gunicorn / Uvicorn"] },
   { key: "observability", items: ["Sentry", "OpenTelemetry", "Prometheus", "Grafana", "Loki", "Elastic APM"] },
 ];
 
-export const ARTICLES = [
+export type Article = {
+  n: string;
+  title: string;
+  href: string;
+  date: string;
+  tag: string;
+  min: number;
+  summary: string;
+};
+
+export const ARTICLES: Article[] = [
   {
     n: "01",
     title: "Stop Treating LLM Calls as Free: How Real Cost Engineering for Agents Actually Works",
@@ -134,6 +144,9 @@ export const ARTICLES = [
       "https://medium.com/@el_mohamad/stop-treating-llm-calls-as-free-how-real-cost-engineering-for-agents-actually-works-e04c25fa2e0a",
     date: "Jun 2026",
     tag: "agents · cost",
+    min: 11,
+    summary:
+      "Token budgets, caching, routing and model tiering — the engineering that keeps agentic systems affordable without dumbing them down.",
   },
   {
     n: "02",
@@ -142,6 +155,9 @@ export const ARTICLES = [
       "https://medium.com/@el_mohamad/stop-trusting-the-embedding-how-real-rag-pipelines-actually-work-6d1dd7a9143f",
     date: "May 2026",
     tag: "rag",
+    min: 10,
+    summary:
+      "Chunking, hybrid retrieval, re-ranking and evaluation — why a vector search isn't a RAG pipeline, and how to build one that holds up.",
   },
   {
     n: "03",
@@ -149,7 +165,10 @@ export const ARTICLES = [
     href:
       "https://medium.com/@el_mohamad/stop-trusting-the-model-how-real-llm-guardrails-actually-work-16e3dd52c6cb",
     date: "May 2026",
-    tag: "guardrails",
+    tag: "reliability",
+    min: 9,
+    summary:
+      "Validation, structured outputs and failure handling that make LLM features safe to put in front of real users.",
   },
   {
     n: "04",
@@ -158,7 +177,20 @@ export const ARTICLES = [
       "https://medium.com/@el_mohamad/stop-putting-everything-in-one-prompt-how-real-research-agents-actually-work-50e981631cef",
     date: "Apr 2026",
     tag: "agents",
+    min: 12,
+    summary:
+      "Decomposition, tool use and multi-step orchestration — how research agents actually plan, search and synthesize instead of one giant prompt.",
   },
+];
+
+/* /uses — the toolbox, grouped. Tool names are language-neutral. */
+export const USES: { key: string; items: string[] }[] = [
+  { key: "editor", items: ["Neovim", "VS Code", "Cursor", "tmux", "zsh + starship", "Linux"] },
+  { key: "languages", items: ["Python", "TypeScript", "Go", "SQL", "Bash"] },
+  { key: "backend", items: ["Django / DRF", "FastAPI", "Go Fiber", "Celery", "RabbitMQ", "PostgreSQL", "Redis"] },
+  { key: "ai", items: ["Image agents", "RAG pipelines", "LangChain", "Qdrant", "Cost engineering"] },
+  { key: "frontend", items: ["React", "Vite", "Tailwind", "Framer Motion", "Remotion"] },
+  { key: "infra", items: ["Docker", "Kubernetes", "GitHub Actions", "AWS", "Nginx", "Grafana + Loki"] },
 ];
 
 export const BUILD = {
