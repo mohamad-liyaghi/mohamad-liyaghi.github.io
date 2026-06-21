@@ -29,12 +29,8 @@ export function Nav() {
       <div className="border-b border-line bg-bg/72 backdrop-blur-xl">
         <nav className="wrap flex h-16 items-center justify-between gap-4">
           {/* left: window chrome + path → home */}
-          <button onClick={home} className="group flex items-center gap-2.5">
-            <span className="flex items-center gap-1.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
-            </span>
+          <button onClick={home} className="group flex items-center gap-2">
+            <Icon name="terminal" size={16} className="text-accent" />
             <span
               className="keep-mono text-sm text-dim transition-colors group-hover:text-text"
               dir="ltr"

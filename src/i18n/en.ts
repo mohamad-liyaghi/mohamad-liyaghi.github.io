@@ -25,7 +25,7 @@ const en = {
     prompt: "guest@mohamad-liyaghi:~$",
     cmd: "whoami",
     name: "Mohamad Liyaghi",
-    nameAlt: "محمد لیاقی",
+    nameAlt: "",
     role: "Software Engineer · AI",
     tagline: "I build backend systems and AI features that hold up at scale.",
     blurb:

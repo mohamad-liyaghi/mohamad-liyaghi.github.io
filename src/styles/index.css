@@ -18,48 +18,60 @@
   --color-accent: var(--accent);
   --color-accent2: var(--accent-2);
   --color-accent3: var(--accent-3);
-  --color-warn: var(--warn);
 
   --breakpoint-xs: 30rem;
 }
 
-/* Dark is the default theme */
+/* Dark — deep aubergine / Ubuntu-coded */
 :root {
-  --bg: #0a0a0c;
-  --bg-soft: #0f0f13;
-  --bg-elev: #15151b;
-  --line: #24242e;
-  --line-soft: #1a1a22;
-  --text: #e9e9ee;
-  --text-dim: #9b9ba6;
-  --text-faint: #61616d;
-  --accent: #986dff;
-  --accent-2: #2ce58f;
-  --accent-3: #38bdf8;
-  --warn: #ffb454;
-  --grid: rgba(255, 255, 255, 0.022);
-  --glow: rgba(152, 109, 255, 0.16);
-  --selection: rgba(152, 109, 255, 0.34);
+  --bg: #160b13;
+  --bg-soft: #1d101a;
+  --bg-elev: #261622;
+  --line: #38233140;
+  --line: #382231;
+  --line-soft: #271a23;
+  --text: #f3ebe7;
+  --text-dim: #b6a6ad;
+  --text-faint: #7c6a74;
+  --accent: #e95420;          /* Ubuntu orange */
+  --accent-2: #33d17a;        /* terminal green */
+  --accent-3: #5fb3ff;        /* dir blue */
+  --grid: rgba(255, 255, 255, 0.02);
+  --glow: rgba(233, 84, 32, 0.13);
+  --selection: rgba(233, 84, 32, 0.3);
   color-scheme: dark;
 }
 
 [data-theme="light"] {
-  --bg: #f4f3ef;
-  --bg-soft: #faf9f6;
+  --bg: #f4efe9;
+  --bg-soft: #fbf8f4;
   --bg-elev: #ffffff;
-  --line: #e0ded6;
-  --line-soft: #ebe9e2;
-  --text: #14141a;
-  --text-dim: #55555f;
-  --text-faint: #8c8c95;
-  --accent: #6b3df0;
-  --accent-2: #04915a;
-  --accent-3: #0077c2;
-  --warn: #b4690e;
-  --grid: rgba(0, 0, 0, 0.03);
-  --glow: rgba(107, 61, 240, 0.12);
-  --selection: rgba(107, 61, 240, 0.18);
+  --line: #e6dcd0;
+  --line-soft: #efe7dc;
+  --text: #1c1117;
+  --text-dim: #5e4d55;
+  --text-faint: #93808a;
+  --accent: #d2441a;
+  --accent-2: #1c8a52;
+  --accent-3: #1f72c4;
+  --grid: rgba(0, 0, 0, 0.028);
+  --glow: rgba(210, 68, 26, 0.1);
+  --selection: rgba(210, 68, 26, 0.16);
   color-scheme: light;
+}
+
+/* The console is always a dark Ubuntu terminal, in either theme */
+:root {
+  --term-bg: #2a0a22;
+  --term-bg2: #36102c;
+  --term-text: #eeeeec;
+  --term-dim: #b8a9b2;
+  --term-faint: #8a7681;
+  --term-ok: #33d17a;
+  --term-orange: #e95420;
+  --term-blue: #6cb6ff;
+  --term-line: #4a2740;
+  --term-scan: rgba(255, 255, 255, 0.03);
 }
 
 /* Persian uses Vazirmatn for prose; the terminal chrome stays mono */
@@ -87,7 +99,6 @@ body {
   background-color: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
-  font-feature-settings: "ss01", "cv01";
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
@@ -100,7 +111,6 @@ section {
   scroll-margin-top: 92px;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 11px;
   height: 11px;
@@ -128,8 +138,14 @@ button {
 }
 
 /* ------------------------------------------------------------------ *
- *  Geeky helpers
+ *  Layout helpers
  * ------------------------------------------------------------------ */
+.wrap {
+  width: 100%;
+  max-width: 1080px;
+  margin-inline: auto;
+  padding-inline: clamp(1.1rem, 4vw, 2rem);
+}
 
 /* page-wide dot grid + soft accent glow */
 .bg-grid::before {
@@ -140,32 +156,78 @@ button {
   background-image:
     linear-gradient(var(--grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 100% 60% at 50% 0%, #000 30%, transparent 80%);
+  background-size: 58px 58px;
+  mask-image: radial-gradient(ellipse 100% 58% at 50% 0%, #000 30%, transparent 80%);
   pointer-events: none;
 }
 .bg-grid::after {
   content: "";
   position: fixed;
-  top: -20%;
+  top: -22%;
   left: 50%;
-  width: 70vw;
-  height: 60vh;
+  width: 68vw;
+  height: 58vh;
   transform: translateX(-50%);
   z-index: -2;
-  background: radial-gradient(circle, var(--glow), transparent 65%);
-  filter: blur(40px);
+  background: radial-gradient(circle, var(--glow), transparent 66%);
+  filter: blur(46px);
   pointer-events: none;
 }
 
-.wrap {
-  width: 100%;
-  max-width: 1080px;
-  margin-inline: auto;
-  padding-inline: clamp(1.1rem, 4vw, 2rem);
+/* ------------------------------------------------------------------ *
+ *  Terminal / console
+ * ------------------------------------------------------------------ */
+.term {
+  position: relative;
+  background:
+    radial-gradient(120% 80% at 50% -10%, var(--term-bg2), var(--term-bg) 60%);
+  color: var(--term-text);
+  border: 1px solid var(--term-line);
+  box-shadow:
+    0 40px 90px -40px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+}
+.scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 2px,
+    var(--term-scan) 2px 3px
+  );
+  opacity: 0.7;
+}
+.t-ok { color: var(--term-ok); }
+.t-orange { color: var(--term-orange); }
+.t-blue { color: var(--term-blue); }
+.t-text { color: var(--term-text); }
+.t-dim { color: var(--term-dim); }
+.t-faint { color: var(--term-faint); }
+
+.name-xl {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  font-size: clamp(2rem, 7.5vw, 3.6rem);
+  color: var(--term-text);
 }
 
-/* monospace section index label e.g. 02 // WORK */
+.term-caret {
+  display: inline-block;
+  width: 0.58em;
+  height: 1.05em;
+  background: var(--term-orange);
+  translate: 0 0.18em;
+  animation: blink 1.05s steps(1) infinite;
+}
+
+/* ------------------------------------------------------------------ *
+ *  Components
+ * ------------------------------------------------------------------ */
 .kbd {
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -173,7 +235,6 @@ button {
   text-transform: uppercase;
 }
 
-/* tech chip */
 .chip {
   font-family: var(--font-mono);
   font-size: 0.74rem;
@@ -182,8 +243,8 @@ button {
   border: 1px solid var(--color-line);
   border-radius: 7px;
   color: var(--text-dim);
-  background: color-mix(in oklab, var(--bg-elev) 60%, transparent);
-  transition: color 0.18s, border-color 0.18s, transform 0.18s, background 0.18s;
+  background: color-mix(in oklab, var(--bg-elev) 55%, transparent);
+  transition: color 0.18s, border-color 0.18s, transform 0.18s;
   white-space: nowrap;
 }
 .chip:hover {
@@ -192,7 +253,6 @@ button {
   transform: translateY(-2px);
 }
 
-/* blinking terminal caret */
 .caret {
   display: inline-block;
   width: 0.6ch;
@@ -203,12 +263,9 @@ button {
   animation: blink 1.05s steps(1) infinite;
 }
 @keyframes blink {
-  50% {
-    opacity: 0;
-  }
+  50% { opacity: 0; }
 }
 
-/* dotted ascii rule */
 .rule {
   border: none;
   height: 1px;
@@ -219,15 +276,12 @@ button {
   );
 }
 
-/* accent link underline */
 .ulink {
   position: relative;
   color: var(--text-dim);
   transition: color 0.18s;
 }
-.ulink:hover {
-  color: var(--text);
-}
+.ulink:hover { color: var(--text); }
 .ulink::after {
   content: "";
   position: absolute;
@@ -239,14 +293,9 @@ button {
   transform-origin: var(--ul-origin, left);
   transition: transform 0.22s ease;
 }
-html[dir="rtl"] .ulink::after {
-  --ul-origin: right;
-}
-.ulink:hover::after {
-  transform: scaleX(1);
-}
+html[dir="rtl"] .ulink::after { --ul-origin: right; }
+.ulink:hover::after { transform: scaleX(1); }
 
-/* card */
 .card {
   position: relative;
   border: 1px solid var(--color-line);
@@ -255,11 +304,10 @@ html[dir="rtl"] .ulink::after {
   transition: border-color 0.2s, transform 0.2s, background 0.2s;
 }
 .card:hover {
-  border-color: color-mix(in oklab, var(--accent) 45%, var(--line));
+  border-color: color-mix(in oklab, var(--accent) 42%, var(--line));
   background: var(--bg-soft);
 }
 
-/* primary / ghost buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -273,27 +321,19 @@ html[dir="rtl"] .ulink::after {
   color: var(--text);
   transition: transform 0.16s, border-color 0.16s, background 0.16s, color 0.16s;
 }
-.btn:hover {
-  transform: translateY(-2px);
-}
+.btn:hover { transform: translateY(-2px); }
 .btn-primary {
   background: var(--accent);
   border-color: var(--accent);
-  color: #0a0a0c;
+  color: #fff;
   font-weight: 600;
 }
-[data-theme="light"] .btn-primary {
-  color: #fff;
-}
-.btn-primary:hover {
-  box-shadow: 0 8px 26px -10px var(--accent);
-}
+.btn-primary:hover { box-shadow: 0 10px 28px -10px var(--accent); }
 .btn-ghost:hover {
   border-color: color-mix(in oklab, var(--accent) 55%, var(--line));
   color: var(--text);
 }
 
-/* animated status dot */
 .live-dot {
   width: 7px;
   height: 7px;
@@ -303,68 +343,17 @@ html[dir="rtl"] .ulink::after {
   animation: ping 2s ease-out infinite;
 }
 @keyframes ping {
-  0% {
-    box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent-2) 65%, transparent);
-  }
-  70% {
-    box-shadow: 0 0 0 7px transparent;
-  }
-  100% {
-    box-shadow: 0 0 0 0 transparent;
-  }
+  0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent-2) 65%, transparent); }
+  70% { box-shadow: 0 0 0 7px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
 }
 
-/* gradient shimmer text for the name */
-.shimmer {
-  background: linear-gradient(
-    100deg,
-    var(--text) 20%,
-    var(--accent) 42%,
-    var(--accent-3) 55%,
-    var(--text) 78%
-  );
-  background-size: 220% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: shimmer 7s linear infinite;
-}
-@keyframes shimmer {
-  to {
-    background-position: -220% center;
-  }
-}
-
-/* marquee ticker */
-.ticker {
-  display: inline-flex;
-  gap: 2.5rem;
-  white-space: nowrap;
-  animation: ticker 32s linear infinite;
-}
-html[dir="rtl"] .ticker {
-  animation-direction: reverse;
-}
-@keyframes ticker {
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-/* Respect reduced motion everywhere */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-  .caret {
-    animation: none;
-    opacity: 1;
-  }
+  .caret, .term-caret { animation: none; opacity: 1; }
 }

@@ -31,11 +31,11 @@ export function About() {
           <Reveal delay={0.1}>
             <div className="card overflow-hidden">
               <div className="flex items-center gap-2 border-b border-line bg-bg-elev/50 px-4 py-2.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
-                <span className="ms-2 keep-mono text-xs text-faint" dir="ltr">
-                  whoami.json
+                <span className="keep-mono text-xs text-accent" dir="ltr">
+                  ❯_
+                </span>
+                <span className="keep-mono text-xs text-faint" dir="ltr">
+                  mohamad@liyaghi: ~/about
                 </span>
               </div>
               <div className="p-5">
@@ -51,7 +51,7 @@ export function About() {
                   <div>
                     <p className="font-semibold">{t("hero.name")}</p>
                     <p className="keep-mono text-xs text-faint" dir="ltr">
-                      {t("hero.nameAlt")}
+                      {t("hero.nameAlt") || "Software Engineer · AI"}
                     </p>
                   </div>
                 </div>

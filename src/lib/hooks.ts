@@ -19,7 +19,7 @@ export function useTheme(): [Theme, () => void] {
       /* ignore */
     }
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", theme === "dark" ? "#0a0a0c" : "#f4f3ef");
+    if (meta) meta.setAttribute("content", theme === "dark" ? "#160b13" : "#f4efe9");
   }, [theme]);
 
   const toggle = useCallback(
