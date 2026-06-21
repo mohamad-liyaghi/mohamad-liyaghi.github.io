@@ -134,6 +134,30 @@ const SWATCHES = [
   "var(--term-faint)",
 ];
 
+/* htop/btop — "what's running": backend ranks #1, team-lead #2 */
+const PROCS = [
+  { pid: 1, cpu: 42.0, mem: 18.3, cmd: "backend-systems --scale --async" },
+  { pid: 2, cpu: 27.5, mem: 12.1, cmd: "team-lead --review --ship" },
+  { pid: 3, cpu: 19.8, mem: 9.4, cmd: "image-agents --multimodal" },
+  { pid: 4, cpu: 14.2, mem: 7.1, cmd: "rag-pipelines --rerank" },
+  { pid: 5, cpu: 11.6, mem: 5.5, cmd: "cost-engine --tokens --cache" },
+  { pid: 6, cpu: 8.3, mem: 4.2, cmd: "video-pipeline --remotion" },
+];
+
+function Bar({ pct, color }: { pct: number; color: string }) {
+  const W = 20;
+  const f = Math.round((pct / 100) * W);
+  return (
+    <span className="whitespace-pre">
+      <span className="t-faint">[</span>
+      <span style={{ color }}>{"|".repeat(f)}</span>
+      <span className="t-faint">{"·".repeat(W - f)}</span>
+      <span className="t-faint">] </span>
+      <span className="t-text">{pct}%</span>
+    </span>
+  );
+}
+
 function Row({ k, children }: { k: string; children: ReactNode }) {
   return (
     <p className="whitespace-pre-wrap break-words">
@@ -199,18 +223,21 @@ function Neofetch() {
  * ------------------------------------------------------------------ */
 const ORDER = [
   "help",
+  "ls",
+  "cat",
   "neofetch",
   "about",
-  "whoami",
+  "experience",
   "skills",
   "projects",
-  "experience",
+  "whoami",
   "writing",
   "blog",
   "resume",
   "contact",
   "socials",
   "uses",
+  "htop",
   "theme",
   "lang",
   "clear",
@@ -248,7 +275,9 @@ export function Terminal() {
         <p className="t-faint">{t("term.helpLead")}:</p>
         {ORDER.map((c) => (
           <p key={c}>
-            <span className="t-cyan inline-block w-24">{c}</span>
+            <span className="t-cyan inline-block w-28">
+              {c === "cat" ? "cat <file>" : c}
+            </span>
             <span className="t-dim">{t(`term.cmd.${c}`)}</span>
           </p>
         ))}
@@ -298,33 +327,105 @@ export function Terminal() {
       </div>
     );
 
+    const oss = PROJECTS.filter((p) => p.kind === "oss");
     const projects = (
       <div className="grid gap-1">
-        {PROJECTS.map((p, i) => (
+        <p className="t-faint">
+          open-source side projects — the day job lives in{" "}
+          <span className="t-cyan">experience</span>.
+        </p>
+        {oss.map((p) => (
           <p key={p.id}>
-            <span className="t-faint">{String(i + 1).padStart(2, "0")}</span>{" "}
-            <span className="t-text">{p.name}</span>{" "}
+            <span className="t-cyan">{p.name}</span>{" "}
             <span className="t-faint">— </span>
-            <TLink href={p.href}>{p.linkLabel}</TLink>
+            <TLink href={p.href}>{p.linkLabel.toLowerCase()}</TLink>
+            <span className="t-faint"> · {p.tech.slice(0, 3).join(" · ")}</span>
           </p>
         ))}
         <p className="t-faint">→ {t("projects.more")}.</p>
       </div>
     );
 
-    const experience = (
-      <div className="grid gap-1.5">
-        {EXPERIENCE.map((e) => (
-          <p key={e.id}>
-            <span className="t-text">{t(`experience.items.${e.id}.role`)}</span>{" "}
-            <span className="t-faint">@</span>{" "}
-            <span className="t-blue">{e.company}</span>{" "}
-            <span className="t-faint">
-              ({e.period}
-              {e.current ? ` — ${t("experience.present")}` : ""})
+    const ls = (
+      <p className="flex flex-wrap gap-x-5 gap-y-1">
+        <span className="t-text">about.md</span>
+        <span className="t-text">experience.md</span>
+        <span className="t-text">skills.md</span>
+        <span className="t-text">contact.md</span>
+        <span className="t-yellow">resume.pdf</span>
+        <span className="t-cyan">projects/</span>
+        <span className="t-cyan">writing/</span>
+        <span className="t-cyan">uses/</span>
+      </p>
+    );
+
+    const procmon = (
+      <div className="grid gap-0.5 overflow-x-auto">
+        <p className="flex items-center gap-2">
+          <span className="nf-label w-10">CPU</span>
+          <Bar pct={78} color="var(--term-ok)" />
+        </p>
+        <p className="flex items-center gap-2">
+          <span className="nf-label w-10">MEM</span>
+          <Bar pct={61} color="var(--term-cyan)" />
+        </p>
+        <p className="t-faint">
+          {t("term.procs.uptime")} · {t("term.procs.tasks")} ·{" "}
+          {t("term.procs.load")}
+        </p>
+        <p className="mt-1 t-faint whitespace-nowrap">
+          <span className="inline-block w-9 text-end pe-2">PID</span>
+          <span className="inline-block w-14 text-end pe-2">CPU%</span>
+          <span className="inline-block w-14 text-end pe-3">MEM%</span>
+          <span>COMMAND</span>
+        </p>
+        {PROCS.map((p) => (
+          <p key={p.pid} className="whitespace-nowrap">
+            <span className="t-faint inline-block w-9 text-end pe-2">
+              {p.pid}
             </span>
+            <span className="t-ok inline-block w-14 text-end pe-2">
+              {p.cpu.toFixed(1)}
+            </span>
+            <span className="t-cyan inline-block w-14 text-end pe-3">
+              {p.mem.toFixed(1)}
+            </span>
+            <span className="t-text">{p.cmd}</span>
           </p>
         ))}
+        <p className="mt-1 t-faint">F10 quit · htop · btop</p>
+      </div>
+    );
+
+    const experience = (
+      <div className="grid gap-3 max-w-2xl">
+        {EXPERIENCE.map((e) => {
+          const bullets = t(`experience.items.${e.id}.bullets`, {
+            returnObjects: true,
+          }) as string[];
+          const host = e.url
+            ? e.url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")
+            : "";
+          return (
+            <div key={e.id}>
+              <p className="flex flex-wrap items-baseline gap-x-2">
+                <span className="t-text font-semibold">{e.company}</span>
+                {host ? <TLink href={e.url}>{host}</TLink> : null}
+                <span className="t-faint">
+                  — {e.period}
+                  {e.current ? ` · ${t("experience.present")}` : ""}
+                </span>
+              </p>
+              <p className="t-cyan">→ {t(`experience.items.${e.id}.track`)}</p>
+              {bullets.map((b, i) => (
+                <p key={i} className="mt-0.5 flex gap-2 t-dim">
+                  <span className="t-faint">·</span>
+                  <span>{b}</span>
+                </p>
+              ))}
+            </div>
+          );
+        })}
       </div>
     );
 
@@ -374,7 +475,19 @@ export function Terminal() {
       </div>
     );
 
-    return { help, whoami, about, skills, projects, experience, writing, contact, socials };
+    return {
+      help,
+      whoami,
+      about,
+      skills,
+      projects,
+      experience,
+      writing,
+      contact,
+      socials,
+      ls,
+      procmon,
+    };
   }, [t]);
 
   /* ---- command execution ---- */
@@ -387,6 +500,10 @@ export function Terminal() {
         node: <p className="t-dim">{t("term.opening", { what })}</p>,
         run: () => window.open(href, "_blank", "noopener"),
       });
+
+      // fork bomb :(){ :|:& };:
+      if (/:\s*\(\s*\)\s*\{/.test(raw) || raw.replace(/\s/g, "").includes(":|:&};:"))
+        return { node: <p className="t-orange">{t("term.forkbomb")}</p> };
 
       switch (cmd) {
         case "":
@@ -410,15 +527,65 @@ export function Terminal() {
         case "tools":
           return { node: renderers.skills };
         case "projects":
-        case "work":
-        case "ls":
           return { node: renderers.projects };
         case "experience":
         case "exp":
+        case "work":
+          return { node: renderers.experience };
         case "cv":
-          return cmd === "cv"
-            ? open(PROFILE.resumePdf, "résumé.pdf")
-            : { node: renderers.experience };
+          return open(PROFILE.resumePdf, "résumé.pdf");
+        case "ls":
+        case "dir": {
+          const d = arg.replace(/^\.?\//, "").replace(/\/$/, "").toLowerCase();
+          if (!d) return { node: renderers.ls };
+          if (d === "projects") return { node: renderers.projects };
+          if (d === "writing") return { node: renderers.writing };
+          if (d === "uses")
+            return {
+              node: <p className="t-dim">{t("term.opening", { what: "/uses" })}</p>,
+              run: () => navigate(`/${lng}/uses`),
+            };
+          return {
+            node: (
+              <p className="t-red">
+                ls: cannot access '{arg}': No such file or directory
+              </p>
+            ),
+          };
+        }
+        case "cat": {
+          if (!arg) return { node: <p className="t-dim">{t("term.catUsage")}</p> };
+          const f = arg.replace(/^\.?\//, "").replace(/\/$/, "").toLowerCase();
+          const files: Record<string, ReactNode> = {
+            "about.md": renderers.about,
+            "experience.md": renderers.experience,
+            "skills.md": renderers.skills,
+            "contact.md": renderers.contact,
+          };
+          if (files[f]) return { node: files[f] };
+          if (f === "resume.pdf")
+            return {
+              node: (
+                <p className="t-yellow">
+                  cat: resume.pdf is binary — run{" "}
+                  <span className="t-cyan">resume</span> to open it 📄
+                </p>
+              ),
+            };
+          if (["projects", "writing", "uses"].includes(f))
+            return { node: <p className="t-red">{t("term.isDir", { file: f })}</p> };
+          return { node: <p className="t-red">{t("term.noFile", { file: arg })}</p> };
+        }
+        case "htop":
+        case "btop":
+        case "top":
+          return { node: renderers.procmon };
+        case "rm":
+        case "rmdir":
+        case "del":
+        case "mkfs":
+        case "dd":
+          return { node: <p className="t-orange">{t("term.dontmess")}</p> };
         case "writing":
         case "articles":
         case "posts":
@@ -535,9 +702,9 @@ export function Terminal() {
         node: (
           <p className="t-faint">
             {t("term.hint")} <span className="t-cyan">help</span> ·{" "}
-            <span className="t-cyan">projects</span> ·{" "}
-            <span className="t-cyan">resume</span> ·{" "}
-            <span className="t-cyan">blog</span>
+            <span className="t-cyan">experience</span> ·{" "}
+            <span className="t-cyan">ls</span> ·{" "}
+            <span className="t-cyan">resume</span>
           </p>
         ),
       },
@@ -699,12 +866,12 @@ export function Terminal() {
           </a>
           <button
             onClick={() => {
-              if (phase === "ready") submit("projects");
+              if (phase === "ready") submit("experience");
               inputRef.current?.focus();
             }}
             className="btn btn-ghost"
           >
-            <Icon name="terminal" size={15} /> projects
+            <Icon name="terminal" size={15} /> experience
           </button>
           <button onClick={() => navigate(`/${lng}/blog`)} className="btn btn-ghost">
             blog
