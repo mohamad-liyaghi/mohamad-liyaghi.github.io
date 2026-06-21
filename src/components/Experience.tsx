@@ -22,6 +22,20 @@ export function Experience() {
               returnObjects: true,
             }) as string[];
             const period = e.current ? `${e.period} — ${present}` : e.period;
+            const hasRoles = !!e.roles?.length;
+
+            const companyName = e.url ? (
+              <a
+                href={e.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ulink text-accent"
+              >
+                {e.company}
+              </a>
+            ) : (
+              <span className="text-text">{e.company}</span>
+            );
 
             return (
               <li key={e.id} className="relative">
@@ -29,19 +43,14 @@ export function Experience() {
                 <Reveal delay={i * 0.05}>
                   <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                     <h3 className="text-lg font-semibold">
-                      {t(`experience.items.${e.id}.role`)}
-                      <span className="mx-1.5 text-faint">@</span>
-                      {e.url ? (
-                        <a
-                          href={e.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="ulink text-accent"
-                        >
-                          {e.company}
-                        </a>
+                      {hasRoles ? (
+                        companyName
                       ) : (
-                        <span className="text-text">{e.company}</span>
+                        <>
+                          {t(`experience.items.${e.id}.role`)}
+                          <span className="mx-1.5 text-faint">@</span>
+                          {companyName}
+                        </>
                       )}
                     </h3>
                     <span className="keep-mono text-xs text-faint" dir="ltr">
@@ -52,7 +61,30 @@ export function Experience() {
                     {e.location}
                   </p>
 
-                  <ul className="mt-3 space-y-2">
+                  {/* one company, two connected chapters: promoted from within */}
+                  {hasRoles ? (
+                    <ol className="mt-4 space-y-3 border-s border-line/70 ps-5">
+                      {e.roles!.map((r) => (
+                        <li key={r.id} className="relative">
+                          <span
+                            className={`absolute -start-[23px] top-[0.4rem] h-1.5 w-1.5 rounded-full ring-4 ring-bg ${
+                              r.current ? "bg-accent" : "bg-faint"
+                            }`}
+                          />
+                          <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                            <span className="font-medium">
+                              {t(`experience.items.${e.id}.roles.${r.id}.title`)}
+                            </span>
+                            <span className="chip keep-mono !text-[10px]" dir="ltr">
+                              {t(`experience.items.${e.id}.roles.${r.id}.tag`)}
+                            </span>
+                          </div>
+                        </li>
+                      ))}
+                    </ol>
+                  ) : null}
+
+                  <ul className="mt-4 space-y-2">
                     {bullets.map((b, j) => (
                       <li key={j} className="flex gap-2.5 text-dim">
                         <span className="mt-[0.45rem] h-1 w-1 shrink-0 rounded-full bg-accent" />

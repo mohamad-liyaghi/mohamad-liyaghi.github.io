@@ -1,7 +1,35 @@
+import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
+import { PROFILE } from "../data/site";
 import { Reveal, SectionHeader } from "./ui";
 
 const FACT_KEYS = ["based", "role", "company", "focus", "langs"] as const;
+const COMPANY = "ZebracatAi";
+
+function CompanyLink({ children }: { children: ReactNode }) {
+  return (
+    <a
+      href={PROFILE.companyUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="ulink text-accent"
+    >
+      {children}
+    </a>
+  );
+}
+
+/* Turn the bare "ZebracatAi" mentions in the prose into links. */
+function linkifyCompany(text: string): ReactNode {
+  const segments = text.split(COMPANY);
+  if (segments.length === 1) return text;
+  return segments.map((seg, i) => (
+    <span key={i}>
+      {i > 0 ? <CompanyLink>{COMPANY}</CompanyLink> : null}
+      {seg}
+    </span>
+  ));
+}
 
 export function About() {
   const { t } = useTranslation();
@@ -23,7 +51,7 @@ export function About() {
             </p>
             {paras.map((p, i) => (
               <p key={i} className="text-[1.02rem] leading-relaxed text-dim">
-                {p}
+                {linkifyCompany(p)}
               </p>
             ))}
           </Reveal>
@@ -62,7 +90,11 @@ export function About() {
                         {t(`about.factLabels.${k}`)}
                       </dt>
                       <dd className="text-dim" dir="auto">
-                        {t(`about.facts.${k}`)}
+                        {k === "company" ? (
+                          <CompanyLink>{t(`about.facts.${k}`)}</CompanyLink>
+                        ) : (
+                          t(`about.facts.${k}`)
+                        )}
                       </dd>
                     </div>
                   ))}

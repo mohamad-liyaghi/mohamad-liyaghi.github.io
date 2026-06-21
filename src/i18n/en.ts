@@ -28,7 +28,7 @@ const en = {
     shell: "zsh",
     online: "online",
     welcome:
-      "Welcome to Mohamad OS — five years of shipping. Type a command to look around.",
+      "Welcome — glad you stopped by. You're in my terminal: type a command to look around.",
     hint: "try:",
     helpLead: "available commands",
     helpFoot: "also: htop · whoami · date · sudo · ↑↓ history · tab to complete",
@@ -80,7 +80,7 @@ const en = {
     role: "Software Engineer · AI",
     tagline: "I build backend systems and AI features that hold up at scale.",
     blurb:
-      "Full-stack engineer and AI enthusiast at Zebracat. Five years turning hard requirements into reliable, high-throughput systems — and writing about what actually works.",
+      "Full-stack engineer and AI enthusiast at ZebracatAi. Five years turning hard requirements into reliable, high-throughput systems — and writing about what actually works.",
     focus: ["image agents", "RAG pipelines", "cost engineering", "video at scale"],
     status: "available for interesting problems",
     exp: "5y shipping",
@@ -94,8 +94,8 @@ const en = {
     cmd: "cat about.md",
     title: "A full-stack engineer who likes hard problems",
     p: [
-      "I'm Mohamad — a software engineer at Zebracat (zebracat.ai), where we turn text into video with generative AI. I work across the stack but live mostly in the backend: services that stay fast and predictable when traffic doesn't.",
-      "I'm an AI engineer in the practical sense — I design and ship production LLM systems: image agents, RAG pipelines, and the cost engineering that keeps them fast and affordable at scale. I sweat the parts that make them hold up — queues, caching, vector search, observability and back-pressure under load.",
+      "I'm Mohamad — a software engineer at ZebracatAi, where we turn text into video with generative AI. I work across the stack but live mostly in the backend: services that stay fast and predictable when traffic doesn't.",
+      "Most of what I do is the engineering that makes software dependable — clean APIs, async pipelines and queues, caching, sensible data modeling, and the observability that tells you the truth under load. I build for scale and reliability: systems that stay fast when traffic spikes and fail gracefully when something breaks. I work with LLMs, retrieval and agents too, and treat them like any other production system — measured, tested and kept affordable.",
       "On the frontend I'm at home in React and TypeScript, and I enjoy media-heavy work — programmatic video with tools like Remotion and headless rendering. I'm dedicated, I read a lot, I write about what I learn, and I'm happiest when I'm shipping.",
     ],
     factLabels: {
@@ -108,7 +108,7 @@ const en = {
     facts: {
       based: "Tehran, Iran",
       role: "Software Engineer · AI",
-      company: "Zebracat — zebracat.ai",
+      company: "ZebracatAi",
       focus: "image agents · RAG · scale",
       langs: "Persian (native) · English (C1)",
     },
@@ -124,6 +124,10 @@ const en = {
       zebracat: {
         role: "Software Engineer · Team Lead",
         track: "backend engineer → team lead",
+        roles: {
+          lead: { title: "Team Lead", tag: "promoted" },
+          backend: { title: "Backend Engineer", tag: "started here" },
+        },
         bullets: [
           "Started on the backend — async pipelines (queues, workers, back-pressure), vector search and cost-aware LLM orchestration that keep latency and spend under control as request volume grows.",
           "Grew into Team Lead — scope, review and ship, mentoring the team while keeping systems stable as the product moves fast.",

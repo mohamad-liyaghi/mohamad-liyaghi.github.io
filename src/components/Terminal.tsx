@@ -49,7 +49,7 @@ const OK = (msg: ReactNode, d: number): BootLine => ({
 });
 
 const BOOT: BootLine[] = [
-  K("0.000000", "Mohamad OS 5.0.0-generic (gcc 14.2.0) — booting", 110),
+  K("0.000000", "Linux portfolio 5.0.0-generic (gcc 14.2.0) — booting", 110),
   K("0.041982", "Command line: ro quiet splash focus=ai persist=on", 150),
   K("0.182740", "Detected 5 CPU cores online — one per year", 250),
   OK("Mounted /home/mohamad", 240),
@@ -180,9 +180,9 @@ function Neofetch() {
           <span className="t-blue font-semibold">portfolio</span>
         </p>
         <p className="t-faint">-----------------------</p>
-        <Row k="OS">Mohamad OS · Software Engineer · AI</Row>
+        <Row k="OS">Software Engineer · AI</Row>
         <Row k="Host">
-          <TLink href={PROFILE.companyUrl}>ZebracatAi — zebracat.ai</TLink>
+          <TLink href={PROFILE.companyUrl}>ZebracatAi</TLink>
         </Row>
         <Row k="Kernel">full-stack · backend-heavy</Row>
         <Row k="Uptime">5 years, shipping</Row>
@@ -734,9 +734,13 @@ export function Terminal() {
     if (el) el.scrollTop = el.scrollHeight;
   }, [blocks, shown, input, phase]);
 
-  /* ---- focus the prompt once interactive ---- */
+  /* ---- focus the prompt the moment it's interactive — no click needed ---- */
   useEffect(() => {
-    if (phase === "ready") inputRef.current?.focus();
+    if (phase !== "ready") return;
+    const id = requestAnimationFrame(() =>
+      inputRef.current?.focus({ preventScroll: true }),
+    );
+    return () => cancelAnimationFrame(id);
   }, [phase]);
 
   const onKey = (e: ReactKeyboardEvent<HTMLInputElement>) => {
@@ -838,6 +842,8 @@ export function Terminal() {
                 </p>
                 <input
                   ref={inputRef}
+                  // eslint-disable-next-line jsx-a11y/no-autofocus
+                  autoFocus
                   className="term-input"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}

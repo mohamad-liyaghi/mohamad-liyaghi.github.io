@@ -34,14 +34,32 @@ export const SECTIONS = [
   { id: "contact", n: "06", key: "contact" },
 ] as const;
 
-export const EXPERIENCE = [
+export type ExperienceRole = { id: string; current: boolean };
+
+export type ExperienceItem = {
+  id: string;
+  company: string;
+  url: string;
+  location: string;
+  period: string;
+  current: boolean;
+  roles?: ExperienceRole[];
+  tech: string[];
+};
+
+export const EXPERIENCE: ExperienceItem[] = [
   {
     id: "zebracat",
-    company: "Zebracat",
+    company: "ZebracatAi",
     url: PROFILE.companyUrl,
     location: "Remote · Berlin",
     period: "Sep 2024",
     current: true,
+    // one company, two connected chapters: started on the backend, then promoted.
+    roles: [
+      { id: "lead", current: true },
+      { id: "backend", current: false },
+    ],
     tech: ["Python", "FastAPI", "Django", "RabbitMQ", "Redis", "Kubernetes", "AWS"],
   },
   {
@@ -53,7 +71,7 @@ export const EXPERIENCE = [
     current: false,
     tech: ["Django", "FastAPI", "React", "PostgreSQL", "Docker"],
   },
-] as const;
+];
 
 export type ProjectKind = "work" | "oss";
 
@@ -67,7 +85,7 @@ export const PROJECTS: {
 }[] = [
   {
     id: "zebracat",
-    name: "Zebracat",
+    name: "ZebracatAi",
     kind: "work",
     href: PROFILE.companyUrl,
     linkLabel: "zebracat.ai",
@@ -115,14 +133,15 @@ export const PROJECTS: {
   },
 ];
 
+// Ordered for emphasis: backend + ai lead, frontend sits lower (I'm backend-heavy).
 export const SKILLS: { key: string; items: string[] }[] = [
   { key: "languages", items: ["Python", "TypeScript", "JavaScript", "Go"] },
   { key: "backend", items: ["Django", "DRF", "FastAPI", "Celery", "Express", "Go Fiber"] },
-  { key: "frontend", items: ["React", "Next.js", "Vite", "Tailwind", "Framer Motion", "Remotion"] },
-  { key: "data", items: ["PostgreSQL", "PostGIS", "MongoDB", "Redis", "MySQL", "Qdrant", "Milvus"] },
   { key: "ai", items: ["Image agents", "RAG pipelines", "LLM agents", "Cost engineering", "Vector search", "LangChain"] },
+  { key: "data", items: ["PostgreSQL", "PostGIS", "MongoDB", "Redis", "MySQL", "Qdrant", "Milvus"] },
   { key: "messaging", items: ["RabbitMQ", "Socket.IO", "WebSockets", "asyncio", "Microservices"] },
   { key: "infra", items: ["Docker", "Kubernetes", "GitHub Actions", "Nginx", "AWS", "Gunicorn / Uvicorn"] },
+  { key: "frontend", items: ["React", "Next.js", "Vite", "Tailwind", "Framer Motion", "Remotion"] },
   { key: "observability", items: ["Sentry", "OpenTelemetry", "Prometheus", "Grafana", "Loki", "Elastic APM"] },
 ];
 
