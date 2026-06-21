@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mohamad Liyaghi — Software Engineer · AI — Résumé</title>
+    <meta name="description" content="Résumé of Mohamad Liyaghi, Software Engineer · AI at Zebracat." />
+    <style>
+      @page {
+        size: A4;
+        margin: 13mm 15mm;
+      }
+      :root {
+        --ink: #16181d;
+        --soft: #44474f;
+        --muted: #6b6f78;
+        --rule: #d7d9de;
+        --accent: #5b3df0;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Helvetica Neue", Arial, "Segoe UI", sans-serif;
+        color: var(--ink);
+        font-size: 10.4pt;
+        line-height: 1.4;
+        background: #fff;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .sheet {
+        max-width: 820px;
+        margin: 0 auto;
+        padding: 26px 30px 36px;
+      }
+      a {
+        color: var(--ink);
+        text-decoration: none;
+      }
+      /* Header */
+      header {
+        border-bottom: 2px solid var(--ink);
+        padding-bottom: 12px;
+        margin-bottom: 14px;
+      }
+      h1 {
+        font-size: 23pt;
+        margin: 0;
+        letter-spacing: -0.2px;
+      }
+      .role {
+        font-size: 11pt;
+        font-weight: 600;
+        color: var(--accent);
+        margin: 3px 0 9px;
+        letter-spacing: 0.2px;
+      }
+      .contact {
+        font-size: 9pt;
+        color: var(--soft);
+        line-height: 1.7;
+      }
+      .contact span:not(:last-child)::after {
+        content: " · ";
+        color: var(--muted);
+      }
+      .contact a {
+        color: var(--soft);
+      }
+      /* Sections */
+      section {
+        margin-top: 14px;
+      }
+      h2 {
+        font-size: 9pt;
+        text-transform: uppercase;
+        letter-spacing: 1.4px;
+        color: var(--accent);
+        margin: 0 0 8px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid var(--rule);
+      }
+      p {
+        margin: 0 0 6px;
+      }
+      .summary {
+        color: var(--soft);
+      }
+      /* Skills */
+      .skills {
+        display: grid;
+        grid-template-columns: 130px 1fr;
+        row-gap: 5px;
+        column-gap: 12px;
+        font-size: 9.6pt;
+      }
+      .skills dt {
+        font-weight: 700;
+        color: var(--ink);
+      }
+      .skills dd {
+        margin: 0;
+        color: var(--soft);
+      }
+      /* Experience / Projects */
+      .entry {
+        margin-bottom: 11px;
+      }
+      .entry:last-child {
+        margin-bottom: 0;
+      }
+      .entry-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+      }
+      .entry-title {
+        font-size: 11pt;
+        font-weight: 700;
+        margin: 0;
+      }
+      .entry-org {
+        font-weight: 600;
+        color: var(--accent);
+      }
+      .entry-meta {
+        font-size: 8.8pt;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+      .entry-sub {
+        font-size: 9pt;
+        color: var(--muted);
+        margin: 1px 0 5px;
+      }
+      ul {
+        margin: 5px 0 0;
+        padding-inline-start: 16px;
+      }
+      li {
+        margin-bottom: 3px;
+        color: var(--soft);
+      }
+      .proj {
+        margin-bottom: 7px;
+      }
+      .proj b {
+        color: var(--ink);
+      }
+      .proj .tech {
+        color: var(--muted);
+        font-size: 9pt;
+      }
+      .two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px 22px;
+      }
+      .writing li {
+        margin-bottom: 4px;
+      }
+      .writing .src {
+        color: var(--muted);
+        font-size: 8.8pt;
+      }
+      footer {
+        margin-top: 16px;
+        font-size: 8.4pt;
+        color: var(--muted);
+        text-align: center;
+      }
+      @media print {
+        .sheet {
+          padding: 0;
+          max-width: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sheet">
+      <header>
+        <h1>Mohamad Liyaghi</h1>
+        <div class="role">Software Engineer · AI</div>
+        <div class="contact">
+          <span>Tehran, Iran</span>
+          <span>+98 991 951 4231</span>
+          <span><a href="mailto:liaghimohamad69@gmail.com">liaghimohamad69@gmail.com</a></span>
+          <span><a href="https://mohamad-liyaghi.ir">mohamad-liyaghi.ir</a></span>
+          <span><a href="https://github.com/mohamad-liyaghi">github.com/mohamad-liyaghi</a></span>
+          <span><a href="https://www.linkedin.com/in/mohamad-liyaghi/">linkedin.com/in/mohamad-liyaghi</a></span>
+          <span><a href="https://medium.com/@el_mohamad">medium.com/@el_mohamad</a></span>
+        </div>
+      </header>
+
+      <section>
+        <h2>Summary</h2>
+        <p class="summary">
+          Software engineer with 5+ years building scalable, high-throughput backend systems and shipping
+          production AI features. Full-stack across Python, TypeScript and Go with a deep backend focus —
+          distributed services, async pipelines and real-time systems — plus hands-on LLM work: agents,
+          RAG, guardrails and cost engineering. Comfortable end to end, from API design and data modelling
+          to containers, cloud and observability. I write regularly about the realities of running AI in
+          production.
+        </p>
+      </section>
+
+      <section>
+        <h2>Skills</h2>
+        <dl class="skills">
+          <dt>Languages</dt>
+          <dd>Python, TypeScript, JavaScript, Go</dd>
+          <dt>Backend</dt>
+          <dd>Django, Django REST Framework, FastAPI, Celery, Express, Go Fiber</dd>
+          <dt>Frontend</dt>
+          <dd>React, Next.js, TypeScript, Tailwind CSS, Remotion (programmatic video)</dd>
+          <dt>AI / LLM</dt>
+          <dd>LLM integration, RAG, AI agents, LangChain, guardrails, cost engineering, vector search</dd>
+          <dt>Data &amp; Search</dt>
+          <dd>PostgreSQL, PostGIS, MongoDB, Redis, MySQL, Qdrant, Milvus, Elasticsearch</dd>
+          <dt>Async / Realtime</dt>
+          <dd>RabbitMQ, Celery, Socket.IO, WebSockets, asyncio, microservices</dd>
+          <dt>DevOps / Cloud</dt>
+          <dd>Docker, Kubernetes, GitHub Actions, Nginx, AWS, Gunicorn, Uvicorn</dd>
+          <dt>Observability</dt>
+          <dd>Sentry, OpenTelemetry, Prometheus, Grafana, Loki, Elastic APM</dd>
+          <dt>Testing</dt>
+          <dd>Pytest, unittest</dd>
+        </dl>
+      </section>
+
+      <section>
+        <h2>Experience</h2>
+
+        <div class="entry">
+          <div class="entry-head">
+            <p class="entry-title">
+              Software Engineer · Team Lead<span class="entry-org"> — Zebracat</span>
+            </p>
+            <span class="entry-meta">Sep 2024 – Present · Remote (Berlin, DE)</span>
+          </div>
+          <div class="entry-sub">AI text-to-video platform (zebracat.ai)</div>
+          <ul>
+            <li>
+              Lead backend development for an AI text-to-video platform — microservices that fan out heavy
+              generative jobs and stream real-time progress back to users.
+            </li>
+            <li>
+              Design async pipelines (queues, workers, back-pressure) that keep latency and cost
+              predictable as request volume scales.
+            </li>
+            <li>
+              Integrate and productionize LLM features — agents, retrieval and guardrails — with the
+              observability and cost controls that keep them reliable.
+            </li>
+            <li>
+              Lead the team day to day: scoping, code review and on-time delivery while keeping services
+              stable as the product moves fast.
+            </li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-head">
+            <p class="entry-title">
+              Full-Stack Developer<span class="entry-org"> — Freelance</span>
+            </p>
+            <span class="entry-meta">Jun 2021 – Sep 2024 · Remote</span>
+          </div>
+          <ul>
+            <li>
+              Delivered end-to-end web products (SaaS and consumer) from requirements to production, owning
+              both frontend and backend.
+            </li>
+            <li>
+              Built scalable Django / FastAPI backends and responsive React frontends; handled deployment,
+              monitoring and third-party integrations.
+            </li>
+            <li>Shipped reliable, secure systems under tight client deadlines.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Selected Projects</h2>
+        <div class="proj">
+          <b>FoodAnywhere</b> — Open-source food-delivery backend with geospatial search and worker-offloaded
+          tasks. <span class="tech">Django, PostGIS, Redis, Celery, Prometheus, Grafana, Loki, Docker, Kubernetes.</span>
+        </div>
+        <div class="proj">
+          <b>FastQuora</b> — Q&amp;A platform with full-text search, caching and end-to-end tests.
+          <span class="tech">FastAPI, PostgreSQL, Elasticsearch, Redis, Docker, Pytest.</span>
+        </div>
+        <div class="proj">
+          <b>fast-commerce</b> — Async e-commerce backend focused on throughput and clean API design.
+          <span class="tech">FastAPI, PostgreSQL, Redis, Pytest, Kubernetes.</span>
+        </div>
+        <div class="proj">
+          <b>AcademyMaster</b> — Academy-management API with layered permissions and background jobs.
+          <span class="tech">Django, DRF, Celery, PostgreSQL, Docker.</span>
+        </div>
+      </section>
+
+      <section>
+        <h2>Selected Writing — medium.com/@el_mohamad</h2>
+        <ul class="writing">
+          <li>Stop Treating LLM Calls as Free: How Real Cost Engineering for Agents Actually Works <span class="src">(2026)</span></li>
+          <li>Stop Trusting the Embedding: How Real RAG Pipelines Actually Work <span class="src">(2026)</span></li>
+          <li>Stop Trusting the Model: How Real LLM Guardrails Actually Work <span class="src">(2026)</span></li>
+          <li>Stop Putting Everything in One Prompt: How Real Research Agents Actually Work <span class="src">(2026)</span></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Languages</h2>
+        <div class="two">
+          <p><b>Persian</b> — Native</p>
+          <p><b>English</b> — Professional (C1)</p>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
