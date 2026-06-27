@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { SECTIONS } from "../data/site";
@@ -36,12 +36,31 @@ export function Nav() {
     }
   };
 
+  // Close the mobile menu on Escape while it's open.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  // Close the mobile menu whenever the route changes.
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
+
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <div className="border-b border-line bg-bg/72 backdrop-blur-xl">
         <nav className="wrap flex h-16 items-center justify-between gap-4">
           {/* left: prompt glyph + path → home */}
-          <button onClick={home} className="group flex items-center gap-2">
+          <button
+            onClick={home}
+            aria-label={t("nav.home")}
+            className="group flex items-center gap-2"
+          >
             <Icon name="terminal" size={16} className="text-accent" />
             <span
               className="keep-mono text-sm text-dim transition-colors group-hover:text-text"
@@ -100,7 +119,7 @@ export function Nav() {
               onClick={() => setOpen((v) => !v)}
               aria-label={t("a11y.menu")}
               aria-expanded={open}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-line text-dim lg:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-line text-dim lg:hidden"
             >
               <Icon name={open ? "close" : "menu"} size={18} />
             </button>

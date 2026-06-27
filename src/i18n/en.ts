@@ -16,6 +16,7 @@ const en = {
     theme: "Toggle theme",
     lang: "Switch language",
     top: "Back to top",
+    skip: "Skip to content",
     menu: "Open menu",
     github: "GitHub",
     linkedin: "LinkedIn",
@@ -88,13 +89,22 @@ const en = {
     contact: "contact",
     scroll: "scroll",
   },
+  resumeMenu: {
+    heading: "Résumé / CV",
+    view: "view in browser",
+  },
+  routeMeta: {
+    home: "Mohamad Liyaghi — Software Engineer · AI",
+    blog: "Writing — Mohamad Liyaghi",
+    uses: "Uses — Mohamad Liyaghi",
+  },
   about: {
     index: "01",
     label: "about",
     cmd: "cat about.md",
     title: "A full-stack engineer who likes hard problems",
     p: [
-      "I'm Mohamad — a software engineer at ZebracatAi, where we turn text into video with generative AI. I work across the stack but live mostly in the backend: services that stay fast and predictable when traffic doesn't.",
+      "I'm Mohamad — a software engineer at ZebracatAi, where we turn text into video with generative AI. I work across the stack but live mostly in the backend: services that stay fast and predictable under load.",
       "Most of what I do is the engineering that makes software dependable — clean APIs, async pipelines and queues, caching, sensible data modeling, and the observability that tells you the truth under load. I build for scale and reliability: systems that stay fast when traffic spikes and fail gracefully when something breaks. I work with LLMs, retrieval and agents too, and treat them like any other production system — measured, tested and kept affordable.",
       "On the frontend I'm at home in React and TypeScript, and I enjoy media-heavy work — programmatic video with tools like Remotion and headless rendering. I'm dedicated, I read a lot, I write about what I learn, and I'm happiest when I'm shipping.",
     ],

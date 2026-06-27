@@ -4,10 +4,13 @@ import { Link } from "react-router-dom";
 import { ARTICLES, PROFILE } from "../data/site";
 import { Icon } from "../components/Icons";
 import { ArrowLink, Reveal } from "../components/ui";
+import { useDocumentMeta } from "../lib/meta";
 
 export function Blog() {
   const { t, i18n } = useTranslation();
   const lng = i18n.language === "fa" ? "fa" : "en";
+
+  useDocumentMeta(t("routeMeta.blog"), t("blog.intro"));
 
   useEffect(() => {
     window.scrollTo(0, 0);

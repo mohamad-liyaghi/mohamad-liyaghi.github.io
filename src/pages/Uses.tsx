@@ -3,10 +3,13 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { USES } from "../data/site";
 import { Chip, Reveal } from "../components/ui";
+import { useDocumentMeta } from "../lib/meta";
 
 export function Uses() {
   const { t, i18n } = useTranslation();
   const lng = i18n.language === "fa" ? "fa" : "en";
+
+  useDocumentMeta(t("routeMeta.uses"), t("uses.intro"));
 
   useEffect(() => {
     window.scrollTo(0, 0);

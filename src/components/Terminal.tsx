@@ -17,11 +17,13 @@ import {
   EXPERIENCE,
   PROFILE,
   PROJECTS,
+  RESUMES,
   SKILLS,
   SOCIALS,
 } from "../data/site";
 import { toggleTheme } from "../lib/hooks";
 import { Icon } from "./Icons";
+import { ResumeMenu } from "./ResumeMenu";
 
 /* ------------------------------------------------------------------ *
  *  Boot log — streams for ~5s, then the screen clears to the prompt.
@@ -85,6 +87,15 @@ const BOOT: BootLine[] = [
 ];
 
 const BOOT_TOTAL = BOOT.reduce((a, b) => a + b.d, 0) + 650;
+
+/* Replay the boot sequence once per tab session; skip it on in-session revisits. */
+function bootedThisSession(): boolean {
+  try {
+    return sessionStorage.getItem("booted") === "1";
+  } catch {
+    return false;
+  }
+}
 
 /* ------------------------------------------------------------------ *
  *  Prompt + small renderers
@@ -251,8 +262,9 @@ export function Terminal() {
   const navigate = useNavigate();
   const lng = i18n.language === "fa" ? "fa" : "en";
 
-  const [phase, setPhase] = useState<"boot" | "ready">(reduce ? "ready" : "boot");
-  const [shown, setShown] = useState(reduce ? BOOT.length : 0);
+  const skipBoot = reduce || bootedThisSession();
+  const [phase, setPhase] = useState<"boot" | "ready">(skipBoot ? "ready" : "boot");
+  const [shown, setShown] = useState(skipBoot ? BOOT.length : 0);
   const [blocks, setBlocks] = useState<{ id: number; node: ReactNode }[]>([]);
   const [input, setInput] = useState("");
   const [history, setHistory] = useState<string[]>([]);
@@ -416,7 +428,7 @@ export function Terminal() {
                   {e.current ? ` · ${t("experience.present")}` : ""}
                 </span>
               </p>
-              <p className="t-cyan">→ {t(`experience.items.${e.id}.track`)}</p>
+              <p className="t-cyan">{t(`experience.items.${e.id}.track`)}</p>
               {bullets.map((b, i) => (
                 <p key={i} className="mt-0.5 flex gap-2 t-dim">
                   <span className="t-faint">·</span>
@@ -498,7 +510,7 @@ export function Terminal() {
       const arg = parts.slice(1).join(" ");
       const open = (href: string, what: string): CmdResult => ({
         node: <p className="t-dim">{t("term.opening", { what })}</p>,
-        run: () => window.open(href, "_blank", "noopener"),
+        run: () => window.open(href, "_blank", "noopener,noreferrer"),
       });
 
       // fork bomb :(){ :|:& };:
@@ -533,7 +545,10 @@ export function Terminal() {
         case "work":
           return { node: renderers.experience };
         case "cv":
-          return open(PROFILE.resumePdf, "résumé.pdf");
+          return open(
+            (RESUMES.find((r) => r.id === lng) ?? RESUMES[0]).pdf,
+            "résumé.pdf",
+          );
         case "ls":
         case "dir": {
           const d = arg.replace(/^\.?\//, "").replace(/\/$/, "").toLowerCase();
@@ -607,7 +622,10 @@ export function Terminal() {
             run: () => navigate(`/${lng}/uses`),
           };
         case "resume":
-          return open(PROFILE.resumePdf, "résumé.pdf");
+          return open(
+            (RESUMES.find((r) => r.id === lng) ?? RESUMES[0]).pdf,
+            "résumé.pdf",
+          );
         case "github":
           return open(PROFILE.github, "github");
         case "linkedin":
@@ -693,6 +711,11 @@ export function Terminal() {
 
   /* ---- boot streaming ---- */
   const finishBoot = useCallback(() => {
+    try {
+      sessionStorage.setItem("booted", "1");
+    } catch {
+      /* ignore */
+    }
     setPhase("ready");
     setBlocks([
       { id: nextId(), node: <p className="t-dim">{t("term.welcome")}</p> },
@@ -712,7 +735,7 @@ export function Terminal() {
   }, [t]);
 
   useEffect(() => {
-    if (reduce) {
+    if (skipBoot) {
       finishBoot();
       return;
     }
@@ -728,6 +751,15 @@ export function Terminal() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  /* Output is stored as rendered nodes, so re-translate the welcome when the
+     language changes in-app (otherwise it would stay in the old language). */
+  const prevLng = useRef(lng);
+  useEffect(() => {
+    if (prevLng.current === lng) return;
+    prevLng.current = lng;
+    if (phase === "ready") finishBoot();
+  }, [lng, phase, finishBoot]);
+
   /* ---- keep view pinned to the newest output ---- */
   useLayoutEffect(() => {
     const el = bodyRef.current;
@@ -737,6 +769,9 @@ export function Terminal() {
   /* ---- focus the prompt the moment it's interactive — no click needed ---- */
   useEffect(() => {
     if (phase !== "ready") return;
+    // Only auto-focus on devices with a precise pointer (desktop). On touch this
+    // would raise the on-screen keyboard and cover the page on load.
+    if (!window.matchMedia("(pointer: fine)").matches) return;
     const id = requestAnimationFrame(() =>
       inputRef.current?.focus({ preventScroll: true }),
     );
@@ -781,10 +816,10 @@ export function Terminal() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[calc(100svh-4rem)] items-center pt-24 pb-14"
+      className="relative flex hero-min items-center pt-24 pb-14"
     >
       <h1 className="sr-only">
-        {PROFILE.name} — Software Engineer · AI at Zebracat. Image agents, RAG
+        {PROFILE.name} — Software Engineer · AI at ZebracatAi. Image agents, RAG
         pipelines and cost engineering at scale.
       </h1>
 
@@ -828,7 +863,12 @@ export function Terminal() {
 
             {/* interactive history */}
             {phase === "ready" && (
-              <div className="space-y-1.5">
+              <div
+                className="space-y-1.5"
+                role="log"
+                aria-live="polite"
+                aria-atomic="false"
+              >
                 {blocks.map((b) => (
                   <div key={b.id}>{b.node}</div>
                 ))}
@@ -842,13 +882,13 @@ export function Terminal() {
                 </p>
                 <input
                   ref={inputRef}
-                  // eslint-disable-next-line jsx-a11y/no-autofocus
-                  autoFocus
                   className="term-input"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={onKey}
                   aria-label="terminal input"
+                  enterKeyHint="go"
+                  inputMode="text"
                   autoCapitalize="off"
                   autoCorrect="off"
                   autoComplete="off"
@@ -863,13 +903,11 @@ export function Terminal() {
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: reduce ? 0 : (BOOT_TOTAL + 200) / 1000, duration: 0.4 }}
+          transition={{ delay: reduce ? 0 : 0.35, duration: 0.4 }}
           className="mx-auto mt-5 flex max-w-3xl flex-wrap items-center gap-2.5"
           dir="ltr"
         >
-          <a href={PROFILE.resumePdf} download className="btn btn-primary">
-            <Icon name="download" size={15} /> résumé.pdf
-          </a>
+          <ResumeMenu />
           <button
             onClick={() => {
               if (phase === "ready") submit("experience");

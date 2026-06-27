@@ -34,11 +34,13 @@ export function SectionHeader({
   label,
   title,
   intro,
+  titleId,
 }: {
   index: string;
   label: string;
   title: string;
   intro?: string;
+  titleId?: string;
 }) {
   return (
     <div className="mb-10">
@@ -47,7 +49,10 @@ export function SectionHeader({
         <span className="kbd text-faint keep-mono">// {label}</span>
         <span className="rule flex-1" />
       </div>
-      <h2 className="mt-4 text-[1.7rem] xs:text-3xl md:text-[2.4rem] font-semibold leading-[1.1] tracking-tight">
+      <h2
+        id={titleId}
+        className="mt-4 text-[1.7rem] xs:text-3xl md:text-[2.4rem] font-semibold leading-[1.1] tracking-tight"
+      >
         {title}
       </h2>
       {intro ? (

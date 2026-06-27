@@ -9,13 +9,18 @@ export function Writing() {
   const lng = i18n.language === "fa" ? "fa" : "en";
 
   return (
-    <section id="writing" className="py-20 sm:py-28">
+    <section
+      id="writing"
+      aria-labelledby="writing-title"
+      className="py-20 sm:py-28"
+    >
       <div className="wrap">
         <SectionHeader
           index={t("writing.index")}
           label={t("writing.label")}
           title={t("writing.title")}
           intro={t("writing.intro")}
+          titleId="writing-title"
         />
 
         <div className="grid gap-3">
@@ -25,7 +30,7 @@ export function Writing() {
                 href={a.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="card group flex items-start gap-4 p-5"
+                className="card group flex items-start gap-4 p-5 transition duration-300 hover:-translate-y-0.5 hover:border-accent/40"
               >
                 <span className="kbd keep-mono pt-0.5 text-accent">{a.n}</span>
                 <div className="flex-1">

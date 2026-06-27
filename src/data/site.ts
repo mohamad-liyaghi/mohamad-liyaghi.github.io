@@ -3,9 +3,9 @@
 export const PROFILE = {
   name: "Mohamad Liyaghi",
   email: "liaghimohamad69@gmail.com",
-  resumePdf: "/mohamad-liyaghi.pdf",
+  resumePdf: "/Mohamad_Liyaghi_CV.pdf",
   resumeView: "/cv.html",
-  company: "Zebracat",
+  company: "ZebracatAi",
   companyUrl: "https://www.zebracat.ai",
   github: "https://github.com/mohamad-liyaghi",
   githubUser: "mohamad-liyaghi",
@@ -14,6 +14,31 @@ export const PROFILE = {
   telegram: "https://t.me/El_mohamad",
   repo: "https://github.com/mohamad-liyaghi/mohamad-liyaghi.github.io",
 };
+
+/* Résumé / CV — English first, Persian (RTL) second. PDFs live in /public. */
+export type ResumeLang = "en" | "fa";
+export const RESUMES: {
+  id: ResumeLang;
+  label: string;
+  pdf: string;
+  view: string;
+  file: string;
+}[] = [
+  {
+    id: "en",
+    label: "English",
+    pdf: "/Mohamad_Liyaghi_CV.pdf",
+    view: "/cv.html",
+    file: "Mohamad_Liyaghi_CV.pdf",
+  },
+  {
+    id: "fa",
+    label: "فارسی",
+    pdf: "/Mohamad_Liyaghi_CV_FA.pdf",
+    view: "/cv-fa.html",
+    file: "Mohamad_Liyaghi_CV_FA.pdf",
+  },
+];
 
 export type SocialId = "github" | "linkedin" | "medium" | "telegram" | "email";
 

@@ -15,7 +15,7 @@ export function Footer() {
     onHome ? scrollToId(id) : navigate(`/${lng}#${id}`);
 
   return (
-    <footer className="mt-8 border-t border-line">
+    <footer className="mt-16 border-t border-line">
       <div className="wrap py-12">
         <div className="grid gap-8 sm:grid-cols-3">
           <div>
@@ -86,8 +86,8 @@ export function Footer() {
           <span dir="auto">
             © {BUILD.year} {t("hero.name")} · {t("footer.rights")}
           </span>
-          <span dir="ltr">
-            {t("footer.build")} {BUILD.sha}
+          <span dir="auto">
+            {t("footer.build")} <span dir="ltr">{BUILD.sha}</span>
           </span>
         </div>
       </div>

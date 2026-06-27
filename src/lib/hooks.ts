@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export type Theme = "dark" | "light";
 
@@ -52,7 +52,7 @@ export function useScrollSpy(ids: string[], offset = 110): string {
   const [active, setActive] = useState("");
 
   useEffect(() => {
-    const onScroll = () => {
+    const compute = () => {
       const scrollPos = window.scrollY + offset + 1;
       let current = "";
       for (const id of ids) {
@@ -66,10 +66,20 @@ export function useScrollSpy(ids: string[], offset = 110): string {
       }
       setActive(current);
     };
-    onScroll();
+    // Coalesce scroll bursts into a single recompute per animation frame.
+    let frame = 0;
+    const onScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        compute();
+      });
+    };
+    compute();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("resize", onScroll, { passive: true });
     return () => {
+      if (frame) window.cancelAnimationFrame(frame);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
@@ -80,17 +90,47 @@ export function useScrollSpy(ids: string[], offset = 110): string {
 
 export function useCopy(timeout = 1600): [boolean, (text: string) => void] {
   const [copied, setCopied] = useState(false);
+  const timer = useRef<number>(0);
+
+  // Clear any pending reset on unmount to avoid setState-after-unmount.
+  useEffect(() => {
+    return () => {
+      if (timer.current) window.clearTimeout(timer.current);
+    };
+  }, []);
+
   const copy = useCallback(
     (text: string) => {
-      navigator.clipboard
-        ?.writeText(text)
-        .then(() => {
-          setCopied(true);
-          window.setTimeout(() => setCopied(false), timeout);
-        })
-        .catch(() => {
+      const flash = () => {
+        setCopied(true);
+        if (timer.current) window.clearTimeout(timer.current);
+        timer.current = window.setTimeout(() => setCopied(false), timeout);
+      };
+      const fallback = () => {
+        try {
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          ta.setAttribute("readonly", "");
+          ta.style.position = "fixed";
+          ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          const ok = document.execCommand("copy");
+          document.body.removeChild(ta);
+          if (ok) flash();
+        } catch {
           /* ignore */
-        });
+        }
+      };
+      try {
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).then(flash, fallback);
+        } else {
+          fallback();
+        }
+      } catch {
+        fallback();
+      }
     },
     [timeout],
   );

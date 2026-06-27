@@ -9,13 +9,14 @@ export function Skills() {
   const { t } = useTranslation();
 
   return (
-    <section id="skills" className="py-20 sm:py-28">
+    <section id="skills" aria-labelledby="skills-title" className="py-20 sm:py-28">
       <div className="wrap">
         <SectionHeader
           index={t("skills.index")}
           label={t("skills.label")}
           title={t("skills.title")}
           intro={t("skills.intro")}
+          titleId="skills-title"
         />
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

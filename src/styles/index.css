@@ -33,7 +33,7 @@
   --line-soft: #20232f;
   --text: #c0caf5;
   --text-dim: #9aa5ce;
-  --text-faint: #565f89;
+  --text-faint: #7a83ab;      /* lifted for WCAG AA on the dark bg */
   --accent: #7aa2f7;          /* blue */
   --accent-2: #9ece6a;        /* green */
   --accent-3: #7dcfff;        /* cyan */
@@ -54,8 +54,8 @@
   --line-soft: #d6d8e3;
   --text: #2e3043;
   --text-dim: #555a77;
-  --text-faint: #848cb5;
-  --accent: #2e7de9;          /* blue */
+  --text-faint: #5b6385;      /* darkened for WCAG AA on the light bg */
+  --accent: #1e5fc0;          /* blue — darkened so accent text passes AA */
   --accent-2: #587539;        /* green */
   --accent-3: #007197;        /* cyan */
   --magenta: #9854f1;         /* purple */
@@ -129,7 +129,7 @@ section {
   background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--line);
+  background: color-mix(in oklab, var(--text-faint) 55%, transparent);
   border: 3px solid var(--bg);
   border-radius: 999px;
 }
@@ -155,6 +155,12 @@ button {
   max-width: 1080px;
   margin-inline: auto;
   padding-inline: clamp(1.1rem, 4vw, 2rem);
+}
+
+/* hero height: 100vh fallback first, then 100svh for modern mobile browsers */
+.hero-min {
+  min-height: calc(100vh - 4rem);
+  min-height: calc(100svh - 4rem);
 }
 
 /* page-wide dot grid + soft accent glow */
@@ -264,6 +270,8 @@ button {
   opacity: 0;
   padding: 0;
   border: 0;
+  /* 16px stops iOS Safari from zooming the viewport when the input is focused */
+  font-size: 16px;
   pointer-events: none;
 }
 
@@ -421,9 +429,9 @@ html[dir="rtl"] .ulink::after { --ul-origin: right; }
   border-radius: 50%;
   background: var(--accent-2);
   box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent-2) 70%, transparent);
-  animation: ping 2s ease-out infinite;
+  animation: dot-pulse 2s ease-out infinite;
 }
-@keyframes ping {
+@keyframes dot-pulse {
   0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent-2) 65%, transparent); }
   70% { box-shadow: 0 0 0 7px transparent; }
   100% { box-shadow: 0 0 0 0 transparent; }
@@ -438,4 +446,11 @@ html[dir="rtl"] .ulink::after { --ul-origin: right; }
   }
   .caret, .term-caret { animation: none; opacity: 1; }
   .term-body { scroll-behavior: auto; }
+}
+
+/* keep an accidental print of the page legible (the résumé PDFs are the real print target) */
+@media print {
+  .bg-grid::before,
+  .bg-grid::after { display: none !important; }
+  body { background: #fff; color: #111; overflow: visible; }
 }

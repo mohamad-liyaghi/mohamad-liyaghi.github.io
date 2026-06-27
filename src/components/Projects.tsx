@@ -7,13 +7,18 @@ export function Projects() {
   const { t } = useTranslation();
 
   return (
-    <section id="projects" className="py-20 sm:py-28">
+    <section
+      id="projects"
+      aria-labelledby="projects-title"
+      className="py-20 sm:py-28"
+    >
       <div className="wrap">
         <SectionHeader
           index={t("projects.index")}
           label={t("projects.label")}
           title={t("projects.title")}
           intro={t("projects.intro")}
+          titleId="projects-title"
         />
 
         <div className="grid gap-4 sm:grid-cols-2">
@@ -23,7 +28,7 @@ export function Projects() {
                 href={p.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="card group flex h-full flex-col p-5"
+                className="card group flex h-full flex-col p-5 transition duration-300 hover:-translate-y-0.5 hover:border-accent/40"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-2">

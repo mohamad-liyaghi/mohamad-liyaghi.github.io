@@ -36,12 +36,13 @@ export function About() {
   const paras = t("about.p", { returnObjects: true }) as string[];
 
   return (
-    <section id="about" className="py-20 sm:py-28">
+    <section id="about" aria-labelledby="about-title" className="py-20 sm:py-28">
       <div className="wrap">
         <SectionHeader
           index={t("about.index")}
           label={t("about.label")}
           title={t("about.title")}
+          titleId="about-title"
         />
 
         <div className="grid gap-10 md:grid-cols-[1.5fr_1fr] md:gap-12">
@@ -72,9 +73,10 @@ export function About() {
                     src="/me.jpg"
                     alt={t("hero.name")}
                     loading="lazy"
+                    decoding="async"
                     width={64}
                     height={64}
-                    className="h-16 w-16 rounded-lg object-cover ring-1 ring-line"
+                    className="h-16 w-16 rounded-lg object-cover ring-1 ring-accent/25"
                   />
                   <div>
                     <p className="font-semibold">{t("hero.name")}</p>

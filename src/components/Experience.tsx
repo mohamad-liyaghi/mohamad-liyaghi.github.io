@@ -7,13 +7,18 @@ export function Experience() {
   const present = t("experience.present");
 
   return (
-    <section id="experience" className="py-20 sm:py-28">
+    <section
+      id="experience"
+      aria-labelledby="experience-title"
+      className="py-20 sm:py-28"
+    >
       <div className="wrap">
         <SectionHeader
           index={t("experience.index")}
           label={t("experience.label")}
           title={t("experience.title")}
           intro={t("experience.lead")}
+          titleId="experience-title"
         />
 
         <ol className="relative space-y-10 border-s border-line ps-7">

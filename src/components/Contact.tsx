@@ -18,13 +18,18 @@ export function Contact() {
   const socials = SOCIALS.filter((s) => s.id !== "email");
 
   return (
-    <section id="contact" className="py-20 sm:py-28">
+    <section
+      id="contact"
+      aria-labelledby="contact-title"
+      className="py-20 sm:py-28"
+    >
       <div className="wrap">
         <SectionHeader
           index={t("contact.index")}
           label={t("contact.label")}
           title={t("contact.title")}
           intro={t("contact.intro")}
+          titleId="contact-title"
         />
 
         <Reveal>
@@ -32,21 +37,24 @@ export function Contact() {
             <p className="keep-mono text-xs text-accent2" dir="ltr">
               $ echo $EMAIL
             </p>
-            <div className="mt-3 flex flex-wrap items-center gap-4">
+            <div className="mt-3 flex min-w-0 flex-wrap items-center gap-4">
               <a
                 href={`mailto:${PROFILE.email}`}
-                className="ulink text-xl font-semibold sm:text-2xl"
+                className="ulink min-w-0 break-all text-xl font-semibold sm:text-2xl"
                 dir="ltr"
               >
                 {PROFILE.email}
               </a>
               <button
                 onClick={() => copy(PROFILE.email)}
-                className="inline-flex items-center gap-1.5 rounded-md border border-line px-2.5 py-1.5 keep-mono text-xs text-dim transition-colors hover:border-accent/50 hover:text-text"
+                className="inline-flex min-h-10 items-center gap-1.5 rounded-md border border-line px-2.5 py-1.5 keep-mono text-xs text-dim transition-colors hover:border-accent/50 hover:text-text"
               >
                 <Icon name={copied ? "check" : "copy"} size={14} />
                 {copied ? t("contact.copied") : t("contact.copy")}
               </button>
+              <span className="sr-only" role="status" aria-live="polite">
+                {copied ? t("contact.copied") : ""}
+              </span>
             </div>
 
             <p className="mt-7 kbd keep-mono text-faint" dir="auto">

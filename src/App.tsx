@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Navigate,
   Outlet,
@@ -18,8 +19,11 @@ import { ScrollProgress } from "./components/controls";
 import { Skills } from "./components/Skills";
 import { Terminal } from "./components/Terminal";
 import { Writing } from "./components/Writing";
-import { Blog } from "./pages/Blog";
-import { Uses } from "./pages/Uses";
+import { useCanonical, useDocumentMeta } from "./lib/meta";
+
+// Secondary pages are split out of the main bundle.
+const Blog = lazy(() => import("./pages/Blog").then((m) => ({ default: m.Blog })));
+const Uses = lazy(() => import("./pages/Uses").then((m) => ({ default: m.Uses })));
 
 function initialLang(): Lang {
   try {
@@ -34,6 +38,8 @@ function initialLang(): Lang {
 /* Shared chrome + per-language side effects for every page under /:lang */
 function LangLayout() {
   const { lang } = useParams();
+  const { t } = useTranslation();
+  const { pathname } = useLocation();
   const l: Lang = isLang(lang) ? lang : "en";
 
   useEffect(() => {
@@ -47,13 +53,23 @@ function LangLayout() {
     }
   }, [l]);
 
+  useCanonical(pathname);
+
   return (
     <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-md focus:border focus:border-line focus:bg-bg-elev focus:px-4 focus:py-2 focus:text-text"
+      >
+        {t("a11y.skip")}
+      </a>
       <div className="bg-grid" aria-hidden="true" />
       <ScrollProgress />
       <Nav />
-      <main>
-        <Outlet />
+      <main id="main" tabIndex={-1}>
+        <Suspense fallback={null}>
+          <Outlet />
+        </Suspense>
       </main>
       <Footer />
     </>
@@ -61,7 +77,9 @@ function LangLayout() {
 }
 
 function Home() {
+  const { t } = useTranslation();
   const { hash } = useLocation();
+  useDocumentMeta(t("routeMeta.home"));
   useEffect(() => {
     if (!hash) return;
     const el = document.getElementById(hash.slice(1));
