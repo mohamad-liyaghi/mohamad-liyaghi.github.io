@@ -40,7 +40,10 @@ export function useReveal<T extends Element = HTMLDivElement>() {
           }
         }
       },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.12 },
+      // threshold 0 with a shallow bottom margin: anything the reader can
+      // scroll to will fire. A stricter threshold left the last section on the
+      // page stuck at opacity 0 on tall or short viewports.
+      { rootMargin: "0px 0px -5% 0px", threshold: 0 },
     );
     io.observe(el);
     return () => io.disconnect();

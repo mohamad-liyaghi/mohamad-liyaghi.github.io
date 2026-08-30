@@ -25,8 +25,14 @@ export function Writing() {
                     </span>
                     {fmt(t.writing.read, { minutes: num(a.minutes) })}
                   </p>
-                  <h3 className="flex items-start gap-2 text-[1.15rem] leading-snug text-ink transition-colors duration-300 group-hover:text-accent sm:text-[1.35rem]">
-                    <span className="ul" dir="ltr">
+                  {/* Titles stay English, so the whole row lays out LTR even on the
+                      Persian page — otherwise each row packs to the right and the
+                      column ends up with a ragged left edge. */}
+                  <h3
+                    dir="ltr"
+                    className="flex items-start gap-2 text-[1.15rem] leading-snug text-ink transition-colors duration-300 group-hover:text-accent sm:text-[1.35rem]"
+                  >
+                    <span className="ul">
                       {t.writing.items[a.id as keyof typeof t.writing.items]}
                     </span>
                     <ArrowOut

@@ -172,9 +172,12 @@
   /* The signature: display lines are printed onto the page rather than faded
      in — each line uncovered from the reading edge, so it runs right-to-left
      in Persian without any extra code. */
+  /* The vertical insets are deeply negative on purpose: clipping at the line
+     box would slice the descenders off "Liyaghi", and take the swash and dots
+     off «لیاقی» entirely. Only the horizontal edge should ever cut. */
   .wipe > span {
     display: block;
-    clip-path: inset(0 100% 0 0);
+    clip-path: inset(-50% 100% -50% 0);
     transform: translateY(0.12em);
     transition:
       clip-path 860ms var(--ease),
@@ -182,14 +185,14 @@
     transition-delay: var(--delay, 0ms);
   }
   .wipe[data-in] > span {
-    clip-path: inset(0 -3% 0 0);
+    clip-path: inset(-50% -4% -50% 0);
     transform: none;
   }
   [dir="rtl"] .wipe > span {
-    clip-path: inset(0 0 0 100%);
+    clip-path: inset(-50% 0 -50% 100%);
   }
   [dir="rtl"] .wipe[data-in] > span {
-    clip-path: inset(0 -3% 0 -3%);
+    clip-path: inset(-50% -4% -50% -4%);
   }
 
   /* Hairlines draw themselves from the reading edge. */
@@ -216,6 +219,20 @@
   }
   .flourish[data-in] path {
     stroke-dashoffset: 0;
+  }
+
+  /* The display name. Latin sets tight; Persian cannot — Vazirmatn's bold
+     descenders need real leading or the two lines collide. The bottom padding
+     reserves descender space so the flourish never lands on a tail. */
+  .hero-name {
+    font-size: clamp(3.4rem, 12.5vw, 7.25rem);
+    line-height: 0.95;
+    padding-bottom: 0.19em;
+  }
+  [lang="fa"] .hero-name {
+    font-size: clamp(2.9rem, 10vw, 5.75rem);
+    line-height: 1.4;
+    padding-bottom: 0.04em;
   }
 
   /* --- text and links ---------------------------------------------------- */

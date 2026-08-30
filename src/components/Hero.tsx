@@ -12,7 +12,7 @@ function Flourish() {
   return (
     <svg
       ref={ref}
-      className="flourish mt-3 h-3 w-[min(20rem,72%)] text-accent-bright"
+      className="flourish mt-1 h-3 w-[min(20rem,68%)] text-accent-bright"
       viewBox="0 0 300 12"
       fill="none"
       aria-hidden="true"
@@ -63,7 +63,7 @@ export function Hero() {
 
         <h1
           ref={nameRef}
-          className="wipe mt-7 font-display text-[clamp(3.4rem,13vw,7.5rem)] leading-[0.95] text-ink"
+          className="hero-name wipe mt-7 font-display text-ink"
         >
           {t.hero.nameLines.map((line, i) => (
             <span key={line} style={{ "--delay": `${120 + i * 110}ms` } as CSSProperties}>
