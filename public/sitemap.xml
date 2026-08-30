@@ -4,35 +4,15 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
 >
   <url>
-    <loc>https://mohamad-liyaghi.ir/en</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://mohamad-liyaghi.ir/en" />
-    <xhtml:link rel="alternate" hreflang="fa" href="https://mohamad-liyaghi.ir/fa" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://mohamad-liyaghi.ir/en" />
+    <loc>https://mohamad-liyaghi.ir/en/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mohamad-liyaghi.ir/en/" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://mohamad-liyaghi.ir/fa/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mohamad-liyaghi.ir/en/" />
   </url>
   <url>
-    <loc>https://mohamad-liyaghi.ir/fa</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://mohamad-liyaghi.ir/en" />
-    <xhtml:link rel="alternate" hreflang="fa" href="https://mohamad-liyaghi.ir/fa" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://mohamad-liyaghi.ir/en" />
-  </url>
-  <url>
-    <loc>https://mohamad-liyaghi.ir/en/blog</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://mohamad-liyaghi.ir/en/blog" />
-    <xhtml:link rel="alternate" hreflang="fa" href="https://mohamad-liyaghi.ir/fa/blog" />
-  </url>
-  <url>
-    <loc>https://mohamad-liyaghi.ir/fa/blog</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://mohamad-liyaghi.ir/en/blog" />
-    <xhtml:link rel="alternate" hreflang="fa" href="https://mohamad-liyaghi.ir/fa/blog" />
-  </url>
-  <url>
-    <loc>https://mohamad-liyaghi.ir/en/uses</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://mohamad-liyaghi.ir/en/uses" />
-    <xhtml:link rel="alternate" hreflang="fa" href="https://mohamad-liyaghi.ir/fa/uses" />
-  </url>
-  <url>
-    <loc>https://mohamad-liyaghi.ir/fa/uses</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://mohamad-liyaghi.ir/en/uses" />
-    <xhtml:link rel="alternate" hreflang="fa" href="https://mohamad-liyaghi.ir/fa/uses" />
+    <loc>https://mohamad-liyaghi.ir/fa/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mohamad-liyaghi.ir/en/" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://mohamad-liyaghi.ir/fa/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mohamad-liyaghi.ir/en/" />
   </url>
 </urlset>

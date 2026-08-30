@@ -1,78 +1,60 @@
-import { useTranslation } from "react-i18next";
-import { PROFILE, PROJECTS } from "../data/site";
-import { Icon } from "./Icons";
-import { ArrowLink, Chip, Reveal, SectionHeader } from "./ui";
+import { PROFILE, PROJECTS, SECTIONS, STATS } from "../data/profile";
+import { useI18n } from "../i18n";
+import { ArrowOut, Star } from "./Icons";
+import { Out, Reveal, Section, SectionHead } from "./primitives";
+
+const N = SECTIONS.find((s) => s.id === "projects")!.n;
 
 export function Projects() {
-  const { t } = useTranslation();
+  const { t, num, fmt } = useI18n();
 
   return (
-    <section
-      id="projects"
-      aria-labelledby="projects-title"
-      className="py-20 sm:py-28"
-    >
-      <div className="wrap">
-        <SectionHeader
-          index={t("projects.index")}
-          label={t("projects.label")}
-          title={t("projects.title")}
-          intro={t("projects.intro")}
-          titleId="projects-title"
-        />
+    <Section id="projects">
+      <SectionHead id="projects" n={N} title={t.projects.title} lede={t.projects.lede} />
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          {PROJECTS.map((p, i) => (
-            <Reveal key={p.id} delay={(i % 2) * 0.06}>
-              <a
+      <ul className="grid gap-px border border-hairline bg-hairline sm:grid-cols-2">
+        {PROJECTS.map((p, i) => (
+          <li key={p.id}>
+            <Reveal delay={(i % 2) * 70 + Math.floor(i / 2) * 60} className="h-full">
+              <Out
                 href={p.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card group flex h-full flex-col p-5 transition duration-300 hover:-translate-y-0.5 hover:border-accent/40"
+                className="card group flex h-full flex-col border-0 p-6 sm:p-7"
+                aria-label={`${p.name} — ${num(p.stars)} ${t.projects.stars}`}
               >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-center gap-2">
-                    <span className="kbd keep-mono text-faint">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="text-lg font-semibold" dir="ltr">
-                      {p.name}
-                    </h3>
-                  </div>
-                  <span className="flex items-center gap-2">
-                    <span
-                      className={`kbd keep-mono ${
-                        p.kind === "work" ? "text-accent2" : "text-faint"
-                      }`}
-                    >
-                      {p.kind === "work" ? t("projects.work") : "OSS"}
-                    </span>
-                    <Icon
-                      name="arrow-up-right"
-                      size={16}
-                      className="text-faint transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent rtl:group-hover:-translate-x-0.5"
-                    />
+                <div className="flex items-start justify-between gap-4">
+                  <h3 className="font-mono text-[0.95rem] font-medium tracking-tight text-ink transition-colors duration-300 group-hover:text-accent">
+                    {p.name}
+                  </h3>
+                  <span className="label flex shrink-0 items-center gap-1.5 tracking-normal">
+                    <Star width={13} height={13} className="text-accent-bright" />
+                    {num(p.stars)}
                   </span>
                 </div>
 
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-dim">
-                  {t(`projects.items.${p.id}`)}
-                </p>
+                <p className="mt-4 flex-1 text-[0.9rem] leading-relaxed">{t.projects.items[p.id]}</p>
 
-                <div className="mt-4 flex flex-wrap gap-1.5" dir="ltr">
+                <ul className="mt-5 flex flex-wrap gap-x-2.5 gap-y-1">
                   {p.tech.map((tech) => (
-                    <Chip key={tech}>{tech}</Chip>
+                    <li key={tech} className="font-mono text-[0.7rem] text-muted">
+                      {tech}
+                    </li>
                   ))}
-                </div>
-              </a>
+                </ul>
+              </Out>
             </Reveal>
-          ))}
-        </div>
+          </li>
+        ))}
+      </ul>
 
-        <div className="mt-7">
-          <ArrowLink href={PROFILE.github} label={t("projects.more")} />
-        </div>
-      </div>
-    </section>
+      <Reveal delay={120}>
+        <Out
+          href={PROFILE.github}
+          className="ul mt-10 inline-flex items-center gap-1.5 text-[0.95rem] font-medium text-accent"
+        >
+          {fmt(t.projects.more, { count: num(STATS.repos) })}
+          <ArrowOut width={14} height={14} />
+        </Out>
+      </Reveal>
+    </Section>
   );
 }

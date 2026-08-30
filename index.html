@@ -1,44 +1,55 @@
 <!doctype html>
-<html lang="en" data-theme="dark" dir="ltr">
+<html lang="en" dir="ltr" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="author" content="Mohamad Liyaghi" />
-    <meta name="theme-color" content="#16161e" />
+    <meta name="theme-color" content="#F7F4EE" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href="https://mohamad-liyaghi.ir/en/" />
 
     <title>Mohamad Liyaghi — Software Engineer · AI</title>
     <meta
       name="description"
-      content="Mohamad Liyaghi — Software Engineer · AI at ZebracatAi. Full-stack & AI engineer building backend systems, image agents, RAG pipelines and video generation at scale with Python, TypeScript, Go and React."
+      content="Mohamad Liyaghi — Software Engineer · AI at Zebracat, working from Tehran. Job pipelines, LLM features and programmatic video in Python, TypeScript and Go."
     />
-    <meta name="keywords" content="Mohamad Liyaghi, Software Engineer, AI Engineer, Full-Stack, Python, Django, FastAPI, TypeScript, React, Go, LLM, RAG, Agents, ZebracatAi" />
 
-    <meta property="og:title" content="Mohamad Liyaghi — Software Engineer · AI" />
-    <meta property="og:description" content="Full-stack & AI engineer at ZebracatAi. Backend systems, LLM agents, RAG pipelines and video generation at scale." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://mohamad-liyaghi.ir" />
-    <meta property="og:image" content="https://mohamad-liyaghi.ir/og-cover.png" />
-    <meta property="og:image:width" content="2400" />
-    <meta property="og:image:height" content="1260" />
-    <meta property="og:image:alt" content="Mohamad Liyaghi — Software Engineer · AI" />
+    <meta property="og:type" content="profile" />
     <meta property="og:site_name" content="Mohamad Liyaghi" />
+    <meta property="og:url" content="https://mohamad-liyaghi.ir/en/" />
+    <meta property="og:title" content="Mohamad Liyaghi — Software Engineer · AI" />
+    <meta
+      property="og:description"
+      content="I build the systems that turn a prompt into a finished video — the job pipelines underneath, the model steps in between, and the interface on top."
+    />
+    <meta property="og:image" content="https://mohamad-liyaghi.ir/og-cover.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Mohamad Liyaghi — Software Engineer · AI" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="fa_IR" />
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Mohamad Liyaghi — Software Engineer · AI" />
-    <meta name="twitter:description" content="Full-stack & AI engineer at ZebracatAi. Backend, LLM agents, RAG and video generation at scale." />
+    <meta
+      name="twitter:description"
+      content="Software Engineer · AI at Zebracat. Job pipelines, LLM features and programmatic video."
+    />
     <meta name="twitter:image" content="https://mohamad-liyaghi.ir/og-cover.png" />
+
+    <link rel="alternate" hreflang="en" href="https://mohamad-liyaghi.ir/en/" />
+    <link rel="alternate" hreflang="fa" href="https://mohamad-liyaghi.ir/fa/" />
+    <link rel="alternate" hreflang="x-default" href="https://mohamad-liyaghi.ir/en/" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700&display=swap"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Vazirmatn:wght@400;500;700&display=swap"
     />
 
-    <!-- Restore deep-link path after the 404.html SPA redirect (GitHub Pages) -->
+    <!-- Restore the deep-linked path after the GitHub Pages 404 bounce. -->
     <script>
       (function () {
         var r = sessionStorage.redirect;
@@ -47,50 +58,40 @@
       })();
     </script>
 
-    <!-- Set theme + language before paint to avoid a flash -->
+    <!-- Settle theme and language before first paint, so neither one flashes. -->
     <script>
       (function () {
+        var d = document.documentElement;
         try {
-          var t = localStorage.getItem("theme") || "dark";
-          document.documentElement.setAttribute("data-theme", t);
-          var tc = document.querySelector('meta[name="theme-color"]');
-          if (tc) tc.setAttribute("content", t === "light" ? "#e1e2e7" : "#16161e");
-          var l = localStorage.getItem("lang");
-          if (!l) {
-            var path = location.pathname.replace(/\/+$/, "").split("/").pop();
-            l = path === "fa" || path === "en" ? path : (navigator.language || "en").slice(0, 2);
-          }
+          var t = localStorage.getItem("theme") === "dark" ? "dark" : "light";
+          d.setAttribute("data-theme", t);
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute("content", t === "dark" ? "#12110D" : "#F7F4EE");
+
+          var seg = location.pathname.replace(/^\/+|\/+$/g, "").split("/")[0];
+          var l =
+            seg === "fa" || seg === "en"
+              ? seg
+              : localStorage.getItem("lang") ||
+                ((navigator.language || "en").toLowerCase().indexOf("fa") === 0 ? "fa" : "en");
           l = l === "fa" ? "fa" : "en";
-          document.documentElement.setAttribute("lang", l);
-          document.documentElement.setAttribute("dir", l === "fa" ? "rtl" : "ltr");
+          d.setAttribute("lang", l);
+          d.setAttribute("dir", l === "fa" ? "rtl" : "ltr");
         } catch (e) {}
       })();
     </script>
 
-    <link
-      rel="alternate"
-      hreflang="en"
-      href="https://mohamad-liyaghi.ir/en"
-    />
-    <link
-      rel="alternate"
-      hreflang="fa"
-      href="https://mohamad-liyaghi.ir/fa"
-    />
-    <link rel="alternate" hreflang="x-default" href="https://mohamad-liyaghi.ir/en" />
-
-    <!-- Structured data: who this is, for search engines -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Mohamad Liyaghi",
-        "url": "https://mohamad-liyaghi.ir/en",
-        "image": "https://mohamad-liyaghi.ir/me.jpg",
+        "alternateName": "محمد لیاقی",
+        "url": "https://mohamad-liyaghi.ir/en/",
         "jobTitle": "Software Engineer · AI",
         "worksFor": {
           "@type": "Organization",
-          "name": "ZebracatAi",
+          "name": "Zebracat",
           "url": "https://www.zebracat.ai"
         },
         "address": {
@@ -99,11 +100,13 @@
           "addressCountry": "IR"
         },
         "email": "liaghimohamad69@gmail.com",
+        "knowsLanguage": ["fa", "en"],
         "knowsAbout": [
-          "Backend Engineering",
-          "Distributed Systems",
-          "LLM Applications",
-          "Retrieval-Augmented Generation",
+          "Software Engineering",
+          "Backend Development",
+          "Asynchronous Job Pipelines",
+          "Large Language Model Applications",
+          "Programmatic Video",
           "Python",
           "TypeScript",
           "Go"
@@ -119,6 +122,14 @@
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <p style="padding: 2rem; font-family: system-ui">
+        Mohamad Liyaghi — Software Engineer · AI at Zebracat, in Tehran. This site needs JavaScript;
+        the résumé is available at
+        <a href="/cv.html">/cv.html</a> and my GitHub at
+        <a href="https://github.com/mohamad-liyaghi">github.com/mohamad-liyaghi</a>.
+      </p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

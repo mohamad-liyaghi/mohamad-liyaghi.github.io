@@ -1,94 +1,71 @@
-import { useTranslation } from "react-i18next";
-import { PROFILE, SOCIALS } from "../data/site";
-import { useCopy } from "../lib/hooks";
-import { Icon, type IconName } from "./Icons";
-import { Reveal, SectionHeader } from "./ui";
+import type { ComponentType, SVGProps } from "react";
+import { PROFILE, SECTIONS, SOCIALS, type SocialId } from "../data/profile";
+import { useI18n } from "../i18n";
+import { ArrowOut, GitHub, LinkedIn, Mail, Medium, Telegram } from "./Icons";
+import { Out, Reveal, Section, SectionHead } from "./primitives";
 
-const SOCIAL_ICON: Record<string, IconName> = {
-  github: "github",
-  linkedin: "linkedin",
-  medium: "medium",
-  telegram: "telegram",
-  email: "mail",
+const N = SECTIONS.find((s) => s.id === "contact")!.n;
+
+const MARKS: Record<SocialId, ComponentType<SVGProps<SVGSVGElement>>> = {
+  email: Mail,
+  github: GitHub,
+  linkedin: LinkedIn,
+  medium: Medium,
+  telegram: Telegram,
 };
 
 export function Contact() {
-  const { t } = useTranslation();
-  const [copied, copy] = useCopy();
-  const socials = SOCIALS.filter((s) => s.id !== "email");
+  const { t } = useI18n();
+  const elsewhere = SOCIALS.filter((s) => s.id !== "email");
 
   return (
-    <section
-      id="contact"
-      aria-labelledby="contact-title"
-      className="py-20 sm:py-28"
-    >
-      <div className="wrap">
-        <SectionHeader
-          index={t("contact.index")}
-          label={t("contact.label")}
-          title={t("contact.title")}
-          intro={t("contact.intro")}
-          titleId="contact-title"
-        />
+    <Section id="contact">
+      <SectionHead id="contact" n={N} title={t.contact.title} lede={t.contact.lede} />
 
+      <Reveal>
+        <a
+          href={`mailto:${PROFILE.email}`}
+          className="ul inline-block font-display text-[clamp(1.5rem,5.5vw,3rem)] leading-tight text-ink transition-colors duration-300 hover:text-accent"
+          dir="ltr"
+        >
+          {PROFILE.email}
+        </a>
+      </Reveal>
+
+      <div className="mt-16">
         <Reveal>
-          <div className="card p-6 sm:p-8">
-            <p className="keep-mono text-xs text-accent2" dir="ltr">
-              $ echo $EMAIL
-            </p>
-            <div className="mt-3 flex min-w-0 flex-wrap items-center gap-4">
-              <a
-                href={`mailto:${PROFILE.email}`}
-                className="ulink min-w-0 break-all text-xl font-semibold sm:text-2xl"
-                dir="ltr"
-              >
-                {PROFILE.email}
-              </a>
-              <button
-                onClick={() => copy(PROFILE.email)}
-                className="inline-flex min-h-10 items-center gap-1.5 rounded-md border border-line px-2.5 py-1.5 keep-mono text-xs text-dim transition-colors hover:border-accent/50 hover:text-text"
-              >
-                <Icon name={copied ? "check" : "copy"} size={14} />
-                {copied ? t("contact.copied") : t("contact.copy")}
-              </button>
-              <span className="sr-only" role="status" aria-live="polite">
-                {copied ? t("contact.copied") : ""}
-              </span>
-            </div>
+          <p className="label">{t.contact.elsewhere}</p>
+        </Reveal>
 
-            <p className="mt-7 kbd keep-mono text-faint" dir="auto">
-              // {t("contact.or")}
-            </p>
-            <div className="mt-3 grid gap-2 xs:grid-cols-2">
-              {socials.map((s) => (
-                <a
-                  key={s.id}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-3 rounded-lg border border-line p-3 transition-colors hover:border-accent/50 hover:bg-bg-elev/40"
-                >
-                  <span className="text-dim transition-colors group-hover:text-accent">
-                    <Icon name={SOCIAL_ICON[s.id]} size={18} />
-                  </span>
-                  <span className="flex flex-col leading-tight">
-                    <span className="text-sm">{s.label}</span>
-                    <span className="keep-mono text-xs text-faint" dir="ltr">
+        <ul className="mt-5 grid border-t border-hairline sm:grid-cols-2">
+          {elsewhere.map((s, i) => {
+            const Mark = MARKS[s.id];
+            return (
+              <li key={s.id} className="border-b border-hairline">
+                <Reveal delay={i * 60}>
+                  <Out
+                    href={s.href}
+                    className="group flex items-center gap-4 py-4 pe-2 transition-colors duration-300 hover:text-accent"
+                  >
+                    <Mark className="shrink-0 text-muted transition-colors duration-300 group-hover:text-accent" />
+                    <span className="w-20 shrink-0 text-[0.95rem] font-medium text-ink transition-colors duration-300 group-hover:text-accent">
+                      {t.contact.socials[s.id]}
+                    </span>
+                    <span className="flex-1 truncate font-mono text-[0.8rem] text-muted" dir="ltr">
                       {s.handle}
                     </span>
-                  </span>
-                  <Icon
-                    name="arrow-up-right"
-                    size={15}
-                    className="ms-auto text-faint transition-colors group-hover:text-accent"
-                  />
-                </a>
-              ))}
-            </div>
-          </div>
-        </Reveal>
+                    <ArrowOut
+                      width={14}
+                      height={14}
+                      className="shrink-0 text-rule transition-colors duration-300 group-hover:text-accent"
+                    />
+                  </Out>
+                </Reveal>
+              </li>
+            );
+          })}
+        </ul>
       </div>
-    </section>
+    </Section>
   );
 }

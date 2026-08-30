@@ -1,96 +1,31 @@
-import { useTranslation } from "react-i18next";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { BUILD, PROFILE, SECTIONS, SOCIALS } from "../data/site";
-import { scrollToId } from "../lib/hooks";
-import { ExternalLink } from "./ui";
+import { BUILD, PROFILE } from "../data/profile";
+import { useI18n } from "../i18n";
+import { ArrowUp } from "./Icons";
+import { Container, Out } from "./primitives";
 
 export function Footer() {
-  const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const lng = i18n.language === "fa" ? "fa" : "en";
-  const onHome = location.pathname.replace(/\/+$/, "") === `/${lng}`;
-
-  const go = (id: string) =>
-    onHome ? scrollToId(id) : navigate(`/${lng}#${id}`);
+  const { t, fmt } = useI18n();
 
   return (
-    <footer className="mt-16 border-t border-line">
-      <div className="wrap py-12">
-        <div className="grid gap-8 sm:grid-cols-3">
-          <div>
-            <p className="kbd keep-mono mb-3.5 text-faint" dir="auto">
-              // {t("footer.index")}
-            </p>
-            <ul className="space-y-2">
-              {SECTIONS.map((s) => (
-                <li key={s.id}>
-                  <button
-                    onClick={() => go(s.id)}
-                    className="text-sm text-dim transition-colors hover:text-text"
-                  >
-                    {t(`nav.${s.key}`)}
-                  </button>
-                </li>
-              ))}
-              <li>
-                <Link
-                  to={`/${lng}/blog`}
-                  className="text-sm text-dim transition-colors hover:text-text"
-                >
-                  {t("nav.blog")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to={`/${lng}/uses`}
-                  className="text-sm text-dim transition-colors hover:text-text"
-                >
-                  {t("nav.uses")}
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="kbd keep-mono mb-3.5 text-faint" dir="auto">
-              // {t("footer.elsewhere")}
-            </p>
-            <ul className="space-y-2">
-              {SOCIALS.map((s) => (
-                <li key={s.id}>
-                  <ExternalLink href={s.href} className="ulink text-sm">
-                    {s.label}
-                  </ExternalLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <p className="kbd keep-mono mb-3.5 text-faint" dir="auto">
-              // {t("footer.colophon")}
-            </p>
-            <p className="text-sm leading-relaxed text-dim">
-              {t("footer.colophonText")}
-            </p>
-            <div className="mt-3">
-              <ExternalLink href={PROFILE.repo} className="ulink keep-mono text-xs">
-                {t("footer.source")} ↗
-              </ExternalLink>
-            </div>
-          </div>
+    <footer className="border-t border-hairline py-10">
+      <Container className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+        <div className="flex flex-col gap-1">
+          <p className="text-[0.85rem] text-ink">{fmt(t.footer.rights, { year: BUILD.year })}</p>
+          <p className="label">{t.footer.built}</p>
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-6 keep-mono text-xs text-faint">
-          <span dir="auto">
-            © {BUILD.year} {t("hero.name")} · {t("footer.rights")}
+        <div className="flex items-center gap-5">
+          <Out href={PROFILE.repo} className="ul text-[0.85rem] text-muted hover:text-ink">
+            {t.footer.source}
+          </Out>
+          <span className="font-mono text-[0.7rem] text-rule" aria-hidden>
+            {BUILD.sha}
           </span>
-          <span dir="auto">
-            {t("footer.build")} <span dir="ltr">{BUILD.sha}</span>
-          </span>
+          <a href="#top" aria-label={t.a11y.top} className="icon-btn">
+            <ArrowUp />
+          </a>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }

@@ -1,0 +1,367 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   Editorial ink & amber.
+
+   One warm paper ground, one deep ink, one amber. The amber comes in two
+   strengths: `accent` is dark enough to sit on paper as text (4.6:1), while
+   `accent-bright` is the decorative one used for rules, marks and the drawn
+   flourish, where contrast rules don't apply.
+   ========================================================================= */
+
+:root {
+  --c-paper: #f7f4ee;
+  --c-surface: #fffcf6;
+  --c-sunk: #f1ede4;
+  --c-ink: #16150f;
+  --c-body: #46433a;
+  --c-muted: #7c7869;
+  --c-rule: #e3ddd0;
+  --c-hairline: #ede8dd;
+  --c-accent: #a85a28;
+  --c-accent-bright: #c2703b;
+  --c-accent-wash: rgb(168 90 40 / 0.09);
+  --grain: 0.038;
+  --grain-blend: multiply;
+
+  --ease: cubic-bezier(0.22, 0.68, 0.24, 1);
+  --dur: 620ms;
+
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --c-paper: #12110d;
+  --c-surface: #1a1913;
+  --c-sunk: #0d0c09;
+  --c-ink: #f4f0e6;
+  --c-body: #c6c1b2;
+  --c-muted: #8b8677;
+  --c-rule: #2c2a22;
+  --c-hairline: #211f19;
+  --c-accent: #e5a05f;
+  --c-accent-bright: #eeae6f;
+  --c-accent-wash: rgb(229 160 95 / 0.12);
+  --grain: 0.05;
+  --grain-blend: screen;
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-paper: var(--c-paper);
+  --color-surface: var(--c-surface);
+  --color-sunk: var(--c-sunk);
+  --color-ink: var(--c-ink);
+  --color-body: var(--c-body);
+  --color-muted: var(--c-muted);
+  --color-rule: var(--c-rule);
+  --color-hairline: var(--c-hairline);
+  --color-accent: var(--c-accent);
+  --color-accent-bright: var(--c-accent-bright);
+  --color-accent-wash: var(--c-accent-wash);
+
+  --font-display: "Instrument Serif", "Vazirmatn", Georgia, "Times New Roman", serif;
+  --font-sans: "Archivo", "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Vazirmatn", ui-monospace, "SFMono-Regular", monospace;
+}
+
+/* Persian has no Instrument Serif, so the display face becomes Vazirmatn —
+   set a little heavier so it still reads as display type. */
+[lang="fa"] {
+  --font-display: "Vazirmatn", Georgia, serif;
+  --font-sans: "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  * {
+    min-width: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--c-paper);
+    color: var(--c-body);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    transition:
+      background-color 320ms var(--ease),
+      color 320ms var(--ease);
+  }
+
+  /* Paper texture. Fixed, cheap, and the only decoration on the page that
+     never moves. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: var(--grain);
+    mix-blend-mode: var(--grain-blend);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: var(--c-ink);
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.04;
+    letter-spacing: -0.015em;
+  }
+
+  [lang="fa"] h1,
+  [lang="fa"] h2,
+  [lang="fa"] h3 {
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.35;
+  }
+
+  [lang="fa"] body {
+    line-height: 1.95;
+  }
+
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
+
+  ::selection {
+    background: var(--c-accent-wash);
+    color: var(--c-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@layer components {
+  /* --- motion primitives ------------------------------------------------- */
+
+  /* Everything that enters the page does it the same way. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity var(--dur) var(--ease),
+      transform var(--dur) var(--ease);
+    transition-delay: var(--delay, 0ms);
+  }
+  .reveal[data-in] {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* The signature: display lines are printed onto the page rather than faded
+     in — each line uncovered from the reading edge, so it runs right-to-left
+     in Persian without any extra code. */
+  .wipe > span {
+    display: block;
+    clip-path: inset(0 100% 0 0);
+    transform: translateY(0.12em);
+    transition:
+      clip-path 860ms var(--ease),
+      transform 860ms var(--ease);
+    transition-delay: var(--delay, 0ms);
+  }
+  .wipe[data-in] > span {
+    clip-path: inset(0 -3% 0 0);
+    transform: none;
+  }
+  [dir="rtl"] .wipe > span {
+    clip-path: inset(0 0 0 100%);
+  }
+  [dir="rtl"] .wipe[data-in] > span {
+    clip-path: inset(0 -3% 0 -3%);
+  }
+
+  /* Hairlines draw themselves from the reading edge. */
+  .rule {
+    height: 1px;
+    background: var(--c-rule);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 900ms var(--ease);
+    transition-delay: var(--delay, 0ms);
+  }
+  .rule[data-in] {
+    transform: scaleX(1);
+  }
+  [dir="rtl"] .rule {
+    transform-origin: right center;
+  }
+
+  /* The hand-drawn amber stroke under the name, inked in once. */
+  .flourish path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 1200ms var(--ease) 620ms;
+  }
+  .flourish[data-in] path {
+    stroke-dashoffset: 0;
+  }
+
+  /* --- text and links ---------------------------------------------------- */
+
+  .ul {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    background-position: 0 calc(100% - 1px);
+    transition: background-size 400ms var(--ease);
+  }
+  [dir="rtl"] .ul {
+    background-position: 100% calc(100% - 1px);
+  }
+  .ul:hover,
+  .ul:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+  }
+  [lang="fa"] .label {
+    letter-spacing: 0;
+    font-size: 0.75rem;
+  }
+
+  /* --- surfaces ---------------------------------------------------------- */
+
+  .card {
+    position: relative;
+    background: var(--c-surface);
+    border: 1px solid var(--c-hairline);
+    transition:
+      border-color 380ms var(--ease),
+      transform 380ms var(--ease),
+      background-color 320ms var(--ease);
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    inset-inline: -1px;
+    top: -1px;
+    height: 2px;
+    background: var(--c-accent-bright);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 460ms var(--ease);
+  }
+  [dir="rtl"] .card::before {
+    transform-origin: right center;
+  }
+  .card:hover,
+  .card:focus-within {
+    border-color: var(--c-rule);
+    transform: translateY(-3px);
+  }
+  .card:hover::before,
+  .card:focus-within::before {
+    transform: scaleX(1);
+  }
+
+  /* --- buttons ----------------------------------------------------------- */
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.35rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1;
+    border: 1px solid transparent;
+    transition:
+      background-color 300ms var(--ease),
+      border-color 300ms var(--ease),
+      color 300ms var(--ease),
+      transform 300ms var(--ease);
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn-primary {
+    background: var(--c-ink);
+    color: var(--c-paper);
+  }
+  .btn-primary:hover {
+    background: var(--c-accent);
+  }
+  .btn-ghost {
+    border-color: var(--c-rule);
+    color: var(--c-ink);
+  }
+  .btn-ghost:hover {
+    border-color: var(--c-accent);
+    color: var(--c-accent);
+  }
+
+  .icon-btn {
+    display: inline-grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    color: var(--c-muted);
+    border: 1px solid transparent;
+    transition:
+      color 260ms var(--ease),
+      border-color 260ms var(--ease),
+      background-color 260ms var(--ease);
+  }
+  .icon-btn:hover {
+    color: var(--c-ink);
+    border-color: var(--c-rule);
+    background: var(--c-surface);
+  }
+}
+
+/* Honour the OS setting: show everything, move nothing. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .wipe > span {
+    clip-path: none;
+    transform: none;
+  }
+  .rule {
+    transform: scaleX(1);
+  }
+  .flourish path {
+    stroke-dashoffset: 0;
+  }
+}

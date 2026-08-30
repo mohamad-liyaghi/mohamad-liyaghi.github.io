@@ -1,171 +1,145 @@
-import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { SECTIONS } from "../data/site";
-import { scrollToId, useScrollSpy } from "../lib/hooks";
-import { Icon } from "./Icons";
-import { LangToggle, ThemeToggle } from "./controls";
-
-const IDS = SECTIONS.map((s) => s.id);
-const PAGES = ["blog", "uses"] as const;
+import { SECTIONS } from "../data/profile";
+import { useI18n } from "../i18n";
+import { useActiveSection, useScrolledPast, useTheme } from "../lib/hooks";
+import { Close, Menu, Monogram, Moon, Sun } from "./Icons";
 
 export function Nav() {
-  const { t, i18n } = useTranslation();
-  const active = useScrollSpy(IDS);
-  const navigate = useNavigate();
-  const location = useLocation();
+  const { t, lang, toggleLang } = useI18n();
+  const [theme, toggleTheme] = useTheme();
+  const active = useActiveSection();
+  const scrolled = useScrolledPast(16);
   const [open, setOpen] = useState(false);
 
-  const lng = i18n.language === "fa" ? "fa" : "en";
-  const onHome = location.pathname.replace(/\/+$/, "") === `/${lng}`;
-
-  const go = (id: string) => {
-    setOpen(false);
-    if (onHome) scrollToId(id);
-    else navigate(`/${lng}#${id}`);
-  };
-
-  const home = () => {
-    setOpen(false);
-    if (onHome) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      history.replaceState(null, "", location.pathname);
-    } else {
-      navigate(`/${lng}`);
-    }
-  };
-
-  // Close the mobile menu on Escape while it's open.
+  // A locked body keeps the drawer from scrolling the page behind it.
   useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  // Close the mobile menu whenever the route changes.
   useEffect(() => {
-    setOpen(false);
-  }, [location.pathname]);
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  const themeLabel = t.a11y.theme.replace("{mode}", theme === "dark" ? t.a11y.light : t.a11y.dark);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
-      <div className="border-b border-line bg-bg/72 backdrop-blur-xl">
-        <nav className="wrap flex h-16 items-center justify-between gap-4">
-          {/* left: prompt glyph + path → home */}
-          <button
-            onClick={home}
-            aria-label={t("nav.home")}
-            className="group flex items-center gap-2"
-          >
-            <Icon name="terminal" size={16} className="text-accent" />
-            <span
-              className="keep-mono text-sm text-dim transition-colors group-hover:text-text"
-              dir="ltr"
-            >
-              ~/mohamad-liyaghi
-            </span>
-          </button>
+    <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:start-4 focus:z-[70] focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
+      >
+        {t.a11y.skip}
+      </a>
 
-          {/* center: numbered sections + pages (desktop) */}
-          <ul className="hidden items-center gap-0.5 lg:flex">
-            {SECTIONS.map((s) => {
-              const on = onHome && active === s.id;
-              return (
-                <li key={s.id}>
-                  <button
-                    onClick={() => go(s.id)}
-                    className={`flex items-baseline gap-1.5 rounded-md px-2.5 py-1.5 text-sm transition-colors ${
-                      on ? "text-text" : "text-dim hover:text-text"
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ${
+          scrolled
+            ? "border-b border-hairline bg-paper/85 backdrop-blur-md"
+            : "border-b border-transparent"
+        }`}
+      >
+        <nav
+          aria-label={t.nav.about}
+          className="mx-auto flex h-16 w-full max-w-5xl items-center justify-between gap-4 px-6 sm:px-8 lg:px-10"
+        >
+          <a
+            href="#top"
+            className="flex items-center gap-2.5 text-ink transition-colors duration-300 hover:text-accent"
+          >
+            <Monogram className="h-7 w-7" />
+            <span className="sr-only">{t.meta.title}</span>
+          </a>
+
+          <ul className="hidden items-center gap-1 md:flex">
+            {SECTIONS.map(({ id }) => (
+              <li key={id}>
+                <a
+                  href={`#${id}`}
+                  aria-current={active === id ? "true" : undefined}
+                  className={`relative px-3 py-2 text-sm transition-colors duration-300 hover:text-ink ${
+                    active === id ? "text-ink" : "text-muted"
+                  }`}
+                >
+                  {t.nav[id]}
+                  <span
+                    aria-hidden
+                    className={`absolute inset-x-3 bottom-1 h-px origin-center bg-accent-bright transition-transform duration-300 ${
+                      active === id ? "scale-x-100" : "scale-x-0"
                     }`}
-                  >
-                    <span
-                      className={`kbd keep-mono ${on ? "text-accent" : "text-faint"}`}
-                    >
-                      {s.n}
-                    </span>
-                    <span>{t(`nav.${s.key}`)}</span>
-                  </button>
-                </li>
-              );
-            })}
-            <li aria-hidden="true" className="mx-1 h-4 w-px bg-line" />
-            {PAGES.map((p) => {
-              const onPage = location.pathname.endsWith(`/${p}`);
-              return (
-                <li key={p}>
-                  <Link
-                    to={`/${lng}/${p}`}
-                    onClick={() => setOpen(false)}
-                    className={`rounded-md px-2.5 py-1.5 text-sm transition-colors ${
-                      onPage ? "text-accent" : "text-dim hover:text-text"
-                    }`}
-                  >
-                    {t(`nav.${p}`)}
-                  </Link>
-                </li>
-              );
-            })}
+                  />
+                </a>
+              </li>
+            ))}
           </ul>
 
-          {/* right: controls */}
-          <div className="flex items-center gap-2">
-            <LangToggle />
-            <ThemeToggle />
+          <div className="flex items-center gap-1">
             <button
-              onClick={() => setOpen((v) => !v)}
-              aria-label={t("a11y.menu")}
-              aria-expanded={open}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-line text-dim lg:hidden"
+              type="button"
+              onClick={toggleLang}
+              aria-label={t.a11y.lang}
+              className="icon-btn w-auto px-2.5 font-mono text-xs font-medium tracking-widest uppercase"
             >
-              <Icon name={open ? "close" : "menu"} size={18} />
+              {lang === "en" ? "فا" : "EN"}
+            </button>
+            <button
+              type="button"
+              onClick={toggleTheme}
+              aria-label={themeLabel}
+              className="icon-btn"
+            >
+              {theme === "dark" ? <Sun /> : <Moon />}
+            </button>
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-label={t.a11y.menu}
+              aria-expanded={open}
+              className="icon-btn md:hidden"
+            >
+              <Menu />
             </button>
           </div>
         </nav>
-      </div>
+      </header>
 
-      {/* mobile menu */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-            className="border-b border-line bg-bg/95 backdrop-blur-xl lg:hidden"
+      {/* Mobile drawer */}
+      <div
+        hidden={!open}
+        className="fixed inset-0 z-[60] bg-paper md:hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-label={t.a11y.menu}
+      >
+        <div className="flex h-16 items-center justify-end px-6 sm:px-8">
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label={t.a11y.close}
+            className="icon-btn"
           >
-            <ul className="wrap grid gap-1 py-3">
-              {SECTIONS.map((s) => (
-                <li key={s.id}>
-                  <button
-                    onClick={() => go(s.id)}
-                    className="flex w-full items-center gap-3 rounded-md px-2 py-2.5 text-start text-base text-dim transition-colors hover:bg-bg-elev hover:text-text"
-                  >
-                    <span className="kbd keep-mono text-accent">{s.n}</span>
-                    <span>{t(`nav.${s.key}`)}</span>
-                  </button>
-                </li>
-              ))}
-              <li aria-hidden="true" className="my-1 h-px bg-line" />
-              {PAGES.map((p) => (
-                <li key={p}>
-                  <Link
-                    to={`/${lng}/${p}`}
-                    onClick={() => setOpen(false)}
-                    className="flex w-full items-center gap-3 rounded-md px-2 py-2.5 text-start text-base text-dim transition-colors hover:bg-bg-elev hover:text-text"
-                  >
-                    <span className="kbd keep-mono text-accent">~/</span>
-                    <span>{t(`nav.${p}`)}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+            <Close />
+          </button>
+        </div>
+        <ul className="flex flex-col px-6 sm:px-8">
+          {SECTIONS.map(({ id, n }) => (
+            <li key={id} className="border-b border-hairline">
+              <a
+                href={`#${id}`}
+                onClick={() => setOpen(false)}
+                className="flex items-baseline gap-5 py-5 text-2xl text-ink"
+              >
+                <span className="label text-accent">{n}</span>
+                {t.nav[id]}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }

@@ -1,111 +1,40 @@
-import type { ReactNode } from "react";
-import { useTranslation } from "react-i18next";
-import { PROFILE } from "../data/site";
-import { Reveal, SectionHeader } from "./ui";
+import { SECTIONS } from "../data/profile";
+import { useI18n } from "../i18n";
+import { Reveal, Section, SectionHead } from "./primitives";
 
-const FACT_KEYS = ["based", "role", "company", "focus", "langs"] as const;
-const COMPANY = "ZebracatAi";
-
-function CompanyLink({ children }: { children: ReactNode }) {
-  return (
-    <a
-      href={PROFILE.companyUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="ulink text-accent"
-    >
-      {children}
-    </a>
-  );
-}
-
-/* Turn the bare "ZebracatAi" mentions in the prose into links. */
-function linkifyCompany(text: string): ReactNode {
-  const segments = text.split(COMPANY);
-  if (segments.length === 1) return text;
-  return segments.map((seg, i) => (
-    <span key={i}>
-      {i > 0 ? <CompanyLink>{COMPANY}</CompanyLink> : null}
-      {seg}
-    </span>
-  ));
-}
+const N = SECTIONS.find((s) => s.id === "about")!.n;
+const FACT_KEYS = ["based", "role", "company", "languages"] as const;
 
 export function About() {
-  const { t } = useTranslation();
-  const paras = t("about.p", { returnObjects: true }) as string[];
+  const { t } = useI18n();
 
   return (
-    <section id="about" aria-labelledby="about-title" className="py-20 sm:py-28">
-      <div className="wrap">
-        <SectionHeader
-          index={t("about.index")}
-          label={t("about.label")}
-          title={t("about.title")}
-          titleId="about-title"
-        />
+    <Section id="about">
+      <SectionHead id="about" n={N} title={t.about.title} />
 
-        <div className="grid gap-10 md:grid-cols-[1.5fr_1fr] md:gap-12">
-          <Reveal className="space-y-5">
-            <p className="keep-mono text-xs text-accent2" dir="ltr">
-              $ {t("about.cmd")}
-            </p>
-            {paras.map((p, i) => (
-              <p key={i} className="text-[1.02rem] leading-relaxed text-dim">
-                {linkifyCompany(p)}
-              </p>
-            ))}
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <div className="card overflow-hidden">
-              <div className="flex items-center gap-2 border-b border-line bg-bg-elev/50 px-4 py-2.5">
-                <span className="keep-mono text-xs text-accent" dir="ltr">
-                  ❯_
-                </span>
-                <span className="keep-mono text-xs text-faint" dir="ltr">
-                  mohamad@liyaghi: ~/about
-                </span>
-              </div>
-              <div className="p-5">
-                <div className="mb-5 flex items-center gap-4">
-                  <img
-                    src="/me.jpg"
-                    alt={t("hero.name")}
-                    loading="lazy"
-                    decoding="async"
-                    width={64}
-                    height={64}
-                    className="h-16 w-16 rounded-lg object-cover ring-1 ring-accent/25"
-                  />
-                  <div>
-                    <p className="font-semibold">{t("hero.name")}</p>
-                    <p className="keep-mono text-xs text-faint" dir="ltr">
-                      {t("hero.nameAlt") || "Software Engineer · AI"}
-                    </p>
-                  </div>
-                </div>
-                <dl className="space-y-2.5 keep-mono text-xs">
-                  {FACT_KEYS.map((k) => (
-                    <div key={k} className="flex gap-3">
-                      <dt className="w-20 shrink-0 text-faint">
-                        {t(`about.factLabels.${k}`)}
-                      </dt>
-                      <dd className="text-dim" dir="auto">
-                        {k === "company" ? (
-                          <CompanyLink>{t(`about.facts.${k}`)}</CompanyLink>
-                        ) : (
-                          t(`about.facts.${k}`)
-                        )}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-            </div>
-          </Reveal>
+      <div className="grid gap-12 lg:grid-cols-[1.55fr_1fr] lg:gap-16">
+        <div className="flex flex-col gap-6">
+          {t.about.paragraphs.map((p, i) => (
+            <Reveal key={p.slice(0, 24)} delay={i * 80}>
+              <p className="text-[1.02rem] leading-[1.75]">{p}</p>
+            </Reveal>
+          ))}
         </div>
+
+        <Reveal delay={160}>
+          <dl className="border-t border-rule">
+            {FACT_KEYS.map((key) => {
+              const fact = t.about.facts[key];
+              return (
+                <div key={key} className="border-b border-hairline py-4">
+                  <dt className="label">{fact.label}</dt>
+                  <dd className="mt-1.5 text-[0.95rem] text-ink">{fact.value}</dd>
+                </div>
+              );
+            })}
+          </dl>
+        </Reveal>
       </div>
-    </section>
+    </Section>
   );
 }

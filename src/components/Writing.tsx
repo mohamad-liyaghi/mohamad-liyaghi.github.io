@@ -1,77 +1,56 @@
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import { ARTICLES, PROFILE } from "../data/site";
-import { Icon } from "./Icons";
-import { ArrowLink, Reveal, SectionHeader } from "./ui";
+import { ARTICLES, PROFILE, SECTIONS } from "../data/profile";
+import { useI18n } from "../i18n";
+import { ArrowOut } from "./Icons";
+import { Out, Reveal, Section, SectionHead } from "./primitives";
+
+const N = SECTIONS.find((s) => s.id === "writing")!.n;
 
 export function Writing() {
-  const { t, i18n } = useTranslation();
-  const lng = i18n.language === "fa" ? "fa" : "en";
+  const { t, num, fmt, monthYear } = useI18n();
 
   return (
-    <section
-      id="writing"
-      aria-labelledby="writing-title"
-      className="py-20 sm:py-28"
-    >
-      <div className="wrap">
-        <SectionHeader
-          index={t("writing.index")}
-          label={t("writing.label")}
-          title={t("writing.title")}
-          intro={t("writing.intro")}
-          titleId="writing-title"
-        />
+    <Section id="writing">
+      <SectionHead id="writing" n={N} title={t.writing.title} lede={t.writing.lede} />
 
-        <div className="grid gap-3">
-          {ARTICLES.map((a, i) => (
-            <Reveal key={a.n} delay={i * 0.05}>
-              <a
-                href={a.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card group flex items-start gap-4 p-5 transition duration-300 hover:-translate-y-0.5 hover:border-accent/40"
-              >
-                <span className="kbd keep-mono pt-0.5 text-accent">{a.n}</span>
-                <div className="flex-1">
-                  <h3
-                    className="font-medium leading-snug text-text transition-colors"
-                    dir="ltr"
-                  >
-                    {a.title}
+      <ul className="border-t border-hairline">
+        {ARTICLES.map((a, i) => (
+          <li key={a.id} className="border-b border-hairline">
+            <Reveal delay={i * 55}>
+              <Out href={a.href} className="group block py-6">
+                <div className="grid gap-2 sm:grid-cols-[10rem_1fr] sm:gap-8">
+                  <p className="label pt-1 whitespace-nowrap">
+                    {monthYear(a.date)}
+                    <span aria-hidden className="mx-2 text-rule">
+                      /
+                    </span>
+                    {fmt(t.writing.read, { minutes: num(a.minutes) })}
+                  </p>
+                  <h3 className="flex items-start gap-2 text-[1.15rem] leading-snug text-ink transition-colors duration-300 group-hover:text-accent sm:text-[1.35rem]">
+                    <span className="ul" dir="ltr">
+                      {t.writing.items[a.id as keyof typeof t.writing.items]}
+                    </span>
+                    <ArrowOut
+                      width={15}
+                      height={15}
+                      className="mt-1.5 shrink-0 text-muted transition-colors duration-300 group-hover:text-accent"
+                    />
                   </h3>
-                  <div
-                    className="mt-2 flex items-center gap-2.5 keep-mono text-xs text-faint"
-                    dir="ltr"
-                  >
-                    <span className="text-accent2">{a.tag}</span>
-                    <span>·</span>
-                    <span>{a.date}</span>
-                  </div>
                 </div>
-                <Icon
-                  name="arrow-up-right"
-                  size={17}
-                  className="shrink-0 text-faint transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent rtl:group-hover:-translate-x-0.5"
-                />
-              </a>
+              </Out>
             </Reveal>
-          ))}
-        </div>
+          </li>
+        ))}
+      </ul>
 
-        <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
-          <Link
-            to={`/${lng}/blog`}
-            className="group inline-flex items-center gap-1.5 keep-mono text-sm text-accent transition-colors hover:text-text"
-          >
-            {t("writing.open")}
-            <span className="transition-transform group-hover:translate-x-0.5 rtl:rotate-180">
-              →
-            </span>
-          </Link>
-          <ArrowLink href={PROFILE.medium} label={t("writing.all")} />
-        </div>
-      </div>
-    </section>
+      <Reveal delay={120}>
+        <Out
+          href={PROFILE.medium}
+          className="ul mt-10 inline-flex items-center gap-1.5 text-[0.95rem] font-medium text-accent"
+        >
+          {t.writing.more}
+          <ArrowOut width={14} height={14} />
+        </Out>
+      </Reveal>
+    </Section>
   );
 }

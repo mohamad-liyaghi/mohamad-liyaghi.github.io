@@ -1,327 +1,357 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Mohamad Liyaghi — Software Engineer · AI — Résumé</title>
-    <meta name="description" content="Résumé of Mohamad Liyaghi, Software Engineer · AI at ZebracatAi." />
+    <title>Mohamad Liyaghi — Résumé</title>
+    <meta
+      name="description"
+      content="Résumé of Mohamad Liyaghi — Software Engineer · AI at Zebracat. Job pipelines, LLM features and programmatic video in Python, TypeScript and Go."
+    />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="alternate" hreflang="fa" href="https://mohamad-liyaghi.ir/cv-fa.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
     <style>
-      @page {
-        size: A4;
-        margin: 13mm 15mm;
-      }
+      /* Kept deliberately in step with cv/cv-en.tex — the .tex is canonical. */
+      @page { size: A4; margin: 12mm 14mm; }
+
       :root {
-        --ink: #16181d;
-        --soft: #44474f;
-        --muted: #6b6f78;
-        --rule: #d7d9de;
-        --accent: #5b3df0;
+        --ink: #16150f;
+        --body: #46433a;
+        --muted: #7c7869;
+        --accent: #a85a28;
+        --hairline: #d9d2c4;
+        --paper: #f7f4ee;
       }
-      * {
-        box-sizing: border-box;
-      }
-      html,
+      * { box-sizing: border-box; margin: 0; padding: 0; }
       body {
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        font-family: "Helvetica Neue", Arial, "Segoe UI", sans-serif;
-        color: var(--ink);
-        font-size: 10.4pt;
-        line-height: 1.4;
-        background: #fff;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
+        background: var(--paper);
+        color: var(--body);
+        font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+        font-size: 10.2pt;
+        line-height: 1.5;
+        padding: 28px 16px 64px;
+        -webkit-font-smoothing: antialiased;
       }
       .sheet {
-        max-width: 820px;
+        max-width: 210mm;
         margin: 0 auto;
-        padding: 26px 30px 36px;
+        background: #fff;
+        padding: 16mm 15mm 14mm;
+        box-shadow: 0 24px 60px -32px rgb(0 0 0 / 0.35);
       }
-      a {
-        color: var(--ink);
-        text-decoration: none;
-      }
-      /* Header */
-      header {
-        border-bottom: 2px solid var(--ink);
-        padding-bottom: 12px;
-        margin-bottom: 14px;
-      }
+      a { color: inherit; text-decoration: none; }
+      a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
       h1 {
-        font-size: 23pt;
-        margin: 0;
-        letter-spacing: -0.2px;
-      }
-      .role {
-        font-size: 11pt;
-        font-weight: 600;
-        color: var(--accent);
-        margin: 3px 0 9px;
-        letter-spacing: 0.2px;
-      }
-      .contact {
-        font-size: 9pt;
-        color: var(--soft);
-        line-height: 1.7;
-      }
-      .contact span:not(:last-child)::after {
-        content: " · ";
-        color: var(--muted);
-      }
-      .contact a {
-        color: var(--soft);
-      }
-      /* Sections */
-      section {
-        margin-top: 14px;
-      }
-      h2 {
-        font-size: 9pt;
-        text-transform: uppercase;
-        letter-spacing: 1.4px;
-        color: var(--accent);
-        margin: 0 0 8px;
-        padding-bottom: 4px;
-        border-bottom: 1px solid var(--rule);
-      }
-      p {
-        margin: 0 0 6px;
-      }
-      .summary {
-        color: var(--soft);
-      }
-      /* Skills */
-      .skills {
-        display: grid;
-        grid-template-columns: 130px 1fr;
-        row-gap: 5px;
-        column-gap: 12px;
-        font-size: 9.6pt;
-      }
-      .skills dt {
-        font-weight: 700;
+        font-family: "Instrument Serif", Georgia, serif;
+        font-size: 30pt;
+        font-weight: 400;
+        line-height: 1;
         color: var(--ink);
+        letter-spacing: -0.01em;
       }
-      .skills dd {
-        margin: 0;
-        color: var(--soft);
+      .name-rule { width: 54px; height: 1.6px; background: var(--accent); margin: 7px 0 9px; }
+      .title { font-size: 12pt; font-weight: 600; color: var(--ink); }
+      .contact {
+        margin-top: 7px;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 7.9pt;
+        line-height: 1.75;
+        color: var(--muted);
+        word-spacing: 0.05em;
       }
-      /* Experience / Projects */
-      .entry {
-        margin-bottom: 11px;
-        break-inside: avoid;
-      }
-      .entry:last-child {
-        margin-bottom: 0;
-      }
-      .entry-head {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        gap: 12px;
-      }
-      .entry-title {
-        font-size: 11pt;
-        font-weight: 700;
-        margin: 0;
-      }
-      .entry-org {
-        font-weight: 600;
+      .contact span { white-space: nowrap; }
+      .sep { color: var(--hairline); margin: 0 6px; }
+
+      h2 {
+        margin-top: 15px;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 8pt;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
         color: var(--accent);
+        padding-bottom: 3px;
+        border-bottom: 1px solid var(--hairline);
       }
-      .entry-meta {
-        font-size: 8.8pt;
+      h2 + * { margin-top: 8px; }
+
+      .role-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+      h3 { font-size: 12pt; font-weight: 600; color: var(--ink); }
+      .dates {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 7.8pt;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
         color: var(--muted);
         white-space: nowrap;
       }
-      .entry-sub {
-        font-size: 9pt;
+      .org { margin-top: 2px; color: var(--muted); }
+      .org strong { color: var(--accent); font-weight: 600; }
+
+      ul.bullets { list-style: none; margin-top: 6px; }
+      ul.bullets li { position: relative; padding-left: 17px; margin-top: 4px; }
+      ul.bullets li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.72em;
+        width: 8px;
+        height: 1px;
+        background: var(--accent);
+      }
+      .tech {
+        margin-top: 6px;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 7.6pt;
         color: var(--muted);
-        margin: 1px 0 5px;
       }
-      ul {
-        margin: 5px 0 0;
-        padding-inline-start: 16px;
+      .role + .role { margin-top: 11px; }
+
+      .repo-meta {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 7.8pt;
+        color: var(--muted);
       }
-      li {
-        margin-bottom: 3px;
-        color: var(--soft);
+      .projects { list-style: none; margin-top: 7px; }
+      .projects li { margin-top: 4px; }
+      .projects b { color: var(--ink); font-weight: 600; }
+      .stars {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 7.6pt;
+        color: var(--muted);
       }
-      .proj {
-        margin-bottom: 7px;
-        break-inside: avoid;
+
+      dl.skills { display: grid; grid-template-columns: 108px 1fr; row-gap: 3.5px; column-gap: 12px; }
+      dl.skills dt {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 7.8pt;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding-top: 1.5px;
       }
-      .proj b {
+
+      .actions {
+        max-width: 210mm;
+        margin: 0 auto 14px;
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+      }
+      .actions a {
+        font-size: 9pt;
+        border: 1px solid var(--hairline);
+        background: #fff;
+        padding: 7px 13px;
         color: var(--ink);
       }
-      .proj .tech {
-        color: var(--muted);
-        font-size: 9pt;
-      }
-      .two {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4px 22px;
-      }
-      .writing li {
-        margin-bottom: 4px;
-      }
-      .writing .src {
-        color: var(--muted);
-        font-size: 8.8pt;
-      }
+      .actions a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
       @media print {
-        .sheet {
-          padding: 0;
-          max-width: none;
-        }
+        body { background: #fff; padding: 0; font-size: 9.4pt; line-height: 1.42; }
+        .sheet { max-width: none; padding: 0; box-shadow: none; }
+        .actions { display: none; }
+        a { color: inherit !important; text-decoration: none !important; }
+        h2 { margin-top: 11px; }
+      }
+      @media (max-width: 640px) {
+        .sheet { padding: 22px 18px 26px; }
+        .role-head { flex-direction: column; gap: 2px; }
+        dl.skills { grid-template-columns: 1fr; row-gap: 1px; }
+        dl.skills dd { margin-bottom: 6px; }
       }
     </style>
   </head>
   <body>
-    <div class="sheet">
+    <div class="actions">
+      <a href="/Mohamad_Liyaghi_CV.pdf" download>Download PDF</a>
+      <a href="/cv-fa.html">فارسی</a>
+      <a href="/">← Back to site</a>
+    </div>
+
+    <main class="sheet">
       <header>
         <h1>Mohamad Liyaghi</h1>
-        <div class="role">Software Engineer · AI</div>
-        <div class="contact">
-          <span>Tehran, Iran</span>
-          <span>+98 991 951 4231</span>
-          <span><a href="mailto:liaghimohamad69@gmail.com">liaghimohamad69@gmail.com</a></span>
-          <span><a href="https://mohamad-liyaghi.ir">mohamad-liyaghi.ir</a></span>
-          <span><a href="https://github.com/mohamad-liyaghi">github.com/mohamad-liyaghi</a></span>
-          <span><a href="https://www.linkedin.com/in/mohamad-liyaghi/">linkedin.com/in/mohamad-liyaghi</a></span>
-          <span><a href="https://medium.com/@el_mohamad">medium.com/@el_mohamad</a></span>
-        </div>
+        <div class="name-rule"></div>
+        <p class="title">Software Engineer · AI</p>
+        <p class="contact">
+          <span><a href="mailto:liaghimohamad69@gmail.com">liaghimohamad69@gmail.com</a></span
+          ><span class="sep">|</span><span>+98 991 951 4231</span><span class="sep">|</span
+          ><span><a href="https://mohamad-liyaghi.ir">mohamad-liyaghi.ir</a></span><br />
+          <span><a href="https://github.com/mohamad-liyaghi">github.com/mohamad-liyaghi</a></span
+          ><span class="sep">|</span
+          ><span
+            ><a href="https://www.linkedin.com/in/mohamad-liyaghi/">linkedin.com/in/mohamad-liyaghi</a></span
+          ><span class="sep">|</span
+          ><span><a href="https://medium.com/@el_mohamad">medium.com/@el_mohamad</a></span
+          ><span class="sep">|</span><span>Tehran, Iran</span>
+        </p>
       </header>
 
-      <section>
-        <h2>Summary</h2>
-        <p class="summary">
-          Software engineer with 5+ years building scalable, high-throughput backend systems and shipping
-          production AI features. Full-stack across Python, TypeScript and Go with a deep backend focus —
-          distributed services, async pipelines and real-time systems — plus hands-on LLM work: agents,
-          RAG, vector search and cost engineering. Comfortable end to end, from API design and data modeling
-          to containers, cloud and observability. I write regularly about the realities of running AI in
-          production.
+      <h2>Summary</h2>
+      <p>
+        Software engineer, five years in Python and backend-leaning full-stack. I build the systems
+        behind AI video at Zebracat: job pipelines that split a render into work which can fail and
+        retry on its own, the model steps that generate scripts and scenes, programmatic video with
+        Remotion, and the React interfaces on top. I write publicly about how language-model systems
+        behave under real traffic.
+      </p>
+
+      <h2>Experience</h2>
+      <div class="role">
+        <div class="role-head">
+          <h3>Software Engineer · AI</h3>
+          <span class="dates">Sep 2024 — Present · Remote (Berlin)</span>
+        </div>
+        <p class="org">
+          <strong><a href="https://www.zebracat.ai">Zebracat</a></strong> · Generative text-to-video
+          platform
         </p>
-      </section>
-
-      <section>
-        <h2>Skills</h2>
-        <dl class="skills">
-          <dt>Languages</dt>
-          <dd>Python, TypeScript, JavaScript, Go</dd>
-          <dt>Backend</dt>
-          <dd>Django, Django REST Framework, FastAPI, Celery, Express, Go Fiber</dd>
-          <dt>Frontend</dt>
-          <dd>React, Next.js, TypeScript, Tailwind CSS, Remotion (programmatic video)</dd>
-          <dt>AI / LLM</dt>
-          <dd>LLM integration, RAG, AI agents, image agents, LangChain, vector search, prompt engineering, cost engineering</dd>
-          <dt>Data &amp; Search</dt>
-          <dd>PostgreSQL, PostGIS, MongoDB, Redis, MySQL, Qdrant, Milvus, Elasticsearch</dd>
-          <dt>Async / Realtime</dt>
-          <dd>RabbitMQ, Celery, Socket.IO, WebSockets, asyncio, microservices</dd>
-          <dt>DevOps / Cloud</dt>
-          <dd>Docker, Kubernetes, GitHub Actions, Nginx, AWS, Gunicorn, Uvicorn</dd>
-          <dt>Observability</dt>
-          <dd>Sentry, OpenTelemetry, Prometheus, Grafana, Loki, Elastic APM</dd>
-          <dt>Testing</dt>
-          <dd>Pytest, unittest</dd>
-        </dl>
-      </section>
-
-      <section>
-        <h2>Experience</h2>
-
-        <div class="entry">
-          <div class="entry-head">
-            <p class="entry-title">
-              Software Engineer · Team Lead<span class="entry-org"> — ZebracatAi</span>
-            </p>
-            <span class="entry-meta">Sep 2024 – Present · Remote (Berlin, DE)</span>
-          </div>
-          <div class="entry-sub">AI text-to-video platform (zebracat.ai)</div>
-          <ul>
-            <li>
-              Lead backend development for an AI text-to-video platform — microservices that fan out heavy
-              generative jobs and stream real-time progress back to users.
-            </li>
-            <li>
-              Design async pipelines (queues, workers, back-pressure) that keep latency and cost
-              predictable as request volume scales.
-            </li>
-            <li>
-              Integrate and productionize LLM features — agents, retrieval and vector search — with the
-              observability and cost controls that keep them reliable.
-            </li>
-            <li>
-              Lead the team day to day: scoping, code review and on-time delivery while keeping services
-              stable as the product moves fast.
-            </li>
-          </ul>
-        </div>
-
-        <div class="entry">
-          <div class="entry-head">
-            <p class="entry-title">
-              Full-Stack Developer<span class="entry-org"> — Freelance</span>
-            </p>
-            <span class="entry-meta">Jun 2021 – Sep 2024 · Remote</span>
-          </div>
-          <ul>
-            <li>
-              Delivered end-to-end web products (SaaS and consumer) from requirements to production, owning
-              both frontend and backend.
-            </li>
-            <li>
-              Built scalable Django / FastAPI backends and responsive React frontends; handled deployment,
-              monitoring and third-party integrations.
-            </li>
-            <li>Shipped reliable, secure systems under tight client deadlines.</li>
-          </ul>
-        </div>
-      </section>
-
-      <section>
-        <h2>Selected Projects</h2>
-        <div class="proj">
-          <b>FoodAnywhere</b> — Open-source food-delivery backend with geospatial search and worker-offloaded
-          tasks. <span class="tech">Django, PostGIS, Redis, Celery, Prometheus, Grafana, Loki, Docker, Kubernetes.</span>
-        </div>
-        <div class="proj">
-          <b>FastQuora</b> — Q&amp;A platform with full-text search, caching and end-to-end tests.
-          <span class="tech">FastAPI, PostgreSQL, Elasticsearch, Redis, Docker, Pytest.</span>
-        </div>
-        <div class="proj">
-          <b>fast-commerce</b> — Async e-commerce backend focused on throughput and clean API design.
-          <span class="tech">FastAPI, PostgreSQL, Redis, Pytest, Kubernetes.</span>
-        </div>
-        <div class="proj">
-          <b>AcademyMaster</b> — Academy-management API with layered permissions and background jobs.
-          <span class="tech">Django, DRF, Celery, PostgreSQL, Docker.</span>
-        </div>
-      </section>
-
-      <section>
-        <h2>Selected Writing</h2>
-        <ul class="writing">
-          <li><a href="https://medium.com/@el_mohamad/stop-treating-llm-calls-as-free-how-real-cost-engineering-for-agents-actually-works-e04c25fa2e0a">Stop Treating LLM Calls as Free: How Real Cost Engineering for Agents Actually Works</a> <span class="src">(2026)</span></li>
-          <li><a href="https://medium.com/@el_mohamad/stop-trusting-the-embedding-how-real-rag-pipelines-actually-work-6d1dd7a9143f">Stop Trusting the Embedding: How Real RAG Pipelines Actually Work</a> <span class="src">(2026)</span></li>
-          <li><a href="https://medium.com/@el_mohamad/stop-trusting-the-model-how-real-llm-guardrails-actually-work-16e3dd52c6cb">Stop Trusting the Model: How Real LLM Guardrails Actually Work</a> <span class="src">(2026)</span></li>
-          <li><a href="https://medium.com/@el_mohamad/stop-putting-everything-in-one-prompt-how-real-research-agents-actually-work-50e981631cef">Stop Putting Everything in One Prompt: How Real Research Agents Actually Work</a> <span class="src">(2026)</span></li>
+        <ul class="bullets">
+          <li>
+            Build the generation pipeline: a render is split into jobs that retry independently
+            across RabbitMQ workers, with state held per job so one failed step doesn't cost the
+            whole video.
+          </li>
+          <li>
+            Work on the model side of the product — script and scene generation, output validated
+            against a schema before it reaches the pipeline, and retries that keep one bad response
+            from failing a render.
+          </li>
+          <li>
+            Build programmatic video with Remotion: React components rendered headlessly into
+            frames, so changing a template ships like any other code change.
+          </li>
+          <li>
+            Work across the stack — Django and FastAPI services behind React and TypeScript
+            surfaces.
+          </li>
         </ul>
-        <p class="writing src"><a href="https://medium.com/@el_mohamad">medium.com/@el_mohamad</a></p>
-      </section>
+        <p class="tech">
+          Python · FastAPI · Django · RabbitMQ · Redis · React · TypeScript · Remotion · Docker ·
+          AWS
+        </p>
+      </div>
 
-      <section>
-        <h2>Languages</h2>
-        <div class="two">
-          <p><b>Persian</b> — Native</p>
-          <p><b>English</b> — Professional (C1)</p>
+      <div class="role">
+        <div class="role-head">
+          <h3>Full-Stack Developer</h3>
+          <span class="dates">Jun 2021 — Sep 2024 · Remote</span>
         </div>
-      </section>
-    </div>
+        <p class="org"><strong>Freelance</strong> · SaaS and consumer web products</p>
+        <ul class="bullets">
+          <li>
+            Shipped products end to end for clients: data model, API, frontend, deployment, and the
+            support afterwards.
+          </li>
+          <li>
+            Standardised on Django/DRF and FastAPI behind React, containerised, with monitoring in
+            place before handover.
+          </li>
+          <li>
+            Owned the parts a client couldn't audit for themselves — authentication, access control,
+            and how their data was stored.
+          </li>
+        </ul>
+        <p class="tech">Django · DRF · FastAPI · React · PostgreSQL · Docker · Nginx</p>
+      </div>
+
+      <h2>Selected open source</h2>
+      <p class="repo-meta">
+        229 stars across 23 public repositories ·
+        <a href="https://github.com/mohamad-liyaghi">github.com/mohamad-liyaghi</a>
+      </p>
+      <ul class="projects">
+        <li>
+          <b><a href="https://github.com/mohamad-liyaghi/FoodAnywhere">FoodAnywhere</a></b>
+          <span class="stars">40 stars</span> — Food-delivery backend. PostGIS geospatial search,
+          Celery for slow work, and tracing that follows an order from request to worker.
+        </li>
+        <li>
+          <b><a href="https://github.com/mohamad-liyaghi/fast-commerce">fast-commerce</a></b>
+          <span class="stars">22 stars</span> — Async e-commerce backend built for throughput —
+          clean API boundaries, background processing, tests that gate deploys.
+        </li>
+        <li>
+          <b><a href="https://github.com/mohamad-liyaghi/AcademyMaster">AcademyMaster</a></b>
+          <span class="stars">21 stars</span> — Academy-management API with layered permissions and
+          scheduled background jobs.
+        </li>
+        <li>
+          <b><a href="https://github.com/mohamad-liyaghi/Tsuna-Streaming">Tsuna-Streaming</a></b>
+          <span class="stars">16 stars</span> — Streaming backend for video and music, with
+          expensive processing pushed onto background workers.
+        </li>
+        <li>
+          <b
+            ><a href="https://github.com/mohamad-liyaghi/telegram-to-rubika-uploader"
+              >telegram-to-rubika-uploader</a
+            ></b
+          >
+          <span class="stars">14 stars</span> — Go tool relaying files up to 2 GB between platforms,
+          so users in Iran don't re-upload over scarce VPN bandwidth.
+        </li>
+        <li>
+          <b><a href="https://github.com/mohamad-liyaghi/FastQuora">FastQuora</a></b>
+          <span class="stars">11 stars</span> — Q&amp;A platform on FastAPI — Elasticsearch search,
+          Redis cache, distributed tracing through both.
+        </li>
+      </ul>
+
+      <h2>Skills</h2>
+      <dl class="skills">
+        <dt>Languages</dt>
+        <dd>Python, Go, TypeScript, SQL, Bash</dd>
+        <dt>Backend</dt>
+        <dd>Django, Django REST Framework, FastAPI, Celery, RabbitMQ, asyncio, REST, WebSockets</dd>
+        <dt>Models</dt>
+        <dd>LLM APIs, structured output, tool calling, RAG, vector search, evaluation</dd>
+        <dt>Data</dt>
+        <dd>PostgreSQL (incl. PostGIS), Redis, Elasticsearch, MongoDB</dd>
+        <dt>Frontend</dt>
+        <dd>React, TypeScript, Tailwind, Remotion</dd>
+        <dt>Infrastructure</dt>
+        <dd>Docker, Kubernetes, GitHub Actions, AWS, Nginx</dd>
+        <dt>Reliability</dt>
+        <dd>OpenTelemetry, Prometheus, Grafana, Sentry, Pytest</dd>
+      </dl>
+
+      <h2>Writing</h2>
+      <p>
+        Long-form notes on language models in production, published on Medium —
+        <a
+          href="https://medium.com/@el_mohamad/stop-being-a-feature-factory-the-engineers-other-job-is-reading-the-money-f95653b9c3ff"
+          >Stop Being a Feature Factory</a
+        >
+        (Aug 2026),
+        <a
+          href="https://medium.com/@el_mohamad/stop-being-your-products-night-shift-how-an-agent-squad-actually-works-9fb5b2f9718a"
+          >How an Agent Squad Actually Works</a
+        >
+        (Aug 2026),
+        <a
+          href="https://medium.com/@el_mohamad/stop-treating-open-source-models-as-a-downgrade-how-model-routing-actually-works-3891150cbc97"
+          >How Model Routing Actually Works</a
+        >
+        (Jul 2026). Full archive:
+        <a href="https://medium.com/@el_mohamad">medium.com/@el_mohamad</a>
+      </p>
+
+      <h2>Education &amp; languages</h2>
+      <dl class="skills">
+        <dt>Education</dt>
+        <dd>B.Sc. Computer Science</dd>
+        <dt>Languages</dt>
+        <dd>Persian — native · English — professional working proficiency</dd>
+      </dl>
+    </main>
   </body>
 </html>

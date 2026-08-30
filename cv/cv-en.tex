@@ -1,0 +1,181 @@
+% Mohamad Liyaghi — résumé (English)
+% Build: xelatex -interaction=nonstopmode cv-en.tex   (see build.sh)
+% The palette and type match mohamad-liyaghi.ir: warm paper, deep ink, one amber.
+
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[a4paper,top=12mm,bottom=10mm,left=14mm,right=14mm]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage[hidelinks,unicode]{hyperref}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+% ---------------------------------------------------------------- type
+\defaultfontfeatures{Path=fonts/, Ligatures=TeX}
+\setmainfont{Archivo-Regular.ttf}[
+  BoldFont       = Archivo-SemiBold.ttf,
+  ItalicFont     = Archivo-Regular.ttf,
+  BoldItalicFont = Archivo-SemiBold.ttf,
+]
+\newfontfamily\displayfont{InstrumentSerif-Regular.ttf}
+\newfontfamily\metafont{JetBrainsMono-Regular.ttf}[BoldFont = JetBrainsMono-Medium.ttf]
+
+% ---------------------------------------------------------------- colour
+\definecolor{ink}{HTML}{16150F}
+\definecolor{bodytext}{HTML}{46433A}
+\definecolor{muted}{HTML}{7C7869}
+\definecolor{accent}{HTML}{A85A28}
+\definecolor{hairline}{HTML}{D9D2C4}
+\color{bodytext}
+
+% ---------------------------------------------------------------- pieces
+% Section heading: letterspaced amber label over a hairline.
+\newcommand{\cvsection}[1]{%
+  \vspace{6pt}%
+  {\metafont\bfseries\fontsize{8}{10}\selectfont\color{accent}%
+   \addfontfeature{LetterSpace=18}\MakeUppercase{#1}}\par
+  \vspace{2.5pt}{\color{hairline}\hrule height 0.6pt}\vspace{5.5pt}%
+}
+
+% Small uppercase meta, used for dates and locations.
+\newcommand{\meta}[1]{{\metafont\fontsize{7.8}{9}\selectfont\color{muted}%
+  \addfontfeature{LetterSpace=8}\MakeUppercase{#1}}}
+
+% Role header: title left, dates right; then organisation and context.
+\newcommand{\role}[4]{%
+  {\fontsize{11.5}{13}\selectfont\bfseries\color{ink}#1}\hfill\meta{#4}\par
+  \vspace{2pt}%
+  {\bfseries\color{accent}#2}{\color{muted}\ \textperiodcentered\ #3}\par
+  \vspace{5pt}%
+}
+
+\newlist{cvbullets}{itemize}{1}
+\setlist[cvbullets]{
+  label       = {\color{accent}\rule[0.26em]{0.55em}{0.55pt}},
+  leftmargin  = 1.2em,
+  labelsep    = 0.6em,
+  itemsep     = 2.4pt,
+  topsep      = 0pt,
+  parsep      = 0pt,
+}
+
+% The technology line that closes each role.
+\newcommand{\tech}[1]{\vspace{4pt}{\metafont\fontsize{7.6}{9.5}\selectfont\color{muted}#1}\par}
+
+% Two-column row used by Skills.
+\newcommand{\skillrow}[2]{%
+  \begin{minipage}[t]{0.185\textwidth}\raggedright\vspace{0pt}%
+    {\metafont\bfseries\fontsize{7.8}{9.5}\selectfont\color{muted}%
+     \addfontfeature{LetterSpace=10}\MakeUppercase{#1}}%
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.795\textwidth}\raggedright\vspace{0pt}#2\end{minipage}\par
+  \vspace{2.4pt}%
+}
+
+\newcommand{\project}[3]{{\bfseries\color{ink}#1}\ {\metafont\fontsize{7.6}{9}\selectfont\color{muted}#2}\ \textemdash\ #3\par\vspace{2pt}}
+
+\newcommand{\link}[2]{\href{#1}{#2}}
+
+% ================================================================= document
+\begin{document}
+\fontsize{9.2}{11.9}\selectfont
+
+{\displayfont\fontsize{29}{32}\selectfont\color{ink}Mohamad Liyaghi}\par
+\vspace{4pt}
+{\color{accent}\hrule height 1.4pt width 54pt}
+\vspace{7pt}
+{\fontsize{11}{13}\selectfont\bfseries\color{ink}Software Engineer \textperiodcentered\ AI}\par
+\vspace{6pt}
+{\metafont\fontsize{7.9}{10.5}\selectfont\color{muted}%
+  \link{mailto:liaghimohamad69@gmail.com}{liaghimohamad69@gmail.com}\ \ \textbar\ \
+  +98 991 951 4231\ \ \textbar\ \
+  \link{https://mohamad-liyaghi.ir}{mohamad-liyaghi.ir}\par
+  \vspace{2.5pt}
+  \link{https://github.com/mohamad-liyaghi}{github.com/mohamad-liyaghi}\ \ \textbar\ \
+  \link{https://www.linkedin.com/in/mohamad-liyaghi/}{linkedin.com/in/mohamad-liyaghi}\ \ \textbar\ \
+  \link{https://medium.com/@el_mohamad}{medium.com/@el\_mohamad}\ \ \textbar\ \
+  Tehran, Iran}\par
+
+\vspace{4pt}
+
+\cvsection{Summary}
+
+Software engineer, five years in Python and backend-leaning full-stack. I build the systems behind
+AI video at Zebracat: job pipelines that split a render into work which can fail and retry on its own,
+the model steps that generate scripts and scenes, programmatic video with Remotion, and the React
+interfaces on top. I write publicly about how language-model systems behave under real traffic.
+
+\cvsection{Experience}
+
+\role{Software Engineer \textperiodcentered\ AI}{Zebracat}{Generative text-to-video platform}{Sep 2024 \textendash\ Present \textperiodcentered\ Remote (Berlin)}
+\begin{cvbullets}
+  \item Build the generation pipeline: a render is split into jobs that retry independently
+        across RabbitMQ workers, with state held per job so one failed step doesn't cost the
+        whole video.
+  \item Work on the model side of the product \textemdash\ script and scene generation, output
+        validated against a schema before it reaches the pipeline, and retries that keep one bad
+        response from failing a render.
+  \item Build programmatic video with Remotion: React components rendered headlessly into
+        frames, so changing a template ships like any other code change.
+  \item Work across the stack \textemdash\ Django and FastAPI services behind React and
+        TypeScript surfaces.
+\end{cvbullets}
+\tech{Python \textperiodcentered\ FastAPI \textperiodcentered\ Django \textperiodcentered\ RabbitMQ \textperiodcentered\ Redis \textperiodcentered\ React \textperiodcentered\ TypeScript \textperiodcentered\ Remotion \textperiodcentered\ Docker \textperiodcentered\ AWS}
+
+\vspace{8pt}
+
+\role{Full-Stack Developer}{Freelance}{SaaS and consumer web products}{Jun 2021 \textendash\ Sep 2024 \textperiodcentered\ Remote}
+\begin{cvbullets}
+  \item Shipped products end to end for clients: data model, API, frontend, deployment, and the
+        support afterwards.
+  \item Standardised on Django/DRF and FastAPI behind React, containerised, with monitoring in
+        place before handover.
+  \item Owned the parts a client couldn't audit for themselves \textemdash\ authentication,
+        access control, and how their data was stored.
+\end{cvbullets}
+\tech{Django \textperiodcentered\ DRF \textperiodcentered\ FastAPI \textperiodcentered\ React \textperiodcentered\ PostgreSQL \textperiodcentered\ Docker \textperiodcentered\ Nginx}
+
+\cvsection{Selected open source}
+
+{\metafont\fontsize{7.8}{10}\selectfont\color{muted}%
+229 stars across 23 public repositories \textperiodcentered\
+\link{https://github.com/mohamad-liyaghi}{github.com/mohamad-liyaghi}}\par
+\vspace{5.5pt}
+
+\project{\link{https://github.com/mohamad-liyaghi/FoodAnywhere}{FoodAnywhere}}{40 stars}{Food-delivery backend. PostGIS geospatial search, Celery for slow work, and tracing that follows an order from request to worker.}
+\project{\link{https://github.com/mohamad-liyaghi/fast-commerce}{fast-commerce}}{22 stars}{Async e-commerce backend built for throughput \textemdash\ clean API boundaries, background processing, tests that gate deploys.}
+\project{\link{https://github.com/mohamad-liyaghi/AcademyMaster}{AcademyMaster}}{21 stars}{Academy-management API with layered permissions and scheduled background jobs.}
+\project{\link{https://github.com/mohamad-liyaghi/Tsuna-Streaming}{Tsuna-Streaming}}{16 stars}{Streaming backend for video and music, with expensive processing pushed onto background workers.}
+\project{\link{https://github.com/mohamad-liyaghi/telegram-to-rubika-uploader}{telegram-to-rubika-uploader}}{14 stars}{Go tool relaying files up to 2\,GB between platforms, so users in Iran don't re-upload over scarce VPN bandwidth.}
+\project{\link{https://github.com/mohamad-liyaghi/FastQuora}{FastQuora}}{11 stars}{Q\&A platform on FastAPI \textemdash\ Elasticsearch search, Redis cache, distributed tracing through both.}
+
+\cvsection{Skills}
+
+\skillrow{Languages}{Python, Go, TypeScript, SQL, Bash}
+\skillrow{Backend}{Django, Django REST Framework, FastAPI, Celery, RabbitMQ, asyncio, REST, WebSockets}
+\skillrow{Models}{LLM APIs, structured output, tool calling, RAG, vector search, evaluation}
+\skillrow{Data}{PostgreSQL (incl. PostGIS), Redis, Elasticsearch, MongoDB}
+\skillrow{Frontend}{React, TypeScript, Tailwind, Remotion}
+\skillrow{Infrastructure}{Docker, Kubernetes, GitHub Actions, AWS, Nginx}
+\skillrow{Reliability}{OpenTelemetry, Prometheus, Grafana, Sentry, Pytest}
+
+\cvsection{Writing}
+
+Long-form notes on language models in production, published on Medium \textemdash\
+\link{https://medium.com/@el_mohamad/stop-being-a-feature-factory-the-engineers-other-job-is-reading-the-money-f95653b9c3ff}{Stop Being a Feature Factory} (Aug 2026),
+\link{https://medium.com/@el_mohamad/stop-being-your-products-night-shift-how-an-agent-squad-actually-works-9fb5b2f9718a}{How an Agent Squad Actually Works} (Aug 2026),
+\link{https://medium.com/@el_mohamad/stop-treating-open-source-models-as-a-downgrade-how-model-routing-actually-works-3891150cbc97}{How Model Routing Actually Works} (Jul 2026).
+Full archive: \link{https://medium.com/@el_mohamad}{medium.com/@el\_mohamad}
+
+\enlargethispage{1.5\baselineskip}
+\cvsection{Education \& languages}
+
+\skillrow{Education}{B.Sc. Computer Science}
+\skillrow{Languages}{Persian \textemdash\ native \quad\textperiodcentered\quad English \textemdash\ professional working proficiency}
+\vspace{-2.4pt}
+
+\end{document}

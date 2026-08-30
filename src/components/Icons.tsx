@@ -1,121 +1,161 @@
-import type { ReactElement, SVGProps } from "react";
+import type { SVGProps } from "react";
 
-type IconName =
-  | "sun"
-  | "moon"
-  | "arrow-down"
-  | "arrow-up-right"
-  | "copy"
-  | "check"
-  | "menu"
-  | "close"
-  | "download"
-  | "terminal"
-  | "github"
-  | "linkedin"
-  | "medium"
-  | "telegram"
-  | "mail";
+/**
+ * Drawn here rather than pulled from an icon set, so the whole page shares one
+ * stroke weight and one corner radius. 24px grid, 1.6 stroke, round joins.
+ */
+type IconProps = SVGProps<SVGSVGElement>;
 
-const STROKE = new Set<IconName>([
-  "sun",
-  "moon",
-  "arrow-down",
-  "arrow-up-right",
-  "copy",
-  "check",
-  "menu",
-  "close",
-  "download",
-  "terminal",
-  "mail",
-]);
-
-const PATHS: Record<IconName, ReactElement> = {
-  sun: (
-    <>
-      <circle cx="12" cy="12" r="4.2" />
-      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
-    </>
-  ),
-  moon: <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z" />,
-  "arrow-down": (
-    <>
-      <path d="M12 5v14" />
-      <path d="m19 12-7 7-7-7" />
-    </>
-  ),
-  "arrow-up-right": (
-    <>
-      <path d="M7 17 17 7" />
-      <path d="M7 7h10v10" />
-    </>
-  ),
-  copy: (
-    <>
-      <rect x="9" y="9" width="13" height="13" rx="2" />
-      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-    </>
-  ),
-  check: <path d="m20 6-11 11-5-5" />,
-  menu: <path d="M3 6h18M3 12h18M3 18h18" />,
-  close: <path d="M18 6 6 18M6 6l12 12" />,
-  download: (
-    <>
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-      <path d="m7 10 5 5 5-5" />
-      <path d="M12 15V3" />
-    </>
-  ),
-  terminal: (
-    <>
-      <path d="m4 17 6-6-6-6" />
-      <path d="M12 19h8" />
-    </>
-  ),
-  mail: (
-    <>
-      <rect x="2" y="4" width="20" height="16" rx="2" />
-      <path d="m22 7-10 6L2 7" />
-    </>
-  ),
-  github: (
-    <path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58l-.01-2.05c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6.01 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.62-5.48 5.92.43.37.81 1.1.81 2.22l-.01 3.29c0 .32.22.7.83.58A12 12 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z" />
-  ),
-  linkedin: (
-    <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8.02H4.8V24H.22zM8.34 8.02h4.4v2.18h.06c.61-1.16 2.1-2.38 4.32-2.38 4.62 0 5.48 3.04 5.48 7V24h-4.58v-8.14c0-1.94-.03-4.44-2.7-4.44-2.71 0-3.12 2.11-3.12 4.29V24H8.34z" />
-  ),
-  medium: (
-    <path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.52 6.42-3.39 6.42s-3.38-2.88-3.38-6.42 1.51-6.42 3.38-6.42 3.39 2.88 3.39 6.42M24 12c0 3.17-.53 5.75-1.19 5.75s-1.19-2.58-1.19-5.75.53-5.75 1.19-5.75S24 8.83 24 12z" />
-  ),
-  telegram: (
-    <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.92-.74 1.14-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z" />
-  ),
-};
-
-export function Icon({
-  name,
-  size = 18,
-  ...rest
-}: { name: IconName; size?: number } & SVGProps<SVGSVGElement>) {
-  const stroke = STROKE.has(name);
+function Stroke({ children, ...props }: IconProps) {
   return (
     <svg
       viewBox="0 0 24 24"
-      width={size}
-      height={size}
-      fill={stroke ? "none" : "currentColor"}
-      stroke={stroke ? "currentColor" : "none"}
-      strokeWidth={stroke ? 2 : undefined}
+      width="18"
+      height="18"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.6}
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
       focusable="false"
-      {...rest}
+      {...props}
     >
-      {PATHS[name]}
+      {children}
     </svg>
   );
 }
 
-export type { IconName };
+export const Sun = (p: IconProps) => (
+  <Stroke {...p}>
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" />
+  </Stroke>
+);
+
+export const Moon = (p: IconProps) => (
+  <Stroke {...p}>
+    <path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2Z" />
+  </Stroke>
+);
+
+export const ArrowOut = (p: IconProps) => (
+  <Stroke {...p}>
+    <path d="M7 17 17 7M9 7h8v8" />
+  </Stroke>
+);
+
+export const ArrowDown = (p: IconProps) => (
+  <Stroke {...p}>
+    <path d="M12 5v14M6 13l6 6 6-6" />
+  </Stroke>
+);
+
+export const ArrowUp = (p: IconProps) => (
+  <Stroke {...p}>
+    <path d="M12 19V5M6 11l6-6 6 6" />
+  </Stroke>
+);
+
+export const Chevron = (p: IconProps) => (
+  <Stroke {...p}>
+    <path d="m6 9 6 6 6-6" />
+  </Stroke>
+);
+
+export const Menu = (p: IconProps) => (
+  <Stroke {...p}>
+    <path d="M4 7h16M4 12h16M4 17h16" />
+  </Stroke>
+);
+
+export const Close = (p: IconProps) => (
+  <Stroke {...p}>
+    <path d="M6 6l12 12M18 6L6 18" />
+  </Stroke>
+);
+
+export const Star = (p: IconProps) => (
+  <Stroke {...p}>
+    <path d="m12 4 2.4 5 5.6.8-4 3.9 1 5.5-5-2.6-5 2.6 1-5.5-4-3.9 5.6-.8Z" />
+  </Stroke>
+);
+
+export const Doc = (p: IconProps) => (
+  <Stroke {...p}>
+    <path d="M14 3H7a1.5 1.5 0 0 0-1.5 1.5v15A1.5 1.5 0 0 0 7 21h10a1.5 1.5 0 0 0 1.5-1.5V7.5Z" />
+    <path d="M14 3v4.5h4.5M9 13h6M9 16.5h4" />
+  </Stroke>
+);
+
+export const Mail = (p: IconProps) => (
+  <Stroke {...p}>
+    <rect x="3" y="5.5" width="18" height="13" rx="1.5" />
+    <path d="m3.8 6.8 8.2 6 8.2-6" />
+  </Stroke>
+);
+
+/* Brand marks are filled, not stroked — they are drawn from each brand's own
+   glyph and would not read correctly as outlines. */
+function Brand({ children, ...props }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="18"
+      height="18"
+      fill="currentColor"
+      aria-hidden="true"
+      focusable="false"
+      {...props}
+    >
+      {children}
+    </svg>
+  );
+}
+
+export const GitHub = (p: IconProps) => (
+  <Brand {...p}>
+    <path d="M12 1.8a10.2 10.2 0 0 0-3.2 19.9c.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.5 2.3 1.1 2.9.9.1-.7.4-1.1.7-1.4-2.3-.3-4.7-1.1-4.7-5 0-1.1.4-2 1-2.8-.1-.2-.4-1.2.1-2.6 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5.1 0c2-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.6.6.8 1 1.7 1 2.8 0 3.9-2.4 4.7-4.7 5 .4.3.7 1 .7 2v2.9c0 .3.2.6.7.5A10.2 10.2 0 0 0 12 1.8Z" />
+  </Brand>
+);
+
+export const LinkedIn = (p: IconProps) => (
+  <Brand {...p}>
+    <path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0-.02-5ZM3 21h4V9.5H3V21Zm7 0h4v-6.2c0-1.7.9-2.5 2-2.5s1.9.8 1.9 2.5V21h4v-6.9c0-3.4-1.8-4.9-4.2-4.9-1.9 0-2.9 1.1-3.4 1.9h-.1V9.5h-4c.1 1.1 0 11.5 0 11.5Z" />
+  </Brand>
+);
+
+export const Medium = (p: IconProps) => (
+  <Brand {...p}>
+    <ellipse cx="6.5" cy="12" rx="6.1" ry="6.8" />
+    <ellipse cx="16.4" cy="12" rx="2.9" ry="6.3" />
+    <ellipse cx="22" cy="12" rx="1.4" ry="5.6" />
+  </Brand>
+);
+
+export const Telegram = (p: IconProps) => (
+  <Brand {...p}>
+    <path d="M21.7 4.3 2.9 11.5c-.9.4-.9 1 0 1.3l4.7 1.5 1.8 5.5c.2.6.5.7 1 .3l2.6-2.1 4.7 3.5c.9.5 1.4.2 1.6-.8l3-13.7c.2-1-.4-1.5-1.6-.7Zm-4 3-7.6 6.9-.3 3.3-1.5-4.7 9-5.9c.4-.3.8-.1.4.4Z" />
+  </Brand>
+);
+
+/** The mark. An M whose last stem carries on into an L. */
+export const Monogram = (p: IconProps) => (
+  <svg
+    viewBox="0 0 32 32"
+    width="28"
+    height="28"
+    fill="none"
+    aria-hidden="true"
+    focusable="false"
+    {...p}
+  >
+    <path
+      d="M6.5 24V8.6L13.4 18l6.9-9.4V24h5.2"
+      stroke="currentColor"
+      strokeWidth={2.6}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);

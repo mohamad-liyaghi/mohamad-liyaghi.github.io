@@ -1,146 +1,131 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { PROFILE, SECTIONS, type SectionId } from "../data/profile";
 
-export type Theme = "dark" | "light";
-
-const THEME_COLOR: Record<Theme, string> = {
-  dark: "#16161e",
-  light: "#e1e2e7",
-};
-
-export function readTheme(): Theme {
-  if (typeof document === "undefined") return "dark";
-  return document.documentElement.getAttribute("data-theme") === "light"
-    ? "light"
-    : "dark";
-}
-
-/** Apply a theme to the DOM and notify every useTheme() listener. */
-export function setTheme(theme: Theme) {
-  document.documentElement.setAttribute("data-theme", theme);
-  try {
-    localStorage.setItem("theme", theme);
-  } catch {
-    /* ignore */
-  }
-  const meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute("content", THEME_COLOR[theme]);
-  window.dispatchEvent(new CustomEvent("themechange"));
-}
-
-export function toggleTheme(): Theme {
-  const next: Theme = readTheme() === "dark" ? "light" : "dark";
-  setTheme(next);
-  return next;
-}
-
-export function useTheme(): [Theme, () => void] {
-  const [theme, set] = useState<Theme>(readTheme);
-
+/** True once the user has asked the OS to keep motion to a minimum. */
+export function usePrefersReducedMotion(): boolean {
+  const [reduced, setReduced] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
   useEffect(() => {
-    // index.html sets data-theme pre-paint; sync the meta colour + state here,
-    // and keep every instance in lock-step via the themechange event.
-    set(readTheme());
-    const sync = () => set(readTheme());
-    window.addEventListener("themechange", sync);
-    return () => window.removeEventListener("themechange", sync);
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const on = () => setReduced(mq.matches);
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
   }, []);
-
-  return [theme, useCallback(() => void toggleTheme(), [])];
+  return reduced;
 }
 
-export function useScrollSpy(ids: string[], offset = 110): string {
-  const [active, setActive] = useState("");
-
+/**
+ * Adds `data-in` to an element the first time it enters the viewport, which is
+ * all the CSS needs to run a reveal. Elements stay revealed once seen — nothing
+ * on this page should animate twice.
+ */
+export function useReveal<T extends Element = HTMLDivElement>() {
+  const ref = useRef<T | null>(null);
   useEffect(() => {
-    const compute = () => {
-      const scrollPos = window.scrollY + offset + 1;
-      let current = "";
-      for (const id of ids) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        const top = el.getBoundingClientRect().top + window.scrollY;
-        if (top <= scrollPos) current = id;
-      }
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 4) {
-        current = ids[ids.length - 1] ?? current;
-      }
-      setActive(current);
-    };
-    // Coalesce scroll bursts into a single recompute per animation frame.
-    let frame = 0;
-    const onScroll = () => {
-      if (frame) return;
-      frame = window.requestAnimationFrame(() => {
-        frame = 0;
-        compute();
-      });
-    };
-    compute();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-    return () => {
-      if (frame) window.cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [ids, offset]);
+    const el = ref.current;
+    if (!el) return;
+    if (!("IntersectionObserver" in window)) {
+      el.setAttribute("data-in", "");
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.setAttribute("data-in", "");
+            io.unobserve(entry.target);
+          }
+        }
+      },
+      { rootMargin: "0px 0px -12% 0px", threshold: 0.12 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return ref;
+}
 
+/** Which section the reader is currently looking at, for the nav. */
+export function useActiveSection(): SectionId | null {
+  const [active, setActive] = useState<SectionId | null>(null);
+  useEffect(() => {
+    const targets = SECTIONS.map(({ id }) => document.getElementById(id)).filter(
+      (el): el is HTMLElement => el !== null,
+    );
+    if (targets.length === 0) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive(visible.target.id as SectionId);
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.25, 0.5] },
+    );
+    targets.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
   return active;
 }
 
-export function useCopy(timeout = 1600): [boolean, (text: string) => void] {
-  const [copied, setCopied] = useState(false);
-  const timer = useRef<number>(0);
-
-  // Clear any pending reset on unmount to avoid setState-after-unmount.
+/** True once the page has scrolled past the given offset. */
+export function useScrolledPast(offset = 24): boolean {
+  const [past, setPast] = useState(false);
   useEffect(() => {
-    return () => {
-      if (timer.current) window.clearTimeout(timer.current);
-    };
-  }, []);
-
-  const copy = useCallback(
-    (text: string) => {
-      const flash = () => {
-        setCopied(true);
-        if (timer.current) window.clearTimeout(timer.current);
-        timer.current = window.setTimeout(() => setCopied(false), timeout);
-      };
-      const fallback = () => {
-        try {
-          const ta = document.createElement("textarea");
-          ta.value = text;
-          ta.setAttribute("readonly", "");
-          ta.style.position = "fixed";
-          ta.style.opacity = "0";
-          document.body.appendChild(ta);
-          ta.select();
-          const ok = document.execCommand("copy");
-          document.body.removeChild(ta);
-          if (ok) flash();
-        } catch {
-          /* ignore */
-        }
-      };
-      try {
-        if (navigator.clipboard) {
-          navigator.clipboard.writeText(text).then(flash, fallback);
-        } else {
-          fallback();
-        }
-      } catch {
-        fallback();
-      }
-    },
-    [timeout],
-  );
-  return [copied, copy];
+    const onScroll = () => setPast(window.scrollY > offset);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [offset]);
+  return past;
 }
 
-/** Smooth-scroll to a section id and update the hash without a jump. */
-export function scrollToId(id: string) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.scrollIntoView({ behavior: "smooth", block: "start" });
-  history.replaceState(null, "", `#${id}`);
+/** The wall clock in Tehran, ticking once a minute. */
+export function useLocalTime(locale: string): string {
+  const format = useCallback(
+    () =>
+      new Intl.DateTimeFormat(locale, {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+        timeZone: PROFILE.timeZone,
+      }).format(new Date()),
+    [locale],
+  );
+  const [time, setTime] = useState(format);
+  useEffect(() => {
+    setTime(format());
+    const id = window.setInterval(() => setTime(format()), 30_000);
+    return () => window.clearInterval(id);
+  }, [format]);
+  return time;
+}
+
+export type Theme = "light" | "dark";
+
+/** Theme lives on <html data-theme> and is set before paint in index.html. */
+export function useTheme(): [Theme, () => void] {
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof document === "undefined") return "light";
+    return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+  });
+  const toggle = useCallback(() => {
+    setTheme((prev) => {
+      const next: Theme = prev === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      document
+        .querySelector('meta[name="theme-color"]')
+        ?.setAttribute("content", next === "dark" ? "#12110D" : "#F7F4EE");
+      try {
+        window.localStorage.setItem("theme", next);
+      } catch {
+        /* the choice just won't survive a reload */
+      }
+      return next;
+    });
+  }, []);
+  return [theme, toggle];
 }

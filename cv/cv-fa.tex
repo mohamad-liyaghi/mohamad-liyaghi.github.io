@@ -1,0 +1,163 @@
+% رزومهٔ محمد لیاقی (فارسی)
+% ساخت: xelatex -interaction=nonstopmode cv-fa.tex   (به build.sh نگاه کنید)
+% رنگ‌ها و تایپوگرافی هم‌خانوادهٔ mohamad-liyaghi.ir است.
+
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[a4paper,top=12mm,bottom=10mm,left=14mm,right=14mm]{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[hidelinks,unicode]{hyperref}
+\usepackage{xepersian}          % bidi را می‌آورد، پس باید آخرین بسته باشد
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+% ---------------------------------------------------------------- قلم‌ها
+\settextfont[Path=fonts/, BoldFont = Vazirmatn-Bold.ttf]{Vazirmatn-Regular.ttf}
+\setlatintextfont[Path=fonts/, BoldFont = Archivo-SemiBold.ttf]{Archivo-Regular.ttf}
+\setdigitfont[Path=fonts/, BoldFont = Vazirmatn-Bold.ttf]{Vazirmatn-Regular.ttf}
+\newfontfamily\metafont[Path=fonts/, BoldFont = JetBrainsMono-Medium.ttf]{JetBrainsMono-Regular.ttf}
+\newfontfamily\displayfont[Path=fonts/, Script=Arabic, Language=Parsi, BoldFont = Vazirmatn-Bold.ttf]{Vazirmatn-Bold.ttf}
+
+% ---------------------------------------------------------------- رنگ‌ها
+\definecolor{ink}{HTML}{16150F}
+\definecolor{bodytext}{HTML}{46433A}
+\definecolor{muted}{HTML}{7C7869}
+\definecolor{accent}{HTML}{A85A28}
+\definecolor{hairline}{HTML}{D9D2C4}
+\color{bodytext}
+
+% ---------------------------------------------------------------- اجزا
+\newcommand{\cvsection}[1]{%
+  \vspace{4pt}%
+  {\bfseries\fontsize{9}{11}\selectfont\color{accent}#1}\par
+  \vspace{2pt}{\color{hairline}\hrule height 0.6pt}\vspace{4.5pt}%
+}
+
+\newcommand{\meta}[1]{{\fontsize{8}{9.5}\selectfont\color{muted}#1}}
+
+\newcommand{\role}[4]{%
+  {\fontsize{11}{13}\selectfont\bfseries\color{ink}#1}\hfill\meta{#4}\par
+  \vspace{2pt}%
+  {\bfseries\color{accent}#2}{\color{muted}\ \textperiodcentered\ #3}\par
+  \vspace{4pt}%
+}
+
+\newlist{cvbullets}{itemize}{1}
+\setlist[cvbullets]{
+  label       = {\color{accent}\rule[0.26em]{0.55em}{0.55pt}},
+  leftmargin  = 1.2em,
+  labelsep    = 0.6em,
+  itemsep     = 2.4pt,
+  topsep      = 0pt,
+  parsep      = 0pt,
+}
+
+\newcommand{\tech}[1]{\vspace{3pt}{\metafont\fontsize{7.4}{9.5}\selectfont\color{muted}\lr{#1}}\par}
+
+\newcommand{\skillrow}[2]{%
+  \begin{minipage}[t]{0.185\textwidth}\raggedleft\vspace{0pt}%
+    {\bfseries\fontsize{8.2}{10}\selectfont\color{muted}#1}%
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.795\textwidth}\raggedright\vspace{0pt}#2\end{minipage}\par
+  \vspace{1.4pt}%
+}
+
+\newcommand{\project}[3]{{\bfseries\color{ink}\lr{#1}}\ {\fontsize{7.9}{9.5}\selectfont\color{muted}#2}\ \textemdash\ #3\par\vspace{1.4pt}}
+
+\newcommand{\link}[2]{\href{#1}{#2}}
+
+% ================================================================= سند
+\begin{document}
+\fontsize{9}{13.1}\selectfont
+
+{\displayfont\fontsize{27}{30}\selectfont\color{ink}محمد لیاقی}\par
+\vspace{4pt}
+{\color{accent}\hrule height 1.4pt width 54pt}
+\vspace{7pt}
+{\fontsize{11}{13}\selectfont\bfseries\color{ink}مهندس نرم‌افزار \textperiodcentered\ هوش مصنوعی}\par
+\vspace{6pt}
+{\metafont\fontsize{7.9}{10.5}\selectfont\color{muted}%
+  \lr{\link{mailto:liaghimohamad69@gmail.com}{liaghimohamad69@gmail.com}}\ \ \textbar\ \
+  \lr{+98 991 951 4231}\ \ \textbar\ \
+  \lr{\link{https://mohamad-liyaghi.ir}{mohamad-liyaghi.ir}}\par
+  \vspace{2.5pt}
+  \lr{\link{https://github.com/mohamad-liyaghi}{github.com/mohamad-liyaghi}}\ \ \textbar\ \
+  \lr{\link{https://www.linkedin.com/in/mohamad-liyaghi/}{linkedin.com/in/mohamad-liyaghi}}\ \ \textbar\ \
+  \lr{\link{https://medium.com/@el_mohamad}{medium.com/@el\_mohamad}}}\par
+{\fontsize{8.4}{10}\selectfont\color{muted}تهران، ایران}\par
+
+\vspace{3pt}
+
+\cvsection{خلاصه}
+
+مهندس نرم‌افزارم؛ پنج سال کار با \lr{Python} و تمام‌پشته با گرایش بک‌اند. در \lr{Zebracat}
+سامانه‌های پشت ویدیوی مبتنی بر هوش مصنوعی را می‌سازم: خط‌لوله‌هایی که یک رندر را به کارهایی
+می‌شکنند که مستقل از هم شکست می‌خورند و دوباره تلاش می‌کنند، گام‌های مدل که متن و صحنه تولید می‌کنند، ویدیوی برنامه‌پذیر با \lr{Remotion}، و رابط‌های \lr{React} روی همهٔ این‌ها. دربارهٔ رفتار واقعی مدل‌های زبانی زیر بار کاربر می‌نویسم.
+
+\cvsection{تجربهٔ کاری}
+
+\role{مهندس نرم‌افزار \textperiodcentered\ هوش مصنوعی}{\lr{Zebracat}}{پلتفرم ساخت ویدیو از متن}{شهریور ۱۴۰۳ — اکنون · دورکاری (برلین)}
+\begin{cvbullets}
+  \item ساخت خط‌لولهٔ تولید: هر رندر به کارهایی شکسته می‌شود که مستقل از هم روی کارگرهای
+        \lr{RabbitMQ} دوباره تلاش می‌کنند و وضعیت هر کار جداگانه نگه داشته می‌شود، تا شکست یک
+        مرحله به قیمت کل ویدیو تمام نشود.
+  \item کار روی بخش مدلِ محصول — ساخت متن و صحنه، اعتبارسنجی خروجی با شِما پیش از رسیدن به
+        خط‌لوله، و تلاش مجددی که نمی‌گذارد یک پاسخ نامعتبر کل رندر را خراب کند.
+  \item ساخت ویدیوی برنامه‌پذیر با \lr{Remotion}: کامپوننت‌های \lr{React} که بدون مرورگر به فریم
+        تبدیل می‌شوند، تا تغییر یک قالب مثل هر تغییر کد دیگری منتشر شود.
+  \item کار در همهٔ لایه‌ها — سرویس‌های \lr{Django} و \lr{FastAPI} پشت رابط‌های \lr{React} و
+        \lr{TypeScript}.
+\end{cvbullets}
+\tech{Python · FastAPI · Django · RabbitMQ · Redis · React · TypeScript · Remotion · Docker · AWS}
+
+\vspace{6pt}
+
+\role{توسعه‌دهندهٔ تمام‌پشته}{فریلنس}{محصولات وب و \lr{SaaS}}{خرداد ۱۴۰۰ — شهریور ۱۴۰۳ · دورکاری}
+\begin{cvbullets}
+  \item تحویل کامل محصول به کارفرما: مدل داده، \lr{API}، رابط کاربری، استقرار، و پشتیبانی پس از آن.
+  \item استانداردسازی روی \lr{Django/DRF} و \lr{FastAPI} پشت \lr{React}، کانتینری‌شده و با پایش
+        فعال پیش از تحویل.
+  \item برعهده‌گرفتن بخش‌هایی که کارفرما خودش نمی‌توانست بررسی‌شان کند — احراز هویت، کنترل
+        دسترسی، و نحوهٔ نگهداری داده‌هایش.
+\end{cvbullets}
+\tech{Django · DRF · FastAPI · React · PostgreSQL · Docker · Nginx}
+
+\cvsection{پروژه‌های متن‌باز منتخب}
+
+{\metafont\fontsize{7.6}{10}\selectfont\color{muted}%
+\lr{\link{https://github.com/mohamad-liyaghi}{github.com/mohamad-liyaghi}}} {\fontsize{8.4}{10}\selectfont\color{muted}— ۲۲۹ ستاره در ۲۳ مخزن عمومی}\par
+\vspace{4.5pt}
+
+\project{\link{https://github.com/mohamad-liyaghi/FoodAnywhere}{FoodAnywhere}}{۴۰ ستاره}{بک‌اند سفارش غذا. \lr{PostGIS} برای جست‌وجوی مکانی، \lr{Celery} برای کارهای سنگین، و ردیابی‌ای که سفارش را از درخواست تا کارگر دنبال می‌کند.}
+\project{\link{https://github.com/mohamad-liyaghi/fast-commerce}{fast-commerce}}{۲۲ ستاره}{بک‌اند فروشگاهی ناهمگام با تمرکز بر توان عملیاتی — مرزهای تمیز \lr{API}، پردازش پس‌زمینه، و آزمون‌هایی که جلوی انتشار خراب را می‌گیرند.}
+\project{\link{https://github.com/mohamad-liyaghi/AcademyMaster}{AcademyMaster}}{۲۱ ستاره}{\lr{API} مدیریت آموزشگاه با دسترسی‌های لایه‌ای و کارهای زمان‌بندی‌شدهٔ پس‌زمینه.}
+\project{\link{https://github.com/mohamad-liyaghi/Tsuna-Streaming}{Tsuna-Streaming}}{۱۶ ستاره}{بک‌اند پخش ویدیو و موسیقی، با انتقال پردازش‌های سنگین به کارگرهای پس‌زمینه.}
+\project{\link{https://github.com/mohamad-liyaghi/telegram-to-rubika-uploader}{telegram-to-rubika-uploader}}{۱۴ ستاره}{ابزار \lr{Go} برای انتقال فایل تا ۲ گیگابایت میان دو پلتفرم، تا کاربران ایرانی پهنای باند محدود \lr{VPN} را صرف آپلود دوباره نکنند.}
+\project{\link{https://github.com/mohamad-liyaghi/FastQuora}{FastQuora}}{۱۱ ستاره}{سامانهٔ پرسش و پاسخ روی \lr{FastAPI} — جست‌وجو با \lr{Elasticsearch}، کش با \lr{Redis}، و ردیابی توزیع‌شده در هر دو.}
+
+\cvsection{مهارت‌ها}
+
+\skillrow{زبان‌ها}{\lr{Python, Go, TypeScript, SQL, Bash}}
+\skillrow{بک‌اند}{\lr{Django, Django REST Framework, FastAPI, Celery, RabbitMQ, asyncio, REST, WebSockets}}
+\skillrow{مدل‌ها}{\lr{LLM APIs}، خروجی ساخت‌یافته، فراخوانی ابزار، \lr{RAG}، جست‌وجوی برداری، ارزیابی}
+\skillrow{داده}{\lr{PostgreSQL (PostGIS), Redis, Elasticsearch, MongoDB}}
+\skillrow{فرانت‌اند}{\lr{React, TypeScript, Tailwind, Remotion}}
+\skillrow{زیرساخت}{\lr{Docker, Kubernetes, GitHub Actions, AWS, Nginx}}
+\skillrow{پایداری}{\lr{OpenTelemetry, Prometheus, Grafana, Sentry, Pytest}}
+
+\cvsection{نوشته‌ها}
+
+یادداشت‌های بلند دربارهٔ مدل‌های زبانی در محیط واقعی، منتشرشده در \lr{Medium} (به انگلیسی) —
+\lr{\link{https://medium.com/@el_mohamad/stop-being-a-feature-factory-the-engineers-other-job-is-reading-the-money-f95653b9c3ff}{Stop Being a Feature Factory}} (مرداد ۱۴۰۵)،
+\lr{\link{https://medium.com/@el_mohamad/stop-being-your-products-night-shift-how-an-agent-squad-actually-works-9fb5b2f9718a}{How an Agent Squad Actually Works}} (مرداد ۱۴۰۵).
+آرشیو کامل: \lr{\link{https://medium.com/@el_mohamad}{medium.com/@el\_mohamad}}
+
+\enlargethispage{2.6\baselineskip}
+\cvsection{تحصیلات و زبان}
+
+\skillrow{تحصیلات}{کارشناسی علوم کامپیوتر}
+\skillrow{زبان}{فارسی — زبان مادری \quad\textperiodcentered\quad انگلیسی — در حد کار حرفه‌ای}
+
+\end{document}

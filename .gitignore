@@ -5,3 +5,9 @@ node_modules
 dist
 .vite
 *.log
+
+# LaTeX build artifacts
+cv/*.aux
+cv/*.log
+cv/*.out
+cv/*.pdf
