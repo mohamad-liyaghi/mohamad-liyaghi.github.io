@@ -20,10 +20,9 @@ export const en = {
     close: "Close menu",
     top: "Back to top",
     external: "opens in a new tab",
-    localTime: "Local time in Tehran",
   },
   hero: {
-    place: "Tehran, Iran",
+    eyebrow: "Backend · AI · Video",
     nameLines: ["Mohamad", "Liyaghi"],
     role: "Software Engineer · AI",
     at: "at",
@@ -89,7 +88,7 @@ export const en = {
       tsuna:
         "Streaming backend for video and music, with the expensive processing pushed onto background workers.",
       rubika:
-        "Relays files up to 2 GB between two platforms, so people in Iran don't spend scarce VPN bandwidth re-uploading what they already sent.",
+        "Relays files up to 2 GB directly between two platforms, so nobody burns limited bandwidth re-uploading what they already sent.",
       fastquora:
         "Q&A platform on FastAPI. Elasticsearch for search, Redis for cache, distributed tracing through both.",
     },
@@ -97,12 +96,12 @@ export const en = {
   about: {
     title: "About",
     paragraphs: [
-      "I'm a software engineer in Tehran, five years into Python and most of that on the backend. The last stretch has been AI video, where the interesting problems turn out to be less about the model and more about everything around it — queues that survive a dead worker, state you can resume, progress a person can actually watch.",
+      "I'm a software engineer five years into Python, most of that on the backend. The last stretch has been AI video, where the interesting problems turn out to be less about the model and more about everything around it — queues that survive a dead worker, state you can resume, progress a person can actually watch.",
       "I work across the stack rather than at one layer: Django and FastAPI behind React and TypeScript, Remotion when the output is a video instead of a page. The seams between those are where systems usually break, so that's the part I pay attention to.",
-      "Outside work I publish open source — mostly backends, plus a self-hosted stack for collaborating over networks you can't rely on, which is a real problem where I live. I write on Medium about what LLM systems actually do once real traffic reaches them.",
+      "Outside work I publish open source — mostly backends, plus a self-hosted stack for collaborating over networks you can't rely on. I write on Medium about what LLM systems actually do once real traffic reaches them.",
     ],
     facts: {
-      based: { label: "Based in", value: "Tehran, Iran" },
+      work: { label: "Work", value: "Remote" },
       role: { label: "Role", value: "Software Engineer · AI" },
       company: { label: "Company", value: "Zebracat" },
       languages: { label: "Languages", value: "Persian (native), English (professional)" },
@@ -149,7 +148,7 @@ export const en = {
     },
   },
   footer: {
-    built: "Designed and built in Tehran",
+    built: "Designed and built from scratch",
     source: "Source",
     rights: "© {year} Mohamad Liyaghi",
   },

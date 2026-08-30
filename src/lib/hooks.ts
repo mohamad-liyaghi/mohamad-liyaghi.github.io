@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { PROFILE, SECTIONS, type SectionId } from "../data/profile";
+import { SECTIONS, type SectionId } from "../data/profile";
 
 /** True once the user has asked the OS to keep motion to a minimum. */
 export function usePrefersReducedMotion(): boolean {
@@ -40,10 +40,11 @@ export function useReveal<T extends Element = HTMLDivElement>() {
           }
         }
       },
-      // threshold 0 with a shallow bottom margin: anything the reader can
-      // scroll to will fire. A stricter threshold left the last section on the
-      // page stuck at opacity 0 on tall or short viewports.
-      { rootMargin: "0px 0px -5% 0px", threshold: 0 },
+      // The bottom margin holds the reveal until the element is properly in
+      // view, and it is in pixels rather than a percentage on purpose: as a
+      // share of a very tall window the dead band grows past the footer, and
+      // the last rows of the page would then never fire at all.
+      { rootMargin: "0px 0px -64px 0px", threshold: 0 },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -84,27 +85,6 @@ export function useScrolledPast(offset = 24): boolean {
     return () => window.removeEventListener("scroll", onScroll);
   }, [offset]);
   return past;
-}
-
-/** The wall clock in Tehran, ticking once a minute. */
-export function useLocalTime(locale: string): string {
-  const format = useCallback(
-    () =>
-      new Intl.DateTimeFormat(locale, {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-        timeZone: PROFILE.timeZone,
-      }).format(new Date()),
-    [locale],
-  );
-  const [time, setTime] = useState(format);
-  useEffect(() => {
-    setTime(format());
-    const id = window.setInterval(() => setTime(format()), 30_000);
-    return () => window.clearInterval(id);
-  }, [format]);
-  return time;
 }
 
 export type Theme = "light" | "dark";

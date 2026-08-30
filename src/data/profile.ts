@@ -17,7 +17,6 @@ export const PROFILE = {
   medium: "https://medium.com/@el_mohamad",
   telegram: "https://t.me/El_mohamad",
   repo: "https://github.com/mohamad-liyaghi/mohamad-liyaghi.github.io",
-  timeZone: "Asia/Tehran",
 } as const;
 
 /** Verified 2026-08-30 against the GitHub API. */

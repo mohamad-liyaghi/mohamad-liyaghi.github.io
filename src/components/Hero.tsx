@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import { PROFILE, STATS } from "../data/profile";
 import { useI18n } from "../i18n";
-import { useLocalTime, useReveal } from "../lib/hooks";
+import { useReveal } from "../lib/hooks";
 import { ArrowOut, Mail } from "./Icons";
 import { Container, Out, Reveal } from "./primitives";
 import { ResumeMenu } from "./ResumeMenu";
@@ -40,8 +40,7 @@ function Stat({ value, label, delay }: { value: string; label: string; delay: nu
 }
 
 export function Hero() {
-  const { t, lang, num } = useI18n();
-  const time = useLocalTime(lang === "fa" ? "fa-IR" : "en-GB");
+  const { t, num } = useI18n();
   const nameRef = useReveal<HTMLHeadingElement>();
 
   return (
@@ -53,11 +52,7 @@ export function Hero() {
               aria-hidden
               className="inline-block h-1.5 w-1.5 rounded-full bg-accent-bright"
             />
-            {t.hero.place}
-            <span aria-hidden className="text-rule">
-              /
-            </span>
-            <time aria-label={t.a11y.localTime}>{time}</time>
+            {t.hero.eyebrow}
           </p>
         </Reveal>
 

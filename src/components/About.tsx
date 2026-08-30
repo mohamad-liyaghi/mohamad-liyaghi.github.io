@@ -3,7 +3,7 @@ import { useI18n } from "../i18n";
 import { Reveal, Section, SectionHead } from "./primitives";
 
 const N = SECTIONS.find((s) => s.id === "about")!.n;
-const FACT_KEYS = ["based", "role", "company", "languages"] as const;
+const FACT_KEYS = ["role", "company", "work", "languages"] as const;
 
 export function About() {
   const { t } = useI18n();

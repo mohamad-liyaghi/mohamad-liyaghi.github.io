@@ -53,7 +53,7 @@ src/
   components/    one file per section, plus shared primitives
   data/profile.ts   language-neutral facts — links, roles, projects, stats
   i18n/          en.ts, fa.ts and the provider that swaps them
-  lib/hooks.ts   reveal, scroll spy, theme, Tehran clock
+  lib/hooks.ts   reveal, scroll spy, theme
   styles.css     design tokens and the motion primitives
 cv/              LaTeX résumés (source of truth) + build.sh
 public/          favicon, social card, résumé PDFs and HTML
