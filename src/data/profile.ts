@@ -60,6 +60,9 @@ export const SECTIONS: { id: SectionId; n: string }[] = [
   { id: "contact", n: "06" },
 ];
 
+/** Shown in the identity column — the 6-second scan. */
+export const HIGHLIGHTS = ["Python", "FastAPI", "Django", "Remotion", "Go"] as const;
+
 export type RoleId = "zebracat" | "freelance";
 
 export const ROLES: {

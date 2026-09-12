@@ -225,12 +225,12 @@
      descenders need real leading or the two lines collide. The bottom padding
      reserves descender space so the flourish never lands on a tail. */
   .hero-name {
-    font-size: clamp(3.2rem, 10vw, 6.1rem);
+    font-size: clamp(2.6rem, 8vw, 3.4rem);
     line-height: 0.95;
-    padding-bottom: 0.19em;
+    padding-bottom: 0.12em;
   }
   [lang="fa"] .hero-name {
-    font-size: clamp(2.7rem, 9vw, 5.1rem);
+    font-size: clamp(2.2rem, 7vw, 2.9rem);
     line-height: 1.4;
     padding-bottom: 0.04em;
   }

@@ -95,6 +95,13 @@ export const Mail = (p: IconProps) => (
   </Stroke>
 );
 
+export const Search = (p: IconProps) => (
+  <Stroke {...p}>
+    <circle cx="11" cy="11" r="6.5" />
+    <path d="m16 16 5 5" />
+  </Stroke>
+);
+
 /* Brand marks are filled, not stroked — they are drawn from each brand's own
    glyph and would not read correctly as outlines. */
 function Brand({ children, ...props }: IconProps) {

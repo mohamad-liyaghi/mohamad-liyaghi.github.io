@@ -54,25 +54,23 @@ export function SectionHead({
 }) {
   const { num, lang } = useI18n();
   return (
-    <header className="mb-12 sm:mb-16">
-      <Rule />
-      <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-baseline sm:gap-8">
-        <Reveal delay={80}>
-          <span className="label text-accent">{num(Number(n)).padStart(2, lang === "fa" ? "\u06F0" : "0")}</span>
+    <header className="mb-8 sm:mb-10">
+      <Reveal delay={80}>
+        <p className="label flex items-center gap-3">
+          <span className="text-accent">{num(Number(n)).padStart(2, lang === "fa" ? "\u06F0" : "0")}</span>
+          <span className="h-px flex-1 bg-hairline" aria-hidden />
+        </p>
+      </Reveal>
+      <Reveal delay={140}>
+        <h2 id={`${id}-title`} className="mt-3 font-display text-[1.75rem] text-ink sm:text-[2rem]">
+          {title}
+        </h2>
+      </Reveal>
+      {lede ? (
+        <Reveal delay={200}>
+          <p className="mt-2 max-w-xl text-[0.95rem] text-muted">{lede}</p>
         </Reveal>
-        <div className="flex-1">
-          <Reveal delay={140}>
-            <h2 id={`${id}-title`} className="text-[2rem] sm:text-[2.6rem]">
-              {title}
-            </h2>
-          </Reveal>
-          {lede ? (
-            <Reveal delay={220}>
-              <p className="mt-3 max-w-2xl text-[0.95rem] text-muted sm:text-base">{lede}</p>
-            </Reveal>
-          ) : null}
-        </div>
-      </div>
+      ) : null}
     </header>
   );
 }
@@ -87,8 +85,8 @@ export function Section({
   className?: string;
 }) {
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className={`py-20 sm:py-28 ${className}`}>
-      <Container>{children}</Container>
+    <section id={id} aria-labelledby={`${id}-title`} className={`py-16 sm:py-20 ${className}`}>
+      {children}
     </section>
   );
 }

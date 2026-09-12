@@ -93,6 +93,21 @@ export function useScrolledPast(offset = 24): boolean {
   return past;
 }
 
+/** 0–1 scroll progress of the document. */
+export function useScrollProgress(): number {
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setValue(max > 0 ? Math.min(1, window.scrollY / max) : 0);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return value;
+}
+
 export type Theme = "light" | "dark";
 
 /** Theme lives on <html data-theme> and is set before paint in index.html. */
@@ -101,6 +116,14 @@ export function useTheme(): [Theme, () => void] {
     if (typeof document === "undefined") return "light";
     return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
   });
+  useEffect(() => {
+    const sync = () => {
+      const next = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+      setTheme(next);
+    };
+    window.addEventListener("themechange", sync);
+    return () => window.removeEventListener("themechange", sync);
+  }, []);
   const toggle = useCallback(() => {
     setTheme((prev) => {
       const next: Theme = prev === "dark" ? "light" : "dark";
@@ -113,6 +136,7 @@ export function useTheme(): [Theme, () => void] {
       } catch {
         /* the choice just won't survive a reload */
       }
+      window.dispatchEvent(new Event("themechange"));
       return next;
     });
   }, []);

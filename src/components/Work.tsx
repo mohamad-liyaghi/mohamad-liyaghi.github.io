@@ -46,7 +46,7 @@ export function Work() {
                 </div>
 
                 {copy.steps.length > 0 ? (
-                  <ol className="mt-8 grid gap-px border border-hairline bg-hairline sm:grid-cols-3">
+                  <ol className="mt-8 grid gap-px border border-hairline bg-hairline">
                     {copy.steps.map((step, si) => (
                       <li key={step.title} className="bg-surface p-6 sm:p-7">
                         <p className="label text-accent">{num(si + 1).padStart(2, zero)}</p>
@@ -70,7 +70,11 @@ export function Work() {
                   </ul>
                 ) : null}
 
-                <ul className="mt-6 flex flex-wrap gap-x-3 gap-y-1.5 sm:ps-[10rem] sm:ms-10">
+                <ul
+                  className={`mt-6 flex flex-wrap gap-x-3 gap-y-1.5 ${
+                    copy.bullets.length > 0 ? "sm:ps-[10rem] sm:ms-10" : ""
+                  }`}
+                >
                   {role.tech.map((tech) => (
                     <li key={tech} className="font-mono text-xs text-muted">
                       {tech}
