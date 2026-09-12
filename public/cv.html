@@ -6,7 +6,7 @@
     <title>Mohamad Liyaghi — Résumé</title>
     <meta
       name="description"
-      content="Résumé of Mohamad Liyaghi — Software Engineer · AI at Zebracat. Job pipelines, LLM features and programmatic video in Python, TypeScript and Go."
+      content="Résumé of Mohamad Liyaghi — Software Engineer · AI at Zebracat. Generation pipelines, model steps, and programmatic video in Python, TypeScript and Go."
     />
     <link rel="icon" href="/favicon.svg" />
     <link rel="alternate" hreflang="fa" href="https://mohamad-liyaghi.ir/cv-fa.html" />
@@ -197,11 +197,10 @@
 
       <h2>Summary</h2>
       <p>
-        Software engineer, five years in Python and backend-leaning full-stack. I build the systems
-        behind AI video at Zebracat: job pipelines that split a render into work which can fail and
-        retry on its own, the model steps that generate scripts and scenes, programmatic video with
-        Remotion, and the React interfaces on top. I write publicly about how language-model systems
-        behave under real traffic.
+        Software engineer, five years of Python, mostly backend. At Zebracat I work on the path from
+        a prompt to a rendered video: jobs that retry on their own, model output that has to pass a
+        schema, and Remotion templates that ship like code. I write about language-model systems
+        once they have real users.
       </p>
 
       <h2>Experience</h2>
@@ -216,23 +215,18 @@
         </p>
         <ul class="bullets">
           <li>
-            Build the generation pipeline: a render is split into jobs that retry independently
-            across RabbitMQ workers, with state held per job so one failed step doesn't cost the
-            whole video.
+            A failed scene no longer kills the render. Each step is a job on RabbitMQ, with its own
+            state and its own retry.
           </li>
           <li>
-            Work on the model side of the product — script and scene generation, output validated
-            against a schema before it reaches the pipeline, and retries that keep one bad response
-            from failing a render.
+            Scripts and scenes are generated, then checked against a schema. A bad response retries;
+            it does not take the video down.
           </li>
           <li>
-            Build programmatic video with Remotion: React components rendered headlessly into
-            frames, so changing a template ships like any other code change.
+            Templates are Remotion — React rendered headlessly into frames. Changing one is a code
+            change.
           </li>
-          <li>
-            Work across the stack — Django and FastAPI services behind React and TypeScript
-            surfaces.
-          </li>
+          <li>Django and FastAPI services behind React and TypeScript.</li>
         </ul>
         <p class="tech">
           Python · FastAPI · Django · RabbitMQ · Redis · React · TypeScript · Remotion · Docker ·
@@ -248,16 +242,16 @@
         <p class="org"><strong>Freelance</strong> · SaaS and consumer web products</p>
         <ul class="bullets">
           <li>
-            Shipped products end to end for clients: data model, API, frontend, deployment, and the
-            support afterwards.
+            Took client products from the data model through the API, the UI, and deploy, then stayed
+            for the support.
           </li>
           <li>
-            Standardised on Django/DRF and FastAPI behind React, containerised, with monitoring in
-            place before handover.
+            Django/DRF or FastAPI behind React, containerised, with monitoring in place before
+            handover.
           </li>
           <li>
-            Owned the parts a client couldn't audit for themselves — authentication, access control,
-            and how their data was stored.
+            Owned auth, access control, and how the data was stored — the parts a client could not
+            audit themselves.
           </li>
         </ul>
         <p class="tech">Django · DRF · FastAPI · React · PostgreSQL · Docker · Nginx</p>
@@ -271,37 +265,37 @@
       <ul class="projects">
         <li>
           <b><a href="https://github.com/mohamad-liyaghi/FoodAnywhere">FoodAnywhere</a></b>
-          <span class="stars">40 stars</span> — Food-delivery backend. PostGIS geospatial search,
-          Celery for slow work, and tracing that follows an order from request to worker.
+          <span class="stars">40 stars</span> — Nearby restaurants, orders through the kitchen.
+          PostGIS search, Celery for slow work, traces from request to worker.
         </li>
         <li>
-          <b><a href="https://github.com/mohamad-liyaghi/fast-commerce">fast-commerce</a></b>
-          <span class="stars">22 stars</span> — Async e-commerce backend built for throughput —
-          clean API boundaries, background processing, tests that gate deploys.
+          <b><a href="https://github.com/mohamad-liyaghi/fast-commerce">Fast Commerce</a></b>
+          <span class="stars">22 stars</span> — Async store API built for throughput — clean
+          boundaries, background processing, tests that block a bad deploy.
         </li>
         <li>
           <b><a href="https://github.com/mohamad-liyaghi/AcademyMaster">AcademyMaster</a></b>
-          <span class="stars">21 stars</span> — Academy-management API with layered permissions and
-          scheduled background jobs.
+          <span class="stars">21 stars</span> — An academy's API: who can see what, and jobs that
+          run on a schedule.
         </li>
         <li>
-          <b><a href="https://github.com/mohamad-liyaghi/Tsuna-Streaming">Tsuna-Streaming</a></b>
-          <span class="stars">16 stars</span> — Streaming backend for video and music, with
-          expensive processing pushed onto background workers.
+          <b><a href="https://github.com/mohamad-liyaghi/Tsuna-Streaming">Tsuna</a></b>
+          <span class="stars">16 stars</span> — Video and music streaming, with expensive processing
+          off the request path.
         </li>
         <li>
           <b
             ><a href="https://github.com/mohamad-liyaghi/telegram-to-rubika-uploader"
-              >telegram-to-rubika-uploader</a
+              >Telegram → Rubika</a
             ></b
           >
-          <span class="stars">14 stars</span> — Go tool relaying files up to 2 GB directly between
+          <span class="stars">14 stars</span> — Go tool moving files up to 2 GB straight between
           platforms, so nobody re-uploads over limited bandwidth.
         </li>
         <li>
           <b><a href="https://github.com/mohamad-liyaghi/FastQuora">FastQuora</a></b>
-          <span class="stars">11 stars</span> — Q&amp;A platform on FastAPI — Elasticsearch search,
-          Redis cache, distributed tracing through both.
+          <span class="stars">11 stars</span> — Ask and answer — Elasticsearch on the search path,
+          tracing through the cache.
         </li>
       </ul>
 
@@ -316,7 +310,7 @@
         <dt>Data</dt>
         <dd>PostgreSQL (incl. PostGIS), Redis, Elasticsearch, MongoDB</dd>
         <dt>Frontend</dt>
-        <dd>React, TypeScript, Tailwind, Remotion</dd>
+        <dd>React, Tailwind, Remotion</dd>
         <dt>Infrastructure</dt>
         <dd>Docker, Kubernetes, GitHub Actions, AWS, Nginx</dd>
         <dt>Reliability</dt>
@@ -325,7 +319,7 @@
 
       <h2>Writing</h2>
       <p>
-        Long-form notes on language models in production, published on Medium —
+        On agents, models, and the money around shipping them, published on Medium —
         <a
           href="https://medium.com/@el_mohamad/stop-being-a-feature-factory-the-engineers-other-job-is-reading-the-money-f95653b9c3ff"
           >Stop Being a Feature Factory</a

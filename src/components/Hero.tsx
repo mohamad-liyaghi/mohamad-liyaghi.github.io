@@ -1,8 +1,8 @@
 import type { CSSProperties } from "react";
-import { PROFILE, STATS } from "../data/profile";
+import { ARTICLES, PROFILE, STATS } from "../data/profile";
 import { useI18n } from "../i18n";
 import { useReveal } from "../lib/hooks";
-import { ArrowOut, Mail } from "./Icons";
+import { Mail } from "./Icons";
 import { Container, Out, Reveal } from "./primitives";
 import { ResumeMenu } from "./ResumeMenu";
 
@@ -39,12 +39,42 @@ function Stat({ value, label, delay }: { value: string; label: string; delay: nu
   );
 }
 
+function Pipeline() {
+  const { t, num, lang } = useI18n();
+  const zero = lang === "fa" ? "\u06F0" : "0";
+  return (
+    <Reveal delay={480}>
+      <aside className="figure p-6 sm:p-7">
+        <p className="label text-accent">{t.pipeline.kicker}</p>
+        <p className="mt-5 font-display text-2xl leading-snug text-ink sm:text-[1.65rem]">
+          {t.pipeline.from}
+          <span className="mt-1 block text-muted">{t.pipeline.to}</span>
+        </p>
+        <ol className="mt-8 flex flex-col">
+          {t.pipeline.steps.map((step, i) => (
+            <li
+              key={step.title}
+              className="grid grid-cols-[2.5rem_1fr] gap-3 border-t border-hairline py-3.5"
+            >
+              <span className="label pt-1 text-accent">{num(i + 1).padStart(2, zero)}</span>
+              <div>
+                <p className="font-medium text-ink">{step.title}</p>
+                <p className="mt-0.5 text-[0.9rem] text-muted">{step.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </aside>
+    </Reveal>
+  );
+}
+
 export function Hero() {
   const { t, num } = useI18n();
   const nameRef = useReveal<HTMLHeadingElement>();
 
   return (
-    <section id="top" className="relative pt-32 pb-20 sm:pt-40 sm:pb-28">
+    <section id="top" className="relative pt-32 pb-16 sm:pt-40 sm:pb-24">
       <Container>
         <Reveal>
           <p className="label flex items-center gap-2.5">
@@ -56,58 +86,60 @@ export function Hero() {
           </p>
         </Reveal>
 
-        <h1
-          ref={nameRef}
-          className="hero-name wipe mt-7 font-display text-ink"
-        >
-          {t.hero.nameLines.map((line, i) => (
-            <span key={line} style={{ "--delay": `${120 + i * 110}ms` } as CSSProperties}>
-              {line}
-            </span>
-          ))}
-        </h1>
+        <div className="mt-7 grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-16">
+          <div>
+            <h1 ref={nameRef} className="hero-name wipe font-display text-ink">
+              {t.hero.nameLines.map((line, i) => (
+                <span key={line} style={{ "--delay": `${120 + i * 110}ms` } as CSSProperties}>
+                  {line}
+                </span>
+              ))}
+            </h1>
 
-        <Flourish />
+            <Flourish />
 
-        <Reveal delay={420}>
-          <p className="mt-7 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[0.95rem]">
-            <span className="font-medium text-ink">{t.hero.role}</span>
-            <span className="text-muted">{t.hero.at}</span>
-            <Out
-              href={PROFILE.companyUrl}
-              className="ul inline-flex items-center gap-1 font-medium text-accent"
-            >
-              {PROFILE.company}
-              <ArrowOut width={13} height={13} />
-            </Out>
-          </p>
-        </Reveal>
+            <Reveal delay={420}>
+              <p className="mt-7 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[0.95rem]">
+                <span className="font-medium text-ink">{t.hero.role}</span>
+                <span className="text-muted">{t.hero.at}</span>
+                <Out
+                  href={PROFILE.companyUrl}
+                  className="ul inline-flex items-center gap-1 font-medium text-accent"
+                >
+                  {PROFILE.company}
+                </Out>
+              </p>
+            </Reveal>
 
-        <Reveal delay={500}>
-          <p className="mt-8 max-w-2xl font-display text-[clamp(1.3rem,3.2vw,1.85rem)] leading-[1.42] text-ink">
-            {t.hero.statement}
-          </p>
-        </Reveal>
+            <Reveal delay={500}>
+              <p className="hero-statement mt-8 max-w-2xl font-display text-[clamp(1.25rem,2.8vw,1.7rem)] leading-[1.45] text-ink">
+                {t.hero.statement}
+              </p>
+            </Reveal>
 
-        <Reveal delay={560}>
-          <p className="mt-6 max-w-xl text-[0.95rem] text-muted">{t.hero.lede}</p>
-        </Reveal>
+            <Reveal delay={560}>
+              <p className="mt-6 max-w-xl text-[0.95rem] text-muted">{t.hero.lede}</p>
+            </Reveal>
 
-        <Reveal delay={620}>
-          <div className="mt-10 flex flex-wrap items-center gap-3">
-            <ResumeMenu />
-            <a href={`mailto:${PROFILE.email}`} className="btn btn-ghost">
-              <Mail />
-              {t.hero.email}
-            </a>
+            <Reveal delay={620}>
+              <div className="mt-10 flex flex-wrap items-center gap-3">
+                <ResumeMenu />
+                <a href={`mailto:${PROFILE.email}`} className="btn btn-ghost">
+                  <Mail />
+                  {t.hero.email}
+                </a>
+              </div>
+            </Reveal>
           </div>
-        </Reveal>
+
+          <Pipeline />
+        </div>
 
         <div className="mt-16 border-t border-hairline pt-8">
           <div className="grid grid-cols-3 gap-6 sm:max-w-lg">
-            <Stat value={num(STATS.stars)} label={t.stats.stars} delay={700} />
+            <Stat value={num(STATS.years)} label={t.stats.years} delay={700} />
             <Stat value={num(STATS.repos)} label={t.stats.repos} delay={760} />
-            <Stat value={num(STATS.years)} label={t.stats.years} delay={820} />
+            <Stat value={num(ARTICLES.length)} label={t.stats.writing} delay={820} />
           </div>
         </div>
       </Container>

@@ -6,7 +6,7 @@
     <title>محمد لیاقی — رزومه</title>
     <meta
       name="description"
-      content="رزومهٔ محمد لیاقی — مهندس نرم‌افزار · هوش مصنوعی در Zebracat. خط‌لوله‌های پردازش، قابلیت‌های مبتنی بر مدل‌های زبانی و ویدیوی برنامه‌پذیر."
+      content="رزومهٔ محمد لیاقی — مهندس نرم‌افزار · هوش مصنوعی در Zebracat. پایپ‌لاین تولید، گام‌های مدل، و ویدیوی برنامه‌پذیر."
     />
     <link rel="icon" href="/favicon.svg" />
     <link rel="alternate" hreflang="en" href="https://mohamad-liyaghi.ir/cv.html" />
@@ -187,11 +187,10 @@
 
       <h2>خلاصه</h2>
       <p>
-        مهندس نرم‌افزارم؛ پنج سال کار با Python و تمام‌پشته با گرایش بک‌اند. در Zebracat سامانه‌های
-        پشت ویدیوی مبتنی بر هوش مصنوعی را می‌سازم: خط‌لوله‌هایی که یک رندر را به کارهایی می‌شکنند که
-        مستقل از هم شکست می‌خورند و دوباره تلاش می‌کنند، گام‌های مدل که متن و صحنه تولید می‌کنند،
-        ویدیوی برنامه‌پذیر با Remotion، و رابط‌های React روی همهٔ این‌ها. دربارهٔ رفتار واقعی
-        مدل‌های زبانی زیر بار کاربر می‌نویسم.
+        مهندس نرم‌افزارم؛ پنج سال Python، بیشتر در بک‌اند. در Zebracat روی مسیر متن تا ویدیوی نهایی
+        کار می‌کنم: کارهایی که خودشان دوباره تلاش می‌کنند، خروجی مدلی که باید از شِما رد شود، و
+        قالب‌های Remotion که مثل کد منتشر می‌شوند. درباره‌ی سامانه‌های مبتنی بر مدل زبانی می‌نویسم،
+        وقتی کاربر واقعی به آن‌ها می‌رسد.
       </p>
 
       <h2>تجربهٔ کاری</h2>
@@ -205,19 +204,18 @@
         </p>
         <ul class="bullets">
           <li>
-            ساخت خط‌لولهٔ تولید: هر رندر به کارهایی شکسته می‌شود که مستقل از هم روی کارگرهای
-            RabbitMQ دوباره تلاش می‌کنند و وضعیت هر کار جداگانه نگه داشته می‌شود، تا شکست یک مرحله
-            به قیمت کل ویدیو تمام نشود.
+            دیگر شکست یک صحنه کل رندر را نمی‌کشد. هر مرحله یک کار روی RabbitMQ است، با وضعیت و تلاش
+            مجدد خودش.
           </li>
           <li>
-            کار روی بخش مدلِ محصول — ساخت متن و صحنه، اعتبارسنجی خروجی با شِما پیش از رسیدن به
-            خط‌لوله، و تلاش مجددی که نمی‌گذارد یک پاسخ نامعتبر کل رندر را خراب کند.
+            متن و صحنه تولید می‌شوند، بعد با شِما سنجیده می‌شوند. پاسخ خراب دوباره تلاش می‌کند؛ ویدیو
+            را پایین نمی‌آورد.
           </li>
           <li>
-            ساخت ویدیوی برنامه‌پذیر با Remotion: کامپوننت‌های React که بدون مرورگر به فریم تبدیل
-            می‌شوند، تا تغییر یک قالب مثل هر تغییر کد دیگری منتشر شود.
+            قالب‌ها Remotion هستند — React که بدون مرورگر به فریم تبدیل می‌شود. تغییر یکی یعنی یک
+            تغییر کد.
           </li>
-          <li>کار در همهٔ لایه‌ها — سرویس‌های Django و FastAPI پشت رابط‌های React و TypeScript.</li>
+          <li>سرویس‌های Django و FastAPI پشت React و TypeScript.</li>
         </ul>
         <p class="tech" dir="ltr" style="text-align: right">
           Python · FastAPI · Django · RabbitMQ · Redis · React · TypeScript · Remotion · Docker ·
@@ -232,14 +230,11 @@
         </div>
         <p class="org"><strong>فریلنس</strong> · محصولات وب و SaaS</p>
         <ul class="bullets">
-          <li>تحویل کامل محصول به کارفرما: مدل داده، API، رابط کاربری، استقرار، و پشتیبانی پس از آن.</li>
+          <li>محصول کارفرما را از مدل داده تا API و رابط و استقرار بردم، و بعد از تحویل هم ماندم.</li>
+          <li>Django/DRF یا FastAPI پشت React، کانتینری‌شده، با پایش فعال پیش از تحویل.</li>
           <li>
-            استانداردسازی روی Django/DRF و FastAPI پشت React، کانتینری‌شده و با پایش فعال پیش از
-            تحویل.
-          </li>
-          <li>
-            برعهده‌گرفتن بخش‌هایی که کارفرما خودش نمی‌توانست بررسی‌شان کند — احراز هویت، کنترل
-            دسترسی، و نحوهٔ نگهداری داده‌هایش.
+            احراز هویت، کنترل دسترسی، و نحوهٔ نگهداری داده — بخش‌هایی که کارفرما خودش نمی‌توانست
+            بررسی‌شان کند.
           </li>
         </ul>
         <p class="tech" dir="ltr" style="text-align: right">
@@ -255,37 +250,37 @@
       <ul class="projects">
         <li>
           <b><a href="https://github.com/mohamad-liyaghi/FoodAnywhere">FoodAnywhere</a></b>
-          <span class="stars">۴۰ ستاره</span> — بک‌اند سفارش غذا. PostGIS برای جست‌وجوی مکانی،
-          Celery برای کارهای سنگین، و ردیابی‌ای که سفارش را از درخواست تا کارگر دنبال می‌کند.
+          <span class="stars">۴۰ ستاره</span> — رستوران نزدیک، سفارش تا آشپزخانه. جست‌وجوی PostGIS،
+          کار سنگین با Celery، ردپا از درخواست تا کارگر.
         </li>
         <li>
-          <b><a href="https://github.com/mohamad-liyaghi/fast-commerce">fast-commerce</a></b>
-          <span class="stars">۲۲ ستاره</span> — بک‌اند فروشگاهی ناهمگام با تمرکز بر توان عملیاتی —
-          مرزهای تمیز API، پردازش پس‌زمینه، و آزمون‌هایی که جلوی انتشار خراب را می‌گیرند.
+          <b><a href="https://github.com/mohamad-liyaghi/fast-commerce">Fast Commerce</a></b>
+          <span class="stars">۲۲ ستاره</span> — API فروشگاهی ناهمگام با تمرکز بر توان عملیاتی —
+          مرزهای تمیز، پردازش پس‌زمینه، آزمون‌هایی که جلوی انتشار خراب را می‌گیرند.
         </li>
         <li>
           <b><a href="https://github.com/mohamad-liyaghi/AcademyMaster">AcademyMaster</a></b>
-          <span class="stars">۲۱ ستاره</span> — API مدیریت آموزشگاه با دسترسی‌های لایه‌ای و کارهای
-          زمان‌بندی‌شدهٔ پس‌زمینه.
+          <span class="stars">۲۱ ستاره</span> — API یک آموزشگاه: چه کسی چه می‌بیند، و کارهایی که سر
+          وقت اجرا می‌شوند.
         </li>
         <li>
-          <b><a href="https://github.com/mohamad-liyaghi/Tsuna-Streaming">Tsuna-Streaming</a></b>
-          <span class="stars">۱۶ ستاره</span> — بک‌اند پخش ویدیو و موسیقی، با انتقال پردازش‌های
-          سنگین به کارگرهای پس‌زمینه.
+          <b><a href="https://github.com/mohamad-liyaghi/Tsuna-Streaming">Tsuna</a></b>
+          <span class="stars">۱۶ ستاره</span> — پخش ویدیو و موسیقی، با انتقال پردازش سنگین از مسیر
+          درخواست.
         </li>
         <li>
           <b
             ><a href="https://github.com/mohamad-liyaghi/telegram-to-rubika-uploader"
-              >telegram-to-rubika-uploader</a
+              >Telegram → Rubika</a
             ></b
           >
           <span class="stars">۱۴ ستاره</span> — ابزار Go برای انتقال مستقیم فایل تا ۲ گیگابایت میان
-          دو پلتفرم، تا کسی پهنای باند محدودش را صرف آپلود دوباره نکند.
+          دو پلتفرم، تا پهنای باند صرف آپلود دوباره نشود.
         </li>
         <li>
           <b><a href="https://github.com/mohamad-liyaghi/FastQuora">FastQuora</a></b>
-          <span class="stars">۱۱ ستاره</span> — سامانهٔ پرسش و پاسخ روی FastAPI — جست‌وجو با
-          Elasticsearch، کش با Redis، و ردیابی توزیع‌شده در هر دو.
+          <span class="stars">۱۱ ستاره</span> — پرسش و پاسخ — Elasticsearch روی جست‌وجو، ردیابی در
+          کش.
         </li>
       </ul>
 
@@ -304,7 +299,7 @@
           PostgreSQL (PostGIS), Redis, Elasticsearch, MongoDB
         </dd>
         <dt>فرانت‌اند</dt>
-        <dd dir="ltr" style="text-align: right">React, TypeScript, Tailwind, Remotion</dd>
+        <dd dir="ltr" style="text-align: right">React, Tailwind, Remotion</dd>
         <dt>زیرساخت</dt>
         <dd dir="ltr" style="text-align: right">Docker, Kubernetes, GitHub Actions, AWS, Nginx</dd>
         <dt>پایداری</dt>
@@ -315,7 +310,7 @@
 
       <h2>نوشته‌ها</h2>
       <p>
-        یادداشت‌های بلند دربارهٔ مدل‌های زبانی در محیط واقعی، منتشرشده در Medium (به انگلیسی) —
+        دربارهٔ ایجنت‌ها، مدل‌ها، و پولی که دورِ ساختن‌شان می‌چرخد، در Medium (به انگلیسی) —
         <a
           href="https://medium.com/@el_mohamad/stop-being-a-feature-factory-the-engineers-other-job-is-reading-the-money-f95653b9c3ff"
           >Stop Being a Feature Factory</a

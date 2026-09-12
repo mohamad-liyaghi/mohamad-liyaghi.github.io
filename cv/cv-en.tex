@@ -102,25 +102,21 @@
 
 \cvsection{Summary}
 
-Software engineer, five years in Python and backend-leaning full-stack. I build the systems behind
-AI video at Zebracat: job pipelines that split a render into work which can fail and retry on its own,
-the model steps that generate scripts and scenes, programmatic video with Remotion, and the React
-interfaces on top. I write publicly about how language-model systems behave under real traffic.
+Software engineer, five years of Python, mostly backend. At Zebracat I work on the path from a prompt
+to a rendered video: jobs that retry on their own, model output that has to pass a schema, and Remotion
+templates that ship like code. I write about language-model systems once they have real users.
 
 \cvsection{Experience}
 
 \role{Software Engineer \textperiodcentered\ AI}{Zebracat}{Generative text-to-video platform}{Sep 2024 \textendash\ Present \textperiodcentered\ Remote (Berlin)}
 \begin{cvbullets}
-  \item Build the generation pipeline: a render is split into jobs that retry independently
-        across RabbitMQ workers, with state held per job so one failed step doesn't cost the
-        whole video.
-  \item Work on the model side of the product \textemdash\ script and scene generation, output
-        validated against a schema before it reaches the pipeline, and retries that keep one bad
-        response from failing a render.
-  \item Build programmatic video with Remotion: React components rendered headlessly into
-        frames, so changing a template ships like any other code change.
-  \item Work across the stack \textemdash\ Django and FastAPI services behind React and
-        TypeScript surfaces.
+  \item A failed scene no longer kills the render. Each step is a job on RabbitMQ, with its own
+        state and its own retry.
+  \item Scripts and scenes are generated, then checked against a schema. A bad response retries;
+        it does not take the video down.
+  \item Templates are Remotion \textemdash\ React rendered headlessly into frames. Changing one
+        is a code change.
+  \item Django and FastAPI services behind React and TypeScript.
 \end{cvbullets}
 \tech{Python \textperiodcentered\ FastAPI \textperiodcentered\ Django \textperiodcentered\ RabbitMQ \textperiodcentered\ Redis \textperiodcentered\ React \textperiodcentered\ TypeScript \textperiodcentered\ Remotion \textperiodcentered\ Docker \textperiodcentered\ AWS}
 
@@ -128,12 +124,12 @@ interfaces on top. I write publicly about how language-model systems behave unde
 
 \role{Full-Stack Developer}{Freelance}{SaaS and consumer web products}{Jun 2021 \textendash\ Sep 2024 \textperiodcentered\ Remote}
 \begin{cvbullets}
-  \item Shipped products end to end for clients: data model, API, frontend, deployment, and the
-        support afterwards.
-  \item Standardised on Django/DRF and FastAPI behind React, containerised, with monitoring in
-        place before handover.
-  \item Owned the parts a client couldn't audit for themselves \textemdash\ authentication,
-        access control, and how their data was stored.
+  \item Took client products from the data model through the API, the UI, and deploy, then stayed
+        for the support.
+  \item Django/DRF or FastAPI behind React, containerised, with monitoring in place before
+        handover.
+  \item Owned auth, access control, and how the data was stored \textemdash\ the parts a client
+        could not audit themselves.
 \end{cvbullets}
 \tech{Django \textperiodcentered\ DRF \textperiodcentered\ FastAPI \textperiodcentered\ React \textperiodcentered\ PostgreSQL \textperiodcentered\ Docker \textperiodcentered\ Nginx}
 
@@ -144,12 +140,12 @@ interfaces on top. I write publicly about how language-model systems behave unde
 \link{https://github.com/mohamad-liyaghi}{github.com/mohamad-liyaghi}}\par
 \vspace{5.5pt}
 
-\project{\link{https://github.com/mohamad-liyaghi/FoodAnywhere}{FoodAnywhere}}{40 stars}{Food-delivery backend. PostGIS geospatial search, Celery for slow work, and tracing that follows an order from request to worker.}
-\project{\link{https://github.com/mohamad-liyaghi/fast-commerce}{fast-commerce}}{22 stars}{Async e-commerce backend built for throughput \textemdash\ clean API boundaries, background processing, tests that gate deploys.}
-\project{\link{https://github.com/mohamad-liyaghi/AcademyMaster}{AcademyMaster}}{21 stars}{Academy-management API with layered permissions and scheduled background jobs.}
-\project{\link{https://github.com/mohamad-liyaghi/Tsuna-Streaming}{Tsuna-Streaming}}{16 stars}{Streaming backend for video and music, with expensive processing pushed onto background workers.}
-\project{\link{https://github.com/mohamad-liyaghi/telegram-to-rubika-uploader}{telegram-to-rubika-uploader}}{14 stars}{Go tool relaying files up to 2\,GB directly between platforms, so nobody re-uploads over limited bandwidth.}
-\project{\link{https://github.com/mohamad-liyaghi/FastQuora}{FastQuora}}{11 stars}{Q\&A platform on FastAPI \textemdash\ Elasticsearch search, Redis cache, distributed tracing through both.}
+\project{\link{https://github.com/mohamad-liyaghi/FoodAnywhere}{FoodAnywhere}}{40 stars}{Nearby restaurants, orders through the kitchen. PostGIS search, Celery for slow work, traces from request to worker.}
+\project{\link{https://github.com/mohamad-liyaghi/fast-commerce}{Fast Commerce}}{22 stars}{Async store API built for throughput \textemdash\ clean boundaries, background processing, tests that block a bad deploy.}
+\project{\link{https://github.com/mohamad-liyaghi/AcademyMaster}{AcademyMaster}}{21 stars}{An academy's API: who can see what, and jobs that run on a schedule.}
+\project{\link{https://github.com/mohamad-liyaghi/Tsuna-Streaming}{Tsuna}}{16 stars}{Video and music streaming, with expensive processing off the request path.}
+\project{\link{https://github.com/mohamad-liyaghi/telegram-to-rubika-uploader}{Telegram $\rightarrow$ Rubika}}{14 stars}{Go tool moving files up to 2\,GB straight between platforms, so nobody re-uploads over limited bandwidth.}
+\project{\link{https://github.com/mohamad-liyaghi/FastQuora}{FastQuora}}{11 stars}{Ask and answer \textemdash\ Elasticsearch on the search path, tracing through the cache.}
 
 \cvsection{Skills}
 
@@ -157,13 +153,13 @@ interfaces on top. I write publicly about how language-model systems behave unde
 \skillrow{Backend}{Django, Django REST Framework, FastAPI, Celery, RabbitMQ, asyncio, REST, WebSockets}
 \skillrow{Models}{LLM APIs, structured output, tool calling, RAG, vector search, evaluation}
 \skillrow{Data}{PostgreSQL (incl. PostGIS), Redis, Elasticsearch, MongoDB}
-\skillrow{Frontend}{React, TypeScript, Tailwind, Remotion}
+\skillrow{Frontend}{React, Tailwind, Remotion}
 \skillrow{Infrastructure}{Docker, Kubernetes, GitHub Actions, AWS, Nginx}
 \skillrow{Reliability}{OpenTelemetry, Prometheus, Grafana, Sentry, Pytest}
 
 \cvsection{Writing}
 
-Long-form notes on language models in production, published on Medium \textemdash\
+On agents, models, and the money around shipping them, published on Medium \textemdash\
 \link{https://medium.com/@el_mohamad/stop-being-a-feature-factory-the-engineers-other-job-is-reading-the-money-f95653b9c3ff}{Stop Being a Feature Factory} (Aug 2026),
 \link{https://medium.com/@el_mohamad/stop-being-your-products-night-shift-how-an-agent-squad-actually-works-9fb5b2f9718a}{How an Agent Squad Actually Works} (Aug 2026),
 \link{https://medium.com/@el_mohamad/stop-treating-open-source-models-as-a-downgrade-how-model-routing-actually-works-3891150cbc97}{How Model Routing Actually Works} (Jul 2026).

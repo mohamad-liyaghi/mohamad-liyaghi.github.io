@@ -44,7 +44,7 @@ export function Nav() {
         }`}
       >
         <nav
-          aria-label={t.nav.about}
+          aria-label={t.a11y.primary}
           className="mx-auto flex h-16 w-full max-w-5xl items-center justify-between gap-4 px-6 sm:px-8 lg:px-10"
         >
           <a
@@ -110,7 +110,7 @@ export function Nav() {
       {/* Mobile drawer */}
       <div
         hidden={!open}
-        className="fixed inset-0 z-[60] bg-paper md:hidden"
+        className="fixed inset-0 z-[70] bg-paper md:hidden"
         role="dialog"
         aria-modal="true"
         aria-label={t.a11y.menu}

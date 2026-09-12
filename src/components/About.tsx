@@ -3,7 +3,7 @@ import { useI18n } from "../i18n";
 import { Reveal, Section, SectionHead } from "./primitives";
 
 const N = SECTIONS.find((s) => s.id === "about")!.n;
-const FACT_KEYS = ["role", "company", "work", "languages"] as const;
+const FACT_KEYS = ["role", "company", "work", "education", "languages"] as const;
 
 export function About() {
   const { t } = useI18n();
@@ -12,7 +12,7 @@ export function About() {
     <Section id="about">
       <SectionHead id="about" n={N} title={t.about.title} />
 
-      <div className="grid gap-12 lg:grid-cols-[1.55fr_1fr] lg:gap-16">
+      <div className="grid items-start gap-10 lg:grid-cols-[1.35fr_18rem] lg:grid-rows-[auto_1fr] lg:gap-x-16 lg:gap-y-10">
         <div className="flex flex-col gap-6">
           {t.about.paragraphs.map((p, i) => (
             <Reveal key={p.slice(0, 24)} delay={i * 80}>
@@ -20,6 +20,19 @@ export function About() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal delay={120} className="lg:row-span-2">
+          <figure className="portrait">
+            <img
+              src="/portrait.jpg"
+              alt={t.a11y.photo}
+              width={800}
+              height={1000}
+              loading="lazy"
+              className="aspect-[4/5] w-full object-cover"
+            />
+          </figure>
+        </Reveal>
 
         <Reveal delay={160}>
           <dl className="border-t border-rule">

@@ -1,6 +1,7 @@
 # mohamad-liyaghi.ir
 
-My personal site — a bilingual (English / فارسی) portfolio.
+My personal site — a bilingual (English / فارسی) portfolio. Editorial
+paper, one amber, and the path from a prompt to a rendered video.
 
 **Live:** [mohamad-liyaghi.ir](https://mohamad-liyaghi.ir)
 

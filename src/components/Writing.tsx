@@ -13,39 +13,42 @@ export function Writing() {
       <SectionHead id="writing" n={N} title={t.writing.title} lede={t.writing.lede} />
 
       <ul className="border-t border-hairline">
-        {ARTICLES.map((a, i) => (
-          <li key={a.id} className="border-b border-hairline">
-            <Reveal delay={i * 55}>
-              <Out href={a.href} className="group block py-6">
-                <div className="grid gap-2 sm:grid-cols-[10rem_1fr] sm:gap-8">
-                  <p className="label pt-1 whitespace-nowrap">
-                    {monthYear(a.date)}
-                    <span aria-hidden className="mx-2 text-rule">
-                      /
-                    </span>
-                    {fmt(t.writing.read, { minutes: num(a.minutes) })}
-                  </p>
-                  {/* Titles stay English, so the whole row lays out LTR even on the
-                      Persian page — otherwise each row packs to the right and the
-                      column ends up with a ragged left edge. */}
-                  <h3
-                    dir="ltr"
-                    className="flex items-start gap-2 text-[1.15rem] leading-snug text-ink transition-colors duration-300 group-hover:text-accent sm:text-[1.35rem]"
-                  >
-                    <span className="ul">
-                      {t.writing.items[a.id as keyof typeof t.writing.items]}
-                    </span>
-                    <ArrowOut
-                      width={15}
-                      height={15}
-                      className="mt-1.5 shrink-0 text-muted transition-colors duration-300 group-hover:text-accent"
-                    />
-                  </h3>
-                </div>
-              </Out>
-            </Reveal>
-          </li>
-        ))}
+        {ARTICLES.map((a, i) => {
+          const item = t.writing.items[a.id as keyof typeof t.writing.items];
+          return (
+            <li key={a.id} className="border-b border-hairline">
+              <Reveal delay={i * 55}>
+                <Out href={a.href} className="group block py-6 sm:py-7">
+                  <div className="grid gap-2 sm:grid-cols-[10rem_1fr] sm:gap-8">
+                    <p className="label pt-1 whitespace-nowrap">
+                      {monthYear(a.date)}
+                      <span aria-hidden className="mx-2 text-rule">
+                        /
+                      </span>
+                      {fmt(t.writing.read, { minutes: num(a.minutes) })}
+                    </p>
+                    {/* Titles stay English, so the whole row lays out LTR even on the
+                        Persian page — otherwise each row packs to the right and the
+                        column ends up with a ragged left edge. */}
+                    <div dir="ltr">
+                      <h3 className="flex items-start gap-2 text-[1.15rem] leading-snug text-ink transition-colors duration-300 group-hover:text-accent sm:text-[1.35rem]">
+                        <span className="ul">{item.title}</span>
+                        <ArrowOut
+                          width={15}
+                          height={15}
+                          className="mt-1.5 shrink-0 text-muted transition-colors duration-300 group-hover:text-accent"
+                        />
+                      </h3>
+                      <p className="mt-2 max-w-xl text-[0.92rem] leading-relaxed text-muted">
+                        {item.dek}
+                      </p>
+                    </div>
+                  </div>
+                </Out>
+              </Reveal>
+            </li>
+          );
+        })}
       </ul>
 
       <Reveal delay={120}>

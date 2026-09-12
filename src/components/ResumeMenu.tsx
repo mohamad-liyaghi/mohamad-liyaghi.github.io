@@ -31,6 +31,7 @@ export function ResumeMenu() {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={id}
+        aria-haspopup="true"
         className="btn btn-primary"
       >
         <Doc />
@@ -64,6 +65,7 @@ export function ResumeMenu() {
                 download={r.file}
                 aria-label={`${t.resume.download} — ${t.resume[r.id]}`}
                 className="icon-btn border-hairline"
+                title={t.resume.download}
               >
                 <ArrowDown />
               </a>

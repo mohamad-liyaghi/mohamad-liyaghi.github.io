@@ -97,12 +97,12 @@
   }
 
   /* Paper texture. Fixed, cheap, and the only decoration on the page that
-     never moves. */
+     never moves. Sits under the mobile drawer (z-70) and the nav (z-50). */
   body::after {
     content: "";
     position: fixed;
     inset: 0;
-    z-index: 60;
+    z-index: 40;
     pointer-events: none;
     opacity: var(--grain);
     mix-blend-mode: var(--grain-blend);
@@ -225,14 +225,47 @@
      descenders need real leading or the two lines collide. The bottom padding
      reserves descender space so the flourish never lands on a tail. */
   .hero-name {
-    font-size: clamp(3.4rem, 12.5vw, 7.25rem);
+    font-size: clamp(3.2rem, 10vw, 6.1rem);
     line-height: 0.95;
     padding-bottom: 0.19em;
   }
   [lang="fa"] .hero-name {
-    font-size: clamp(2.9rem, 10vw, 5.75rem);
+    font-size: clamp(2.7rem, 9vw, 5.1rem);
     line-height: 1.4;
     padding-bottom: 0.04em;
+  }
+
+  .hero-statement {
+    font-style: italic;
+  }
+  [lang="fa"] .hero-statement {
+    font-style: normal;
+  }
+
+  .figure {
+    background: var(--c-surface);
+    border: 1px solid var(--c-hairline);
+  }
+
+  .portrait {
+    position: relative;
+    background: var(--c-sunk);
+    overflow: hidden;
+  }
+  .portrait::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 1px var(--c-hairline);
+  }
+  .portrait img {
+    display: block;
+    filter: grayscale(0.06) contrast(1.03);
+    transition: filter 480ms var(--ease);
+  }
+  .portrait:hover img {
+    filter: grayscale(0) contrast(1.02);
   }
 
   /* --- text and links ---------------------------------------------------- */
@@ -380,5 +413,25 @@
   }
   .flourish path {
     stroke-dashoffset: 0;
+  }
+}
+
+@media print {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .wipe > span {
+    clip-path: none !important;
+    transform: none !important;
+  }
+  .rule {
+    transform: scaleX(1) !important;
+  }
+  .flourish path {
+    stroke-dashoffset: 0 !important;
+  }
+  body::after {
+    display: none;
   }
 }

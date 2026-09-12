@@ -90,23 +90,22 @@
 
 \cvsection{خلاصه}
 
-مهندس نرم‌افزارم؛ پنج سال کار با \lr{Python} و تمام‌پشته با گرایش بک‌اند. در \lr{Zebracat}
-سامانه‌های پشت ویدیوی مبتنی بر هوش مصنوعی را می‌سازم: خط‌لوله‌هایی که یک رندر را به کارهایی
-می‌شکنند که مستقل از هم شکست می‌خورند و دوباره تلاش می‌کنند، گام‌های مدل که متن و صحنه تولید می‌کنند، ویدیوی برنامه‌پذیر با \lr{Remotion}، و رابط‌های \lr{React} روی همهٔ این‌ها. دربارهٔ رفتار واقعی مدل‌های زبانی زیر بار کاربر می‌نویسم.
+مهندس نرم‌افزارم؛ پنج سال \lr{Python}، بیشتر در بک‌اند. در \lr{Zebracat} روی مسیر متن تا ویدیوی
+نهایی کار می‌کنم: کارهایی که خودشان دوباره تلاش می‌کنند، خروجی مدلی که باید از شِما رد شود، و
+قالب‌های \lr{Remotion} که مثل کد منتشر می‌شوند. درباره‌ی سامانه‌های مبتنی بر مدل زبانی می‌نویسم،
+وقتی کاربر واقعی به آن‌ها می‌رسد.
 
 \cvsection{تجربهٔ کاری}
 
 \role{مهندس نرم‌افزار \textperiodcentered\ هوش مصنوعی}{\lr{Zebracat}}{پلتفرم ساخت ویدیو از متن}{شهریور ۱۴۰۳ — اکنون · دورکاری (برلین)}
 \begin{cvbullets}
-  \item ساخت خط‌لولهٔ تولید: هر رندر به کارهایی شکسته می‌شود که مستقل از هم روی کارگرهای
-        \lr{RabbitMQ} دوباره تلاش می‌کنند و وضعیت هر کار جداگانه نگه داشته می‌شود، تا شکست یک
-        مرحله به قیمت کل ویدیو تمام نشود.
-  \item کار روی بخش مدلِ محصول — ساخت متن و صحنه، اعتبارسنجی خروجی با شِما پیش از رسیدن به
-        خط‌لوله، و تلاش مجددی که نمی‌گذارد یک پاسخ نامعتبر کل رندر را خراب کند.
-  \item ساخت ویدیوی برنامه‌پذیر با \lr{Remotion}: کامپوننت‌های \lr{React} که بدون مرورگر به فریم
-        تبدیل می‌شوند، تا تغییر یک قالب مثل هر تغییر کد دیگری منتشر شود.
-  \item کار در همهٔ لایه‌ها — سرویس‌های \lr{Django} و \lr{FastAPI} پشت رابط‌های \lr{React} و
-        \lr{TypeScript}.
+  \item دیگر شکست یک صحنه کل رندر را نمی‌کشد. هر مرحله یک کار روی \lr{RabbitMQ} است، با وضعیت و
+        تلاش مجدد خودش.
+  \item متن و صحنه تولید می‌شوند، بعد با شِما سنجیده می‌شوند. پاسخ خراب دوباره تلاش می‌کند؛
+        ویدیو را پایین نمی‌آورد.
+  \item قالب‌ها \lr{Remotion} هستند — \lr{React} که بدون مرورگر به فریم تبدیل می‌شود. تغییر یکی
+        یعنی یک تغییر کد.
+  \item سرویس‌های \lr{Django} و \lr{FastAPI} پشت \lr{React} و \lr{TypeScript}.
 \end{cvbullets}
 \tech{Python · FastAPI · Django · RabbitMQ · Redis · React · TypeScript · Remotion · Docker · AWS}
 
@@ -114,11 +113,10 @@
 
 \role{توسعه‌دهندهٔ تمام‌پشته}{فریلنس}{محصولات وب و \lr{SaaS}}{خرداد ۱۴۰۰ — شهریور ۱۴۰۳ · دورکاری}
 \begin{cvbullets}
-  \item تحویل کامل محصول به کارفرما: مدل داده، \lr{API}، رابط کاربری، استقرار، و پشتیبانی پس از آن.
-  \item استانداردسازی روی \lr{Django/DRF} و \lr{FastAPI} پشت \lr{React}، کانتینری‌شده و با پایش
-        فعال پیش از تحویل.
-  \item برعهده‌گرفتن بخش‌هایی که کارفرما خودش نمی‌توانست بررسی‌شان کند — احراز هویت، کنترل
-        دسترسی، و نحوهٔ نگهداری داده‌هایش.
+  \item محصول کارفرما را از مدل داده تا \lr{API} و رابط و استقرار بردم، و بعد از تحویل هم ماندم.
+  \item \lr{Django/DRF} یا \lr{FastAPI} پشت \lr{React}، کانتینری‌شده، با پایش فعال پیش از تحویل.
+  \item احراز هویت، کنترل دسترسی، و نحوهٔ نگهداری داده — بخش‌هایی که کارفرما خودش نمی‌توانست
+        بررسی‌شان کند.
 \end{cvbullets}
 \tech{Django · DRF · FastAPI · React · PostgreSQL · Docker · Nginx}
 
@@ -128,12 +126,12 @@
 \lr{\link{https://github.com/mohamad-liyaghi}{github.com/mohamad-liyaghi}}} {\fontsize{8.4}{10}\selectfont\color{muted}— ۲۲۹ ستاره در ۲۳ مخزن عمومی}\par
 \vspace{4.5pt}
 
-\project{\link{https://github.com/mohamad-liyaghi/FoodAnywhere}{FoodAnywhere}}{۴۰ ستاره}{بک‌اند سفارش غذا. \lr{PostGIS} برای جست‌وجوی مکانی، \lr{Celery} برای کارهای سنگین، و ردیابی‌ای که سفارش را از درخواست تا کارگر دنبال می‌کند.}
-\project{\link{https://github.com/mohamad-liyaghi/fast-commerce}{fast-commerce}}{۲۲ ستاره}{بک‌اند فروشگاهی ناهمگام با تمرکز بر توان عملیاتی — مرزهای تمیز \lr{API}، پردازش پس‌زمینه، و آزمون‌هایی که جلوی انتشار خراب را می‌گیرند.}
-\project{\link{https://github.com/mohamad-liyaghi/AcademyMaster}{AcademyMaster}}{۲۱ ستاره}{\lr{API} مدیریت آموزشگاه با دسترسی‌های لایه‌ای و کارهای زمان‌بندی‌شدهٔ پس‌زمینه.}
-\project{\link{https://github.com/mohamad-liyaghi/Tsuna-Streaming}{Tsuna-Streaming}}{۱۶ ستاره}{بک‌اند پخش ویدیو و موسیقی، با انتقال پردازش‌های سنگین به کارگرهای پس‌زمینه.}
-\project{\link{https://github.com/mohamad-liyaghi/telegram-to-rubika-uploader}{telegram-to-rubika-uploader}}{۱۴ ستاره}{ابزار \lr{Go} برای انتقال مستقیم فایل تا ۲ گیگابایت میان دو پلتفرم، تا کسی پهنای باند محدودش را صرف آپلود دوباره نکند.}
-\project{\link{https://github.com/mohamad-liyaghi/FastQuora}{FastQuora}}{۱۱ ستاره}{سامانهٔ پرسش و پاسخ روی \lr{FastAPI} — جست‌وجو با \lr{Elasticsearch}، کش با \lr{Redis}، و ردیابی توزیع‌شده در هر دو.}
+\project{\link{https://github.com/mohamad-liyaghi/FoodAnywhere}{FoodAnywhere}}{۴۰ ستاره}{رستوران نزدیک، سفارش تا آشپزخانه. جست‌وجوی \lr{PostGIS}، کار سنگین با \lr{Celery}، ردپا از درخواست تا کارگر.}
+\project{\link{https://github.com/mohamad-liyaghi/fast-commerce}{Fast Commerce}}{۲۲ ستاره}{\lr{API} فروشگاهی ناهمگام با تمرکز بر توان عملیاتی — مرزهای تمیز، پردازش پس‌زمینه، آزمون‌هایی که جلوی انتشار خراب را می‌گیرند.}
+\project{\link{https://github.com/mohamad-liyaghi/AcademyMaster}{AcademyMaster}}{۲۱ ستاره}{\lr{API} یک آموزشگاه: چه کسی چه می‌بیند، و کارهایی که سر وقت اجرا می‌شوند.}
+\project{\link{https://github.com/mohamad-liyaghi/Tsuna-Streaming}{Tsuna}}{۱۶ ستاره}{پخش ویدیو و موسیقی، با انتقال پردازش سنگین از مسیر درخواست.}
+\project{\link{https://github.com/mohamad-liyaghi/telegram-to-rubika-uploader}{Telegram $\rightarrow$ Rubika}}{۱۴ ستاره}{ابزار \lr{Go} برای انتقال مستقیم فایل تا ۲ گیگابایت میان دو پلتفرم، تا پهنای باند صرف آپلود دوباره نشود.}
+\project{\link{https://github.com/mohamad-liyaghi/FastQuora}{FastQuora}}{۱۱ ستاره}{پرسش و پاسخ — \lr{Elasticsearch} روی جست‌وجو، ردیابی در کش.}
 
 \cvsection{مهارت‌ها}
 
@@ -141,13 +139,13 @@
 \skillrow{بک‌اند}{\lr{Django, Django REST Framework, FastAPI, Celery, RabbitMQ, asyncio, REST, WebSockets}}
 \skillrow{مدل‌ها}{\lr{LLM APIs}، خروجی ساخت‌یافته، فراخوانی ابزار، \lr{RAG}، جست‌وجوی برداری، ارزیابی}
 \skillrow{داده}{\lr{PostgreSQL (PostGIS), Redis, Elasticsearch, MongoDB}}
-\skillrow{فرانت‌اند}{\lr{React, TypeScript, Tailwind, Remotion}}
+\skillrow{فرانت‌اند}{\lr{React, Tailwind, Remotion}}
 \skillrow{زیرساخت}{\lr{Docker, Kubernetes, GitHub Actions, AWS, Nginx}}
 \skillrow{پایداری}{\lr{OpenTelemetry, Prometheus, Grafana, Sentry, Pytest}}
 
 \cvsection{نوشته‌ها}
 
-یادداشت‌های بلند دربارهٔ مدل‌های زبانی در محیط واقعی، منتشرشده در \lr{Medium} (به انگلیسی) —
+دربارهٔ ایجنت‌ها، مدل‌ها، و پولی که دورِ ساختن‌شان می‌چرخد، در \lr{Medium} (به انگلیسی) —
 \lr{\link{https://medium.com/@el_mohamad/stop-being-a-feature-factory-the-engineers-other-job-is-reading-the-money-f95653b9c3ff}{Stop Being a Feature Factory}} (مرداد ۱۴۰۵)،
 \lr{\link{https://medium.com/@el_mohamad/stop-being-your-products-night-shift-how-an-agent-squad-actually-works-9fb5b2f9718a}{How an Agent Squad Actually Works}} (مرداد ۱۴۰۵).
 آرشیو کامل: \lr{\link{https://medium.com/@el_mohamad}{medium.com/@el\_mohamad}}

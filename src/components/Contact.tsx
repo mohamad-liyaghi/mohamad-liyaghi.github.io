@@ -32,6 +32,17 @@ export function Contact() {
         </a>
       </Reveal>
 
+      <Reveal delay={80}>
+        <p className="mt-5 max-w-lg text-[0.95rem] text-muted">{t.contact.open}</p>
+      </Reveal>
+
+      <Reveal delay={120}>
+        <a href={`mailto:${PROFILE.email}`} className="btn btn-primary mt-8">
+          <Mail />
+          {t.contact.cta}
+        </a>
+      </Reveal>
+
       <div className="mt-16">
         <Reveal>
           <p className="label">{t.contact.elsewhere}</p>

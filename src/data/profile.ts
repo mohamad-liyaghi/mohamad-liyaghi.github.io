@@ -76,7 +76,7 @@ export const ROLES: {
     href: PROFILE.companyUrl,
     from: "2024-09",
     to: null,
-    tech: ["Python", "FastAPI", "Django", "RabbitMQ", "Redis", "React", "Remotion", "AWS"],
+    tech: ["Python", "FastAPI", "Django", "RabbitMQ", "Redis", "React", "TypeScript", "Remotion", "AWS"],
   },
   {
     id: "freelance",
@@ -103,6 +103,7 @@ export const PROJECTS: {
   stars: number;
   lang: string;
   tech: string[];
+  featured?: boolean;
 }[] = [
   {
     id: "foodanywhere",
@@ -111,10 +112,11 @@ export const PROJECTS: {
     stars: 40,
     lang: "Python",
     tech: ["Django", "PostGIS", "Celery", "OpenTelemetry", "Kubernetes"],
+    featured: true,
   },
   {
     id: "fastcommerce",
-    name: "fast-commerce",
+    name: "Fast Commerce",
     href: "https://github.com/mohamad-liyaghi/fast-commerce",
     stars: 22,
     lang: "Python",
@@ -130,7 +132,7 @@ export const PROJECTS: {
   },
   {
     id: "tsuna",
-    name: "Tsuna-Streaming",
+    name: "Tsuna",
     href: "https://github.com/mohamad-liyaghi/Tsuna-Streaming",
     stars: 16,
     lang: "Python",
@@ -138,7 +140,7 @@ export const PROJECTS: {
   },
   {
     id: "rubika",
-    name: "telegram-to-rubika-uploader",
+    name: "Telegram → Rubika",
     href: "https://github.com/mohamad-liyaghi/telegram-to-rubika-uploader",
     stars: 14,
     lang: "Go",
@@ -174,7 +176,7 @@ export const STACK: { id: StackGroupId; items: string[] }[] = [
     items: ["LLM APIs", "structured output", "tool calling", "RAG", "vector search", "evaluation"],
   },
   { id: "data", items: ["PostgreSQL", "PostGIS", "Redis", "Elasticsearch", "MongoDB"] },
-  { id: "frontend", items: ["React", "TypeScript", "Tailwind", "Remotion"] },
+  { id: "frontend", items: ["React", "Tailwind", "Remotion"] },
   { id: "infra", items: ["Docker", "Kubernetes", "GitHub Actions", "AWS", "Nginx"] },
   { id: "reliability", items: ["OpenTelemetry", "Prometheus", "Grafana", "Sentry", "Pytest"] },
 ];

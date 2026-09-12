@@ -47,7 +47,13 @@ export function useReveal<T extends Element = HTMLDivElement>() {
       { rootMargin: "0px 0px -64px 0px", threshold: 0 },
     );
     io.observe(el);
-    return () => io.disconnect();
+    // Never leave copy invisible: print, screenshot tools, and a missed
+    // intersection should still see the page.
+    const fallback = window.setTimeout(() => el.setAttribute("data-in", ""), 2200);
+    return () => {
+      window.clearTimeout(fallback);
+      io.disconnect();
+    };
   }, []);
   return ref;
 }

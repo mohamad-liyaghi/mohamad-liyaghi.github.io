@@ -73,6 +73,24 @@ function languagePages(): Plugin {
         );
         html = swap(
           html,
+          /(<meta\s+property="og:description"\s+content=")[^"]*(")/,
+          `$1${description}$2`,
+          "og:description",
+        );
+        html = swap(
+          html,
+          /(<meta name="twitter:title" content=")[^"]*(")/,
+          `$1${title}$2`,
+          "twitter:title",
+        );
+        html = swap(
+          html,
+          /(<meta\s+name="twitter:description"\s+content=")[^"]*(")/,
+          `$1${description}$2`,
+          "twitter:description",
+        );
+        html = swap(
+          html,
           /<meta property="og:locale" content="en_US" \/>\s*<meta property="og:locale:alternate" content="fa_IR" \/>/,
           lang === "fa"
             ? '<meta property="og:locale" content="fa_IR" />\n    <meta property="og:locale:alternate" content="en_US" />'
