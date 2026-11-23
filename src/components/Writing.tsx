@@ -1,11 +1,14 @@
 import { useId, useState } from "react";
-import { ARTICLES, PROFILE, type Article } from "../data/profile";
+import { ARTICLES, PROFILE, coverSrcSet, type Article } from "../data/profile";
 import { useI18n } from "../i18n";
 import { useSpotlight } from "../lib/hooks";
 import { ArrowOut, Medium } from "./Icons";
 import { Out, Section } from "./primitives";
 
 const INITIAL = 6;
+/** Rendered widths, so the browser can pick the 400px cover when it's enough. */
+const LEAD_SIZES = "(min-width: 1280px) 26rem, (min-width: 1024px) 44rem, 100vw";
+const CARD_SIZES = "(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 100vw";
 
 function Meta({ post }: { post: Article }) {
   const { t, date, fmt, num } = useI18n();
@@ -37,6 +40,8 @@ function Lead({ post }: { post: Article }) {
           <div className="relative aspect-[800/467] overflow-hidden bg-sunk xl:m-3 xl:self-center xl:rounded-[var(--radius-sm)]">
             <img
               src={post.image}
+              srcSet={coverSrcSet(post)}
+              sizes={LEAD_SIZES}
               alt=""
               width={800}
               height={467}
@@ -69,6 +74,8 @@ function Card({ post }: { post: Article }) {
           <div className="aspect-[800/467] overflow-hidden bg-sunk">
             <img
               src={post.image}
+              srcSet={coverSrcSet(post)}
+              sizes={CARD_SIZES}
               alt=""
               width={800}
               height={467}

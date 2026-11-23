@@ -131,7 +131,7 @@ function languagePages(): Plugin {
 
 export default defineConfig({
   plugins: [
-    mediumFeed(resolve(import.meta.dirname, "src/data/articles.json")),
+    mediumFeed(resolve(import.meta.dirname, "src/data/articles.json"), resolve(import.meta.dirname, "public/covers")),
     react(),
     tailwindcss(),
     languagePages(),

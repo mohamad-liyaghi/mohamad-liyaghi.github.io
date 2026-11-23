@@ -198,7 +198,12 @@
   [lang="fa"] .display {
     font-weight: 820;
     letter-spacing: 0;
-    line-height: 1.12;
+    line-height: 0.98;
+  }
+  /* Persian descenders and dots sit lower; give the clipped rise more room. */
+  [lang="fa"] .rise-line {
+    padding-bottom: 0.2em;
+    margin-bottom: -0.14em;
   }
 
   .h2 {

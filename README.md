@@ -42,9 +42,10 @@ Design tokens live at the top of `src/styles.css`.
 ## Writing stays current on its own
 
 `scripts/medium-feed.ts` is a Vite plugin that fetches the Medium RSS feed at
-build time, strips tracking parameters, works out reading time and the cover
-image, and rewrites `src/data/articles.json`. That JSON is committed and is
-also the fallback: if Medium is down or blocks the runner, the build warns and
+build time, strips tracking parameters, works out reading time, downloads each
+cover into `public/covers/` (Medium's image CDN sets a third-party cookie, so
+covers are served from this site), and rewrites `src/data/articles.json`. The JSON and covers are committed
+and are also the fallback: if Medium is down or blocks the runner, the build warns and
 ships the last snapshot instead of failing. The Pages workflow runs daily, so
 new posts appear without a commit. `MEDIUM_OFFLINE=1` skips the fetch.
 

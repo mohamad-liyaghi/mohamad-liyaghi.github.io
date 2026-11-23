@@ -158,8 +158,14 @@ export type Article = {
   minutes: number;
   dek: string;
   image: string | null;
+  thumb: string | null;
   tags: string[];
 };
+
+/** Responsive sources for a cover, when both sizes are self-hosted. */
+export function coverSrcSet(a: Article): string | undefined {
+  return a.image && a.thumb && a.image !== a.thumb ? `${a.thumb} 400w, ${a.image} 800w` : undefined;
+}
 
 export const ARTICLES: Article[] = snapshot.items;
 export const ARTICLES_FETCHED_AT: string = snapshot.fetchedAt;

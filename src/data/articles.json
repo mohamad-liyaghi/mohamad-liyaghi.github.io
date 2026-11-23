@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-23T06:34:00.000Z",
+  "fetchedAt": "2026-11-23T07:45:56.215Z",
   "source": "https://medium.com/feed/@el_mohamad",
   "items": [
     {
@@ -8,7 +8,8 @@
       "date": "2026-11-21",
       "minutes": 29,
       "dek": "Why connecting an LLM to your data isn’t enough, and how retrieval, tools, planning, and memory actually work.",
-      "image": "https://miro.medium.com/v2/resize:fit:800/format:webp/1*_Sk_sJFdZI0VnPiORAQiCQ.png",
+      "image": "/covers/1__Sk_sJFdZI0VnPiORAQiCQ_png-800.webp",
+      "thumb": "/covers/1__Sk_sJFdZI0VnPiORAQiCQ_png-400.webp",
       "tags": [
         "ai-agent",
         "agentic-ai",
@@ -22,7 +23,8 @@
       "date": "2026-11-14",
       "minutes": 29,
       "dek": "Why better prompts are not about magic words, and how to design, test, version, and defend prompts in production AI systems.",
-      "image": "https://miro.medium.com/v2/resize:fit:800/format:webp/1*RHPvFqCC7TEDELPZSOaMNA.png",
+      "image": "/covers/1_RHPvFqCC7TEDELPZSOaMNA_png-800.webp",
+      "thumb": "/covers/1_RHPvFqCC7TEDELPZSOaMNA_png-400.webp",
       "tags": [
         "generative-ai-tools",
         "ai-agent",
@@ -35,7 +37,8 @@
       "date": "2026-11-07",
       "minutes": 26,
       "dek": "Why the highest-ranked model is not necessarily the right model for your product, and how to build an evaluation process that measures what your users actually need.",
-      "image": "https://miro.medium.com/v2/resize:fit:800/format:webp/1*T58DakP6nRL9wh_vVA-iNQ.png",
+      "image": "/covers/1_T58DakP6nRL9wh_vVA-iNQ_png-800.webp",
+      "thumb": "/covers/1_T58DakP6nRL9wh_vVA-iNQ_png-400.webp",
       "tags": [
         "ai-engineering",
         "ai-agent",
@@ -48,7 +51,8 @@
       "date": "2026-11-01",
       "minutes": 19,
       "dek": "Perplexity, functional correctness, similarity metrics, AI judges, and pairwise rankings measure different things. Here is how they work, and where they can mislead you.",
-      "image": "https://miro.medium.com/v2/resize:fit:800/format:webp/1*0Pua6g6zqQLgXe7chEbYdg.png",
+      "image": "/covers/1_0Pua6g6zqQLgXe7chEbYdg_png-800.webp",
+      "thumb": "/covers/1_0Pua6g6zqQLgXe7chEbYdg_png-400.webp",
       "tags": [
         "vibe-coding",
         "prompt-engineering",
@@ -62,7 +66,8 @@
       "date": "2026-10-24",
       "minutes": 20,
       "dek": "Why training data, model size, post-training, and sampling matter more than most developers realize.",
-      "image": "https://miro.medium.com/v2/resize:fit:800/format:webp/1*ZRYl13fVZLI_lL9EgKjBuA.png",
+      "image": "/covers/1_ZRYl13fVZLI_lL9EgKjBuA_png-800.webp",
+      "thumb": "/covers/1_ZRYl13fVZLI_lL9EgKjBuA_png-400.webp",
       "tags": [
         "ai-engineering",
         "agents",
@@ -76,7 +81,8 @@
       "date": "2026-10-17",
       "minutes": 17,
       "dek": "A working LLM demo is not a production AI product. Here is how foundation models, evaluation, adaptation, infrastructure, and product decisions fit together.",
-      "image": "https://miro.medium.com/v2/resize:fit:800/format:webp/1*t9s8t4GG3MWkM0LMIiF-kQ.png",
+      "image": "/covers/1_t9s8t4GG3MWkM0LMIiF-kQ_png-800.webp",
+      "thumb": "/covers/1_t9s8t4GG3MWkM0LMIiF-kQ_png-400.webp",
       "tags": [
         "ai-engineering",
         "foundation-models",
@@ -91,6 +97,7 @@
       "minutes": 8,
       "dek": "Cloudflare Workers used to be easy to explain.",
       "image": null,
+      "thumb": null,
       "tags": [
         "webflow",
         "seo",
@@ -106,6 +113,7 @@
       "minutes": 15,
       "dek": "You already instrument latency, error rates, and queue depth. The revenue is the one system nobody put a dashboard on — and half of it is code you own.",
       "image": null,
+      "thumb": null,
       "tags": [
         "ai",
         "finance",
@@ -119,6 +127,7 @@
       "minutes": 5,
       "dek": "What experienced developers should actually optimize for when AI can write the code",
       "image": null,
+      "thumb": null,
       "tags": [
         "claude",
         "ai",
@@ -133,6 +142,7 @@
       "minutes": 31,
       "dek": "Support conversations, error triage, flaky tests, the two-line fix nobody has time for. That work arrives on your product’s schedule, not yours — and it does not fit inside a session.",
       "image": null,
+      "thumb": null,
       "tags": [
         "mission-control",
         "agentic-ai",

@@ -46,10 +46,10 @@ export function LangLink({ className = "" }: { className?: string }) {
         e.preventDefault();
         setLang(other);
       }}
-      aria-label={t.a11y.lang}
       className={`icon-btn w-auto px-3 text-[0.8rem] font-semibold ${className}`}
     >
       {t.a11y.langShort}
+      <span className="sr-only"> {t.a11y.lang}</span>
     </a>
   );
 }
@@ -166,11 +166,11 @@ export function Nav() {
             <button
               type="button"
               onClick={openPalette}
-              aria-label={t.a11y.palette}
               aria-keyshortcuts="Control+K Meta+K"
               className="hidden h-9 items-center gap-2 rounded-full border border-line ps-3 pe-1.5 text-[0.85rem] text-muted transition-colors hover:border-line-strong hover:text-text md:inline-flex"
             >
               <Search width={15} height={15} />
+              <span className="sr-only">{t.a11y.palette}</span>
               <span className="kbd">{mod}K</span>
             </button>
             <button type="button" onClick={openPalette} aria-label={t.a11y.palette} className="icon-btn md:hidden">

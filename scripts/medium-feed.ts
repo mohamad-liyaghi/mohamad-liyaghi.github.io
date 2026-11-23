@@ -11,7 +11,8 @@
  * No XML library: the feed is small and regular, and a dependency for it would
  * outweigh the code.
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 import type { Plugin } from "vite";
 
 export const FEED_URL = "https://medium.com/feed/@el_mohamad";
@@ -23,7 +24,10 @@ export type Article = {
   date: string;
   minutes: number;
   dek: string;
+  /** Cover at 800px wide; a self-hosted /covers/ path once downloaded. */
   image: string | null;
+  /** The same cover at 400px, for small slots. */
+  thumb: string | null;
   tags: string[];
 };
 
@@ -102,12 +106,64 @@ export function parseFeed(xml: string): Article[] {
         minutes: Math.max(1, Math.round(words / WORDS_PER_MINUTE)),
         dek: dekFrom(html),
         image: imageFrom(html),
+        thumb: imageFrom(html),
         tags: [...item.matchAll(/<category>([\s\S]*?)<\/category>/g)].map((c) => decode(c[1] ?? "")),
       };
     })
     .filter((a): a is Article => a !== null)
     .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, MAX_ITEMS);
+}
+
+const UA =
+  "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36";
+
+async function fetchBytes(url: string, timeoutMs: number): Promise<Buffer> {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, { signal: ctrl.signal, headers: { "user-agent": UA } });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return Buffer.from(await res.arrayBuffer());
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/**
+ * Covers are served from this site, not Medium's CDN: it sets a third-party
+ * cookie on every image, and the page shouldn't hand visitors to a tracker
+ * just to show a thumbnail. Files are committed with the snapshot, so they
+ * survive a build that can't reach Medium. Any cover that can't be fetched
+ * keeps its remote URL rather than breaking the page.
+ */
+export async function localizeCovers(items: Article[], dir: string): Promise<void> {
+  mkdirSync(dir, { recursive: true });
+  const keep = new Set<string>();
+  for (const item of items) {
+    const id = item.image?.match(/^https:\/\/miro\.medium\.com\/v2\/[^/]+\/format:webp\/([^/?#]+)$/)?.[1];
+    if (!id) continue;
+    const name = id.replace(/[^A-Za-z0-9_-]/g, "_");
+    const paths: Record<number, string> = {};
+    try {
+      for (const w of [400, 800]) {
+        const file = `${name}-${w}.webp`;
+        if (!existsSync(join(dir, file))) {
+          const bytes = await fetchBytes(`https://miro.medium.com/v2/resize:fit:${w}/format:webp/${id}`, 10_000);
+          writeFileSync(join(dir, file), bytes);
+        }
+        keep.add(file);
+        paths[w] = `/covers/${file}`;
+      }
+      item.image = paths[800] ?? item.image;
+      item.thumb = paths[400] ?? item.image;
+    } catch {
+      /* leave the remote URL in place */
+    }
+  }
+  for (const file of readdirSync(dir)) {
+    if (file.endsWith(".webp") && !keep.has(file)) unlinkSync(join(dir, file));
+  }
 }
 
 async function fetchFeed(timeoutMs: number): Promise<string> {
@@ -118,8 +174,7 @@ async function fetchFeed(timeoutMs: number): Promise<string> {
       signal: ctrl.signal,
       headers: {
         // Medium answers 403 to obviously scripted clients.
-        "user-agent":
-          "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36",
+        "user-agent": UA,
         accept: "application/rss+xml, application/xml;q=0.9, */*;q=0.8",
       },
     });
@@ -134,7 +189,7 @@ async function fetchFeed(timeoutMs: number): Promise<string> {
  * Vite plugin. Runs before any module is loaded, so the app imports whichever
  * snapshot is on disk once it finishes. Set MEDIUM_OFFLINE=1 to skip the fetch.
  */
-export function mediumFeed(snapshotPath: string): Plugin {
+export function mediumFeed(snapshotPath: string, coversDir: string): Plugin {
   return {
     name: "medium-feed",
     apply: "build",
@@ -146,6 +201,7 @@ export function mediumFeed(snapshotPath: string): Plugin {
       try {
         const items = parseFeed(await fetchFeed(10_000));
         if (items.length === 0) throw new Error("feed parsed to zero posts");
+        await localizeCovers(items, coversDir);
         const prev = JSON.parse(readFileSync(snapshotPath, "utf8")) as ArticleSnapshot;
         if (JSON.stringify(prev.items) === JSON.stringify(items)) {
           this.info(`medium-feed: ${items.length} posts, unchanged`);

@@ -97,9 +97,9 @@ function LatestEssay() {
     <div ref={ref} className="fade-in w-full max-w-[26rem]" style={delay(650)}>
       <Out href={post.href} className="spot group block">
         <div className="spot-in flex gap-4 p-3.5">
-          {post.image ? (
+          {post.thumb ? (
             <img
-              src={post.image}
+              src={post.thumb}
               alt=""
               width={112}
               height={63}
@@ -142,7 +142,7 @@ export function Hero() {
         <h1
           id="hero-name"
           className="display text-[clamp(3.4rem,13.5vw,11.5rem)] text-text"
-          style={lang === "fa" ? { fontSize: "clamp(3.6rem, 15vw, 10rem)" } : undefined}
+          style={lang === "fa" ? { fontSize: "clamp(3.6rem, 21vw, 10rem)" } : undefined}
         >
           {t.hero.name.map((line, i) => (
             <span key={line} className="rise-line">
