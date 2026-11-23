@@ -3,6 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # Rebuild daily so new Medium posts show up without a commit. The build
+  # fetches the feed; if Medium is unreachable it ships the committed snapshot.
+  schedule:
+    - cron: "17 5 * * *"
   workflow_dispatch:
 
 permissions:

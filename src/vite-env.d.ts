@@ -2,3 +2,4 @@
 
 declare const __BUILD_SHA__: string;
 declare const __BUILD_YEAR__: string;
+declare const __BUILD_DATE__: string;

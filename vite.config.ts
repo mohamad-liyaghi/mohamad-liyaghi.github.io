@@ -4,6 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { execSync } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { mediumFeed } from "./scripts/medium-feed";
 
 const sha = (() => {
   try {
@@ -12,6 +13,8 @@ const sha = (() => {
     return "dev";
   }
 })();
+
+const buildDate = new Date().toISOString().slice(0, 10);
 
 type Meta = Record<"en" | "fa", { title: string; description: string }>;
 
@@ -101,15 +104,42 @@ function languagePages(): Plugin {
         mkdirSync(resolve(dist, lang), { recursive: true });
         writeFileSync(resolve(dist, lang, "index.html"), html);
       }
+
+      // The sitemap is written here too, so its lastmod is the real build date.
+      const alt = ["en", "fa"]
+        .map((l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="https://mohamad-liyaghi.ir/${l}/" />`)
+        .concat(`    <xhtml:link rel="alternate" hreflang="x-default" href="https://mohamad-liyaghi.ir/en/" />`)
+        .join("\n");
+      const urls = ["en", "fa"]
+        .map(
+          (l) =>
+            `  <url>\n    <loc>https://mohamad-liyaghi.ir/${l}/</loc>\n    <lastmod>${buildDate}</lastmod>\n${alt}\n  </url>`,
+        )
+        .concat(
+          ["cv.html", "cv-fa.html"].map(
+            (f) => `  <url>\n    <loc>https://mohamad-liyaghi.ir/${f}</loc>\n    <lastmod>${buildDate}</lastmod>\n  </url>`,
+          ),
+        )
+        .join("\n");
+      writeFileSync(
+        resolve(dist, "sitemap.xml"),
+        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls}\n</urlset>\n`,
+      );
     },
   };
 }
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), languagePages()],
+  plugins: [
+    mediumFeed(resolve(import.meta.dirname, "src/data/articles.json")),
+    react(),
+    tailwindcss(),
+    languagePages(),
+  ],
   define: {
     __BUILD_SHA__: JSON.stringify(sha),
     __BUILD_YEAR__: JSON.stringify(String(new Date().getFullYear())),
+    __BUILD_DATE__: JSON.stringify(buildDate),
   },
   build: { target: "es2022", cssMinify: "lightningcss" },
 });
