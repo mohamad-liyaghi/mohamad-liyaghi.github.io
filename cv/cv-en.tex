@@ -1,6 +1,6 @@
 % Mohamad Liyaghi — résumé (English)
 % Build: xelatex -interaction=nonstopmode cv-en.tex   (see build.sh)
-% The palette and type match mohamad-liyaghi.ir: warm paper, deep ink, one amber.
+% The palette matches the light theme of mohamad-liyaghi.ir: spruce ink, one olive accent.
 
 \documentclass[10pt,a4paper]{article}
 
@@ -21,15 +21,15 @@
   ItalicFont     = Archivo-Regular.ttf,
   BoldItalicFont = Archivo-SemiBold.ttf,
 ]
-\newfontfamily\displayfont{InstrumentSerif-Regular.ttf}
+\newfontfamily\displayfont{Archivo-SemiBold.ttf}
 \newfontfamily\metafont{JetBrainsMono-Regular.ttf}[BoldFont = JetBrainsMono-Medium.ttf]
 
 % ---------------------------------------------------------------- colour
-\definecolor{ink}{HTML}{16150F}
-\definecolor{bodytext}{HTML}{46433A}
-\definecolor{muted}{HTML}{7C7869}
-\definecolor{accent}{HTML}{A85A28}
-\definecolor{hairline}{HTML}{D9D2C4}
+\definecolor{ink}{HTML}{0D1B17}
+\definecolor{bodytext}{HTML}{33443D}
+\definecolor{muted}{HTML}{4C5F57}
+\definecolor{accent}{HTML}{466F00}
+\definecolor{hairline}{HTML}{D3DDD6}
 \color{bodytext}
 
 % ---------------------------------------------------------------- pieces
@@ -84,11 +84,11 @@
 \begin{document}
 \fontsize{9.2}{11.9}\selectfont
 
-{\displayfont\fontsize{29}{32}\selectfont\color{ink}Mohamad Liyaghi}\par
+{\displayfont\fontsize{26}{30}\selectfont\color{ink}Mohamad Liyaghi}\par
 \vspace{4pt}
 {\color{accent}\hrule height 1.4pt width 54pt}
 \vspace{7pt}
-{\fontsize{11}{13}\selectfont\bfseries\color{ink}Software Engineer \textperiodcentered\ AI}\par
+{\fontsize{11}{13}\selectfont\bfseries\color{ink}Software Engineer, AI}\par
 \vspace{6pt}
 {\metafont\fontsize{7.9}{10.5}\selectfont\color{muted}%
   \link{mailto:liaghimohamad69@gmail.com}{liaghimohamad69@gmail.com}\ \ \textbar\ \
@@ -102,68 +102,64 @@
 
 \cvsection{Summary}
 
-Software engineer, five years of Python, mostly backend. At Zebracat I work on the path from a prompt
-to a rendered video: jobs that retry on their own, model output that has to pass a schema, and Remotion
-templates that ship like code. I write about language-model systems once they have real users.
+Software engineer with five years of Python, mostly backend, full-stack when the work needs it. I work
+at Zebracat, an AI video generation company, and write most weeks on Medium about AI engineering: how
+RAG, prompts, evaluation and model choice hold up in production.
 
 \cvsection{Experience}
 
-\role{Software Engineer \textperiodcentered\ AI}{Zebracat}{Generative text-to-video platform}{Sep 2024 \textendash\ Present \textperiodcentered\ Remote (Berlin)}
+\role{Software Engineer, AI}{Zebracat}{AI video generation platform}{Sep 2024 \textendash\ Present \textperiodcentered\ Remote}
 \begin{cvbullets}
-  \item A failed scene no longer kills the render. Each step is a job on RabbitMQ, with its own
-        state and its own retry.
-  \item Scripts and scenes are generated, then checked against a schema. A bad response retries;
-        it does not take the video down.
-  \item Templates are Remotion \textemdash\ React rendered headlessly into frames. Changing one
-        is a code change.
-  \item Django and FastAPI services behind React and TypeScript.
+  \item Ship product features end to end, from backend services to the web app people use every day.
+  \item Turn new AI capabilities into features that survive contact with real users.
+  \item Look after the boring half of the job: reliability, clear interfaces, and code the next person
+        can change.
 \end{cvbullets}
-\tech{Python \textperiodcentered\ FastAPI \textperiodcentered\ Django \textperiodcentered\ RabbitMQ \textperiodcentered\ Redis \textperiodcentered\ React \textperiodcentered\ TypeScript \textperiodcentered\ Remotion \textperiodcentered\ Docker \textperiodcentered\ AWS}
 
 \vspace{8pt}
 
 \role{Full-Stack Developer}{Freelance}{SaaS and consumer web products}{Jun 2021 \textendash\ Sep 2024 \textperiodcentered\ Remote}
 \begin{cvbullets}
-  \item Took client products from the data model through the API, the UI, and deploy, then stayed
-        for the support.
-  \item Django/DRF or FastAPI behind React, containerised, with monitoring in place before
-        handover.
-  \item Owned auth, access control, and how the data was stored \textemdash\ the parts a client
-        could not audit themselves.
+  \item Took client products from an empty repo to production: data model, API, interface, deploy.
+        Then stayed on for support.
+  \item Owned the parts a client can't easily check themselves: authentication, access control, and
+        how their data is stored.
+  \item Handed over with monitoring and tests already in place, so the next developer didn't start
+        blind.
 \end{cvbullets}
 \tech{Django \textperiodcentered\ DRF \textperiodcentered\ FastAPI \textperiodcentered\ React \textperiodcentered\ PostgreSQL \textperiodcentered\ Docker \textperiodcentered\ Nginx}
 
 \cvsection{Selected open source}
 
 {\metafont\fontsize{7.8}{10}\selectfont\color{muted}%
-229 stars across 23 public repositories \textperiodcentered\
+230 stars across 24 public repositories \textperiodcentered\
 \link{https://github.com/mohamad-liyaghi}{github.com/mohamad-liyaghi}}\par
 \vspace{5.5pt}
 
-\project{\link{https://github.com/mohamad-liyaghi/FoodAnywhere}{FoodAnywhere}}{40 stars}{Nearby restaurants, orders through the kitchen. PostGIS search, Celery for slow work, traces from request to worker.}
-\project{\link{https://github.com/mohamad-liyaghi/fast-commerce}{Fast Commerce}}{22 stars}{Async store API built for throughput \textemdash\ clean boundaries, background processing, tests that block a bad deploy.}
-\project{\link{https://github.com/mohamad-liyaghi/AcademyMaster}{AcademyMaster}}{21 stars}{An academy's API: who can see what, and jobs that run on a schedule.}
-\project{\link{https://github.com/mohamad-liyaghi/Tsuna-Streaming}{Tsuna}}{16 stars}{Video and music streaming, with expensive processing off the request path.}
-\project{\link{https://github.com/mohamad-liyaghi/telegram-to-rubika-uploader}{Telegram $\rightarrow$ Rubika}}{14 stars}{Go tool moving files up to 2\,GB straight between platforms, so nobody re-uploads over limited bandwidth.}
-\project{\link{https://github.com/mohamad-liyaghi/FastQuora}{FastQuora}}{11 stars}{Ask and answer \textemdash\ Elasticsearch on the search path, tracing through the cache.}
+\project{\link{https://github.com/mohamad-liyaghi/FoodAnywhere}{FoodAnywhere}}{40 stars}{Food delivery: nearby restaurants and orders through the kitchen. PostGIS search, Celery for slow work, tracing end to end.}
+\project{\link{https://github.com/mohamad-liyaghi/fast-commerce}{Fast Commerce}}{22 stars}{Async store API built for throughput, with clean boundaries, background jobs, and tests that block a bad deploy.}
+\project{\link{https://github.com/mohamad-liyaghi/AcademyMaster}{AcademyMaster}}{21 stars}{Courses, enrolments and roles for a teaching academy, with scheduled jobs.}
+\project{\link{https://github.com/mohamad-liyaghi/Tsuna-Streaming}{Tsuna}}{16 stars}{Video and music streaming, with heavy processing kept off the request path.}
+\project{\link{https://github.com/mohamad-liyaghi/telegram-to-rubika-uploader}{Telegram to Rubika}}{14 stars}{Go tool that moves files up to 2\,GB between the two platforms directly, saving VPN bandwidth.}
+\project{\link{https://github.com/mohamad-liyaghi/FastQuora}{FastQuora}}{11 stars}{Questions and answers, with Elasticsearch on the search path and tracing through the cache.}
 
 \cvsection{Skills}
 
 \skillrow{Languages}{Python, Go, TypeScript, SQL, Bash}
-\skillrow{Backend}{Django, Django REST Framework, FastAPI, Celery, RabbitMQ, asyncio, REST, WebSockets}
-\skillrow{Models}{LLM APIs, structured output, tool calling, RAG, vector search, evaluation}
+\skillrow{Backend}{Django, Django REST Framework, FastAPI, Celery, asyncio, REST, WebSockets}
+\skillrow{AI}{LLM APIs, structured output, tool calling, RAG, vector search, evaluation}
 \skillrow{Data}{PostgreSQL (incl. PostGIS), Redis, Elasticsearch, MongoDB}
-\skillrow{Frontend}{React, Tailwind, Remotion}
+\skillrow{Frontend}{React, TypeScript, Tailwind CSS}
 \skillrow{Infrastructure}{Docker, Kubernetes, GitHub Actions, AWS, Nginx}
 \skillrow{Reliability}{OpenTelemetry, Prometheus, Grafana, Sentry, Pytest}
 
 \cvsection{Writing}
 
-On agents, models, and the money around shipping them, published on Medium \textemdash\
-\link{https://medium.com/@el_mohamad/stop-being-a-feature-factory-the-engineers-other-job-is-reading-the-money-f95653b9c3ff}{Stop Being a Feature Factory} (Aug 2026),
-\link{https://medium.com/@el_mohamad/stop-being-your-products-night-shift-how-an-agent-squad-actually-works-9fb5b2f9718a}{How an Agent Squad Actually Works} (Aug 2026),
-\link{https://medium.com/@el_mohamad/stop-treating-open-source-models-as-a-downgrade-how-model-routing-actually-works-3891150cbc97}{How Model Routing Actually Works} (Jul 2026).
-Full archive: \link{https://medium.com/@el_mohamad}{medium.com/@el\_mohamad}
+An AI engineering series on Medium, new posts most weeks. Recent:
+\link{https://medium.com/@el_mohamad/stop-treating-rag-and-ai-agents-like-magic-0882a234d209}{Stop Treating RAG and AI Agents Like Magic} (Nov 2026),
+\link{https://medium.com/@el_mohamad/stop-treating-prompt-engineering-like-guesswork-777c617782c9}{Stop Treating Prompt Engineering Like Guesswork} (Nov 2026),
+\link{https://medium.com/@el_mohamad/stop-choosing-llms-by-leaderboard-scores-136ffd1dffec}{Stop Choosing LLMs by Leaderboard Scores} (Nov 2026).
+Archive: \link{https://medium.com/@el_mohamad}{medium.com/@el\_mohamad}
 
 \enlargethispage{1.5\baselineskip}
 \cvsection{Education \& languages}

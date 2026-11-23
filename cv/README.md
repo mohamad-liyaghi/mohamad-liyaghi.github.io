@@ -27,9 +27,17 @@ XeLaTeX with bidi/xepersian. On Debian or Ubuntu:
 apt-get install texlive-xetex texlive-latex-extra texlive-lang-arabic
 ```
 
-Fonts are vendored in `fonts/` (Instrument Serif, Archivo, JetBrains Mono,
-Vazirmatn — all SIL Open Font License), so a build does not depend on what is
-installed on the machine.
+Fonts are vendored in `fonts/` (Archivo, JetBrains Mono, Vazirmatn, all SIL
+Open Font License), so a build does not depend on what is installed on the
+machine.
+
+No TeX on the machine? The official TeX Live image works and leaves nothing
+behind but the PDFs:
+
+```bash
+docker run --rm -u "$(id -u):$(id -g)" -e HOME=/tmp -v "$PWD":/work -w /work \
+  texlive/texlive:latest bash cv/build.sh
+```
 
 ## The Persian file
 
@@ -45,5 +53,9 @@ Two things that look like typos but are not:
 ## Keeping the HTML in step
 
 `public/cv.html` and `public/cv-fa.html` mirror these documents by hand — same
-copy, same palette, so a reader gets the same résumé whether they open the page
-or the PDF. When you change a `.tex`, change its HTML twin in the same commit.
+copy, same palette (the site's light theme), so a reader gets the same résumé
+whether they open the page or the PDF. When you change a `.tex`, change its HTML
+twin in the same commit.
+
+What goes in: the employer's name, public product description, title and dates.
+Nothing about how any employer's product is built.

@@ -3,36 +3,41 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Mohamad Liyaghi — Résumé</title>
+    <title>Mohamad Liyaghi, résumé</title>
     <meta
       name="description"
-      content="Résumé of Mohamad Liyaghi — Software Engineer · AI at Zebracat. Generation pipelines, model steps, and programmatic video in Python, TypeScript and Go."
+      content="Résumé of Mohamad Liyaghi, software engineer at Zebracat. Five years of Python, backend and AI, open-source Django and FastAPI projects."
     />
-    <link rel="icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#eff3ee" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href="https://mohamad-liyaghi.ir/cv.html" />
+    <link rel="alternate" hreflang="en" href="https://mohamad-liyaghi.ir/cv.html" />
     <link rel="alternate" hreflang="fa" href="https://mohamad-liyaghi.ir/cv-fa.html" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap"
-    />
+    <link rel="preload" href="/fonts/mona-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
     <style>
-      /* Kept deliberately in step with cv/cv-en.tex — the .tex is canonical. */
+      /* Mirrors cv/cv-en.tex, which is canonical. Colours are the site's light theme. */
+      @font-face {
+        font-family: "Mona Sans";
+        src: url("/fonts/mona-sans-latin.woff2") format("woff2");
+        font-weight: 200 900;
+        font-stretch: 75% 125%;
+        font-display: swap;
+      }
       @page { size: A4; margin: 12mm 14mm; }
-
       :root {
-        --ink: #16150f;
-        --body: #46433a;
-        --muted: #7c7869;
-        --accent: #a85a28;
-        --hairline: #d9d2c4;
-        --paper: #f7f4ee;
+        --ink: #0d1b17;
+        --body: #33443d;
+        --muted: #4c5f57;
+        --accent: #466f00;
+        --lime: #c8f06b;
+        --hairline: #d3ddd6;
+        --ground: #eff3ee;
       }
       * { box-sizing: border-box; margin: 0; padding: 0; }
       body {
-        background: var(--paper);
+        background: var(--ground);
         color: var(--body);
-        font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+        font-family: "Mona Sans", ui-sans-serif, system-ui, sans-serif;
         font-size: 10.2pt;
         line-height: 1.5;
         padding: 28px 16px 64px;
@@ -43,39 +48,25 @@
         margin: 0 auto;
         background: #fff;
         padding: 16mm 15mm 14mm;
-        box-shadow: 0 24px 60px -32px rgb(0 0 0 / 0.35);
+        border-radius: 14px;
+        box-shadow: 0 30px 70px -40px rgb(13 27 23 / 0.35);
       }
       a { color: inherit; text-decoration: none; }
       a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+      a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 
-      h1 {
-        font-family: "Instrument Serif", Georgia, serif;
-        font-size: 30pt;
-        font-weight: 400;
-        line-height: 1;
-        color: var(--ink);
-        letter-spacing: -0.01em;
-      }
-      .name-rule { width: 54px; height: 1.6px; background: var(--accent); margin: 7px 0 9px; }
-      .title { font-size: 12pt; font-weight: 600; color: var(--ink); }
-      .contact {
-        margin-top: 7px;
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 7.9pt;
-        line-height: 1.75;
-        color: var(--muted);
-        word-spacing: 0.05em;
-      }
+      h1 { font-size: 27pt; font-weight: 760; font-stretch: 122%; letter-spacing: -0.03em; line-height: 1; color: var(--ink); }
+      .rule { width: 54px; height: 3px; border-radius: 2px; background: var(--lime); margin: 9px 0 9px; }
+      .title { font-size: 12pt; font-weight: 620; color: var(--ink); }
+      .contact { margin-top: 6px; font-size: 8.6pt; line-height: 1.75; color: var(--muted); }
       .contact span { white-space: nowrap; }
       .sep { color: var(--hairline); margin: 0 6px; }
 
       h2 {
         margin-top: 15px;
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 8pt;
-        font-weight: 500;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
+        font-size: 9pt;
+        font-weight: 680;
+        font-stretch: 112%;
         color: var(--accent);
         padding-bottom: 3px;
         border-bottom: 1px solid var(--hairline);
@@ -83,81 +74,51 @@
       h2 + * { margin-top: 8px; }
 
       .role-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
-      h3 { font-size: 12pt; font-weight: 600; color: var(--ink); }
-      .dates {
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 7.8pt;
-        letter-spacing: 0.07em;
-        text-transform: uppercase;
-        color: var(--muted);
-        white-space: nowrap;
-      }
+      h3 { font-size: 11.5pt; font-weight: 640; color: var(--ink); }
+      .dates { font-size: 8.4pt; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
       .org { margin-top: 2px; color: var(--muted); }
-      .org strong { color: var(--accent); font-weight: 600; }
+      .org strong { color: var(--accent); font-weight: 620; }
 
       ul.bullets { list-style: none; margin-top: 6px; }
-      ul.bullets li { position: relative; padding-left: 17px; margin-top: 4px; }
+      ul.bullets li { position: relative; padding-left: 15px; margin-top: 4px; }
       ul.bullets li::before {
         content: "";
         position: absolute;
         left: 0;
-        top: 0.72em;
-        width: 8px;
-        height: 1px;
+        top: 0.62em;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
         background: var(--accent);
       }
-      .tech {
-        margin-top: 6px;
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 7.6pt;
-        color: var(--muted);
-      }
-      .role + .role { margin-top: 11px; }
+      .tech { margin-top: 6px; font-size: 8.4pt; color: var(--muted); }
+      .role + .role { margin-top: 12px; }
 
-      .repo-meta {
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 7.8pt;
-        color: var(--muted);
-      }
+      .repo-meta { font-size: 8.6pt; color: var(--muted); }
       .projects { list-style: none; margin-top: 7px; }
       .projects li { margin-top: 4px; }
-      .projects b { color: var(--ink); font-weight: 600; }
-      .stars {
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 7.6pt;
-        color: var(--muted);
-      }
+      .projects b { color: var(--ink); font-weight: 620; }
+      .stars { font-size: 8.4pt; color: var(--muted); }
 
       dl.skills { display: grid; grid-template-columns: 108px 1fr; row-gap: 3.5px; column-gap: 12px; }
-      dl.skills dt {
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 7.8pt;
-        font-weight: 500;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--muted);
-        padding-top: 1.5px;
-      }
+      dl.skills dt { font-size: 8.6pt; font-weight: 600; color: var(--muted); padding-top: 1px; }
 
-      .actions {
-        max-width: 210mm;
-        margin: 0 auto 14px;
-        display: flex;
-        gap: 10px;
-        justify-content: flex-end;
-      }
+      .actions { max-width: 210mm; margin: 0 auto 14px; display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
       .actions a {
-        font-size: 9pt;
-        border: 1px solid var(--hairline);
+        font-size: 9.5pt;
+        font-weight: 560;
+        border: 1px solid #bacac0;
+        border-radius: 999px;
         background: #fff;
-        padding: 7px 13px;
+        padding: 7px 14px;
         color: var(--ink);
       }
-      .actions a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+      .actions a.primary { background: var(--lime); border-color: transparent; }
+      .actions a:hover { border-color: var(--accent); text-decoration: none; color: var(--ink); }
 
       @media print {
         body { background: #fff; padding: 0; font-size: 9.4pt; line-height: 1.42; }
-        .sheet { max-width: none; padding: 0; box-shadow: none; }
+        .sheet { max-width: none; padding: 0; box-shadow: none; border-radius: 0; }
         .actions { display: none; }
         a { color: inherit !important; text-decoration: none !important; }
         h2 { margin-top: 11px; }
@@ -171,25 +132,24 @@
     </style>
   </head>
   <body>
-    <div class="actions">
-      <a href="/Mohamad_Liyaghi_CV.pdf" download>Download PDF</a>
-      <a href="/cv-fa.html">فارسی</a>
-      <a href="/">← Back to site</a>
-    </div>
+    <nav class="actions" aria-label="Résumé">
+      <a class="primary" href="/Mohamad_Liyaghi_CV.pdf" download>Download PDF</a>
+      <a href="/cv-fa.html" hreflang="fa" lang="fa">فارسی</a>
+      <a href="/en/">Back to the site</a>
+    </nav>
 
     <main class="sheet">
       <header>
         <h1>Mohamad Liyaghi</h1>
-        <div class="name-rule"></div>
-        <p class="title">Software Engineer · AI</p>
+        <div class="rule" aria-hidden="true"></div>
+        <p class="title">Software Engineer, AI</p>
         <p class="contact">
           <span><a href="mailto:liaghimohamad69@gmail.com">liaghimohamad69@gmail.com</a></span
           ><span class="sep">|</span
           ><span><a href="https://mohamad-liyaghi.ir">mohamad-liyaghi.ir</a></span><br />
           <span><a href="https://github.com/mohamad-liyaghi">github.com/mohamad-liyaghi</a></span
           ><span class="sep">|</span
-          ><span
-            ><a href="https://www.linkedin.com/in/mohamad-liyaghi/">linkedin.com/in/mohamad-liyaghi</a></span
+          ><span><a href="https://www.linkedin.com/in/mohamad-liyaghi/">linkedin.com/in/mohamad-liyaghi</a></span
           ><span class="sep">|</span
           ><span><a href="https://medium.com/@el_mohamad">medium.com/@el_mohamad</a></span>
         </p>
@@ -197,153 +157,76 @@
 
       <h2>Summary</h2>
       <p>
-        Software engineer, five years of Python, mostly backend. At Zebracat I work on the path from
-        a prompt to a rendered video: jobs that retry on their own, model output that has to pass a
-        schema, and Remotion templates that ship like code. I write about language-model systems
-        once they have real users.
+        Software engineer with five years of Python, mostly backend, full-stack when the work needs it. I work at
+        Zebracat, an AI video generation company, and write most weeks on Medium about AI engineering: how RAG,
+        prompts, evaluation and model choice hold up in production.
       </p>
 
       <h2>Experience</h2>
-      <div class="role">
+      <section class="role">
         <div class="role-head">
-          <h3>Software Engineer · AI</h3>
-          <span class="dates">Sep 2024 — Present · Remote (Berlin)</span>
+          <h3>Software Engineer, AI</h3>
+          <span class="dates">Sep 2024 – Present · Remote</span>
         </div>
-        <p class="org">
-          <strong><a href="https://www.zebracat.ai">Zebracat</a></strong> · Generative text-to-video
-          platform
-        </p>
+        <p class="org"><strong><a href="https://www.zebracat.ai">Zebracat</a></strong> · AI video generation platform</p>
         <ul class="bullets">
-          <li>
-            A failed scene no longer kills the render. Each step is a job on RabbitMQ, with its own
-            state and its own retry.
-          </li>
-          <li>
-            Scripts and scenes are generated, then checked against a schema. A bad response retries;
-            it does not take the video down.
-          </li>
-          <li>
-            Templates are Remotion — React rendered headlessly into frames. Changing one is a code
-            change.
-          </li>
-          <li>Django and FastAPI services behind React and TypeScript.</li>
+          <li>Ship product features end to end, from backend services to the web app people use every day.</li>
+          <li>Turn new AI capabilities into features that survive contact with real users.</li>
+          <li>Look after the boring half of the job: reliability, clear interfaces, and code the next person can change.</li>
         </ul>
-        <p class="tech">
-          Python · FastAPI · Django · RabbitMQ · Redis · React · TypeScript · Remotion · Docker ·
-          AWS
-        </p>
-      </div>
-
-      <div class="role">
+      </section>
+      <section class="role">
         <div class="role-head">
           <h3>Full-Stack Developer</h3>
-          <span class="dates">Jun 2021 — Sep 2024 · Remote</span>
+          <span class="dates">Jun 2021 – Sep 2024 · Remote</span>
         </div>
         <p class="org"><strong>Freelance</strong> · SaaS and consumer web products</p>
         <ul class="bullets">
-          <li>
-            Took client products from the data model through the API, the UI, and deploy, then stayed
-            for the support.
-          </li>
-          <li>
-            Django/DRF or FastAPI behind React, containerised, with monitoring in place before
-            handover.
-          </li>
-          <li>
-            Owned auth, access control, and how the data was stored — the parts a client could not
-            audit themselves.
-          </li>
+          <li>Took client products from an empty repo to production: data model, API, interface, deploy. Then stayed on for support.</li>
+          <li>Owned the parts a client can't easily check themselves: authentication, access control, and how their data is stored.</li>
+          <li>Handed over with monitoring and tests already in place, so the next developer didn't start blind.</li>
         </ul>
         <p class="tech">Django · DRF · FastAPI · React · PostgreSQL · Docker · Nginx</p>
-      </div>
+      </section>
 
       <h2>Selected open source</h2>
       <p class="repo-meta">
-        229 stars across 23 public repositories ·
+        230 stars across 24 public repositories ·
         <a href="https://github.com/mohamad-liyaghi">github.com/mohamad-liyaghi</a>
       </p>
       <ul class="projects">
-        <li>
-          <b><a href="https://github.com/mohamad-liyaghi/FoodAnywhere">FoodAnywhere</a></b>
-          <span class="stars">40 stars</span> — Nearby restaurants, orders through the kitchen.
-          PostGIS search, Celery for slow work, traces from request to worker.
-        </li>
-        <li>
-          <b><a href="https://github.com/mohamad-liyaghi/fast-commerce">Fast Commerce</a></b>
-          <span class="stars">22 stars</span> — Async store API built for throughput — clean
-          boundaries, background processing, tests that block a bad deploy.
-        </li>
-        <li>
-          <b><a href="https://github.com/mohamad-liyaghi/AcademyMaster">AcademyMaster</a></b>
-          <span class="stars">21 stars</span> — An academy's API: who can see what, and jobs that
-          run on a schedule.
-        </li>
-        <li>
-          <b><a href="https://github.com/mohamad-liyaghi/Tsuna-Streaming">Tsuna</a></b>
-          <span class="stars">16 stars</span> — Video and music streaming, with expensive processing
-          off the request path.
-        </li>
-        <li>
-          <b
-            ><a href="https://github.com/mohamad-liyaghi/telegram-to-rubika-uploader"
-              >Telegram → Rubika</a
-            ></b
-          >
-          <span class="stars">14 stars</span> — Go tool moving files up to 2 GB straight between
-          platforms, so nobody re-uploads over limited bandwidth.
-        </li>
-        <li>
-          <b><a href="https://github.com/mohamad-liyaghi/FastQuora">FastQuora</a></b>
-          <span class="stars">11 stars</span> — Ask and answer — Elasticsearch on the search path,
-          tracing through the cache.
-        </li>
+        <li><b><a href="https://github.com/mohamad-liyaghi/FoodAnywhere">FoodAnywhere</a></b> <span class="stars">40 stars</span> — Food delivery: nearby restaurants and orders through the kitchen. PostGIS search, Celery for slow work, tracing end to end.</li>
+        <li><b><a href="https://github.com/mohamad-liyaghi/fast-commerce">Fast Commerce</a></b> <span class="stars">22 stars</span> — Async store API built for throughput, with clean boundaries, background jobs, and tests that block a bad deploy.</li>
+        <li><b><a href="https://github.com/mohamad-liyaghi/AcademyMaster">AcademyMaster</a></b> <span class="stars">21 stars</span> — Courses, enrolments and roles for a teaching academy, with scheduled jobs.</li>
+        <li><b><a href="https://github.com/mohamad-liyaghi/Tsuna-Streaming">Tsuna</a></b> <span class="stars">16 stars</span> — Video and music streaming, with heavy processing kept off the request path.</li>
+        <li><b><a href="https://github.com/mohamad-liyaghi/telegram-to-rubika-uploader">Telegram to Rubika</a></b> <span class="stars">14 stars</span> — Go tool that moves files up to 2 GB between the two platforms directly, saving VPN bandwidth.</li>
+        <li><b><a href="https://github.com/mohamad-liyaghi/FastQuora">FastQuora</a></b> <span class="stars">11 stars</span> — Questions and answers, with Elasticsearch on the search path and tracing through the cache.</li>
       </ul>
 
       <h2>Skills</h2>
       <dl class="skills">
-        <dt>Languages</dt>
-        <dd>Python, Go, TypeScript, SQL, Bash</dd>
-        <dt>Backend</dt>
-        <dd>Django, Django REST Framework, FastAPI, Celery, RabbitMQ, asyncio, REST, WebSockets</dd>
-        <dt>Models</dt>
-        <dd>LLM APIs, structured output, tool calling, RAG, vector search, evaluation</dd>
-        <dt>Data</dt>
-        <dd>PostgreSQL (incl. PostGIS), Redis, Elasticsearch, MongoDB</dd>
-        <dt>Frontend</dt>
-        <dd>React, Tailwind, Remotion</dd>
-        <dt>Infrastructure</dt>
-        <dd>Docker, Kubernetes, GitHub Actions, AWS, Nginx</dd>
-        <dt>Reliability</dt>
-        <dd>OpenTelemetry, Prometheus, Grafana, Sentry, Pytest</dd>
+        <dt>Languages</dt><dd>Python, Go, TypeScript, SQL, Bash</dd>
+        <dt>Backend</dt><dd>Django, Django REST Framework, FastAPI, Celery, asyncio, REST, WebSockets</dd>
+        <dt>AI</dt><dd>LLM APIs, structured output, tool calling, RAG, vector search, evaluation</dd>
+        <dt>Data</dt><dd>PostgreSQL (incl. PostGIS), Redis, Elasticsearch, MongoDB</dd>
+        <dt>Frontend</dt><dd>React, TypeScript, Tailwind CSS</dd>
+        <dt>Infrastructure</dt><dd>Docker, Kubernetes, GitHub Actions, AWS, Nginx</dd>
+        <dt>Reliability</dt><dd>OpenTelemetry, Prometheus, Grafana, Sentry, Pytest</dd>
       </dl>
 
       <h2>Writing</h2>
       <p>
-        On agents, models, and the money around shipping them, published on Medium —
-        <a
-          href="https://medium.com/@el_mohamad/stop-being-a-feature-factory-the-engineers-other-job-is-reading-the-money-f95653b9c3ff"
-          >Stop Being a Feature Factory</a
-        >
-        (Aug 2026),
-        <a
-          href="https://medium.com/@el_mohamad/stop-being-your-products-night-shift-how-an-agent-squad-actually-works-9fb5b2f9718a"
-          >How an Agent Squad Actually Works</a
-        >
-        (Aug 2026),
-        <a
-          href="https://medium.com/@el_mohamad/stop-treating-open-source-models-as-a-downgrade-how-model-routing-actually-works-3891150cbc97"
-          >How Model Routing Actually Works</a
-        >
-        (Jul 2026). Full archive:
-        <a href="https://medium.com/@el_mohamad">medium.com/@el_mohamad</a>
+        An AI engineering series on Medium, new posts most weeks. Recent:
+        <a href="https://medium.com/@el_mohamad/stop-treating-rag-and-ai-agents-like-magic-0882a234d209">Stop Treating RAG and AI Agents Like Magic</a> (Nov 2026),
+        <a href="https://medium.com/@el_mohamad/stop-treating-prompt-engineering-like-guesswork-777c617782c9">Stop Treating Prompt Engineering Like Guesswork</a> (Nov 2026),
+        <a href="https://medium.com/@el_mohamad/stop-choosing-llms-by-leaderboard-scores-136ffd1dffec">Stop Choosing LLMs by Leaderboard Scores</a> (Nov 2026).
+        Archive: <a href="https://medium.com/@el_mohamad">medium.com/@el_mohamad</a>
       </p>
 
       <h2>Education &amp; languages</h2>
       <dl class="skills">
-        <dt>Education</dt>
-        <dd>B.Sc. Computer Science</dd>
-        <dt>Languages</dt>
-        <dd>Persian — native · English — professional working proficiency</dd>
+        <dt>Education</dt><dd>B.Sc. Computer Science</dd>
+        <dt>Languages</dt><dd>Persian — native · English — professional working proficiency</dd>
       </dl>
     </main>
   </body>

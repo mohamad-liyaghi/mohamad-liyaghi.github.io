@@ -21,11 +21,11 @@
 \newfontfamily\displayfont[Path=fonts/, Script=Arabic, Language=Parsi, BoldFont = Vazirmatn-Bold.ttf]{Vazirmatn-Bold.ttf}
 
 % ---------------------------------------------------------------- رنگ‌ها
-\definecolor{ink}{HTML}{16150F}
-\definecolor{bodytext}{HTML}{46433A}
-\definecolor{muted}{HTML}{7C7869}
-\definecolor{accent}{HTML}{A85A28}
-\definecolor{hairline}{HTML}{D9D2C4}
+\definecolor{ink}{HTML}{0D1B17}
+\definecolor{bodytext}{HTML}{33443D}
+\definecolor{muted}{HTML}{4C5F57}
+\definecolor{accent}{HTML}{466F00}
+\definecolor{hairline}{HTML}{D3DDD6}
 \color{bodytext}
 
 % ---------------------------------------------------------------- اجزا
@@ -74,9 +74,9 @@
 
 {\displayfont\fontsize{27}{30}\selectfont\color{ink}محمد لیاقی}\par
 \vspace{4pt}
-{\color{accent}\hrule height 1.4pt width 54pt}
+{\color{accent}\rule{54pt}{1.4pt}}\par
 \vspace{7pt}
-{\fontsize{11}{13}\selectfont\bfseries\color{ink}مهندس نرم‌افزار \textperiodcentered\ هوش مصنوعی}\par
+{\fontsize{11}{13}\selectfont\bfseries\color{ink}مهندس نرم‌افزار، هوش مصنوعی}\par
 \vspace{6pt}
 {\metafont\fontsize{7.9}{10.5}\selectfont\color{muted}%
   \lr{\link{mailto:liaghimohamad69@gmail.com}{liaghimohamad69@gmail.com}}\ \ \textbar\ \
@@ -90,64 +90,57 @@
 
 \cvsection{خلاصه}
 
-مهندس نرم‌افزارم؛ پنج سال \lr{Python}، بیشتر در بک‌اند. در \lr{Zebracat} روی مسیر متن تا ویدیوی
-نهایی کار می‌کنم: کارهایی که خودشان دوباره تلاش می‌کنند، خروجی مدلی که باید از شِما رد شود، و
-قالب‌های \lr{Remotion} که مثل کد منتشر می‌شوند. درباره‌ی سامانه‌های مبتنی بر مدل زبانی می‌نویسم،
-وقتی کاربر واقعی به آن‌ها می‌رسد.
+مهندس نرم‌افزارم با پنج سال تجربهٔ \lr{Python}، بیشتر در بک‌اند، و تمام‌پشته هر جا کار لازم داشته باشد.
+در \lr{Zebracat}، شرکتی که با هوش مصنوعی ویدیو می‌سازد، کار می‌کنم و تقریباً هر هفته در \lr{Medium} دربارهٔ
+مهندسی هوش مصنوعی می‌نویسم: اینکه \lr{RAG}، پرامپت، ارزیابی و انتخاب مدل در محیط واقعی چطور از پس کار برمی‌آیند.
 
 \cvsection{تجربهٔ کاری}
 
-\role{مهندس نرم‌افزار \textperiodcentered\ هوش مصنوعی}{\lr{Zebracat}}{پلتفرم ساخت ویدیو از متن}{شهریور ۱۴۰۳ — اکنون · دورکاری (برلین)}
+\role{مهندس نرم‌افزار، هوش مصنوعی}{\lr{Zebracat}}{پلتفرم ساخت ویدیو با هوش مصنوعی}{شهریور ۱۴۰۳ — اکنون · دورکاری}
 \begin{cvbullets}
-  \item دیگر شکست یک صحنه کل رندر را نمی‌کشد. هر مرحله یک کار روی \lr{RabbitMQ} است، با وضعیت و
-        تلاش مجدد خودش.
-  \item متن و صحنه تولید می‌شوند، بعد با شِما سنجیده می‌شوند. پاسخ خراب دوباره تلاش می‌کند؛
-        ویدیو را پایین نمی‌آورد.
-  \item قالب‌ها \lr{Remotion} هستند — \lr{React} که بدون مرورگر به فریم تبدیل می‌شود. تغییر یکی
-        یعنی یک تغییر کد.
-  \item سرویس‌های \lr{Django} و \lr{FastAPI} پشت \lr{React} و \lr{TypeScript}.
+  \item قابلیت‌های محصول را از سر تا ته می‌سازم، از سرویس‌های بک‌اند تا وب‌اپی که کاربران هر روز با آن کار می‌کنند.
+  \item توانایی‌های تازهٔ هوش مصنوعی را به قابلیت‌هایی تبدیل می‌کنم که در برخورد با کاربر واقعی هم سرپا بمانند.
+  \item نیمهٔ کم‌سروصدای کار برایم مهم است: پایداری، رابط‌های روشن، و کدی که نفر بعدی بتواند تغییرش بدهد.
 \end{cvbullets}
-\tech{Python · FastAPI · Django · RabbitMQ · Redis · React · TypeScript · Remotion · Docker · AWS}
 
 \vspace{6pt}
 
 \role{توسعه‌دهندهٔ تمام‌پشته}{فریلنس}{محصولات وب و \lr{SaaS}}{خرداد ۱۴۰۰ — شهریور ۱۴۰۳ · دورکاری}
 \begin{cvbullets}
-  \item محصول کارفرما را از مدل داده تا \lr{API} و رابط و استقرار بردم، و بعد از تحویل هم ماندم.
-  \item \lr{Django/DRF} یا \lr{FastAPI} پشت \lr{React}، کانتینری‌شده، با پایش فعال پیش از تحویل.
-  \item احراز هویت، کنترل دسترسی، و نحوهٔ نگهداری داده — بخش‌هایی که کارفرما خودش نمی‌توانست
-        بررسی‌شان کند.
+  \item محصول کارفرما را از مخزن خالی تا محیط عملیاتی بردم: مدل داده، \lr{API}، رابط کاربری، استقرار؛ و بعد هم برای پشتیبانی ماندم.
+  \item مسئول بخش‌هایی بودم که کارفرما به‌راحتی نمی‌تواند خودش بررسی کند: احراز هویت، کنترل دسترسی، و نحوهٔ نگهداری داده‌ها.
+  \item پروژه را با پایش و تست آماده تحویل دادم تا توسعه‌دهندهٔ بعدی کورکورانه شروع نکند.
 \end{cvbullets}
 \tech{Django · DRF · FastAPI · React · PostgreSQL · Docker · Nginx}
 
 \cvsection{پروژه‌های متن‌باز منتخب}
 
 {\metafont\fontsize{7.6}{10}\selectfont\color{muted}%
-\lr{\link{https://github.com/mohamad-liyaghi}{github.com/mohamad-liyaghi}}} {\fontsize{8.4}{10}\selectfont\color{muted}— ۲۲۹ ستاره در ۲۳ مخزن عمومی}\par
+\lr{\link{https://github.com/mohamad-liyaghi}{github.com/mohamad-liyaghi}}} {\fontsize{8.4}{10}\selectfont\color{muted}— ۲۳۰ ستاره در ۲۴ مخزن عمومی}\par
 \vspace{4.5pt}
 
-\project{\link{https://github.com/mohamad-liyaghi/FoodAnywhere}{FoodAnywhere}}{۴۰ ستاره}{رستوران نزدیک، سفارش تا آشپزخانه. جست‌وجوی \lr{PostGIS}، کار سنگین با \lr{Celery}، ردپا از درخواست تا کارگر.}
-\project{\link{https://github.com/mohamad-liyaghi/fast-commerce}{Fast Commerce}}{۲۲ ستاره}{\lr{API} فروشگاهی ناهمگام با تمرکز بر توان عملیاتی — مرزهای تمیز، پردازش پس‌زمینه، آزمون‌هایی که جلوی انتشار خراب را می‌گیرند.}
-\project{\link{https://github.com/mohamad-liyaghi/AcademyMaster}{AcademyMaster}}{۲۱ ستاره}{\lr{API} یک آموزشگاه: چه کسی چه می‌بیند، و کارهایی که سر وقت اجرا می‌شوند.}
-\project{\link{https://github.com/mohamad-liyaghi/Tsuna-Streaming}{Tsuna}}{۱۶ ستاره}{پخش ویدیو و موسیقی، با انتقال پردازش سنگین از مسیر درخواست.}
-\project{\link{https://github.com/mohamad-liyaghi/telegram-to-rubika-uploader}{Telegram $\rightarrow$ Rubika}}{۱۴ ستاره}{ابزار \lr{Go} برای انتقال مستقیم فایل تا ۲ گیگابایت میان دو پلتفرم، تا پهنای باند صرف آپلود دوباره نشود.}
-\project{\link{https://github.com/mohamad-liyaghi/FastQuora}{FastQuora}}{۱۱ ستاره}{پرسش و پاسخ — \lr{Elasticsearch} روی جست‌وجو، ردیابی در کش.}
+\project{\link{https://github.com/mohamad-liyaghi/FoodAnywhere}{FoodAnywhere}}{۴۰ ستاره}{سفارش غذا: رستوران‌های نزدیک و سفارش تا آشپزخانه. جست‌وجوی \lr{PostGIS}، کارهای کند با \lr{Celery}، ردگیری از اول تا آخر.}
+\project{\link{https://github.com/mohamad-liyaghi/fast-commerce}{Fast Commerce}}{۲۲ ستاره}{\lr{API} فروشگاهی ناهمگام برای بار بالا، با مرزهای تمیز، کارهای پس‌زمینه، و تست‌هایی که جلوی استقرار خراب را می‌گیرند.}
+\project{\link{https://github.com/mohamad-liyaghi/AcademyMaster}{AcademyMaster}}{۲۱ ستاره}{دوره‌ها، ثبت‌نام‌ها و نقش‌های یک آموزشگاه، با کارهای زمان‌بندی‌شده.}
+\project{\link{https://github.com/mohamad-liyaghi/Tsuna-Streaming}{Tsuna}}{۱۶ ستاره}{پخش ویدیو و موسیقی، با پردازش سنگینِ بیرون از مسیر درخواست.}
+\project{\link{https://github.com/mohamad-liyaghi/telegram-to-rubika-uploader}{Telegram to Rubika}}{۱۴ ستاره}{ابزار \lr{Go} برای انتقال مستقیم فایل تا ۲ گیگابایت میان دو پلتفرم، برای صرفه‌جویی در حجم \lr{VPN}.}
+\project{\link{https://github.com/mohamad-liyaghi/FastQuora}{FastQuora}}{۱۱ ستاره}{پرسش و پاسخ، با \lr{Elasticsearch} در مسیر جست‌وجو و ردگیری تا لایهٔ کش.}
 
 \cvsection{مهارت‌ها}
 
 \skillrow{زبان‌ها}{\lr{Python, Go, TypeScript, SQL, Bash}}
-\skillrow{بک‌اند}{\lr{Django, Django REST Framework, FastAPI, Celery, RabbitMQ, asyncio, REST, WebSockets}}
-\skillrow{مدل‌ها}{\lr{LLM APIs}، خروجی ساخت‌یافته، فراخوانی ابزار، \lr{RAG}، جست‌وجوی برداری، ارزیابی}
+\skillrow{بک‌اند}{\lr{Django, Django REST Framework, FastAPI, Celery, asyncio, REST, WebSockets}}
+\skillrow{هوش مصنوعی}{\lr{LLM APIs}، خروجی ساخت‌یافته، فراخوانی ابزار، \lr{RAG}، جست‌وجوی برداری، ارزیابی}
 \skillrow{داده}{\lr{PostgreSQL (PostGIS), Redis, Elasticsearch, MongoDB}}
-\skillrow{فرانت‌اند}{\lr{React, Tailwind, Remotion}}
+\skillrow{فرانت‌اند}{\lr{React, TypeScript, Tailwind CSS}}
 \skillrow{زیرساخت}{\lr{Docker, Kubernetes, GitHub Actions, AWS, Nginx}}
 \skillrow{پایداری}{\lr{OpenTelemetry, Prometheus, Grafana, Sentry, Pytest}}
 
 \cvsection{نوشته‌ها}
 
-دربارهٔ ایجنت‌ها، مدل‌ها، و پولی که دورِ ساختن‌شان می‌چرخد، در \lr{Medium} (به انگلیسی) —
-\lr{\link{https://medium.com/@el_mohamad/stop-being-a-feature-factory-the-engineers-other-job-is-reading-the-money-f95653b9c3ff}{Stop Being a Feature Factory}} (مرداد ۱۴۰۵)،
-\lr{\link{https://medium.com/@el_mohamad/stop-being-your-products-night-shift-how-an-agent-squad-actually-works-9fb5b2f9718a}{How an Agent Squad Actually Works}} (مرداد ۱۴۰۵).
+مجموعه‌ای دربارهٔ مهندسی هوش مصنوعی در \lr{Medium} (به انگلیسی)، تقریباً هر هفته یک نوشتهٔ تازه. تازه‌ترین‌ها:
+\lr{\link{https://medium.com/@el_mohamad/stop-treating-rag-and-ai-agents-like-magic-0882a234d209}{Stop Treating RAG and AI Agents Like Magic}} (آبان ۱۴۰۵)،
+\lr{\link{https://medium.com/@el_mohamad/stop-treating-prompt-engineering-like-guesswork-777c617782c9}{Stop Treating Prompt Engineering Like Guesswork}} (آبان ۱۴۰۵).
 آرشیو کامل: \lr{\link{https://medium.com/@el_mohamad}{medium.com/@el\_mohamad}}
 
 \enlargethispage{2.6\baselineskip}

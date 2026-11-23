@@ -3,36 +3,48 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>محمد لیاقی — رزومه</title>
+    <title>محمد لیاقی، رزومه</title>
     <meta
       name="description"
-      content="رزومهٔ محمد لیاقی — مهندس نرم‌افزار · هوش مصنوعی در Zebracat. پایپ‌لاین تولید، گام‌های مدل، و ویدیوی برنامه‌پذیر."
+      content="رزومهٔ محمد لیاقی، مهندس نرم‌افزار در Zebracat. پنج سال Python، بک‌اند و هوش مصنوعی، پروژه‌های متن‌باز Django و FastAPI."
     />
-    <link rel="icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#eff3ee" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href="https://mohamad-liyaghi.ir/cv-fa.html" />
     <link rel="alternate" hreflang="en" href="https://mohamad-liyaghi.ir/cv.html" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Vazirmatn:wght@400;500;700&display=swap"
-    />
+    <link rel="alternate" hreflang="fa" href="https://mohamad-liyaghi.ir/cv-fa.html" />
+    <link rel="preload" href="/fonts/vazirmatn-arabic.woff2" as="font" type="font/woff2" crossorigin />
     <style>
-      /* Kept deliberately in step with cv/cv-fa.tex — the .tex is canonical. */
+      /* Mirrors cv/cv-fa.tex, which is canonical. Colours are the site's light theme. */
+      @font-face {
+        font-family: "Vazirmatn";
+        src: url("/fonts/vazirmatn-arabic.woff2") format("woff2");
+        font-weight: 100 900;
+        font-display: swap;
+        unicode-range: U+0600-06FF, U+0750-077F, U+200C-200E, U+FB50-FDFF, U+FE70-FEFC;
+      }
+      @font-face {
+        font-family: "Mona Sans";
+        src: url("/fonts/mona-sans-latin.woff2") format("woff2");
+        font-weight: 200 900;
+        font-stretch: 75% 125%;
+        font-display: swap;
+      }
       @page { size: A4; margin: 12mm 14mm; }
-
       :root {
-        --ink: #16150f;
-        --body: #46433a;
-        --muted: #7c7869;
-        --accent: #a85a28;
-        --hairline: #d9d2c4;
-        --paper: #f7f4ee;
+        --ink: #0d1b17;
+        --body: #33443d;
+        --muted: #4c5f57;
+        --accent: #466f00;
+        --lime: #c8f06b;
+        --hairline: #d3ddd6;
+        --ground: #eff3ee;
       }
       * { box-sizing: border-box; margin: 0; padding: 0; }
       body {
-        background: var(--paper);
+        background: var(--ground);
         color: var(--body);
-        font-family: "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+        font-family: "Vazirmatn", "Mona Sans", ui-sans-serif, system-ui, sans-serif;
         font-size: 10pt;
         line-height: 1.85;
         padding: 28px 16px 64px;
@@ -43,293 +55,177 @@
         margin: 0 auto;
         background: #fff;
         padding: 16mm 15mm 14mm;
-        box-shadow: 0 24px 60px -32px rgb(0 0 0 / 0.35);
+        border-radius: 14px;
+        box-shadow: 0 30px 70px -40px rgb(13 27 23 / 0.35);
       }
       a { color: inherit; text-decoration: none; }
-      a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+      a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+      a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+      .ltr { direction: ltr; unicode-bidi: isolate; }
 
-      h1 {
-        font-family: "Vazirmatn", Georgia, serif;
-        font-size: 25pt;
-        font-weight: 700;
-        line-height: 1;
-        color: var(--ink);
-        letter-spacing: -0.01em;
-      }
-      .name-rule { width: 54px; height: 1.6px; background: var(--accent); margin: 7px 0 9px; margin-inline-end: auto; }
-      .title { font-size: 12pt; font-weight: 600; color: var(--ink); }
-      .contact {
-        margin-top: 7px;
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 7.9pt;
-        line-height: 1.75;
-        color: var(--muted);
-        word-spacing: 0.05em;
-      }
+      h1 { font-size: 26pt; font-weight: 820; line-height: 1.2; color: var(--ink); }
+      .rule { width: 54px; height: 3px; border-radius: 2px; background: var(--lime); margin: 8px 0 8px; }
+      .title { font-size: 12pt; font-weight: 700; color: var(--ink); }
+      .contact { margin-top: 4px; font-family: "Mona Sans", sans-serif; font-size: 8.6pt; line-height: 1.8; color: var(--muted); }
       .contact span { white-space: nowrap; }
       .sep { color: var(--hairline); margin: 0 6px; }
 
-      h2 {
-        margin-top: 15px;
-        font-size: 9pt;
-        font-weight: 700;
-        color: var(--accent);
-        padding-bottom: 3px;
-        border-bottom: 1px solid var(--hairline);
-      }
-      h2 + * { margin-top: 8px; }
+      h2 { margin-top: 14px; font-size: 10pt; font-weight: 800; color: var(--accent); padding-bottom: 2px; border-bottom: 1px solid var(--hairline); }
+      h2 + * { margin-top: 7px; }
 
       .role-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
-      h3 { font-size: 12pt; font-weight: 600; color: var(--ink); }
-      .dates {
-        font-size: 8.2pt;
-        color: var(--muted);
-        white-space: nowrap;
-      }
-      .org { margin-top: 2px; color: var(--muted); }
-      .org strong { color: var(--accent); font-weight: 600; }
+      h3 { font-size: 11.5pt; font-weight: 750; color: var(--ink); }
+      .dates { font-size: 8.6pt; color: var(--muted); white-space: nowrap; }
+      .org { color: var(--muted); }
+      .org strong { color: var(--accent); font-weight: 700; }
 
-      ul.bullets { list-style: none; margin-top: 6px; }
-      ul.bullets li { position: relative; padding-inline-start: 17px; margin-top: 4px; }
+      ul.bullets { list-style: none; margin-top: 4px; }
+      ul.bullets li { position: relative; padding-right: 15px; margin-top: 2px; }
       ul.bullets li::before {
         content: "";
         position: absolute;
-        inset-inline-start: 0;
-        top: 0.9em;
-        width: 8px;
-        height: 1px;
+        right: 0;
+        top: 0.8em;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
         background: var(--accent);
       }
-      .tech {
-        margin-top: 6px;
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 7.6pt;
-        color: var(--muted);
-      }
-      .role + .role { margin-top: 11px; }
+      .tech { margin-top: 5px; font-family: "Mona Sans", sans-serif; font-size: 8.4pt; color: var(--muted); }
+      .role + .role { margin-top: 10px; }
 
-      .repo-meta {
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 7.8pt;
-        color: var(--muted);
-      }
-      .projects { list-style: none; margin-top: 7px; }
-      .projects li { margin-top: 4px; }
-      .projects b { color: var(--ink); font-weight: 600; }
-      .stars {
-        font-size: 8pt;
-        color: var(--muted);
-      }
+      .repo-meta { font-size: 8.6pt; color: var(--muted); }
+      .projects { list-style: none; margin-top: 6px; }
+      .projects li { margin-top: 2px; }
+      .projects b { color: var(--ink); font-weight: 700; font-family: "Mona Sans", sans-serif; }
+      .stars { font-size: 8.4pt; color: var(--muted); }
 
-      dl.skills { display: grid; grid-template-columns: 96px 1fr; row-gap: 3.5px; column-gap: 12px; }
-      dl.skills dt {
-        font-size: 8.4pt;
-        font-weight: 700;
-        color: var(--muted);
-        padding-top: 1.5px;
-      }
+      dl.skills { display: grid; grid-template-columns: 96px 1fr; row-gap: 2px; column-gap: 12px; }
+      dl.skills dt { font-size: 9pt; font-weight: 700; color: var(--muted); }
+      dl.skills dd.latin { font-family: "Mona Sans", sans-serif; direction: ltr; text-align: right; }
 
-      .actions {
-        max-width: 210mm;
-        margin: 0 auto 14px;
-        display: flex;
-        gap: 10px;
-        justify-content: flex-end;
-      }
+      .actions { max-width: 210mm; margin: 0 auto 14px; display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
       .actions a {
-        font-size: 9pt;
-        border: 1px solid var(--hairline);
+        font-size: 9.5pt;
+        font-weight: 600;
+        border: 1px solid #bacac0;
+        border-radius: 999px;
         background: #fff;
-        padding: 7px 13px;
+        padding: 6px 14px;
         color: var(--ink);
       }
-      .actions a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+      .actions a.primary { background: var(--lime); border-color: transparent; }
+      .actions a:hover { border-color: var(--accent); text-decoration: none; color: var(--ink); }
 
       @media print {
-        body { background: #fff; padding: 0; font-size: 9.2pt; line-height: 1.62; }
-        .sheet { max-width: none; padding: 0; box-shadow: none; }
+        body { background: #fff; padding: 0; font-size: 9.2pt; line-height: 1.7; }
+        .sheet { max-width: none; padding: 0; box-shadow: none; border-radius: 0; }
         .actions { display: none; }
         a { color: inherit !important; text-decoration: none !important; }
-        h2 { margin-top: 11px; }
       }
       @media (max-width: 640px) {
         .sheet { padding: 22px 18px 26px; }
-        .role-head { flex-direction: column; gap: 2px; }
-        dl.skills { grid-template-columns: 1fr; row-gap: 1px; }
+        .role-head { flex-direction: column; gap: 0; }
+        dl.skills { grid-template-columns: 1fr; row-gap: 0; }
         dl.skills dd { margin-bottom: 6px; }
       }
     </style>
   </head>
   <body>
-    <div class="actions">
-      <a href="/Mohamad_Liyaghi_CV_FA.pdf" download>دریافت PDF</a>
-      <a href="/cv.html">English</a>
-      <a href="/">→ بازگشت به سایت</a>
-    </div>
+    <nav class="actions" aria-label="رزومه">
+      <a class="primary" href="/Mohamad_Liyaghi_CV_FA.pdf" download>دریافت PDF</a>
+      <a href="/cv.html" hreflang="en" lang="en">English</a>
+      <a href="/fa/">بازگشت به سایت</a>
+    </nav>
 
     <main class="sheet">
       <header>
         <h1>محمد لیاقی</h1>
-        <div class="name-rule"></div>
-        <p class="title">مهندس نرم‌افزار · هوش مصنوعی</p>
-        <p class="contact" dir="ltr" style="text-align: right">
-          <span><a href="mailto:liaghimohamad69@gmail.com">liaghimohamad69@gmail.com</a></span
+        <div class="rule" aria-hidden="true"></div>
+        <p class="title">مهندس نرم‌افزار، هوش مصنوعی</p>
+        <p class="contact ltr" style="text-align: right">
+          <span><a href="https://medium.com/@el_mohamad">medium.com/@el_mohamad</a></span
           ><span class="sep">|</span
-          ><span><a href="https://mohamad-liyaghi.ir">mohamad-liyaghi.ir</a></span><br />
-          <span><a href="https://github.com/mohamad-liyaghi">github.com/mohamad-liyaghi</a></span
+          ><span><a href="https://www.linkedin.com/in/mohamad-liyaghi/">linkedin.com/in/mohamad-liyaghi</a></span
           ><span class="sep">|</span
-          ><span
-            ><a href="https://www.linkedin.com/in/mohamad-liyaghi/">linkedin.com/in/mohamad-liyaghi</a></span
+          ><span><a href="https://github.com/mohamad-liyaghi">github.com/mohamad-liyaghi</a></span><br />
+          <span><a href="https://mohamad-liyaghi.ir">mohamad-liyaghi.ir</a></span
           ><span class="sep">|</span
-          ><span><a href="https://medium.com/@el_mohamad">medium.com/@el_mohamad</a></span>
+          ><span><a href="mailto:liaghimohamad69@gmail.com">liaghimohamad69@gmail.com</a></span>
         </p>
       </header>
 
       <h2>خلاصه</h2>
       <p>
-        مهندس نرم‌افزارم؛ پنج سال Python، بیشتر در بک‌اند. در Zebracat روی مسیر متن تا ویدیوی نهایی
-        کار می‌کنم: کارهایی که خودشان دوباره تلاش می‌کنند، خروجی مدلی که باید از شِما رد شود، و
-        قالب‌های Remotion که مثل کد منتشر می‌شوند. درباره‌ی سامانه‌های مبتنی بر مدل زبانی می‌نویسم،
-        وقتی کاربر واقعی به آن‌ها می‌رسد.
+        مهندس نرم‌افزارم با پنج سال تجربهٔ Python، بیشتر در بک‌اند، و تمام‌پشته هر جا کار لازم داشته باشد. در
+        Zebracat، شرکتی که با هوش مصنوعی ویدیو می‌سازد، کار می‌کنم و تقریباً هر هفته در Medium دربارهٔ مهندسی هوش
+        مصنوعی می‌نویسم: اینکه RAG، پرامپت، ارزیابی و انتخاب مدل در محیط واقعی چطور از پس کار برمی‌آیند.
       </p>
 
       <h2>تجربهٔ کاری</h2>
-      <div class="role">
+      <section class="role">
         <div class="role-head">
-          <h3>مهندس نرم‌افزار · هوش مصنوعی</h3>
-          <span class="dates">شهریور ۱۴۰۳ — اکنون · دورکاری (برلین)</span>
+          <h3>مهندس نرم‌افزار، هوش مصنوعی</h3>
+          <span class="dates">شهریور ۱۴۰۳ — اکنون · دورکاری</span>
         </div>
-        <p class="org">
-          <strong><a href="https://www.zebracat.ai">Zebracat</a></strong> · پلتفرم ساخت ویدیو از متن
-        </p>
+        <p class="org"><strong><a href="https://www.zebracat.ai">Zebracat</a></strong> · پلتفرم ساخت ویدیو با هوش مصنوعی</p>
         <ul class="bullets">
-          <li>
-            دیگر شکست یک صحنه کل رندر را نمی‌کشد. هر مرحله یک کار روی RabbitMQ است، با وضعیت و تلاش
-            مجدد خودش.
-          </li>
-          <li>
-            متن و صحنه تولید می‌شوند، بعد با شِما سنجیده می‌شوند. پاسخ خراب دوباره تلاش می‌کند؛ ویدیو
-            را پایین نمی‌آورد.
-          </li>
-          <li>
-            قالب‌ها Remotion هستند — React که بدون مرورگر به فریم تبدیل می‌شود. تغییر یکی یعنی یک
-            تغییر کد.
-          </li>
-          <li>سرویس‌های Django و FastAPI پشت React و TypeScript.</li>
+          <li>قابلیت‌های محصول را از سر تا ته می‌سازم، از سرویس‌های بک‌اند تا وب‌اپی که کاربران هر روز با آن کار می‌کنند.</li>
+          <li>توانایی‌های تازهٔ هوش مصنوعی را به قابلیت‌هایی تبدیل می‌کنم که در برخورد با کاربر واقعی هم سرپا بمانند.</li>
+          <li>نیمهٔ کم‌سروصدای کار برایم مهم است: پایداری، رابط‌های روشن، و کدی که نفر بعدی بتواند تغییرش بدهد.</li>
         </ul>
-        <p class="tech" dir="ltr" style="text-align: right">
-          Python · FastAPI · Django · RabbitMQ · Redis · React · TypeScript · Remotion · Docker ·
-          AWS
-        </p>
-      </div>
-
-      <div class="role">
+      </section>
+      <section class="role">
         <div class="role-head">
           <h3>توسعه‌دهندهٔ تمام‌پشته</h3>
           <span class="dates">خرداد ۱۴۰۰ — شهریور ۱۴۰۳ · دورکاری</span>
         </div>
         <p class="org"><strong>فریلنس</strong> · محصولات وب و SaaS</p>
         <ul class="bullets">
-          <li>محصول کارفرما را از مدل داده تا API و رابط و استقرار بردم، و بعد از تحویل هم ماندم.</li>
-          <li>Django/DRF یا FastAPI پشت React، کانتینری‌شده، با پایش فعال پیش از تحویل.</li>
-          <li>
-            احراز هویت، کنترل دسترسی، و نحوهٔ نگهداری داده — بخش‌هایی که کارفرما خودش نمی‌توانست
-            بررسی‌شان کند.
-          </li>
+          <li>محصول کارفرما را از مخزن خالی تا محیط عملیاتی بردم: مدل داده، API، رابط کاربری، استقرار؛ و بعد هم برای پشتیبانی ماندم.</li>
+          <li>مسئول بخش‌هایی بودم که کارفرما به‌راحتی نمی‌تواند خودش بررسی کند: احراز هویت، کنترل دسترسی، و نحوهٔ نگهداری داده‌ها.</li>
+          <li>پروژه را با پایش و تست آماده تحویل دادم تا توسعه‌دهندهٔ بعدی کورکورانه شروع نکند.</li>
         </ul>
-        <p class="tech" dir="ltr" style="text-align: right">
-          Django · DRF · FastAPI · React · PostgreSQL · Docker · Nginx
-        </p>
-      </div>
+        <p class="tech ltr" style="text-align: right">Django · DRF · FastAPI · React · PostgreSQL · Docker · Nginx</p>
+      </section>
 
       <h2>پروژه‌های متن‌باز منتخب</h2>
       <p class="repo-meta">
-        ۲۲۹ ستاره در ۲۳ مخزن عمومی ·
-        <a href="https://github.com/mohamad-liyaghi">github.com/mohamad-liyaghi</a>
+        ۲۳۰ ستاره در ۲۴ مخزن عمومی ·
+        <a class="ltr" href="https://github.com/mohamad-liyaghi">github.com/mohamad-liyaghi</a>
       </p>
       <ul class="projects">
-        <li>
-          <b><a href="https://github.com/mohamad-liyaghi/FoodAnywhere">FoodAnywhere</a></b>
-          <span class="stars">۴۰ ستاره</span> — رستوران نزدیک، سفارش تا آشپزخانه. جست‌وجوی PostGIS،
-          کار سنگین با Celery، ردپا از درخواست تا کارگر.
-        </li>
-        <li>
-          <b><a href="https://github.com/mohamad-liyaghi/fast-commerce">Fast Commerce</a></b>
-          <span class="stars">۲۲ ستاره</span> — API فروشگاهی ناهمگام با تمرکز بر توان عملیاتی —
-          مرزهای تمیز، پردازش پس‌زمینه، آزمون‌هایی که جلوی انتشار خراب را می‌گیرند.
-        </li>
-        <li>
-          <b><a href="https://github.com/mohamad-liyaghi/AcademyMaster">AcademyMaster</a></b>
-          <span class="stars">۲۱ ستاره</span> — API یک آموزشگاه: چه کسی چه می‌بیند، و کارهایی که سر
-          وقت اجرا می‌شوند.
-        </li>
-        <li>
-          <b><a href="https://github.com/mohamad-liyaghi/Tsuna-Streaming">Tsuna</a></b>
-          <span class="stars">۱۶ ستاره</span> — پخش ویدیو و موسیقی، با انتقال پردازش سنگین از مسیر
-          درخواست.
-        </li>
-        <li>
-          <b
-            ><a href="https://github.com/mohamad-liyaghi/telegram-to-rubika-uploader"
-              >Telegram → Rubika</a
-            ></b
-          >
-          <span class="stars">۱۴ ستاره</span> — ابزار Go برای انتقال مستقیم فایل تا ۲ گیگابایت میان
-          دو پلتفرم، تا پهنای باند صرف آپلود دوباره نشود.
-        </li>
-        <li>
-          <b><a href="https://github.com/mohamad-liyaghi/FastQuora">FastQuora</a></b>
-          <span class="stars">۱۱ ستاره</span> — پرسش و پاسخ — Elasticsearch روی جست‌وجو، ردیابی در
-          کش.
-        </li>
+        <li><b><a href="https://github.com/mohamad-liyaghi/FoodAnywhere">FoodAnywhere</a></b> <span class="stars">۴۰ ستاره</span> — سفارش غذا: رستوران‌های نزدیک و سفارش تا آشپزخانه. جست‌وجوی PostGIS، کارهای کند با Celery، ردگیری از اول تا آخر.</li>
+        <li><b><a href="https://github.com/mohamad-liyaghi/fast-commerce">Fast Commerce</a></b> <span class="stars">۲۲ ستاره</span> — API فروشگاهی ناهمگام برای بار بالا، با مرزهای تمیز، کارهای پس‌زمینه، و تست‌هایی که جلوی استقرار خراب را می‌گیرند.</li>
+        <li><b><a href="https://github.com/mohamad-liyaghi/AcademyMaster">AcademyMaster</a></b> <span class="stars">۲۱ ستاره</span> — دوره‌ها، ثبت‌نام‌ها و نقش‌های یک آموزشگاه، با کارهای زمان‌بندی‌شده.</li>
+        <li><b><a href="https://github.com/mohamad-liyaghi/Tsuna-Streaming">Tsuna</a></b> <span class="stars">۱۶ ستاره</span> — پخش ویدیو و موسیقی، با پردازش سنگینِ بیرون از مسیر درخواست.</li>
+        <li><b><a href="https://github.com/mohamad-liyaghi/telegram-to-rubika-uploader">Telegram to Rubika</a></b> <span class="stars">۱۴ ستاره</span> — ابزار Go برای انتقال مستقیم فایل تا ۲ گیگابایت میان دو پلتفرم، برای صرفه‌جویی در حجم VPN.</li>
+        <li><b><a href="https://github.com/mohamad-liyaghi/FastQuora">FastQuora</a></b> <span class="stars">۱۱ ستاره</span> — پرسش و پاسخ، با Elasticsearch در مسیر جست‌وجو و ردگیری تا لایهٔ کش.</li>
       </ul>
 
       <h2>مهارت‌ها</h2>
       <dl class="skills">
-        <dt>زبان‌ها</dt>
-        <dd dir="ltr" style="text-align: right">Python, Go, TypeScript, SQL, Bash</dd>
-        <dt>بک‌اند</dt>
-        <dd dir="ltr" style="text-align: right">
-          Django, Django REST Framework, FastAPI, Celery, RabbitMQ, asyncio, REST, WebSockets
-        </dd>
-        <dt>مدل‌ها</dt>
-        <dd>LLM APIs، خروجی ساخت‌یافته، فراخوانی ابزار، RAG، جست‌وجوی برداری، ارزیابی</dd>
-        <dt>داده</dt>
-        <dd dir="ltr" style="text-align: right">
-          PostgreSQL (PostGIS), Redis, Elasticsearch, MongoDB
-        </dd>
-        <dt>فرانت‌اند</dt>
-        <dd dir="ltr" style="text-align: right">React, Tailwind, Remotion</dd>
-        <dt>زیرساخت</dt>
-        <dd dir="ltr" style="text-align: right">Docker, Kubernetes, GitHub Actions, AWS, Nginx</dd>
-        <dt>پایداری</dt>
-        <dd dir="ltr" style="text-align: right">
-          OpenTelemetry, Prometheus, Grafana, Sentry, Pytest
-        </dd>
+        <dt>زبان‌ها</dt><dd class="latin">Python, Go, TypeScript, SQL, Bash</dd>
+        <dt>بک‌اند</dt><dd class="latin">Django, Django REST Framework, FastAPI, Celery, asyncio, REST, WebSockets</dd>
+        <dt>هوش مصنوعی</dt><dd>LLM APIs، خروجی ساخت‌یافته، فراخوانی ابزار، RAG، جست‌وجوی برداری، ارزیابی</dd>
+        <dt>داده</dt><dd class="latin">PostgreSQL (PostGIS), Redis, Elasticsearch, MongoDB</dd>
+        <dt>فرانت‌اند</dt><dd class="latin">React, TypeScript, Tailwind CSS</dd>
+        <dt>زیرساخت</dt><dd class="latin">Docker, Kubernetes, GitHub Actions, AWS, Nginx</dd>
+        <dt>پایداری</dt><dd class="latin">OpenTelemetry, Prometheus, Grafana, Sentry, Pytest</dd>
       </dl>
 
       <h2>نوشته‌ها</h2>
       <p>
-        دربارهٔ ایجنت‌ها، مدل‌ها، و پولی که دورِ ساختن‌شان می‌چرخد، در Medium (به انگلیسی) —
-        <a
-          href="https://medium.com/@el_mohamad/stop-being-a-feature-factory-the-engineers-other-job-is-reading-the-money-f95653b9c3ff"
-          >Stop Being a Feature Factory</a
-        >
-        (مرداد ۱۴۰۵)،
-        <a
-          href="https://medium.com/@el_mohamad/stop-being-your-products-night-shift-how-an-agent-squad-actually-works-9fb5b2f9718a"
-          >How an Agent Squad Actually Works</a
-        >
-        (مرداد ۱۴۰۵). آرشیو کامل:
-        <a href="https://medium.com/@el_mohamad">medium.com/@el_mohamad</a>
+        مجموعه‌ای دربارهٔ مهندسی هوش مصنوعی در Medium (به انگلیسی)، تقریباً هر هفته یک نوشتهٔ تازه. تازه‌ترین‌ها:
+        <a class="ltr" lang="en" href="https://medium.com/@el_mohamad/stop-treating-rag-and-ai-agents-like-magic-0882a234d209">Stop Treating RAG and AI Agents Like Magic</a> (آبان ۱۴۰۵)،
+        <a class="ltr" lang="en" href="https://medium.com/@el_mohamad/stop-treating-prompt-engineering-like-guesswork-777c617782c9">Stop Treating Prompt Engineering Like Guesswork</a> (آبان ۱۴۰۵).
+        آرشیو کامل: <a class="ltr" href="https://medium.com/@el_mohamad">medium.com/@el_mohamad</a>
       </p>
 
       <h2>تحصیلات و زبان</h2>
       <dl class="skills">
-        <dt>تحصیلات</dt>
-        <dd>کارشناسی علوم کامپیوتر</dd>
-        <dt>زبان</dt>
-        <dd>فارسی — زبان مادری · انگلیسی — در حد کار حرفه‌ای</dd>
+        <dt>تحصیلات</dt><dd>کارشناسی علوم کامپیوتر</dd>
+        <dt>زبان</dt><dd>فارسی — زبان مادری · انگلیسی — در حد کار حرفه‌ای</dd>
       </dl>
     </main>
   </body>
