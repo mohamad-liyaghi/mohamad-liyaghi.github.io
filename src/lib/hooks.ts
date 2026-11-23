@@ -1,12 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import { SECTIONS, type SectionId } from "../data/profile";
 
-/** True once the user has asked the OS to keep motion to a minimum. */
+/** True when the OS asks for as little motion as possible. */
 export function usePrefersReducedMotion(): boolean {
   const [reduced, setReduced] = useState(
-    () =>
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches,
   );
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -17,128 +15,90 @@ export function usePrefersReducedMotion(): boolean {
   return reduced;
 }
 
-/**
- * Adds `data-in` to an element the first time it enters the viewport, which is
- * all the CSS needs to run a reveal. Elements stay revealed once seen — nothing
- * on this page should animate twice.
- */
-export function useReveal<T extends Element = HTMLDivElement>() {
-  const ref = useRef<T | null>(null);
+/** Which section the reader is in, for the nav indicator. */
+export function useActiveSection(): SectionId | null {
+  const [active, setActive] = useState<SectionId | null>(null);
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (!("IntersectionObserver" in window)) {
-      el.setAttribute("data-in", "");
-      return;
-    }
+    const targets = SECTIONS.map((id) => document.getElementById(id)).filter(
+      (el): el is HTMLElement => el !== null,
+    );
+    if (!targets.length) return;
     const io = new IntersectionObserver(
       (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            entry.target.setAttribute("data-in", "");
-            io.unobserve(entry.target);
-          }
+        for (const e of entries) {
+          if (e.isIntersecting) setActive(e.target.id as SectionId);
         }
       },
-      // The bottom margin holds the reveal until the element is properly in
-      // view, and it is in pixels rather than a percentage on purpose: as a
-      // share of a very tall window the dead band grows past the footer, and
-      // the last rows of the page would then never fire at all.
-      { rootMargin: "0px 0px -64px 0px", threshold: 0 },
+      // A thin band a third of the way down the viewport decides.
+      { rootMargin: "-33% 0px -66% 0px" },
     );
-    io.observe(el);
-    // Never leave copy invisible: print, screenshot tools, and a missed
-    // intersection should still see the page.
-    const fallback = window.setTimeout(() => el.setAttribute("data-in", ""), 2200);
+    targets.forEach((el) => io.observe(el));
+    const top = () => window.scrollY < 200 && setActive(null);
+    window.addEventListener("scroll", top, { passive: true });
     return () => {
-      window.clearTimeout(fallback);
       io.disconnect();
+      window.removeEventListener("scroll", top);
+    };
+  }, []);
+  return active;
+}
+
+export function useScrolledPast(offset = 8): boolean {
+  const [past, setPast] = useState(false);
+  useEffect(() => {
+    const on = () => setPast(window.scrollY > offset);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, [offset]);
+  return past;
+}
+
+/**
+ * Spotlight for `.spot` cards inside a container: one delegated pointer
+ * listener writes the cursor position into the hovered card's --mx/--my.
+ * Nothing runs on touch, where there is no hover to light.
+ */
+export function useSpotlight<T extends HTMLElement>(): RefObject<T | null> {
+  const ref = useRef<T | null>(null);
+  useEffect(() => {
+    const root = ref.current;
+    if (!root || !window.matchMedia("(hover: hover)").matches) return;
+    let frame = 0;
+    const onMove = (e: PointerEvent) => {
+      const card = (e.target as Element).closest<HTMLElement>(".spot");
+      if (!card || !root.contains(card)) return;
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+        card.style.setProperty("--my", `${e.clientY - r.top}px`);
+      });
+    };
+    const onLeave = (e: PointerEvent) => {
+      const card = (e.target as Element).closest<HTMLElement>(".spot");
+      if (card) {
+        card.style.setProperty("--mx", "50%");
+        card.style.setProperty("--my", "-40%");
+      }
+    };
+    root.addEventListener("pointermove", onMove);
+    root.addEventListener("pointerout", onLeave);
+    return () => {
+      cancelAnimationFrame(frame);
+      root.removeEventListener("pointermove", onMove);
+      root.removeEventListener("pointerout", onLeave);
     };
   }, []);
   return ref;
 }
 
-/** Which section the reader is currently looking at, for the nav. */
-export function useActiveSection(): SectionId | null {
-  const [active, setActive] = useState<SectionId | null>(null);
+/** "⌘" on Apple platforms, "Ctrl" elsewhere. */
+export function useModKey(): string {
+  const [mod, setMod] = useState("Ctrl");
   useEffect(() => {
-    const targets = SECTIONS.map(({ id }) => document.getElementById(id)).filter(
-      (el): el is HTMLElement => el !== null,
-    );
-    if (targets.length === 0) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive(visible.target.id as SectionId);
-      },
-      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.25, 0.5] },
-    );
-    targets.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+    const p = (navigator as Navigator & { userAgentData?: { platform?: string } }).userAgentData?.platform ?? navigator.platform;
+    if (/mac|iphone|ipad/i.test(p)) setMod("⌘");
   }, []);
-  return active;
-}
-
-/** True once the page has scrolled past the given offset. */
-export function useScrolledPast(offset = 24): boolean {
-  const [past, setPast] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setPast(window.scrollY > offset);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [offset]);
-  return past;
-}
-
-/** 0–1 scroll progress of the document. */
-export function useScrollProgress(): number {
-  const [value, setValue] = useState(0);
-  useEffect(() => {
-    const onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      setValue(max > 0 ? Math.min(1, window.scrollY / max) : 0);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-  return value;
-}
-
-export type Theme = "light" | "dark";
-
-/** Theme lives on <html data-theme> and is set before paint in index.html. */
-export function useTheme(): [Theme, () => void] {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof document === "undefined") return "light";
-    return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
-  });
-  useEffect(() => {
-    const sync = () => {
-      const next = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
-      setTheme(next);
-    };
-    window.addEventListener("themechange", sync);
-    return () => window.removeEventListener("themechange", sync);
-  }, []);
-  const toggle = useCallback(() => {
-    setTheme((prev) => {
-      const next: Theme = prev === "dark" ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", next);
-      document
-        .querySelector('meta[name="theme-color"]')
-        ?.setAttribute("content", next === "dark" ? "#12110D" : "#F7F4EE");
-      try {
-        window.localStorage.setItem("theme", next);
-      } catch {
-        /* the choice just won't survive a reload */
-      }
-      window.dispatchEvent(new Event("themechange"));
-      return next;
-    });
-  }, []);
-  return [theme, toggle];
+  return mod;
 }

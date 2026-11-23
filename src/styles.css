@@ -1,437 +1,552 @@
 @import "tailwindcss";
 
 /* ============================================================================
-   Editorial ink & amber.
+   Spruce and lime.
 
-   One warm paper ground, one deep ink, one amber. The amber comes in two
-   strengths: `accent` is dark enough to sit on paper as text (4.6:1), while
-   `accent-bright` is the decorative one used for rules, marks and the drawn
-   flourish, where contrast rules don't apply.
+   Dark is the flagship: a deep spruce ground (green, not a tinted black) with
+   chalk text and one lime accent, the same pairing as the covers of the AI
+   Engineering series on Medium, so the site and the writing read as one hand.
+   Light is a cool mist with spruce ink. Lime can't carry text on a light
+   ground, so there `accent` (text, strokes) turns olive while `accent-fill`
+   (buttons, highlights) stays lime under dark ink in both themes.
+
+   Type is one family, Mona Sans, used across its width axis: expanded and
+   heavy for display, normal width for reading. Persian is Vazirmatn.
    ========================================================================= */
 
-:root {
-  --c-paper: #f7f4ee;
-  --c-surface: #fffcf6;
-  --c-sunk: #f1ede4;
-  --c-ink: #16150f;
-  --c-body: #46433a;
-  --c-muted: #7c7869;
-  --c-rule: #e3ddd0;
-  --c-hairline: #ede8dd;
-  --c-accent: #a85a28;
-  --c-accent-bright: #c2703b;
-  --c-accent-wash: rgb(168 90 40 / 0.09);
-  --grain: 0.038;
-  --grain-blend: multiply;
-
-  --ease: cubic-bezier(0.22, 0.68, 0.24, 1);
-  --dur: 620ms;
-
-  color-scheme: light;
+@font-face {
+  font-family: "Mona Sans";
+  src: url("/fonts/mona-sans-latin.woff2") format("woff2");
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  font-display: swap;
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+    U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Mona Sans";
+  src: url("/fonts/mona-sans-latin-ext.woff2") format("woff2");
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  font-display: swap;
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F,
+    U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/vazirmatn-arabic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range:
+    U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E,
+    U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB,
+    U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EEFF;
 }
 
+:root,
 [data-theme="dark"] {
-  --c-paper: #12110d;
-  --c-surface: #1a1913;
-  --c-sunk: #0d0c09;
-  --c-ink: #f4f0e6;
-  --c-body: #c6c1b2;
-  --c-muted: #8b8677;
-  --c-rule: #2c2a22;
-  --c-hairline: #211f19;
-  --c-accent: #e5a05f;
-  --c-accent-bright: #eeae6f;
-  --c-accent-wash: rgb(229 160 95 / 0.12);
-  --grain: 0.05;
-  --grain-blend: screen;
-
+  --bg: #0c1714;
+  --bg-raised: #12201c;
+  --bg-sunk: #08110e;
+  --line: #22332d;
+  --line-strong: #2f4740;
+  --text: #e3ece6;
+  --muted: #93a79d;
+  --faint: #7d9188;
+  --accent: #c8f06b;
+  --accent-fill: #c8f06b;
+  --on-accent: #0c1714;
+  --glow: rgb(200 240 107 / 0.13);
+  --shadow: 0 30px 80px -40px rgb(0 0 0 / 0.8);
   color-scheme: dark;
 }
 
-@theme inline {
-  --color-paper: var(--c-paper);
-  --color-surface: var(--c-surface);
-  --color-sunk: var(--c-sunk);
-  --color-ink: var(--c-ink);
-  --color-body: var(--c-body);
-  --color-muted: var(--c-muted);
-  --color-rule: var(--c-rule);
-  --color-hairline: var(--c-hairline);
-  --color-accent: var(--c-accent);
-  --color-accent-bright: var(--c-accent-bright);
-  --color-accent-wash: var(--c-accent-wash);
-
-  --font-display: "Instrument Serif", "Vazirmatn", Georgia, "Times New Roman", serif;
-  --font-sans: "Archivo", "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", "Vazirmatn", ui-monospace, "SFMono-Regular", monospace;
+[data-theme="light"] {
+  --bg: #eff3ee;
+  --bg-raised: #ffffff;
+  --bg-sunk: #e4eae5;
+  --line: #d3ddd6;
+  --line-strong: #bacac0;
+  --text: #0d1b17;
+  --muted: #4c5f57;
+  --faint: #5e7068;
+  --accent: #466f00;
+  --accent-fill: #c8f06b;
+  --on-accent: #0d1b17;
+  --glow: rgb(70 111 0 / 0.09);
+  --shadow: 0 30px 70px -40px rgb(13 27 23 / 0.35);
+  color-scheme: light;
 }
 
-/* Persian has no Instrument Serif, so the display face becomes Vazirmatn —
-   set a little heavier so it still reads as display type. */
-[lang="fa"] {
-  --font-display: "Vazirmatn", Georgia, serif;
-  --font-sans: "Vazirmatn", ui-sans-serif, system-ui, sans-serif;
+:root {
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --bar: 64px;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-raised: var(--bg-raised);
+  --color-sunk: var(--bg-sunk);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-fill: var(--accent-fill);
+  --color-on-accent: var(--on-accent);
+
+  --font-sans: "Mona Sans", "Vazirmatn", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Menlo, monospace;
 }
 
 @layer base {
-  * {
-    min-width: 0;
-  }
-
   html {
-    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--bar) + 16px);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
-    background-color: var(--c-paper);
-    color: var(--c-body);
+    background: var(--bg);
+    color: var(--text);
     font-family: var(--font-sans);
-    font-size: 1rem;
-    line-height: 1.65;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    font-feature-settings: "ss01", "ss02";
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    overflow-x: hidden;
-    transition:
-      background-color 320ms var(--ease),
-      color 320ms var(--ease);
+    overflow-x: clip;
   }
 
-  /* Paper texture. Fixed, cheap, and the only decoration on the page that
-     never moves. Sits under the mobile drawer (z-70) and the nav (z-50). */
-  body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 40;
-    pointer-events: none;
-    opacity: var(--grain);
-    mix-blend-mode: var(--grain-blend);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  h1,
-  h2,
-  h3 {
-    color: var(--c-ink);
-    font-family: var(--font-display);
-    font-weight: 400;
-    line-height: 1.04;
-    letter-spacing: -0.015em;
-  }
-
-  [lang="fa"] h1,
-  [lang="fa"] h2,
-  [lang="fa"] h3 {
-    font-weight: 700;
-    letter-spacing: 0;
-    line-height: 1.35;
-  }
-
+  /* Persian: Vazirmatn wants more air between lines than a Latin face. */
   [lang="fa"] body {
     line-height: 1.95;
-  }
-
-  section[id] {
-    scroll-margin-top: 6rem;
+    font-feature-settings: normal;
   }
 
   ::selection {
-    background: var(--c-accent-wash);
-    color: var(--c-ink);
+    background: var(--accent-fill);
+    color: var(--on-accent);
   }
 
   :focus-visible {
-    outline: 2px solid var(--c-accent);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
-    border-radius: 2px;
+    border-radius: 6px;
   }
 
   a {
     color: inherit;
     text-decoration: none;
   }
+
+  h1,
+  h2,
+  h3 {
+    color: var(--text);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  kbd {
+    font-family: var(--font-mono);
+  }
 }
 
 @layer components {
-  /* --- motion primitives ------------------------------------------------- */
-
-  /* Everything that enters the page does it the same way. */
-  .reveal {
-    opacity: 0;
-    transform: translateY(14px);
-    transition:
-      opacity var(--dur) var(--ease),
-      transform var(--dur) var(--ease);
-    transition-delay: var(--delay, 0ms);
+  .wrap {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
   }
-  .reveal[data-in] {
-    opacity: 1;
-    transform: none;
+  @media (min-width: 640px) {
+    .wrap {
+      padding-inline: 2rem;
+    }
   }
-
-  /* The signature: display lines are printed onto the page rather than faded
-     in — each line uncovered from the reading edge, so it runs right-to-left
-     in Persian without any extra code. */
-  /* The vertical insets are deeply negative on purpose: clipping at the line
-     box would slice the descenders off "Liyaghi", and take the swash and dots
-     off «لیاقی» entirely. Only the horizontal edge should ever cut. */
-  .wipe > span {
-    display: block;
-    clip-path: inset(-50% 100% -50% 0);
-    transform: translateY(0.12em);
-    transition:
-      clip-path 860ms var(--ease),
-      transform 860ms var(--ease);
-    transition-delay: var(--delay, 0ms);
-  }
-  .wipe[data-in] > span {
-    clip-path: inset(-50% -4% -50% 0);
-    transform: none;
-  }
-  [dir="rtl"] .wipe > span {
-    clip-path: inset(-50% 0 -50% 100%);
-  }
-  [dir="rtl"] .wipe[data-in] > span {
-    clip-path: inset(-50% -4% -50% -4%);
+  @media (min-width: 1024px) {
+    .wrap {
+      padding-inline: 3rem;
+    }
   }
 
-  /* Hairlines draw themselves from the reading edge. */
-  .rule {
-    height: 1px;
-    background: var(--c-rule);
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform 900ms var(--ease);
-    transition-delay: var(--delay, 0ms);
-  }
-  .rule[data-in] {
-    transform: scaleX(1);
-  }
-  [dir="rtl"] .rule {
-    transform-origin: right center;
-  }
+  /* --- type ------------------------------------------------------------- */
 
-  /* The hand-drawn amber stroke under the name, inked in once. */
-  .flourish path {
-    stroke-dasharray: 1;
-    stroke-dashoffset: 1;
-    transition: stroke-dashoffset 1200ms var(--ease) 620ms;
+  /* Mona Sans at its widest, heavy and tight: the one loud thing on the page. */
+  .display {
+    font-stretch: 125%;
+    font-weight: 780;
+    letter-spacing: -0.035em;
+    line-height: 0.88;
   }
-  .flourish[data-in] path {
-    stroke-dashoffset: 0;
-  }
-
-  /* The display name. Latin sets tight; Persian cannot — Vazirmatn's bold
-     descenders need real leading or the two lines collide. The bottom padding
-     reserves descender space so the flourish never lands on a tail. */
-  .hero-name {
-    font-size: clamp(2.6rem, 8vw, 3.4rem);
-    line-height: 0.95;
-    padding-bottom: 0.12em;
-  }
-  [lang="fa"] .hero-name {
-    font-size: clamp(2.2rem, 7vw, 2.9rem);
-    line-height: 1.4;
-    padding-bottom: 0.04em;
-  }
-
-  .hero-statement {
-    font-style: italic;
-  }
-  [lang="fa"] .hero-statement {
-    font-style: normal;
-  }
-
-  .figure {
-    background: var(--c-surface);
-    border: 1px solid var(--c-hairline);
-  }
-
-  .portrait {
-    position: relative;
-    background: var(--c-sunk);
-    overflow: hidden;
-  }
-  .portrait::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    box-shadow: inset 0 0 0 1px var(--c-hairline);
-  }
-  .portrait img {
-    display: block;
-    filter: grayscale(0.06) contrast(1.03);
-    transition: filter 480ms var(--ease);
-  }
-  .portrait:hover img {
-    filter: grayscale(0) contrast(1.02);
-  }
-
-  /* --- text and links ---------------------------------------------------- */
-
-  .ul {
-    background-image: linear-gradient(currentColor, currentColor);
-    background-repeat: no-repeat;
-    background-size: 0% 1px;
-    background-position: 0 calc(100% - 1px);
-    transition: background-size 400ms var(--ease);
-  }
-  [dir="rtl"] .ul {
-    background-position: 100% calc(100% - 1px);
-  }
-  .ul:hover,
-  .ul:focus-visible {
-    background-size: 100% 1px;
-  }
-
-  .label {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--c-muted);
-  }
-  [lang="fa"] .label {
+  [lang="fa"] .display {
+    font-weight: 820;
     letter-spacing: 0;
-    font-size: 0.75rem;
+    line-height: 1.12;
   }
 
-  /* --- surfaces ---------------------------------------------------------- */
+  .h2 {
+    font-size: clamp(1.9rem, 1.4rem + 1.8vw, 2.75rem);
+    font-stretch: 112%;
+    font-weight: 680;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+  }
+  [lang="fa"] .h2 {
+    font-weight: 800;
+    letter-spacing: 0;
+    line-height: 1.35;
+  }
 
-  .card {
-    position: relative;
-    background: var(--c-surface);
-    border: 1px solid var(--c-hairline);
+  .h3 {
+    font-size: 1.25rem;
+    font-stretch: 106%;
+    font-weight: 620;
+    letter-spacing: -0.012em;
+    line-height: 1.25;
+  }
+  [lang="fa"] .h3 {
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.6;
+  }
+
+  .meta {
+    font-size: 0.875rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .lede {
+    color: var(--muted);
+    font-size: 1.0625rem;
+    max-width: 34rem;
+  }
+
+  /* An underline that grows from the reading edge on hover and focus. */
+  .link {
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-repeat: no-repeat;
+    background-size: 0% 1.5px;
+    background-position: left 100%;
     transition:
-      border-color 380ms var(--ease),
-      transform 380ms var(--ease),
-      background-color 320ms var(--ease);
+      background-size 420ms var(--ease-out),
+      color 200ms;
   }
-  .card::before {
-    content: "";
-    position: absolute;
-    inset-inline: -1px;
-    top: -1px;
-    height: 2px;
-    background: var(--c-accent-bright);
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform 460ms var(--ease);
+  [dir="rtl"] .link {
+    background-position: right 100%;
   }
-  [dir="rtl"] .card::before {
-    transform-origin: right center;
-  }
-  .card:hover,
-  .card:focus-within {
-    border-color: var(--c-rule);
-    transform: translateY(-3px);
-  }
-  .card:hover::before,
-  .card:focus-within::before {
-    transform: scaleX(1);
+  .link:hover,
+  .link:focus-visible {
+    background-size: 100% 1.5px;
   }
 
-  /* --- buttons ----------------------------------------------------------- */
+  .link-quiet {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.22em;
+    transition: text-decoration-color 200ms;
+  }
+  .link-quiet:hover {
+    text-decoration-color: var(--accent);
+  }
+
+  /* --- controls ---------------------------------------------------------- */
 
   .btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.7rem 1.35rem;
-    font-size: 0.9375rem;
-    font-weight: 500;
-    line-height: 1;
-    border: 1px solid transparent;
+    gap: 0.55rem;
+    height: 2.875rem;
+    padding-inline: 1.15rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 560;
+    white-space: nowrap;
     transition:
-      background-color 300ms var(--ease),
-      border-color 300ms var(--ease),
-      color 300ms var(--ease),
-      transform 300ms var(--ease);
+      background-color 200ms,
+      border-color 200ms,
+      color 200ms,
+      transform 200ms var(--ease-out);
   }
   .btn:active {
-    transform: translateY(1px);
+    transform: scale(0.97);
   }
   .btn-primary {
-    background: var(--c-ink);
-    color: var(--c-paper);
+    background: var(--accent-fill);
+    color: var(--on-accent);
   }
   .btn-primary:hover {
-    background: var(--c-accent);
+    background: color-mix(in oklab, var(--accent-fill) 86%, white);
   }
   .btn-ghost {
-    border-color: var(--c-rule);
-    color: var(--c-ink);
+    border: 1px solid var(--line-strong);
+    color: var(--text);
   }
   .btn-ghost:hover {
-    border-color: var(--c-accent);
-    color: var(--c-accent);
+    border-color: var(--accent);
   }
 
   .icon-btn {
     display: inline-grid;
     place-items: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    color: var(--c-muted);
-    border: 1px solid transparent;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    color: var(--muted);
     transition:
-      color 260ms var(--ease),
-      border-color 260ms var(--ease),
-      background-color 260ms var(--ease);
+      color 200ms,
+      background-color 200ms;
   }
   .icon-btn:hover {
-    color: var(--c-ink);
-    border-color: var(--c-rule);
-    background: var(--c-surface);
+    color: var(--text);
+    background: var(--bg-raised);
+  }
+
+  .kbd {
+    display: inline-grid;
+    place-items: center;
+    min-width: 1.35rem;
+    height: 1.35rem;
+    padding-inline: 0.3rem;
+    border: 1px solid var(--line-strong);
+    border-bottom-width: 2px;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    line-height: 1;
+    color: var(--muted);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    height: 1.75rem;
+    padding-inline: 0.65rem;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    font-size: 0.8125rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* --- spotlight cards -----------------------------------------------------
+     The 1px border is the card's own background showing through a padding of
+     1px; a radial gradient positioned at the pointer lights the part of the
+     border nearest the cursor, and a softer one washes the surface. Pointer
+     coordinates come from one delegated listener (useSpotlight). */
+  .spot {
+    --mx: 50%;
+    --my: -40%;
+    position: relative;
+    border-radius: var(--radius);
+    padding: 1px;
+    background:
+      radial-gradient(22rem circle at var(--mx) var(--my), var(--accent), transparent 42%),
+      var(--line);
+    isolation: isolate;
+    transition: transform 300ms var(--ease-out);
+  }
+  .spot-in {
+    position: relative;
+    height: 100%;
+    border-radius: calc(var(--radius) - 1px);
+    background:
+      radial-gradient(30rem circle at var(--mx) var(--my), var(--glow), transparent 55%),
+      var(--bg-raised);
+  }
+  @media (hover: none) {
+    .spot {
+      background: var(--line);
+    }
+  }
+
+  /* --- section frame ------------------------------------------------------ */
+
+  .section {
+    padding-block: 5.5rem;
+    border-top: 1px solid var(--line);
+  }
+  @media (min-width: 1024px) {
+    .section {
+      padding-block: 7.5rem;
+    }
+    .section-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+      gap: 4rem;
+    }
+    .section-head {
+      position: sticky;
+      top: calc(var(--bar) + 2.5rem);
+      align-self: start;
+    }
   }
 }
 
-/* Honour the OS setting: show everything, move nothing. */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+/* --- motion --------------------------------------------------------------- */
+
+/* The one orchestrated moment: the name rises into place, line by line, on
+   first paint. Everything else on the page only moves when you touch it. */
+@keyframes rise {
+  from {
+    transform: translateY(105%);
   }
-  *,
-  *::before,
-  *::after {
-    transition-duration: 1ms !important;
-    animation-duration: 1ms !important;
-    animation-iteration-count: 1 !important;
+  to {
+    transform: translateY(0);
   }
-  .reveal {
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.rise-line {
+  display: block;
+  overflow: clip;
+  overflow-clip-margin: 0.12em;
+  padding-bottom: 0.06em;
+}
+.rise-line > span {
+  display: block;
+  animation: rise 1100ms var(--ease-out) both;
+  animation-delay: var(--d, 0ms);
+}
+.fade-in {
+  animation: fade 900ms var(--ease-out) both;
+  animation-delay: var(--d, 0ms);
+}
+
+/* Scroll-linked, no JavaScript: a progress hairline under the top bar and the
+   work timeline filling as it passes. Browsers without scroll timelines just
+   show the finished state. */
+@supports (animation-timeline: scroll()) {
+  @keyframes grow-x {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  @keyframes grow-y {
+    from {
+      transform: scaleY(0);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+  .scroll-progress {
+    animation: grow-x linear both;
+    animation-timeline: scroll(root);
+  }
+  .timeline-fill {
+    animation: grow-y linear both;
+    animation-timeline: view();
+    animation-range: entry 40% cover 60%;
+  }
+}
+
+/* Theme switch: the new theme opens as a circle from the toggle. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+@layer base {
+  /* In the base layer so utilities like bg-bg on a <dialog> still win. */
+  dialog {
+    margin: 0;
+    max-width: none;
+    max-height: none;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+  }
+}
+dialog::backdrop {
+  background: rgb(4 10 8 / 0.62);
+  backdrop-filter: blur(3px);
+}
+[data-theme="light"] dialog::backdrop {
+  background: rgb(13 27 23 / 0.32);
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
     opacity: 1;
     transform: none;
   }
-  .wipe > span {
-    clip-path: none;
+}
+dialog[open] .pop {
+  animation: pop 220ms var(--ease-out);
+}
+dialog[open]::backdrop {
+  animation: fade 220ms var(--ease-out);
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
     transform: none;
   }
-  .rule {
-    transform: scaleX(1);
+}
+.toast {
+  animation: toast-in 320ms var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-  .flourish path {
-    stroke-dashoffset: 0;
+  .scroll-progress,
+  .timeline-fill {
+    animation: none !important;
+    transform: none !important;
   }
 }
 
 @media print {
-  .reveal {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-  .wipe > span {
-    clip-path: none !important;
-    transform: none !important;
-  }
-  .rule {
-    transform: scaleX(1) !important;
-  }
-  .flourish path {
-    stroke-dashoffset: 0 !important;
-  }
-  body::after {
-    display: none;
+  .no-print {
+    display: none !important;
   }
 }

@@ -42,6 +42,10 @@ type I18nValue = {
   num: (value: number) => string;
   /** Month + year, in the Gregorian or Persian calendar as appropriate. */
   monthYear: (iso: string) => string;
+  /** Day, month and year. */
+  date: (iso: string) => string;
+  /** Day and month only, for recent dates. */
+  dayMonth: (iso: string) => string;
   fmt: (template: string, vars: Record<string, string | number>) => string;
 };
 
@@ -58,6 +62,9 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     root.setAttribute("lang", lang);
     root.setAttribute("dir", dir);
     document.title = DICTS[lang].meta.title;
+    document
+      .querySelector('link[rel="canonical"]')
+      ?.setAttribute("href", `https://mohamad-liyaghi.ir/${lang}/`);
     document
       .querySelector('meta[name="description"]')
       ?.setAttribute("content", DICTS[lang].meta.description);
@@ -94,6 +101,9 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     const locale = LOCALES[lang];
     const nf = new Intl.NumberFormat(locale);
     const mf = new Intl.DateTimeFormat(locale, { year: "numeric", month: "short" });
+    const df = new Intl.DateTimeFormat(locale, { year: "numeric", month: "short", day: "numeric" });
+    const dm = new Intl.DateTimeFormat(locale, { month: "short", day: "numeric" });
+    const at = (iso: string) => new Date(`${iso.length === 7 ? `${iso}-01` : iso.slice(0, 10)}T12:00:00`);
     return {
       lang,
       dir,
@@ -101,7 +111,9 @@ export function I18nProvider({ children }: { children: ReactNode }) {
       setLang,
       toggleLang: () => setLang(lang === "en" ? "fa" : "en"),
       num: (v) => nf.format(v),
-      monthYear: (iso) => mf.format(new Date(`${iso.length === 7 ? `${iso}-01` : iso}T00:00:00`)),
+      monthYear: (iso) => mf.format(at(iso)),
+      date: (iso) => df.format(at(iso)),
+      dayMonth: (iso) => dm.format(at(iso)),
       fmt: (template, vars) =>
         template.replace(/\{(\w+)\}/g, (whole, key: string) =>
           key in vars ? String(vars[key]) : whole,

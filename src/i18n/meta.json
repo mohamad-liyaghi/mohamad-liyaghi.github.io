@@ -1,10 +1,10 @@
 {
   "en": {
-    "title": "Mohamad Liyaghi — Software Engineer · AI",
-    "description": "Mohamad Liyaghi builds the path from a prompt to a rendered video at Zebracat — job pipelines, model steps, and programmatic video in Python, TypeScript and Go."
+    "title": "Mohamad Liyaghi, software engineer",
+    "description": "Mohamad Liyaghi is a software engineer at Zebracat, an AI video generation company. Backend and AI in Python, open-source Django and FastAPI projects, and weekly essays on AI engineering."
   },
   "fa": {
-    "title": "محمد لیاقی — مهندس نرم‌افزار · هوش مصنوعی",
-    "description": "محمد لیاقی در Zebracat مسیر متن تا ویدیوی نهایی را می‌سازد — صف کارها، گام‌های مدل، و ویدیوی برنامه‌پذیر با Python، TypeScript و Go."
+    "title": "محمد لیاقی، مهندس نرم‌افزار",
+    "description": "محمد لیاقی مهندس نرم‌افزار در Zebracat است، شرکتی که با هوش مصنوعی ویدیو می‌سازد. بک‌اند و هوش مصنوعی با Python، پروژه‌های متن‌باز Django و FastAPI، و نوشته‌های هفتگی دربارهٔ مهندسی هوش مصنوعی."
   }
 }

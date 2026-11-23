@@ -1,40 +1,41 @@
 <!doctype html>
-<html lang="en" dir="ltr" data-theme="light">
+<html lang="en" dir="ltr" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="author" content="Mohamad Liyaghi" />
-    <meta name="theme-color" content="#F7F4EE" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0c1714" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href="https://mohamad-liyaghi.ir/en/" />
 
-    <title>Mohamad Liyaghi — Software Engineer · AI</title>
+    <title>Mohamad Liyaghi, software engineer</title>
     <meta
       name="description"
-      content="Mohamad Liyaghi builds the path from a prompt to a rendered video at Zebracat — job pipelines, model steps, and programmatic video in Python, TypeScript and Go."
+      content="Mohamad Liyaghi is a software engineer at Zebracat, an AI video generation company. Backend and AI in Python, open-source Django and FastAPI projects, and weekly essays on AI engineering."
     />
 
     <meta property="og:type" content="profile" />
     <meta property="og:site_name" content="Mohamad Liyaghi" />
     <meta property="og:url" content="https://mohamad-liyaghi.ir/en/" />
-    <meta property="og:title" content="Mohamad Liyaghi — Software Engineer · AI" />
+    <meta property="og:title" content="Mohamad Liyaghi, software engineer" />
     <meta
       property="og:description"
-      content="A prompt is cheap. Getting a video out of it, every time, is the job. Generation pipelines, model steps, and programmatic video at Zebracat."
+      content="Mohamad Liyaghi is a software engineer at Zebracat, an AI video generation company. Backend and AI in Python, open-source Django and FastAPI projects, and weekly essays on AI engineering."
     />
     <meta property="og:image" content="https://mohamad-liyaghi.ir/og-cover.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Mohamad Liyaghi — Software Engineer · AI" />
+    <meta property="og:image:alt" content="Mohamad Liyaghi, software engineer" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="fa_IR" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Mohamad Liyaghi — Software Engineer · AI" />
+    <meta name="twitter:title" content="Mohamad Liyaghi, software engineer" />
     <meta
       name="twitter:description"
-      content="Software Engineer · AI at Zebracat. Generation pipelines, model steps, and programmatic video."
+      content="Mohamad Liyaghi is a software engineer at Zebracat, an AI video generation company. Backend and AI in Python, open-source Django and FastAPI projects, and weekly essays on AI engineering."
     />
     <meta name="twitter:image" content="https://mohamad-liyaghi.ir/og-cover.png" />
 
@@ -42,42 +43,62 @@
     <link rel="alternate" hreflang="fa" href="https://mohamad-liyaghi.ir/fa/" />
     <link rel="alternate" hreflang="x-default" href="https://mohamad-liyaghi.ir/en/" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Vazirmatn:wght@400;500;700&display=swap"
-    />
+    <!-- Self-hosted, so no third-party CSS blocks the first paint. -->
+    <link rel="preload" href="/fonts/mona-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- Restore the deep-linked path after the GitHub Pages 404 bounce. -->
     <script>
       (function () {
-        var r = sessionStorage.redirect;
-        delete sessionStorage.redirect;
-        if (r && r !== location.href) history.replaceState(null, "", r);
+        try {
+          var r = sessionStorage.redirect;
+          delete sessionStorage.redirect;
+          if (r && r !== location.href) history.replaceState(null, "", r);
+        } catch (e) {}
       })();
     </script>
 
-    <!-- Settle theme and language before first paint, so neither one flashes. -->
+    <!--
+      Settle theme and language before first paint, so neither flashes.
+      Theme: the visitor's stored choice, else the OS preference, else dark.
+    -->
     <script>
       (function () {
         var d = document.documentElement;
+        var stored = null;
         try {
-          var t = localStorage.getItem("theme") === "dark" ? "dark" : "light";
-          d.setAttribute("data-theme", t);
-          var meta = document.querySelector('meta[name="theme-color"]');
-          if (meta) meta.setAttribute("content", t === "dark" ? "#12110D" : "#F7F4EE");
-
-          var seg = location.pathname.replace(/^\/+|\/+$/g, "").split("/")[0];
-          var l =
-            seg === "fa" || seg === "en"
-              ? seg
-              : localStorage.getItem("lang") ||
-                ((navigator.language || "en").toLowerCase().indexOf("fa") === 0 ? "fa" : "en");
-          l = l === "fa" ? "fa" : "en";
-          d.setAttribute("lang", l);
-          d.setAttribute("dir", l === "fa" ? "rtl" : "ltr");
+          stored = localStorage.getItem("theme");
         } catch (e) {}
+        var t =
+          stored === "light" || stored === "dark"
+            ? stored
+            : window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches
+              ? "light"
+              : "dark";
+        d.setAttribute("data-theme", t);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute("content", t === "dark" ? "#0c1714" : "#eff3ee");
+
+        var seg = location.pathname.replace(/^\/+|\/+$/g, "").split("/")[0];
+        var l = seg === "fa" || seg === "en" ? seg : null;
+        if (!l) {
+          try {
+            l = localStorage.getItem("lang");
+          } catch (e) {}
+        }
+        if (l !== "fa" && l !== "en") {
+          l = (navigator.language || "en").toLowerCase().indexOf("fa") === 0 ? "fa" : "en";
+        }
+        d.setAttribute("lang", l);
+        d.setAttribute("dir", l === "fa" ? "rtl" : "ltr");
+        if (l === "fa") {
+          var f = document.createElement("link");
+          f.rel = "preload";
+          f.as = "font";
+          f.type = "font/woff2";
+          f.crossOrigin = "anonymous";
+          f.href = "/fonts/vazirmatn-arabic.woff2";
+          document.head.appendChild(f);
+        }
       })();
     </script>
 
@@ -88,22 +109,24 @@
         "name": "Mohamad Liyaghi",
         "alternateName": "محمد لیاقی",
         "url": "https://mohamad-liyaghi.ir/en/",
-        "jobTitle": "Software Engineer · AI",
+        "image": "https://mohamad-liyaghi.ir/portrait.jpg",
+        "description": "Software engineer working on backend systems and AI features in Python. Writes weekly about AI engineering.",
+        "jobTitle": "Software Engineer",
         "worksFor": {
           "@type": "Organization",
           "name": "Zebracat",
           "url": "https://www.zebracat.ai"
         },
-        "email": "liaghimohamad69@gmail.com",
+        "email": "mailto:liaghimohamad69@gmail.com",
         "knowsLanguage": ["fa", "en"],
         "knowsAbout": [
           "Software Engineering",
           "Backend Development",
-          "Asynchronous Job Pipelines",
-          "Large Language Model Applications",
-          "Programmatic Video",
+          "AI Engineering",
+          "Large Language Models",
           "Python",
-          "TypeScript",
+          "Django",
+          "FastAPI",
           "Go"
         ],
         "sameAs": [
@@ -118,11 +141,11 @@
   <body>
     <div id="root"></div>
     <noscript>
-      <p style="padding: 2rem; font-family: system-ui">
-        Mohamad Liyaghi — Software Engineer · AI at Zebracat. This site needs JavaScript;
-        the résumé is available at
-        <a href="/cv.html">/cv.html</a> and my GitHub at
-        <a href="https://github.com/mohamad-liyaghi">github.com/mohamad-liyaghi</a>.
+      <p style="padding: 2rem; font-family: system-ui; color: #e3ece6; background: #0c1714">
+        Mohamad Liyaghi, software engineer at Zebracat. This site needs JavaScript. The résumé is at
+        <a style="color: #c8f06b" href="/cv.html">/cv.html</a>, code at
+        <a style="color: #c8f06b" href="https://github.com/mohamad-liyaghi">github.com/mohamad-liyaghi</a>
+        and essays at <a style="color: #c8f06b" href="https://medium.com/@el_mohamad">medium.com/@el_mohamad</a>.
       </p>
     </noscript>
     <script type="module" src="/src/main.tsx"></script>

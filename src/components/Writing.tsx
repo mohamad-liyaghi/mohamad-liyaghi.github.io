@@ -1,65 +1,175 @@
-import { ARTICLES, PROFILE, SECTIONS } from "../data/profile";
+import { useId, useState } from "react";
+import { ARTICLES, PROFILE, type Article } from "../data/profile";
 import { useI18n } from "../i18n";
-import { ArrowOut } from "./Icons";
-import { Out, Reveal, Section, SectionHead } from "./primitives";
+import { useSpotlight } from "../lib/hooks";
+import { ArrowOut, Medium } from "./Icons";
+import { Out, Section } from "./primitives";
 
-const N = SECTIONS.find((s) => s.id === "writing")!.n;
+const INITIAL = 6;
+
+function Meta({ post }: { post: Article }) {
+  const { t, date, fmt, num } = useI18n();
+  return (
+    <p className="meta">
+      <time dateTime={post.date}>{date(post.date)}</time>
+      <span className="mx-2 text-line-strong" aria-hidden="true">
+        /
+      </span>
+      {fmt(t.writing.read, { minutes: num(post.minutes) })}
+    </p>
+  );
+}
+
+/** Titles and subtitles stay English in both languages, marked as such. */
+function En({ children, className = "" }: { children: string; className?: string }) {
+  return (
+    <span lang="en" dir="ltr" className={className}>
+      {children}
+    </span>
+  );
+}
+
+function Lead({ post }: { post: Article }) {
+  return (
+    <Out href={post.href} className="spot group block">
+      <article className="spot-in grid overflow-hidden xl:grid-cols-[1.3fr_1fr]">
+        {post.image ? (
+          <div className="relative aspect-[800/467] overflow-hidden bg-sunk xl:m-3 xl:self-center xl:rounded-[var(--radius-sm)]">
+            <img
+              src={post.image}
+              alt=""
+              width={800}
+              height={467}
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.03]"
+            />
+          </div>
+        ) : null}
+        <div className="flex flex-col p-6 sm:p-8 xl:ps-5">
+          <Meta post={post} />
+          <h3 className="h3 mt-3 text-[1.45rem] sm:text-[1.65rem]">
+            <En>{post.title}</En>
+          </h3>
+          <p className="mt-3 text-muted">
+            <En>{post.dek}</En>
+          </p>
+          <ArrowOut className="mt-auto self-end pt-6 text-faint transition-[color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent rtl:-scale-x-100" width={34} height={34} />
+        </div>
+      </article>
+    </Out>
+  );
+}
+
+function Card({ post }: { post: Article }) {
+  return (
+    <Out href={post.href} className="spot group block h-full">
+      <article className="spot-in flex flex-col overflow-hidden">
+        {post.image ? (
+          <div className="aspect-[800/467] overflow-hidden bg-sunk">
+            <img
+              src={post.image}
+              alt=""
+              width={800}
+              height={467}
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.03]"
+            />
+          </div>
+        ) : null}
+        <div className="flex flex-1 flex-col p-5 sm:p-6">
+          <Meta post={post} />
+          <h3 className="h3 mt-2 text-[1.1rem]">
+            <En>{post.title}</En>
+          </h3>
+          <p className="mt-2 line-clamp-3 text-[0.95rem] text-muted">
+            <En>{post.dek}</En>
+          </p>
+        </div>
+      </article>
+    </Out>
+  );
+}
+
+function Row({ post }: { post: Article }) {
+  return (
+    <li>
+      <Out
+        href={post.href}
+        className="group -mx-3 grid grid-cols-[1fr_auto] items-baseline gap-x-6 gap-y-1 rounded-[var(--radius-sm)] px-3 py-4 transition-colors duration-200 hover:bg-raised sm:grid-cols-[9.5rem_1fr_auto]"
+      >
+        <span className="meta order-2 col-span-2 sm:order-none sm:col-span-1">
+          <time dateTime={post.date}>
+            <RowDate iso={post.date} />
+          </time>
+        </span>
+        <span className="font-medium text-text">
+          <En>{post.title}</En>
+        </span>
+        <ArrowOut
+          width={18}
+          height={18}
+          className="text-faint transition-[color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent rtl:-scale-x-100"
+        />
+      </Out>
+    </li>
+  );
+}
+
+function RowDate({ iso }: { iso: string }) {
+  const { date } = useI18n();
+  return <>{date(iso)}</>;
+}
 
 export function Writing() {
-  const { t, num, fmt, monthYear } = useI18n();
+  const { t, fmt, num } = useI18n();
+  const [all, setAll] = useState(false);
+  const spot = useSpotlight<HTMLDivElement>();
+  const listId = useId();
+  const [lead, second, third, ...rest] = ARTICLES;
+  const visibleRest = all ? rest : rest.slice(0, Math.max(0, INITIAL - 3));
+  const hidden = rest.length - visibleRest.length;
 
   return (
-    <Section id="writing">
-      <SectionHead id="writing" n={N} title={t.writing.title} lede={t.writing.lede} />
-
-      <ul className="border-t border-hairline">
-        {ARTICLES.map((a, i) => {
-          const item = t.writing.items[a.id as keyof typeof t.writing.items];
-          return (
-            <li key={a.id} className="border-b border-hairline">
-              <Reveal delay={i * 55}>
-                <Out href={a.href} className="group block py-6 sm:py-7">
-                  <div className="grid gap-2 sm:grid-cols-[10rem_1fr] sm:gap-8">
-                    <p className="label pt-1 whitespace-nowrap">
-                      {monthYear(a.date)}
-                      <span aria-hidden className="mx-2 text-rule">
-                        /
-                      </span>
-                      {fmt(t.writing.read, { minutes: num(a.minutes) })}
-                    </p>
-                    {/* Titles stay English, so the whole row lays out LTR even on the
-                        Persian page — otherwise each row packs to the right and the
-                        column ends up with a ragged left edge. */}
-                    <div dir="ltr">
-                      <h3 className="flex items-start gap-2 text-[1.15rem] leading-snug text-ink transition-colors duration-300 group-hover:text-accent sm:text-[1.35rem]">
-                        <span className="ul">{item.title}</span>
-                        <ArrowOut
-                          width={15}
-                          height={15}
-                          className="mt-1.5 shrink-0 text-muted transition-colors duration-300 group-hover:text-accent"
-                        />
-                      </h3>
-                      <p className="mt-2 max-w-xl text-[0.92rem] leading-relaxed text-muted">
-                        {item.dek}
-                      </p>
-                    </div>
-                  </div>
-                </Out>
-              </Reveal>
-            </li>
-          );
-        })}
-      </ul>
-
-      <Reveal delay={120}>
-        <Out
-          href={PROFILE.medium}
-          className="ul mt-10 inline-flex items-center gap-1.5 text-[0.95rem] font-medium text-accent"
-        >
-          {t.writing.more}
-          <ArrowOut width={14} height={14} />
+    <Section
+      id="writing"
+      title={t.writing.title}
+      lede={t.writing.lede}
+      aside={
+        <Out href={PROFILE.medium} className="link inline-flex items-center gap-2 text-[0.95rem] font-medium">
+          <Medium width={16} height={16} />
+          {t.writing.all}
         </Out>
-      </Reveal>
+      }
+    >
+      <div ref={spot} className="flex flex-col gap-4">
+        {lead ? <Lead post={lead} /> : null}
+        <div className="grid gap-4 sm:grid-cols-2">
+          {second ? <Card post={second} /> : null}
+          {third ? <Card post={third} /> : null}
+        </div>
+      </div>
+      {rest.length ? (
+        <>
+          <ul id={listId} className="mt-8 divide-y divide-line border-y border-line">
+            {visibleRest.map((post) => (
+              <Row key={post.href} post={post} />
+            ))}
+          </ul>
+          {rest.length > INITIAL - 3 ? (
+            <button
+              type="button"
+              aria-expanded={all}
+              aria-controls={listId}
+              onClick={() => setAll((v) => !v)}
+              className="btn btn-ghost mt-6"
+            >
+              {all ? t.writing.less : fmt(t.writing.more, { count: num(hidden) })}
+            </button>
+          ) : null}
+        </>
+      ) : null}
     </Section>
   );
 }

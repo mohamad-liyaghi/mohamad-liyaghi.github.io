@@ -1,105 +1,83 @@
-import { PROFILE, PROJECTS, SECTIONS, STATS } from "../data/profile";
+import { useState } from "react";
+import { PROFILE, PROJECT_FILTERS, PROJECTS, STATS, type ProjectFilter } from "../data/profile";
 import { useI18n } from "../i18n";
-import { ArrowOut, Star } from "./Icons";
-import { Out, Reveal, Section, SectionHead } from "./primitives";
-
-const N = SECTIONS.find((s) => s.id === "projects")!.n;
+import { useSpotlight } from "../lib/hooks";
+import { ArrowOut, GitHub, Star } from "./Icons";
+import { Out, Section } from "./primitives";
 
 export function Projects() {
-  const { t, num, fmt } = useI18n();
-  const featured = PROJECTS.find((p) => p.featured);
-  const rest = PROJECTS.filter((p) => !p.featured);
+  const { t, fmt, num } = useI18n();
+  const [filter, setFilter] = useState<ProjectFilter>("all");
+  const spot = useSpotlight<HTMLUListElement>();
+  const shown = PROJECTS.filter((p) => filter === "all" || p.framework === filter);
+  const count = (f: ProjectFilter) => PROJECTS.filter((p) => f === "all" || p.framework === f).length;
 
   return (
-    <Section id="projects">
-      <SectionHead id="projects" n={N} title={t.projects.title} lede={t.projects.lede} />
-
-      <div className="flex flex-col gap-px border border-hairline bg-hairline">
-        {featured ? (
-          <Reveal>
-            <Out
-              href={featured.href}
-              className="card group block border-0 p-6 sm:p-8"
-              aria-label={`${featured.name} — ${num(featured.stars)} ${t.projects.stars}`}
-            >
-              <div className="flex flex-wrap items-start justify-between gap-4">
-                <div>
-                  <p className="label text-accent">{t.projects.kinds[featured.id]}</p>
-                  <h3 className="mt-2 font-display text-2xl text-ink transition-colors duration-300 group-hover:text-accent sm:text-[1.85rem]">
-                    {featured.name}
-                  </h3>
-                </div>
-                <span className="label flex shrink-0 items-center gap-1.5 tracking-normal">
-                  <Star width={13} height={13} className="text-accent-bright" />
-                  {num(featured.stars)}
-                </span>
-              </div>
-              <p className="mt-4 max-w-2xl text-[0.98rem] leading-relaxed">
-                {t.projects.items[featured.id]}
-              </p>
-              <ul className="mt-5 flex flex-wrap gap-x-2.5 gap-y-1">
-                {featured.tech.map((tech) => (
-                  <li key={tech} className="font-mono text-[0.7rem] text-muted">
-                    {tech}
-                  </li>
-                ))}
-              </ul>
-            </Out>
-          </Reveal>
-        ) : null}
-
-        <ul className="grid gap-px bg-hairline sm:grid-cols-2">
-          {rest.map((p, i) => (
-            <li
-              key={p.id}
-              className={i === rest.length - 1 && rest.length % 2 === 1 ? "sm:col-span-2" : ""}
-            >
-              <Reveal delay={(i % 2) * 70 + Math.floor(i / 2) * 60} className="h-full">
-                <Out
-                  href={p.href}
-                  className="card group flex h-full flex-col border-0 p-6 sm:p-7"
-                  aria-label={`${p.name} — ${num(p.stars)} ${t.projects.stars}`}
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <p className="label mb-2">{t.projects.kinds[p.id]}</p>
-                      <h3 className="font-display text-xl tracking-tight text-ink transition-colors duration-300 group-hover:text-accent">
-                        {p.name}
-                      </h3>
-                    </div>
-                    <span className="label flex shrink-0 items-center gap-1.5 tracking-normal">
-                      <Star width={13} height={13} className="text-accent-bright" />
-                      {num(p.stars)}
-                    </span>
-                  </div>
-
-                  <p className="mt-4 flex-1 text-[0.9rem] leading-relaxed">
-                    {t.projects.items[p.id]}
-                  </p>
-
-                  <ul className="mt-5 flex flex-wrap gap-x-2.5 gap-y-1">
-                    {p.tech.map((tech) => (
-                      <li key={tech} className="font-mono text-[0.7rem] text-muted">
-                        {tech}
-                      </li>
-                    ))}
-                  </ul>
-                </Out>
-              </Reveal>
-            </li>
-          ))}
-        </ul>
+    <Section
+      id="projects"
+      title={t.projects.title}
+      lede={fmt(t.projects.lede, { stars: num(STATS.stars), repos: num(STATS.repos) })}
+      aside={
+        <Out href={PROFILE.github} className="link inline-flex items-center gap-2 text-[0.95rem] font-medium">
+          <GitHub width={16} height={16} />
+          {t.projects.more}
+        </Out>
+      }
+    >
+      <div role="group" aria-label={t.projects.filterLabel} className="mb-6 flex flex-wrap gap-2">
+        {PROJECT_FILTERS.map((f) => (
+          <button
+            key={f}
+            type="button"
+            aria-pressed={filter === f}
+            onClick={() => setFilter(f)}
+            className={`inline-flex h-9 items-center gap-2 rounded-full border px-4 text-[0.9rem] transition-colors duration-200 ${
+              filter === f
+                ? "border-transparent bg-accent-fill font-medium text-on-accent"
+                : "border-line text-muted hover:border-line-strong hover:text-text"
+            }`}
+          >
+            {t.projects.filters[f]}
+            <span className={filter === f ? "opacity-70" : "text-faint"}>{num(count(f))}</span>
+          </button>
+        ))}
       </div>
 
-      <Reveal delay={120}>
-        <Out
-          href={PROFILE.github}
-          className="ul mt-10 inline-flex items-center gap-1.5 text-[0.95rem] font-medium text-accent"
-        >
-          {fmt(t.projects.more, { count: num(STATS.repos) })}
-          <ArrowOut width={14} height={14} />
-        </Out>
-      </Reveal>
+      <ul ref={spot} className="grid gap-4 sm:grid-cols-2">
+        {shown.map((p) => {
+          const copy = t.projects.items[p.id];
+          return (
+            <li key={p.id}>
+              <Out href={p.href} className="spot group block h-full">
+                <article className="spot-in flex h-full flex-col p-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="meta">{copy.kind}</p>
+                      <h3 className="h3 mt-1">{p.name}</h3>
+                    </div>
+                    <ArrowOut
+                      width={20}
+                      height={20}
+                      className="mt-1 shrink-0 text-faint transition-[color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent rtl:-scale-x-100"
+                    />
+                  </div>
+                  <p className="mt-3 text-[0.95rem] text-muted">{copy.body}</p>
+                  <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-6 text-[0.85rem] text-muted">
+                    <span className="inline-flex items-center gap-1.5">
+                      <Star width={15} height={15} className="text-accent" />
+                      {fmt(t.projects.stars, { count: num(p.stars) })}
+                    </span>
+                    <span>{p.lang}</span>
+                    <span className="text-faint" dir="ltr">
+                      {p.tech.slice(0, 3).join(", ")}
+                    </span>
+                  </div>
+                </article>
+              </Out>
+            </li>
+          );
+        })}
+      </ul>
     </Section>
   );
 }

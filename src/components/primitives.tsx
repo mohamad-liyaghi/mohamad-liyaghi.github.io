@@ -1,116 +1,49 @@
-import type { CSSProperties, ReactNode } from "react";
-import { useReveal } from "../lib/hooks";
+import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { useI18n } from "../i18n";
 
-const delayStyle = (delay: number): CSSProperties =>
-  delay ? ({ "--delay": `${delay}ms` } as CSSProperties) : {};
-
-export function Container({
-  children,
-  className = "",
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <div className={`mx-auto w-full max-w-5xl px-6 sm:px-8 lg:px-10 ${className}`}>{children}</div>
-  );
-}
-
-/** Fades and lifts into place once, the first time it is seen. */
-export function Reveal({
-  children,
-  delay = 0,
-  className = "",
-}: {
-  children: ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  const ref = useReveal<HTMLDivElement>();
-  return (
-    <div ref={ref} className={`reveal ${className}`} style={delayStyle(delay)}>
-      {children}
-    </div>
-  );
-}
-
-/** A hairline that draws itself from the reading edge. */
-export function Rule({ delay = 0, className = "" }: { delay?: number; className?: string }) {
-  const ref = useReveal<HTMLDivElement>();
-  return <div ref={ref} className={`rule ${className}`} style={delayStyle(delay)} aria-hidden />;
-}
-
-export function SectionHead({
-  n,
-  title,
-  lede,
-  id,
-}: {
-  n: string;
-  title: string;
-  lede?: string;
-  id: string;
-}) {
-  const { num, lang } = useI18n();
-  return (
-    <header className="mb-8 sm:mb-10">
-      <Reveal delay={80}>
-        <p className="label flex items-center gap-3">
-          <span className="text-accent">{num(Number(n)).padStart(2, lang === "fa" ? "\u06F0" : "0")}</span>
-          <span className="h-px flex-1 bg-hairline" aria-hidden />
-        </p>
-      </Reveal>
-      <Reveal delay={140}>
-        <h2 id={`${id}-title`} className="mt-3 font-display text-[1.75rem] text-ink sm:text-[2rem]">
-          {title}
-        </h2>
-      </Reveal>
-      {lede ? (
-        <Reveal delay={200}>
-          <p className="mt-2 max-w-xl text-[0.95rem] text-muted">{lede}</p>
-        </Reveal>
-      ) : null}
-    </header>
-  );
-}
-
+/**
+ * A section: title and lede in a sticky left column on wide screens, the
+ * content beside it. Stacks on narrow screens.
+ */
 export function Section({
   id,
+  title,
+  lede,
+  aside,
   children,
-  className = "",
 }: {
   id: string;
+  title: string;
+  lede?: ReactNode;
+  aside?: ReactNode;
   children: ReactNode;
-  className?: string;
 }) {
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className={`py-16 sm:py-20 ${className}`}>
-      {children}
+    <section id={id} aria-labelledby={`${id}-title`} className="section">
+      <div className="wrap section-grid">
+        <header className="section-head mb-10 lg:mb-0">
+          <h2 id={`${id}-title`} className="h2 outline-none">
+            {title}
+          </h2>
+          {lede ? <p className="lede mt-4">{lede}</p> : null}
+          {aside ? <div className="mt-6">{aside}</div> : null}
+        </header>
+        <div className="min-w-0">{children}</div>
+      </div>
     </section>
   );
 }
 
-/** External link with the target/rel pair and a screen-reader note. */
+/** External link: new tab, safe rel, and a screen-reader note saying so. */
 export function Out({
   href,
   children,
-  className = "",
   ...rest
-}: {
-  href: string;
-  children: ReactNode;
-  className?: string;
-} & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+}: { href: string; children: ReactNode } & AnchorHTMLAttributes<HTMLAnchorElement>) {
   const { t } = useI18n();
   const external = /^https?:/.test(href);
   return (
-    <a
-      href={href}
-      className={className}
-      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      {...rest}
-    >
+    <a href={href} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})} {...rest}>
       {children}
       {external ? <span className="sr-only"> ({t.a11y.external})</span> : null}
     </a>

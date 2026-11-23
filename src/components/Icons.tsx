@@ -146,23 +146,47 @@ export const Telegram = (p: IconProps) => (
   </Brand>
 );
 
-/** The mark. An M whose last stem carries on into an L. */
-export const Monogram = (p: IconProps) => (
-  <svg
-    viewBox="0 0 32 32"
-    width="28"
-    height="28"
-    fill="none"
-    aria-hidden="true"
-    focusable="false"
-    {...p}
-  >
-    <path
-      d="M6.5 24V8.6L13.4 18l6.9-9.4V24h5.2"
-      stroke="currentColor"
-      strokeWidth={2.6}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+/**
+ * The mark: a 3×3 lattice with a loupe over one corner, the hero field in
+ * miniature. Small dots take currentColor, the lens dot the accent.
+ */
+export const Mark = (p: IconProps) => (
+  <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false" {...p}>
+    <g fill="currentColor">
+      <circle cx="7" cy="16" r="1.9" />
+      <circle cx="7" cy="25" r="1.9" />
+      <circle cx="16" cy="25" r="1.9" />
+      <circle cx="7" cy="7" r="2.3" />
+      <circle cx="16" cy="16" r="2.6" />
+      <circle cx="25" cy="25" r="2.3" />
+      <circle cx="16" cy="7" r="3" />
+      <circle cx="25" cy="16" r="3" />
+    </g>
+    <circle cx="25" cy="7" r="5" fill="var(--accent-fill)" />
   </svg>
+);
+
+export const Copy = (p: IconProps) => (
+  <Stroke {...p}>
+    <rect x="8.5" y="8.5" width="12" height="12" rx="2.5" />
+    <path d="M15.5 8.5V6a2.5 2.5 0 0 0-2.5-2.5H6A2.5 2.5 0 0 0 3.5 6v7A2.5 2.5 0 0 0 6 15.5h2.5" />
+  </Stroke>
+);
+
+export const Check = (p: IconProps) => (
+  <Stroke {...p}>
+    <path d="m5 12.5 4.5 4.5L19 7.5" />
+  </Stroke>
+);
+
+export const ArrowRight = (p: IconProps) => (
+  <Stroke {...p}>
+    <path d="M5 12h14M13 6l6 6-6 6" />
+  </Stroke>
+);
+
+export const Return = (p: IconProps) => (
+  <Stroke {...p}>
+    <path d="M19 6v5a3 3 0 0 1-3 3H6M10 10l-4 4 4 4" />
+  </Stroke>
 );

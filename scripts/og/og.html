@@ -1,0 +1,60 @@
+<!doctype html>
+<!--
+  Source of public/og-cover.png (1200×630) and public/apple-touch-icon.png.
+  Render: serve the repo root, open /scripts/og/og.html at 1200×630 and screenshot;
+  /scripts/og/og.html?icon at 180×180 for the touch icon.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<style>
+  @font-face { font-family: "Mona Sans"; src: url("/public/fonts/mona-sans-latin.woff2") format("woff2"); font-weight: 200 900; font-stretch: 75% 125%; }
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #0c1714; }
+  body { font-family: "Mona Sans", sans-serif; color: #e3ece6; position: relative; }
+  canvas { position: absolute; inset: 0; }
+  .wrap { position: absolute; inset: 0; padding: 64px 72px; display: flex; flex-direction: column; }
+  .top { display: flex; align-items: center; justify-content: space-between; font-size: 24px; color: #93a79d; }
+  h1 { margin: auto 0 0; font-size: 146px; line-height: 0.86; font-weight: 780; font-stretch: 125%; letter-spacing: -0.035em; }
+  p { margin: 30px 0 0; font-size: 32px; font-weight: 500; color: #e3ece6; font-stretch: 105%; }
+  p span { color: #93a79d; }
+  body.icon, body.icon html { width: 180px; height: 180px; }
+</style>
+</head>
+<body>
+<canvas id="c" width="2400" height="1260"></canvas>
+<div class="wrap" id="og">
+  <div class="top">
+    <svg viewBox="0 0 32 32" width="44" height="44"><g fill="#93a79d"><circle cx="7" cy="16" r="1.9"/><circle cx="7" cy="25" r="1.9"/><circle cx="16" cy="25" r="1.9"/><circle cx="7" cy="7" r="2.3"/><circle cx="16" cy="16" r="2.6"/><circle cx="25" cy="25" r="2.3"/><circle cx="16" cy="7" r="3"/><circle cx="25" cy="16" r="3"/></g><circle cx="25" cy="7" r="5" fill="#c8f06b"/></svg>
+    <span>mohamad-liyaghi.ir</span>
+  </div>
+  <h1>Mohamad<br />Liyaghi</h1>
+  <p>Software engineer at Zebracat. <span>Backend, AI, weekly essays.</span></p>
+</div>
+<script>
+  const icon = location.search.includes("icon");
+  const W = icon ? 180 : 1200, H = icon ? 180 : 630;
+  document.documentElement.style.width = document.body.style.width = W + "px";
+  document.documentElement.style.height = document.body.style.height = H + "px";
+  if (icon) {
+    // The touch icon is the favicon mark at full bleed; iOS rounds the corners.
+    document.body.innerHTML = '<svg viewBox="0 0 32 32" width="180" height="180" style="display:block"><rect width="32" height="32" fill="#0c1714"/><g fill="#93a79d"><circle cx="8" cy="16" r="1.7"/><circle cx="8" cy="24" r="1.7"/><circle cx="16" cy="24" r="1.7"/><circle cx="8" cy="8" r="2"/><circle cx="16" cy="16" r="2.3"/><circle cx="24" cy="24" r="2"/><circle cx="16" cy="8" r="2.6"/><circle cx="24" cy="16" r="2.6"/></g><circle cx="24" cy="8" r="4.4" fill="#c8f06b"/></svg>';
+    throw new Error("icon mode: no lattice");
+  }
+  const c = document.getElementById("c");
+  c.width = W * 2; c.height = H * 2; c.style.width = W + "px"; c.style.height = H + "px";
+  const x = c.getContext("2d"); x.scale(2, 2);
+  const gap = icon ? 45 : 24, lx = icon ? 135 : 930, ly = icon ? 45 : 250, R = icon ? 70 : 170;
+  const mix = (a, b, k) => a.map((v, i) => Math.round(v + (b[i] - v) * k));
+  const base = [47, 71, 64], lime = [200, 240, 107];
+  for (let yy = gap / 2; yy < H; yy += gap) for (let xx = gap / 2; xx < W; xx += gap) {
+    const dx = xx - lx, dy = yy - ly, d = Math.hypot(dx, dy) || 1;
+    const k = Math.exp(-(d * d) / (2 * R * R * 0.35));
+    const px = xx + (dx / d) * k * (icon ? 10 : 14), py = yy + (dy / d) * k * (icon ? 10 : 14);
+    const r = icon ? 4 + k * 14 : 1.2 + k * 3.4;
+    const col = mix(base, lime, Math.min(1, k * 1.15));
+    x.fillStyle = `rgb(${col})`; x.globalAlpha = 0.6 + 0.4 * k;
+    x.beginPath(); x.arc(px, py, r, 0, Math.PI * 2); x.fill();
+  }
+</script>
+</body>
+</html>

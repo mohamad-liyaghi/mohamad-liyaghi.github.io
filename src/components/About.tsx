@@ -1,53 +1,59 @@
-import { SECTIONS } from "../data/profile";
+import { STACK } from "../data/profile";
 import { useI18n } from "../i18n";
-import { Reveal, Section, SectionHead } from "./primitives";
+import { Section } from "./primitives";
 
-const N = SECTIONS.find((s) => s.id === "about")!.n;
-const FACT_KEYS = ["role", "company", "work", "education", "languages"] as const;
+const FACTS = ["work", "education", "languages"] as const;
 
 export function About() {
   const { t } = useI18n();
-
   return (
-    <Section id="about">
-      <SectionHead id="about" n={N} title={t.about.title} />
-
-      <div className="grid items-start gap-10 lg:grid-cols-[1.35fr_18rem] lg:grid-rows-[auto_1fr] lg:gap-x-16 lg:gap-y-10">
-        <div className="flex flex-col gap-6">
-          {t.about.paragraphs.map((p, i) => (
-            <Reveal key={p.slice(0, 24)} delay={i * 80}>
-              <p className="text-[1.02rem] leading-[1.75]">{p}</p>
-            </Reveal>
+    <Section id="about" title={t.about.title}>
+      <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_13rem] md:gap-12">
+        <div className="flex max-w-[38rem] flex-col gap-5 text-[1.125rem] leading-[1.7]">
+          {t.about.paragraphs.map((p) => (
+            <p key={p.slice(0, 32)}>{p}</p>
           ))}
         </div>
-
-        <Reveal delay={120} className="lg:row-span-2">
-          <figure className="portrait">
-            <img
-              src="/portrait.jpg"
-              alt={t.a11y.photo}
-              width={800}
-              height={1000}
-              loading="lazy"
-              className="aspect-[4/5] w-full object-cover"
-            />
-          </figure>
-        </Reveal>
-
-        <Reveal delay={160}>
-          <dl className="border-t border-rule">
-            {FACT_KEYS.map((key) => {
-              const fact = t.about.facts[key];
-              return (
-                <div key={key} className="border-b border-hairline py-4">
-                  <dt className="label">{fact.label}</dt>
-                  <dd className="mt-1.5 text-[0.95rem] text-ink">{fact.value}</dd>
-                </div>
-              );
-            })}
-          </dl>
-        </Reveal>
+        <figure className="order-first w-40 md:order-none md:w-auto">
+          <img
+            src="/portrait.webp"
+            alt={t.a11y.photo}
+            width={480}
+            height={600}
+            loading="lazy"
+            decoding="async"
+            className="aspect-[4/5] w-full rounded-[var(--radius)] bg-sunk object-cover grayscale-[0.15]"
+          />
+        </figure>
       </div>
+
+      <dl className="mt-12 grid gap-6 border-t border-line pt-8 sm:grid-cols-3">
+        {FACTS.map((key) => {
+          const [label, value] = t.about.facts[key];
+          return (
+            <div key={key}>
+              <dt className="meta">{label}</dt>
+              <dd className="mt-1 font-medium">{value}</dd>
+            </div>
+          );
+        })}
+      </dl>
+
+      <h3 className="h3 mt-16">{t.about.stackTitle}</h3>
+      <dl className="mt-6 divide-y divide-line border-y border-line">
+        {STACK.map((group) => (
+          <div key={group.id} className="grid gap-2 py-4 sm:grid-cols-[10rem_1fr] sm:gap-6">
+            <dt className="meta pt-1">{t.about.groups[group.id]}</dt>
+            <dd className="flex flex-wrap gap-2" dir="ltr" style={{ justifyContent: "flex-start" }}>
+              {group.items.map((item) => (
+                <span key={item} className="chip text-text">
+                  {item}
+                </span>
+              ))}
+            </dd>
+          </div>
+        ))}
+      </dl>
     </Section>
   );
 }
